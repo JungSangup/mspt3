@@ -30,3 +30,5 @@ backgroundImage: url('https://marp.app/assets/hero-background.svg')
 
 ![w:200](./img/cloud_native_1.png)
 
+![w:400](./img/cloud_native_1.png)
+
