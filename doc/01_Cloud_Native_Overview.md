@@ -11,7 +11,7 @@ footer: Samsung SDS
 
 # Cloud Native
 
-![h:200](./img/cloud_native_1.png) ![h:200](./img/cloud_native_3.png)
+![h:200](./img/cloud_native_1.png) ![h:200](./img/cloud_native_2.png) ![h:200](./img/cloud_native_3.png)
 
 #### [ Cloud Native 의 정의 ]
 클라우드 네이티브 기술은 조직이 퍼블릭, 프라이빗, 그리고 하이브리드 클라우드와 같은 현대적이고 동적인 환경에서 확장 가능한 애플리케이션을 개발하고 실행할 수 있게 해준다. 컨테이너, 서비스 메쉬, 마이크로서비스, 불변(Immutable) 인프라, 그리고 선언형(Declarative) API가 이러한 접근 방식의 예시들이다.  
@@ -45,20 +45,24 @@ footer: Samsung SDS
 
 # Container vs Virtual machine
 
-| | Virtal Machine | Container |
+| | Container | Virtal Machine |
 | :--- | :----: | :----: |
-| Virtualization | H/W Virtualization | OS Virtualization |
-| Efficiency (Resource usage) |  |  |
+| Virtualization | OS Virtualization | H/W Virtualization |
+| Efficiency<br>(Resource usage) | O | △ |
+| Performance |  O | △ |
+| Provisioning |  O | △ |
+| Isolation<br>(Security) | △ | O |
 
+
+- **Continaer** : 성능, 실행속도, 자원활용 측면에서 장점을 가짐.  
+- **Virtual Machine** : 다양한 환경(OS), 격리(보안) 측면에서 장점을 가짐.
+
+<br><br><br>
+
+![h:20](./img/hyperlink.png) [What is a container?](https://www.docker.com/resources/what-container/)
 
 ---
 
 # DevOps
 
 
----
-
-# References
-
-[CNCF](https://cncf.io)
-[CNCF Cloud Native Definition v1.0](https://github.com/cncf/toc/blob/main/DEFINITION.md)
