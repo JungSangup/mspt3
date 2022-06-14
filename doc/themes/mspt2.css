@@ -1,0 +1,36 @@
+/* @theme mspt2 */
+
+@import 'gaia';
+
+:root {
+    font-family: GmarketSansTTFMedium;
+    font-size: 20px;
+    background-image: url("./themes/subtle-prism.svg");
+}
+
+section {
+    
+    vertical-align: top;
+
+}
+
+header {
+    font-family: GmarketSansTTFMedium;
+    font-size: 20px;
+}
+
+footer {
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+}
+
+
+th,
+td {
+    border: none !important;
+}
+
+img[alt~="center"] {
+    display: block;
+    margin: 0 auto;
+}
