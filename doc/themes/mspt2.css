@@ -4,8 +4,9 @@
 
 :root {
     font-family: GmarketSansTTFMedium;
-    font-size: 20px;
-    background-image: url("./themes/subtle-prism.svg");
+    font-size: 18px;
+    background-image: url("./themes/hero-background.svg");
+    background-size: cover;
 }
 
 section {
@@ -33,4 +34,16 @@ td {
 img[alt~="center"] {
     display: block;
     margin: 0 auto;
+}
+
+a:link, a:visited {
+    padding: 0px 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+  
+a:hover, a:active {
+    padding: 0px 5px;
+    text-decoration: none;
+    font-size: 16px;
 }

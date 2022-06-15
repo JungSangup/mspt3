@@ -9,7 +9,7 @@ footer: Samsung SDS
 ---
 
 
-# Cloud Native
+## Cloud Native
 
 ![h:200](./img/cloud_native_1.png) ![h:200](./img/cloud_native_2.png) ![h:200](./img/cloud_native_3.png)
 
@@ -22,12 +22,12 @@ footer: Samsung SDS
 
 ---
 
-# Cloud Native
+## Cloud Native
 
 
 ---
 
-# Container vs Virtual machine
+## Container vs Virtual machine
 
 ![h:280 center](./img/containers-vs-vm.png)
 
@@ -43,7 +43,7 @@ footer: Samsung SDS
 
 ---
 
-# Container vs Virtual machine
+## Container vs Virtual machine
 
 | | Container | Virtal Machine |
 | :--- | :----: | :----: |
@@ -59,10 +59,10 @@ footer: Samsung SDS
 
 <br><br><br>
 
-![h:20](./img/hyperlink.png) [What is a container?](https://www.docker.com/resources/what-container/)
+![h:16](./img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/)
 
 ---
 
-# DevOps
+## DevOps
 
 
