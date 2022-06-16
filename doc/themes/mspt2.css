@@ -3,7 +3,7 @@
 @import 'gaia';
 
 :root {
-    font-family: GmarketSansTTFMedium;
+    font-family: 'GmarketSansTTFMedium';
     font-size: 18px;
     background-image: url("./themes/hero-background.svg");
     background-size: cover;
@@ -16,7 +16,7 @@ section {
 }
 
 header {
-    font-family: GmarketSansTTFMedium;
+    font-family: 'GmarketSansTTFMedium';
     font-size: 20px;
 }
 
