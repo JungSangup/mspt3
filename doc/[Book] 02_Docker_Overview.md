@@ -20,7 +20,7 @@ footer: Samsung SDS
 
 <br>
 
-![h:20](img/handson.png) **Hands-on :** 01_Docker_Intro
+![](img/handson.png) **Hands-on :** 01_Docker_Intro
 
 ---
 
@@ -42,7 +42,7 @@ footer: Samsung SDS
 
 - `Mac, Windows의 경우 Linux가 실행될 VM이 필요함.`
 
-![h:16](img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
+![](img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
 
 ---
 
@@ -64,7 +64,7 @@ footer: Samsung SDS
 | Ubuntu | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) |
 | Binaries | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) | |
 
-![h:16](img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
+![](img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
 
 ---
 
@@ -75,7 +75,7 @@ Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, �
 
 ![Docker architecture h:380 center](img/docker-architecture.svg)
 
-![h:16](img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
+![](img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
 ---
 

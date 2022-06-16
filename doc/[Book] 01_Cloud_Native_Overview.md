@@ -59,7 +59,7 @@ footer: Samsung SDS
 
 <br><br><br>
 
-![h:16](./img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/)
+![](./img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/)
 
 ---
 
