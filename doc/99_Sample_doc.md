@@ -61,10 +61,3 @@ footer: Samsung SDS
 |-----|-----|
 | ![w:200](./img/cloud_native_1.png) | 동해물과 백두산이<br>마르고 닳도록 |
 |Bar  |101  |
-
-
----
-
-![h:20](img/handson.png) **Hands-on** 01_Docker_Intro
-
-![h:20](./img/hyperlink.png) [What is a container?](https://www.docker.com/resources/what-container/)
