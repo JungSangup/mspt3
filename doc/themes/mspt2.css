@@ -27,9 +27,7 @@ footer {
     font-size: 20px;
 }
 
-
-th,
-td {
+th, td {
     border: none !important;
 }
 
