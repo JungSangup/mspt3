@@ -16,7 +16,7 @@ footer: Samsung SDS
 
 **Docker**는 컨테이너의 수명 주기를 관리하기 위한 **도구**와 **플랫폼**을 제공합니다.
 
-[![Build h:220](./img/moby_build.png)](https://www.docker.com/)[![Share h:220](./img/moby_share.png)](https://www.docker.com/)[![Run h:220](./img/moby_run.png)](https://www.docker.com/)
+[![Build](./img/moby_build_s.png)](https://www.docker.com/)[![Share](./img/moby_share_s.png)](https://www.docker.com/)[![Run](./img/moby_run_s.png)](https://www.docker.com/)
 
 <br>
 
