@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: MSP T2 - Docker & Kubernetes
+header: MSP T2 - Docker & Kubernetes - 02. Docker overview
 footer: Samsung SDS
 ---
 
@@ -16,11 +16,11 @@ footer: Samsung SDS
 
 **Docker**는 컨테이너의 수명 주기를 관리하기 위한 **도구**와 **플랫폼**을 제공합니다.
 
-[![Build h:220](img/moby_build.png)](https://www.docker.com/)[![Share h:220](img/moby_share.png)](https://www.docker.com/)[![Run h:220](img/moby_run.png)](https://www.docker.com/)
+[![Build h:220](./img/moby_build.png)](https://www.docker.com/)[![Share h:220](./img/moby_share.png)](https://www.docker.com/)[![Run h:220](./img/moby_run.png)](https://www.docker.com/)
 
 <br>
 
-![](img/handson.png) **Hands-on :** 01_Docker_Intro
+![](./img/handson.png) **Hands-on :** 01_Docker_Intro
 
 ---
 
@@ -65,7 +65,7 @@ footer: Samsung SDS
 
 <br>
 
-![](img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
+![](./img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
 
 ---
 
@@ -73,9 +73,9 @@ footer: Samsung SDS
 **Docker daemon**은 컨테이너를 **빌드/실행**하는 작업을 수행하고, **Docker client**는 이 Docker daemon과 통신합니다. (REST API를 사용)  
 Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, 원격지에서 사용될 수도 있습니다.
 
-![Docker architecture h:380 center](img/docker-architecture.svg)
+![Docker architecture h:380 center](./img/docker-architecture.svg)
 
-![](img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
+![](./img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
 ---
 
@@ -123,7 +123,7 @@ Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.
 
 <br>
 
-![](img/hyperlink.png)[Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
+![](./img/hyperlink.png)[Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
 
 ---
 
@@ -141,9 +141,9 @@ CMD python /app/app.py
 ```
 |  |  |
 | --- | :---: |
-| ![h:250](img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` 
+| ![h:250](./img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` 
 
-![](img/hyperlink.png)[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
+![](./img/hyperlink.png)[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
 
 ---
 
@@ -154,9 +154,9 @@ Container와 Image의 주요 차이점은 **쓰기 가능**한 최상위 레이�
 각 컨테이너에는 쓰기 가능한 자체 컨테이너 레이어가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
 그리고, 이렇게 공유되는 layer구조로 인해 자원을 효율적으로 사용할 수 있습니다. (저장공간, Provisioning)
 
-![h:300](img/sharing-layers.jpeg) 
+![h:300](./img/sharing-layers.jpeg) 
 
-![](img/handson.png) **Hands-on :** 02_Layer
+![](./img/handson.png) **Hands-on :** 02_Docker_Layers
 
 ---
 

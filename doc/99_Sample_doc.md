@@ -14,9 +14,9 @@ footer: Samsung SDS
 ##### H5, 12345, ABCDE, 동해물과 백두산이
 
 
-![](img/handson.png) **Hands-on :** 01_Docker_Intro
+![](./img/handson.png) **Hands-on :** 01_Docker_Intro
 
-![](img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
+![](./img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
 ---
 
@@ -66,3 +66,15 @@ footer: Samsung SDS
 |-----|-----|
 | ![w:200](./img/cloud_native_1.png) | 동해물과 백두산이<br>마르고 닳도록 |
 |Bar  |101  |
+
+---
+
+## [Hands-on] 00. Docker ...
+
+
+다음 실습을 해보겠습니다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker rm --force $(docker ps --filter "label=color=blue" --quiet)
+670302b2287f
+```
+> **명령어** : `docker rm --force $(docker ps --filter "label=color=blue" --quiet)`
