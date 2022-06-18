@@ -60,15 +60,6 @@ footer: Samsung SDS
 
 ---
 
-# Docker
-
-|||
-|-----|-----|
-| ![w:200](./img/cloud_native_1.png) | 동해물과 백두산이<br>마르고 닳도록 |
-|Bar  |101  |
-
----
-
 ## [Hands-on] 00. Docker ...
 
 
@@ -78,3 +69,4 @@ ubuntu@ip-10-0-1-14:~$ docker rm --force $(docker ps --filter "label=color=blue"
 670302b2287f
 ```
 > **명령어** : `docker rm --force $(docker ps --filter "label=color=blue" --quiet)`
+

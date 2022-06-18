@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: MSP T2 - Docker & Kubernetes - 01. Cloud native overview
+header: Docker & Kubernetes - 01. Cloud native overview
 footer: Samsung SDS
 ---
 
@@ -31,7 +31,7 @@ footer: Samsung SDS
 ## Container
 
 **컨테이너**는 애플리케이션이 다양한 컴퓨팅 환경에서 빠르고 안정적으로 실행될 수 있도록 **코드**와 모든 **종속성**을 **패키징**하는 소프트웨어의 표준 단위입니다.
-**컨테이너**는 **가상화** 기술의 하나로 Host 또는 다른 컨테이너와 **분리된 환경**에서 애플리케이션을 실행시킵니다.
+**컨테이너**는 **가상화** 기술의 하나로 Host머신 또는 다른 컨테이너와 **분리된 환경**에서 애플리케이션을 실행시킵니다.
 컨테이너는 **소형**이며 **빠르고** **이식성**이 뛰어납니다.
 
 ![h:380 center](./img/conatiner.png)
@@ -40,7 +40,7 @@ footer: Samsung SDS
 
 ## Container vs Virtual machine
 
-![h:280 center](./img/containers-vs-vm.png)
+![h:300 center](./img/containers-vs-vm.png)
 
 **컨테이너**는 **코드**와 모든 **종속성**을 함께 **패키징**하는 앱 계층의 추상화입니다.
 여러 컨테이너가 동일 시스템에서 실행될 수 있고, OS 커널을 공유하며, 각각은 격리된  
@@ -79,10 +79,11 @@ footer: Samsung SDS
 
 Docker는 이러한 컨테이너를 위한 플랫폼(또는 런타임)입니다. 
 
-![h:350 center](./img/linuxContainer.jpg)
+![h:380 center](./img/linuxContainer.jpg)
 
 ---
 ## Linux Container (LXC)
+Linux커널의 다음 요소들을 이용하여 컨테이너를 위한 격리된 환경을 제공합니다.
 
 ### Namespaces
 Docker는 Linux의 아래와 같은  `namespaces` 기능을 활용하여 격리된 Container를 구현합니다
@@ -99,3 +100,22 @@ Docker Engine cgroups 이라는 Linux기술을 이용하여 CPU, Memory와 같�
 Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 매우 가볍고 빠릅니다. Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공합니다.
 
 
+
+---
+
+## Summary
+
+- Cloud native
+    - Container (orchestration)
+    - Microservice
+    - DevOps
+- Container vs Virtual machine
+- Linux container (LXC)
+    - Namespaces
+    - Control groups
+    - Union file systems
+
+<br><br><br><br><br><br><br><br>
+
+
+`문의처` : 정상업 / rogallo.jung@samsung.com

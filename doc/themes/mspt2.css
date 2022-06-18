@@ -10,17 +10,11 @@
     background-size: cover;
 }
 
-section {
-    
-    vertical-align: top;
-
-}
-
 header {
-
     font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium', 'Trebuchet MS';
     font-size: 20px;
 }
+
 
 footer {
     font-family: 'Trebuchet MS';
