@@ -9,7 +9,7 @@ footer: Samsung SDS
 ---
 
 
-## Cloud Native
+### Cloud Native
 
 ![h:250](./img/cloud_native_1.png) ![h:250](./img/cloud_native_2.png) ![h:250](./img/cloud_native_3.png)
 
@@ -22,13 +22,13 @@ footer: Samsung SDS
 
 ---
 
-## Cloud Native
+### Cloud Native
 
 ![w:1000 center](./img/cloud_native_4.png)
 
 ---
 
-## Container
+### Container
 
 **컨테이너**는 애플리케이션이 다양한 컴퓨팅 환경에서 빠르고 안정적으로 실행될 수 있도록 **코드**와 모든 **종속성**을 **패키징**하는 소프트웨어의 표준 단위입니다.
 **컨테이너**는 **가상화** 기술의 하나로 Host머신 또는 다른 컨테이너와 **분리된 환경**에서 애플리케이션을 실행시킵니다.
@@ -38,7 +38,7 @@ footer: Samsung SDS
 
 ---
 
-## Container vs Virtual machine
+### Container vs Virtual machine
 
 ![h:300 center](./img/containers-vs-vm.png)
 
@@ -52,7 +52,7 @@ footer: Samsung SDS
 
 ---
 
-## Container vs Virtual machine
+### Container vs Virtual machine
 
 | | Container | Virtal Machine |
 | :--- | :----: | :----: |
@@ -72,7 +72,7 @@ footer: Samsung SDS
 
 ---
 
-## Linux Container (LXC)
+### Linux Container (LXC)
 **Container는  Linux 커널의 여러 기능을 활용하여 Container라는 격리된 공간 안에서 프로세스가 동작하는 기술입니다.**
 
 가상머신(VM)과 동일한 효과를 보이지만, 기존의 가상머신(VM)은 호스트의 하드웨어와 OS전체를 가상화하여 무겁고 느리지만, 컨테이너는 호스트 OS(리눅스) 커널을 공유하며 프로세스의 격리/가상화를 통하여 가상머신에 비해 빠른 실행속도를 보입니다.
@@ -103,7 +103,7 @@ Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 �
 
 ---
 
-## Summary
+### Summary
 
 - Cloud native
     - Container (orchestration)
