@@ -178,6 +178,5 @@ Container와 Image의 주요 차이점은 **쓰기 가능**한 최상위 레이�
     - etc.
 - Images and Layers
 - Container and Layers
-<br>
 
 `문의처` : 정상업 / rogallo.jung@samsung.com
