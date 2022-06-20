@@ -165,7 +165,7 @@ Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 �
 **Docker daemon**은 컨테이너를 **빌드/실행**하는 작업을 수행하고, **Docker client**는 이 Docker daemon과 통신합니다. (REST API를 사용)  
 Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, 원격지에서 사용될 수도 있습니다.
 
-![Docker architecture h:380 center](./img/docker-architecture.svg)
+![center](img/docker-architecture.png)
 
 ![](./img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
