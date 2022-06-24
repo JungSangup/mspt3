@@ -23,9 +23,11 @@ footer {
     font-size: 16px;
 }
 
+
 th, td {
     border: none !important;
 }
+
 
 img[alt~="center"] {
     display: block;
@@ -35,7 +37,7 @@ img[alt~="center"] {
 a:link, a:visited {
     padding: 0px 5px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
 }
   
 a:hover, a:active {
