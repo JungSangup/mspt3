@@ -33,7 +33,7 @@ footer: Samsung SDS
 **컨테이너**는 **가상화** 기술의 하나로 Host머신 또는 다른 컨테이너와 **분리된 환경**에서 애플리케이션을 실행시킵니다.
 컨테이너는 **소형**이며 **빠르고** **이식성**이 뛰어납니다.
 
-![h:400 center](./img/conatiner.png)
+![h:400 center](./img/container.png)
 
 ---
 
