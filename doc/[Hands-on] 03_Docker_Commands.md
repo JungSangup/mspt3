@@ -8,7 +8,7 @@ header: Docker & Kubernetes - 03. Docker commands
 footer: Samsung SDS
 ---
 
-## [Hands-on] 02. Docker layers
+## [Hands-on] 03. Docker commands
 
 자주 사용되는 도커 명령어를 알아보겠습니다.
 
@@ -116,39 +116,156 @@ ubuntu       18.04     ad080923604a   2 weeks ago   63.1MB
 
 **tag**를 명시하지 않은 경우는 default tag인 `latest`를 받아오네요.
 
+<br><br>
+
 이제 실행(run)을 해보겠습니다.
 ```bash
-docker run --interactive --tty ubuntu /bin/bash
+ubuntu@ip-10-0-1-14:~$ docker run --interactive --tty ubuntu /bin/bash
+root@060b1a36d1e5:/#
 ```
+> **명령어** : `docker run --interactive --tty ubuntu /bin/bash`
 
-실행된 ubuntu의 정보를 볼까요?
-`cat /etc/os-release`{{execute}}
+`--interactive --tty` 로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
 
-이제 `exit`{{execute}} 명령어로 컨테이너를 빠져나와서,
+---
 
-`ubuntu:18.04`를 실행해봅시다.
-`docker run --interactive --tty ubuntu:18.04 /bin/bash`{{execute}}
-아까와는 다르게 `tag(18.04)`를 명시해서 실행했습니다.
+실행된 ubuntu의 정보를 확인 해볼까요?
+```bash
+root@060b1a36d1e5:/# cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+```
+> **명령어** : `cat /etc/os-release`
 
-`cat /etc/os-release`{{execute}} 의 결과는?  
-둘의 차이를 찾으셨나요?   ಠ_ಠ
+**Ubuntu 22.04 LTS**로 실행된 것을 확인할 수 있습니다. (실행한 시기에 따라 달라질 수 있습니다.)
 
-https://hub.docker.com/_/ubuntu?tab=description 를 보시면, 어떤 tag가 latest인지 알 수 있습니다.
-`exit`{{execute}} 명령어로 컨테이너에서 나와주세요.
+이제 `exit` 명령어로 컨테이너를 빠져나오겠습니다.
+```bash
+root@060b1a36d1e5:/# exit
+exit
+ubuntu@ip-10-0-1-14:~$
+```
+> **명령어** : `exit`
+
+---
+
+이번에는 `ubuntu:18.04`를 실행해봅시다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker run --interactive --tty ubuntu:18.04 /bin/bash
+root@31d0f5ae7f56:/#
+```
+> **명령어** : `docker run --interactive --tty ubuntu:18.04 /bin/bash`
+
+좀전과는 다르게 `tag(18.04)`를 명시해서 실행했습니다.
+
+`cat /etc/os-release`{{execute}} 의 결과는 어떻게 나올까요?
+```bash
+root@31d0f5ae7f56:/# cat /etc/os-release
+NAME="Ubuntu"
+VERSION="18.04.6 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.6 LTS"
+VERSION_ID="18.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
+```
+> **명령어** : `cat /etc/os-release`
+
+둘의 차이를 찾으셨나요?   ಠ_ಠ   (힌트 : VERSION)
+
+---
+
+[https://hub.docker.com/_/ubuntu](https://hub.docker.com/_/ubuntu) 를 보시면, 어떤 tag가 latest인지 알 수 있습니다.
+
+![h:350](img/docker_hub2.png)
 
 
-이번엔 다른 방법(--detach)으로 실행해 보겠습니다.
-`docker run --detach --name my-nginx --publish 8080:80 nginx`{{execute}}
-아까 `--interactive` 옵션을 적용했을때와는 달리, 프롬프트가 그대로 있네요.
+이제 `exit` 명령어로 컨테이너에서 나와주세요.
+```bash
+root@31d0f5ae7f56:/# exit
+exit
+ubuntu@ip-10-0-1-14:~$
+```
+> **명령어** : `exit`
 
-`docker ps --all`{{execute}} 명령어로 컨테이너 목록을 조회해보세요.
-아까 실행했던 ubuntu와 nginx가 보일거예요.  
+---
+
+이번엔 다른 방법(`--detach`)으로 실행해 보겠습니다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker run --detach --name my-nginx --publish 8080:80 nginx
+Unable to find image 'nginx:latest' locally
+latest: Pulling from library/nginx
+b85a868b505f: Pull complete
+f4407ba1f103: Pull complete
+4a7307612456: Pull complete
+935cecace2a0: Pull complete
+8f46223e4234: Pull complete
+fe0ef4c895f5: Pull complete
+Digest: sha256:10f14ffa93f8dedf1057897b745e5ac72ac5655c299dade0aa434c71557697ea
+Status: Downloaded newer image for nginx:latest
+f87853d90ac2305aa55945ea7babf3888ea5b13024046aead8968da2315b135b
+ubuntu@ip-10-0-1-14:~$
+```
+> **명령어** : `docker run --detach --name my-nginx --publish 8080:80 nginx`
+
+이전에 `--interactive` 옵션을 적용했을때와는 달리, 프롬프트가 그대로 있네요.
+
+이제 `docker ps --all` 명령어로 컨테이너 목록을 조회해보세요.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker ps --all
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                      PORTS                                   NAMES
+f87853d90ac2   nginx          "/docker-entrypoint.…"   About a minute ago   Up About a minute           0.0.0.0:8080->80/tcp, :::8080->80/tcp   my-nginx
+31d0f5ae7f56   ubuntu:18.04   "/bin/bash"              14 minutes ago       Exited (0) 3 minutes ago                                            wonderful_bassi
+060b1a36d1e5   ubuntu         "/bin/bash"              25 minutes ago       Exited (0) 25 minutes ago                                           determined_mahavira
+```
+이전에 실행했던 ubuntu와 nginx가 보일거예요.  
 ubuntu는 Exited 상태이고, nginx는 Running 상태 입니다.
 
-nginx가 정말 Running 상태인지 `Display 8080`탭을 눌러서 확인도 해보세요.
+---
 
-이번엔 `docker stop $(docker ps --filter "name=my-nginx" --quiet)`{{execute}}으로 nginx 컨테이너를 멈춰봅시다.  
-`docker ps --all`{{execute}} 로 상태도 확인해보시고, `Display 8080`탭으로 확인도 해보세요.
+nginx가 정말 Running 상태인지 8080번 포트로 접속해서 확인도 해보세요.
+- AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:8080/)
+- Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
+
+![h:400](img/nginx1.png)
+
+---
+
+이번엔 `docker stop` 명령어로 nginx 컨테이너를 멈춰봅시다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker stop $(docker ps --filter "name=my-nginx" --quiet)
+f87853d90ac2
+```
+> **명령어** : `docker stop $(docker ps --filter "name=my-nginx" --quiet)`
+
+`docker ps --all`로 상태도 확인해보시고, 8080번 포트로 접속이 되는지 확인도 해보세요.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker ps --all
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                          PORTS     NAMES
+f87853d90ac2   nginx          "/docker-entrypoint.…"   13 minutes ago   Exited (0) About a minute ago             my-nginx
+31d0f5ae7f56   ubuntu:18.04   "/bin/bash"              26 minutes ago   Exited (0) 15 minutes ago                 wonderful_bassi
+060b1a36d1e5   ubuntu         "/bin/bash"              37 minutes ago   Exited (0) 37 minutes ago                 determined_mahavira
+```
+> **명령어** : `docker ps --all`
+- `Exited` 상태인 컨테이너는 `--all` 옵션을 적용해야 조회가 됩니다.
 
  `docker start` 와 `docker restart` 는 직접 명령어를 만들어서 한번 해보세요.
-> Hint : Exited 상태인 컨테이너는 --all 옵션을 적용해야 조회가 됩니다.
+
+이번 실습은 여기까지 입니다.
+
+(๑╹o╹)✎

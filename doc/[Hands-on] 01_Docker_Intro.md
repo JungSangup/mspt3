@@ -134,10 +134,9 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS    
 
 위 처럼 docker-101 이 보이면 정상입니다.
 
-이제 실행된 애플리케이션에 접속해볼까요?
-실행된 Host의 3000번 포트로 접속하면 됩니다.
-
-- `AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다.` (e.g. http://IP:3000/)
+이제 실행된 애플리케이션에 접속해볼까요? 실행된 Host의 3000번 포트로 접속하면 됩니다.
+- AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
+- Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
 
 ---
 ​
