@@ -110,7 +110,7 @@ Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 �
 
 [![Build](./img/moby_build_s.png)](https://www.docker.com/)[![Share](./img/moby_share_s.png)](https://www.docker.com/)[![Run](./img/moby_run_s.png)](https://www.docker.com/)
 
-<br>
+<br><br>
 
 ![](./img/handson.png) **Hands-on :** 01_Docker_Intro
 

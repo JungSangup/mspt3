@@ -258,8 +258,7 @@ $ docker cp ./some_file my-ubuntu:/work # some_file을 my-ubuntu 컨테이너의
 ```
 
 <br><br><br><br><br><br><br><br>
-
-![](./img/hyperlink.png)[Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/)
+![](./img/handson.png) **Hands-on :** 03_Docker_Commands
 
 ---
 
