@@ -10,13 +10,21 @@ footer: Samsung SDS
 
 ## [Hands-on] 03. Docker network
 
-도커 네트워크를 이용해서 멀티 컨테이너 애플리케이션을 구성해 보겠습니다.
+도커 네트워크를 이용해서 아래 그림과 같이 멀티 컨테이너 애플리케이션을 구성해 보겠습니다.
+우리 애플리케이션에 Database(MySQL)를 연결해서 서비스하도록 합니다.
+
+![](img/multi-app-architecture.png)
+
+
 먼저 docker network create명령으로 bridge network을 하나 생성하겠습니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker network create todo-app
 8440c866efe789d8dac94820c2bbbdca4ca7a6985acff2c3136dd3be31f13203
 ```
 > **명령어** : `docker network create todo-app`
+> - 생성된 `network`는 `docker network inspect [OPTIONS] NETWORK [NETWORK...]`
+명령어를 이용하여 상세 내용을 확인할 수 있습니다.
+---
 
 그리고, 생성한 네트워크를 이용해서 mysql을 실행합니다.
 ```bash
@@ -32,13 +40,25 @@ ubuntu@ip-10-0-1-14:~$ docker run -d \
     --collation-server=utf8mb4_unicode_ci
 c9d83cbd2ac8941da32d8d64103223fe1c6937c9c28507c6e19ed91fca740c98
 ```
-> **명령어** :`docker run -d --network todo-app --network-alias mysql --volume todo-mysql-data:/var/lib/mysql --env MYSQL_ROOT_PASSWORD=secret --env MYSQL_DATABASE=todos --env LANG=C.UTF-8 --name my-mysql mysql:5.7 --character-set-server=utf8 --character-set-client=utf8 --character-set-connection=utf8mb4 --collation-server=utf8mb4_unicode_ci`
-
----
+> **명령어** :
+> ```bash
+> docker run -d \
+>     --network todo-app --network-alias mysql \
+>     --volume todo-mysql-data:/var/lib/mysql \
+>     --env MYSQL_ROOT_PASSWORD=secret \
+>     --env MYSQL_DATABASE=todos \
+>     --env LANG=C.UTF-8 \
+>     --name my-mysql \
+>     mysql:5.7 \
+>     --character-set-server=utf8mb4 \
+>     --collation-server=utf8mb4_unicode_ci
+> ```
 
 이전에 배운 `volume`도 사용하네요.
 데이터의 영속성을 위해서 데이터는 `volume`에 저장하도록 구성했습니다.
 `docker volume create`명령으로 생성하지 않아도, 없는경우엔 도커가 알아서 생성해줍니다. ◟(ˊᗨˋ)◞ 
+
+---
 
 이제 mysql에 로그인해서 데이터베이스가 잘 생성됐나 봅시다.  
 ```bash

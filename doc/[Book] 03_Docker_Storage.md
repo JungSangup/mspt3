@@ -258,7 +258,7 @@ Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문�
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-![](./img/handson.png) **Hands-on :** 04_Docker_Volume
+![](./img/handson.png) **Hands-on :** 04_Docker_Volumes
 
 ---
 
