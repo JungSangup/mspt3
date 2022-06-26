@@ -234,7 +234,7 @@ CMD python /app/app.py
 ```
 |  |  |
 | --- | :---: |
-| ![h:250](./img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` 
+| ![h:250](./img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` |
 
 ![](./img/hyperlink.png)[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
 

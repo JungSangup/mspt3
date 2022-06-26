@@ -375,7 +375,7 @@ docker-101   latest    096cfe46290d   26 seconds ago   172MB
 아래 명령어로 필요한 이미지를 만들어 줍니다.
 현재 있는 이미지를 이용해서 도커 허브에 올리기 위한 새로운 이미지를 만들어 줍니다. (REPOSITORY와 TAG 정보를 변경해서)
 ```bash
-ubuntu@ip-10-0-1-14:~/app$ docker tag docker-101 [USER-NAME]/101-todo-app:1.0.0
+ubuntu@ip-10-0-1-14:~/app$ docker tag docker-101 rogallo/101-todo-app:1.0.0
 ```
 > **명령어** : `docker tag docker-101 [USER-NAME]/101-todo-app:1.0.0`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
@@ -395,7 +395,7 @@ rogallo/101-todo-app   1.0.0       096cfe46290d   59 minutes ago   172MB
 
 먼저 로그인을 하구요,
 ```bash
-ubuntu@ip-10-0-1-14:~/app$ docker login -u [USER-NAME]
+ubuntu@ip-10-0-1-14:~/app$ docker login -u rogallo
 Password:
 WARNING! Your password will be stored unencrypted in /home/ubuntu/.docker/config.json.
 Configure a credential helper to remove this warning. See
@@ -408,7 +408,7 @@ Login Succeeded
 
 아래 명령어로 docker hub의 우리 repository에 업로드(`push`) 해볼까요?
 ```bash
-ubuntu@ip-10-0-1-14:~/app$ docker push [USER-NAME]/101-todo-app:1.0.0
+ubuntu@ip-10-0-1-14:~/app$ docker push rogallo/101-todo-app:1.0.0
 The push refers to repository [docker.io/rogallo/101-todo-app]
 1b433114c90c: Pushed
 53f2ecccc84e: Pushed
