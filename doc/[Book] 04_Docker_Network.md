@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - 03. Docker network
+header: Docker & Kubernetes - 04. Docker network
 footer: Samsung SDS
 ---
 
