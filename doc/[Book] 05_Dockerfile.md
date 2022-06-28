@@ -73,7 +73,7 @@ INSTRUCTION arguments
 
 ## Instructions
 
-### FROM
+### [FROM](https://docs.docker.com/engine/reference/builder/#from)
 
 Base image를 지정하는 Instruction으로, 지정된 Image를 [Docker Hub](https://hub.docker.com/)와 같은 Registry에서 Pull합니다. Base image를 지정할때는 `ubuntu:18.04` 처럼 Image명과 Tag까지 지정해주는것이 좋습니다.
 > Tag가 생략되면 latest 를 사용하게 됩니다.
@@ -129,9 +129,7 @@ CMD  /code/run-app
 
 ---
 
-## Instructions
-
-### LABEL
+### [LABEL](https://docs.docker.com/engine/reference/builder/#label)
 
 `LABEL` instruction은 Label로 지정한 문자열을 이미지에 메타데이터로 추가합니다. 
 `LABEL` 은 key-value 쌍으로 작성하며 space를 포함시키기 위해서는 따옴표(`""`)를, 이어쓰기를 위해서는 백슬래쉬(`\`)를 사용하면 됩니다. 
@@ -174,15 +172,12 @@ CMD ["/bin/echo", "hello docker"]
 
 ---
 
-## Instructions
-
-### RUN
+### [RUN](https://docs.docker.com/engine/reference/builder/#run)
 
  `RUN` Instruction은 Base image위의 새로운 layer에서 Command를 실행하는데 사용됩니다.
  일반적으로 패키지를 설치할 때 자주 사용됩니다.
 
 #### Syntax
-
 **shell form** : command 로 입력받은 명령어는 쉘에서 수행되며 디폴트로 리눅스에서는 `/bin/sh -c` 이 윈도우에서는 `cmd /S /C` 가 사용됩니다.
 ```dockerfile
 RUN <command>
@@ -193,8 +188,6 @@ RUN <command>
 RUN ["executable", "param1", "param2"]
 ```
 > exec form은 JSON array로 파싱되므로, double-quotes(“) 를 이용해야 함.
-
----
 
 #### Example
 ```dockerfile
@@ -207,15 +200,9 @@ RUN apt-get update && apt-get install -y \
         package-c
 ```
 
-위와같이 다양한 명령어 처리에 사용됩니다.
-각 명령어를 실행할 때 마다 하나의 layer가 생성되고, 그 결과는 다음단계에서 사용됩니다.
-
-
 ---
 
-## Instructions
-
-### CMD
+### [CMD](https://docs.docker.com/engine/reference/builder/#cmd)
 
  `CMD` Instruction은 Docker Container가 시작될때 실행 할 커맨드를 지정하는 지시자이며 아래와 같은 특징과 기능을 제공합니다.
 
@@ -267,12 +254,10 @@ CMD ["catalina.sh","run"]
 
 ---
 
-## Instructions
-
-### ENTRYPOINT
+### [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint)
 
 `CMD`와 마찬가지로 컨테이너가 실행될때 기본 command를 지정합니다.
-`CMD`와 비슷하지만 `CMD`는 override 가능하지만 `ENTRYPOINT`는 override할 수 없습니다.
+`CMD`와 비슷하지만 `CMD`는 `docker run`명령어의 인자들로 override 되고, `ENTRYPOINT`는 항상 실행된다는 것입니다. 
 
 `docker run` 커맨드에 인자들을 추가하여 실행하면, 그 인자들은 `CMD`의 요소들을 대체하여 `ENTRYPOINT` Instruction에 지정된 커맨드의 인자로 추가됩니다.
 
@@ -303,9 +288,7 @@ CMD ["world"]
 위와같은 Dockerfile을 작성한 후 아래와 같이 이미지를 빌드하고 실행합니다.
 ```bash
 $ docker build -t my-ubuntu:v3 .
-```
 
-```bash
 $ docker run my-ubuntu:v3
 Hello docker world
 
@@ -316,21 +299,25 @@ Hello docker place
 인자를 주고 실행한 두 번째 컨테이너는 `CMD`의 내용을 명령줄의 내용으로 치환하여 실행합니다. (world -> place로 변경)
 
 
+
 ---
 
-## EXPOSE
+### [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose)
 
-`EXPOSE` 명령은 Container가 Runtime시 수신대기할 포트를 지정하는 명령어입니다. 포트번호 및 TCP 또는 UDP를 지정할 수 있으며 프로토콜이 지정되지 않을 경우 기본값은 TCP입니다.
+`EXPOSE` Instruction은 Container가 Runtime시 수신대기할 포트를 지정하는 명령어입니다. TCP 또는 UDP를 지정할 수 있으며, 지정하지 않을경우 기본값인 TCP로 지정됩니다.
 
-주의해야할 점은 EXPOSE 명령어 자체가 실제로 포트를 열지 않는다는 점입니다. EXPOSE 명령은 이미지를 만드는 사람과 이미지를 사용하는 사람이 포트 및 프로토콜 규약을 명시해놓은 문서기능을 하는 것이고 실제 Container의 포트는 docker run -p 옵션으로 Container를 실행하는 시점에 -p 옵션으로 지정된 포트가 개방됩니다.
+주의해야할 점은 EXPOSE 명령어 자체가 실제로 포트를 열지는 않는다는 점입니다. EXPOSE 명령은 이미지를 만드는 사람과 이미지를 사용하는 사람이 포트 및 프로토콜 규약을 명시해놓은 문서와 같은 역할을 하는 것입니다.
+실제로 Container의 포트는 다음과 같은 방법으로 publish 됩니다.
+- `--publish`(또는 `-p`) flag로 컨테이너의 port와 Host 머신의 port를 지정하여 오픈
+- `--publish-all`(또는 `-P`) flag로 `EXPOSE`로 지정된 모든 포트를 오픈
 
-### Syntax
+#### Syntax
 
 ```dockerfile
 EXPOSE <port> [<port>/<protocol>...]
 ```
 
-### Example
+#### Example
 
 ```Dockerfile
 EXPOSE 80/udp
@@ -341,42 +328,59 @@ EXPOSE 80/tcp
 EXPOSE 80/udp
 ```
 
+```bash
+$ docker run -d --name my-nginx -p 8080:80 nginx
+```
 
+---
 
-## ENV
+### [ENV](https://docs.docker.com/engine/reference/builder/#env)
 
-`ENV`명령어는 환경변수 `<key>` 를 `<value>`로 설정하는 지시자입니다. 쉽게 일반 프로그래밍에서 변수를 지정하는 것과 동일하다고 생각하면 됩니다. 
+`ENV` Instruction은 환경변수를 설정하는데 사용됩니다.
+`ENV`를 사용하여 설정된 환경변수는 Container 실행 시에도 유지되며, `docker run` 명령어에 `--env` flag를 이용하여 변경할 수도 있습니다.
 
-`ENV`를 사용하여 셋팅된 환경변수는 Container Runtime시에도 셋팅된 변수가 유지됩니다.
-
-### Syntax
+#### Syntax
 
 ```dockerfile
 ENV <key> <value>
+````
+```dockerfile
 ENV <key>=<value> ...
 ```
+> 두 가지 다 사용가능하나, 아래 방법을 사용하는 것을 권장함.
 
-### Example
+#### Example
+```dockerfile
+ENV MY_NAME="Tom Cruise" MY_FIGHTER_JET=F14\ Tomcat \
+    MY_BIKE=Kawasaki
+```
+> 값에 공백을 넣으려면 double-quotes(`“`)로 감싸거나 backslashes(`\`)를 사용함.
 
 ```dockerfile
 FROM busybox
-ENV FOO /bar
+ENV FOO=/bar
 WORKDIR ${FOO}   # WORKDIR /bar
-COPY . /quux # COPY all to /quux
+ADD . $FOO       # ADD . /bar
+COPY \$FOO /quux # COPY $FOO /quux
 ```
 
+---
 
-
-## COPY
+### [COPY](https://docs.docker.com/engine/reference/builder/#copy)
 
 호스트의 Context 내의 파일 또는 디렉터리들을 Container의 파일시스템으로 복사하는 명령어입니다. 또한 `--chown` 옵션으로 파일 및 디렉터리에 대한 유저와 그룹을 지정할 수 있습니다.
 
-### Syntax
+#### Syntax
 
-- `COPY [--chown=<user>:<group>] <src>... <dest>`
-- `COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]` (this form is required for paths containing whitespace)
+```dockerfile
+COPY [--chown=<user>:<group>] <src>... <dest>
+```
+```dockerfile
+COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
+```
+> 경로에 공백이 포함된 경우 아래 방법을 사용.
 
-### Example
+#### Example
 
 ```dockerfile
 COPY . /bar/             # adds all files and directories
@@ -391,18 +395,24 @@ COPY --chown=10:11 files* /somedir/
 
 `COPY --chown`에 의해 주어진 유저명과 그룹명으로 지정되지 않은 모든 파일 및 디렉터리들은 Container안에서 UID, GID 0번으로 생성됩니다.
 
+---
 
+### [ADD](https://docs.docker.com/engine/reference/builder/#add)
 
-## ADD
+`ADD`는 Syntax 및 기능면에서 `COPY`와 유사하나, URL을 지정해 파일을 복사 할 수 있고 압축파일(tar)을 을 자동으로 풀어서 복사한다는 점에서 차이가 있습니다.
+> Tar archive format : identity, gzip, bzip2, xz
 
-ADD는 Syntax 및 기능면에서 COPY와 유사 URL을 지정해 파일을 복사 할 수 있고 압축파일(tar)을 을 자동으로 풀어서 복사한다는 점에서 차이가 있습니다.
+#### Syntax
 
-### Syntax
+```dockerfile
+ADD [--chown=<user>:<group>] <src>... <dest>
+```
+```dockerfile
+ADD [--chown=<user>:<group>] ["<src>",... "<dest>"]
+```
+> 경로에 공백이 포함된 경우 아래 방법을 사용.
 
-- `ADD [--chown=<user>:<group>] <src>... <dest>`
-- `ADD [--chown=<user>:<group>] ["<src>",... "<dest>"]`(this form is required for paths containing whitespace)
-
-### Example
+#### Example
 
 ```dockerfile
 ADD http://example.com/big.tar.xz /usr/src/things/
@@ -410,27 +420,29 @@ RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
 ```
 
+---
 
-
-## USER
+### [USER](https://docs.docker.com/engine/reference/builder/#user)
 
 Docker로 Container를 수행할때 Container 실행 유저는 Docker의 기본설정으로 root계정입니다.
 
 ```bash
-root@ubuntu:/# docker run ubuntu whoami
+$ docker run ubuntu whoami
 root
 ```
 
-USER 명령어는 이러한 Container안에서 명령을 실행 할 유저명과 유저그룹을 설정하는 명령어이며, Dockerfile 안에서 USER명령어를 셋팅한 이후의 RUN, CMD, ENTRYPONT 명령어에 적용됩니다.
+USER 명령어는 이러한 Container안에서 명령을 실행 할 유저명(또는 UID)과 유저그룹(or GID)을 설정하는 명령어이며, Dockerfile 안에서 USER명령어를 셋팅한 이후의 RUN, CMD, ENTRYPONT 명령어에 적용됩니다.
 
-### Syntax
+#### Syntax
 
 ```dockerfile
-USER <user>[:<group>] or
+USER <user>[:<group>]
+```
+```dockerfile
 USER <UID>[:<GID>]
 ```
 
-### Example
+#### Example
 
 ```dockerfile
 # 시스템 그룹 및 유저로 postgres를 추가한다. 
@@ -440,19 +452,19 @@ RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
 USER postgres
 ```
 
+---
 
+### [WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir)
 
-## WORKDIR
+`WORKDIR`명령어는 `WORKDIR`명령어에 뒤따르는 `RUN`, `CMD`, `ENTRYPOINT`, `COPY` , `ADD`명령어의 작업디렉터리를 지정하는 명령어입니다.
+`WORKDIR`로 지정한 디렉토리가 없는 경우에는 자동으로 생성되며, `WORKDIR`을 지정하지 않는경우에는 `\`가 작업 디렉토리로 사용됩니다.
 
-`WORKDIR`명령어는 `WORKDIR`명령어에 뒤따르는`WORKDIR`, `RUN`, `CMD`, `ENTRYPOINT`, `COPY` , `ADD`명령어의 작업디렉터리를 지정하는 명령어입니다. 쉽게 말해 리눅스 cd명령어와 비슷하다고 생각하면 됩니다.
-
-### Syntax
-
+#### Syntax
 ```dockerfile
 WORKDIR /path/to/workdir
 ```
 
-### Example
+#### Example
 
 ```dockerfile
 WORKDIR /a   # 작업디렉터리를 /a로 이동합니다
@@ -461,37 +473,30 @@ WORKDIR c    # /a/b에서 하위의 c디렉터리로 이동합니다.
 RUN pwd      # RUN명령어가 실행되는 디렉터리는 WORKDIR로 이동한 /a/b/c가 됩니다.
 ```
 
-주의할 점은, Linux cd명령어와는 다르게 만약 `WORKDIR`로 지정한 디렉터리가 존재하지 않을 경우, 그 디렉터리를 Container 안에 생성한다는 점에서 다릅니다.
-
-아래와 같이 `ENV`로 지정한 환경변수와 함께 쓰일 수 있다는 점도 참고바랍니다.
+아래와 같이 `ENV`로 지정한 환경변수와 함께 쓰일 수도 있습니다.
 
 ```dockerfile
 ENV DIRPATH /path
 ENV DIRNAME dname
 WORKDIR $DIRPATH/$DIRNAME
-RUN pwd                   # 출력결과 /path/dname
+RUN pwd    # 출력결과 /path/dname
 ```
 
+---
 
+### [VOLUME](https://docs.docker.com/engine/reference/builder/#volume)
 
-## VOLUME
+`VOLUME` Instruction은 Mount point를 지정하는 데 사용됩니다.
+컨테이너에서 생성된 데이터를 영구보존하고자 할때 사용되는 명령어로, 컨테이너가 실행될때 Volume 명령어로 선언된 Container의 지점이 Host 머신의 특정지점과 마운트되어 실행됩니다.
+이때 Host에 생성되는 경로는 /var/lib/docker/volumes/ 아래가 됩니다.
 
-### Syntax
+#### Syntax
 
 ```dockerfile
 VOLUME ["/data"]
 ```
 
-`VOLUME` 은 컨테이너에서 생성된 데이터를 영구보존하고자 할때 사용되는 명령어로 컨테이너가 실행될때 Volume 명령어로 선언된 Container 안의 지점을 Container 밖의 특정지점과 자동으로 마운트되어 컨테이너가 실행됩니다.
-
-이때 Host에 생성되는 경로는 /var/lib/docker/volumes/{volume_name}이고, volume_name은 Docker에서 생성하는 해쉬값으로 생성이됩니다.
-
-### Example
-
-```bash
-# cd /dockerfile
-# gedit dockerfile
-```
+#### Example
 
 ```dockerfile
 FROM ubuntu
@@ -502,144 +507,31 @@ CMD ["/bin/bash"]
 ```
 
 ```bash
-# docker build -t localhost/volumetest:v1 .
-root@ubuntu:/dockerfile# docker images
-REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
-localhost/volumetest   v1                  0e537c84a0d2        12 seconds ago      88.1MB
+$ docker build -t volumetest:v1 .
+$ docker volume create my-volume
+$ docker run -it --name volumetest --mount source=my-volume,target=/myvol volumetest:v1 /bin/bash
 ```
-
-생성한 이미지를 실행합니다.
-
-```bash
-# docker run -it localhost/volumetest:v1 /bin/bash;
-```
-
-볼륨을 조회해 보면 신규로 볼륨을 조회해보면 신규로 한개가 생긴것을 확인할 수 있고 생성된 볼륨디렉터리로 들어가면 dockerfile에서 생성한 file을 확인 할 수 있습니다.
-
-```bash
-root@ubuntu:/dockerfile# docker volume ls
-DRIVER              VOLUME NAME
-local               fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9
-root@ubuntu:/dockerfile# cd /var/lib/docker/volumes && ls
-fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9  metadata.db
-
-root@ubuntu:/var/lib/docker/volumes# cd fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9
-root@ubuntu:/var/lib/docker/volumes/fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9# ls
-_data
-root@ubuntu:/var/lib/docker/volumes/fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9# cd _data/
-root@ubuntu:/var/lib/docker/volumes/fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9/_data# ls
-greeting
-
-```
-
-이렇게 dockerfile에서만 Volume을 명시해두고 docker실행시 디폴트로 마운트하게되면, docker에서 자동으로 volume을 생성해주지만, Hash값으로 생성하기 때문에 관리하기가 쉽지 않습니다.
-
-따라서 앞서 배운 내용을 바탕으로 Volume을 사전에 미리 생성해두고, 실행시 dockerfile 안에 명시된 경로로 마운트해보도록하겠습니다.
-
-```bash
-root@ubuntu:/# docker volume create volume2
-volume2
-root@ubuntu:/# docker volume ls
-DRIVER              VOLUME NAME
-local               fbfdbb0b0236c712bd8f2034aa699e0a23a6449915fad90cc0ae07e7f570b0a9
-local               volume2
-```
-
-Volume을 컨테이너 기동시 마운트하면 이 디렉터리가 컨테이너의 지정된 디렉터리로 마운트됩니다.
-
-```bash
-# docker run -it --name volumetest --mount source=volume2,target=/myvol localhost/volumetest:v1 /bin/bash
-root@a52260c673a7:/# cd /myvol && ls
-greeting
-root@a52260c673a7:/myvol# exit
-
-root@ubuntu:/# cd /var/lib/docker/volumes/volume2/_data/ && ls
-greeting
-```
-
-
-
-## 혼동하지 말자
-
-```
-COPY vs ADD
-```
-
-```
-RUN vs CMD
-```
-
-```
-ENTRYPOINT & CMD
-```
-
-
-
-
-
-## 실습
-
-아래 3번의 Dockerfile에 주석부분에 해당되는 Dockerfile을 완성하고, 이미지를 만든 후 실행해 봅시다.
-
-
-
-1. java 애플리케이션을 빌드 할 디렉터리를 생성합니다.
-
-   ```bash
-   # mkdir /lab/dockerfile
-   # cd /lab/dockerfile
-   ```
-
-2. 간단한 java 애플리케이션을 하나 코딩합니다.
-
-   ```bash
-   # gedit /lab/dockerfile/HelloDocker.java
-   public class HelloDocker {
-   	public static void main(String[] args) {
-   		System.out.println("Hello Docker!!!");
-   	}
-   }
-   ```
-
-3. dockerfile을 생성합니다.
-
-   ```bash
-   # gedit /lab/dockerfile/dockerfile
-   ```
-
-   ```dockerfile
-   # Base이미지는 java:8 입니다.
-   
-   
-   # 빌드디렉터리의 모든 파일들은 컨테이너 /home/user/hello 위치로 복사합니다.
-   
-   
-   # 컨테이너 안의 위치를 /home/user/hello로 이동합니다.
-   
-   
-   # javac HelloDocker.java 명령어로 자바파일을 컴파일합니다.
-   
-   
-   # 컨테이너가 시작되면 java HelloDocker을 실행합니다.(디폴트 옵션으로)
-   
-   ```
-
-4. 이미지를 생성합니다.
-
-   ```
-   docker build -t localhost:5000/hellodocker:v1 .
-   ```
-
-5. 빌드한 이미지를 싫행합니다.
-
-   ```
-   docker run localhost:5000/hellodocker:v1
-   ```
+> `docker volume create`명령으로 먼저 Volume을 생성한 후, `docker run`명령어에서 `--mount`나 `-v` flag를 이용하여 마운트 위치를 지정합니다.
 
 ---
 
 ## Summary
 
-- 
+- Dockerfile
+- docker build
+- Build context
+- Instructions
+    - FROM
+    - LABEL
+    - RUN
+    - CMD , ENTRYPOINT
+    - EXPOSE
+    - ENV
+    - COPY , ADD
+    - USER
+    - WORKDIR
+    - VOLUME
+
+<br><br>
 
 `문의처` : 정상업 / rogallo.jung@samsung.com
