@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 736 355" width="736" height="355">
+  <defs>
+    <font-face font-family="Roboto" font-size="12" panose-1="2 0 0 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-73.24219" underline-thickness="48.828125" slope="0" x-height="528.3203" cap-height="710.9375" ascent="927.7344" descent="-244.14062" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Roboto-Regular"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="TreehouseArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -5 10 10" markerWidth="10" markerHeight="10" color="#616161">
+      <g>
+        <path d="M 8 0 L 0 0 M 4 -4 L 8 0 L 4 4" fill="none" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.7.1 
+    <dc:date>2018-05-09 23:20:09 +0000</dc:date>
+  </metadata>
+  <g id="Optimisation_of_build_steps_in_a_Dockerfile" fill-opacity="1" stroke-dasharray="none" stroke="none" stroke-opacity="1" fill="none">
+    <title>Optimisation of build steps in a Dockerfile </title>
+    <g id="Optimisation_of_build_steps_in_a_Dockerfile: Layer 1">
+      <title>Layer 1</title>
+      <g id="Graphic_10">
+        <title>zone internal - grey</title>
+        <rect x="94.5" y="50" width="183" height="105" fill="#eaedef"/>
+        <text transform="translate(109.5 60)" fill="#757575">
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="11">FROM debian:9</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="35">STEP 1</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="59">STEP 2</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="83">STEP 3</tspan>
+        </text>
+      </g>
+      <g id="Graphic_9">
+        <title>zone internal - grey</title>
+        <rect x="94.5" y="200" width="183" height="105" fill="#eaedef"/>
+        <text transform="translate(109.5 210)" fill="#757575">
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="11">FROM debian:9</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="35">STEP 1</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="59">STEP 2</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="83">STEP 3</tspan>
+        </text>
+      </g>
+      <g id="Graphic_8">
+        <title>zone internal - grey</title>
+        <rect x="464.5" y="50" width="183" height="105" fill="#e2f3ec"/>
+        <text transform="translate(479.5 60)" fill="#757575">
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="11">FROM debian:9</tspan>
+        </text>
+      </g>
+      <g id="Graphic_7">
+        <title>zone internal - grey</title>
+        <rect x="464.5" y="200" width="183" height="105" fill="#e2f3ec"/>
+        <text transform="translate(479.5 210)" fill="#757575">
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="11">FROM debian:9</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="35">STEP 1</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="59">STEP 2</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="83">STEP 3</tspan>
+        </text>
+      </g>
+      <g id="Graphic_6">
+        <title>zone internal - grey</title>
+        <rect x="464.5" y="81" width="183" height="74" fill="#fed7d6"/>
+        <text transform="translate(479.5 86)" fill="#757575">
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="11">STEP 1.1</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="35">STEP 2</tspan>
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="59">STEP 3</tspan>
+        </text>
+      </g>
+      <g id="Graphic_5">
+        <title>zone internal - grey</title>
+        <rect x="464.5" y="278" width="183" height="27" fill="#fed7d6"/>
+        <text transform="translate(479.5 283)" fill="#757575">
+          <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#757575" x="0" y="11">STEP 3.1</tspan>
+        </text>
+      </g>
+      <g id="Line_4">
+        <title>path</title>
+        <path d="M 277.5 102.5 L 371 102.5 L 454.6 102.5" marker-end="url(#TreehouseArrow_Marker)" stroke="#616161" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_3">
+        <title>path</title>
+        <path d="M 277.5 252.5 L 371 252.5 L 454.6 252.5" marker-end="url(#TreehouseArrow_Marker)" stroke="#616161" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 736 420" width="736" height="420">
+  <defs>
+    <font-face font-family="Roboto" font-size="10" panose-1="2 0 0 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-73.24219" underline-thickness="48.828125" slope="0" x-height="528.3203" cap-height="710.9375" ascent="927.7344" descent="-244.14062" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Roboto-Regular"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.7.1 
+    <dc:date>2018-06-06 16:43:04 +0000</dc:date>
+  </metadata>
+  <g id="virtual_machines_vs__containers" fill-opacity="1" stroke-dasharray="none" stroke="none" stroke-opacity="1" fill="none">
+    <title>virtual machines vs. containers</title>
+    <rect fill="white" x="0" y="0" width="736" height="420"/>
+    <g id="virtual_machines_vs__containers: Layer 1">
+      <title>Layer 1</title>
+      <g id="Graphic_22">
+        <title>zone external - purple</title>
+        <rect x="203.75" y="39.5" width="152" height="215.5" fill="#ede7f7"/>
+        <text transform="translate(213.75 54.5)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Virtual Machine 2</tspan>
+        </text>
+      </g>
+      <g id="Graphic_21">
+        <title>zone internal - blue</title>
+        <rect x="541.25" y="114" width="154" height="142" fill="#e1f6fe"/>
+        <rect x="541.25" y="114" width="154" height="142" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(551.25 129)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Container 2</tspan>
+        </text>
+      </g>
+      <g id="Graphic_20">
+        <title>zone external - purple</title>
+        <rect x="49.75" y="39.5" width="152" height="215.5" fill="#ede7f7"/>
+        <text transform="translate(59.75 54.5)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Virtual Machine 1</tspan>
+        </text>
+      </g>
+      <g id="Graphic_19">
+        <title>zone internal - blue</title>
+        <rect x="387.25" y="114" width="154" height="142" fill="#e1f6fe"/>
+        <rect x="387.25" y="114" width="154" height="142" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(397.25 129)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Container 1</tspan>
+        </text>
+      </g>
+      <g id="Graphic_18">
+        <title>zone internal - yellow</title>
+        <rect x="71.75" y="115" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="71.75" y="115" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(81.75 130)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Application 1</tspan>
+        </text>
+      </g>
+      <g id="Graphic_17">
+        <title>zone internal - yellow</title>
+        <rect x="225" y="114.25" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="225" y="114.25" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(235 129.25)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Application 2</tspan>
+        </text>
+      </g>
+      <g id="Graphic_16">
+        <title>zone internal - yellow</title>
+        <rect x="71.75" y="154" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="71.75" y="154" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(81.75 169)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Libraries</tspan>
+        </text>
+      </g>
+      <g id="Graphic_15">
+        <title>zone internal - yellow</title>
+        <rect x="225" y="153.25" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="225" y="153.25" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(235 168.25)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Libraries</tspan>
+        </text>
+      </g>
+      <g id="Graphic_14">
+        <title>zone internal - green</title>
+        <rect x="71.75" y="193" width="110" height="40" fill="#e2f3ec"/>
+        <rect x="71.75" y="193" width="110" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(81.75 208)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Guest kernel</tspan>
+        </text>
+      </g>
+      <g id="Graphic_13">
+        <title>zone internal - green</title>
+        <rect x="225" y="192.25" width="110" height="40" fill="#e2f3ec"/>
+        <rect x="225" y="192.25" width="110" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(235 207.25)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Guest kernel</tspan>
+        </text>
+      </g>
+      <g id="Graphic_12">
+        <title>zone internal - blue</title>
+        <rect x="48.75" y="256.5" width="308" height="40" fill="#e1f6fe"/>
+        <rect x="48.75" y="256.5" width="308" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(58.75 271.5)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Hypervisor</tspan>
+        </text>
+      </g>
+      <g id="Graphic_11">
+        <title>zone internal - green</title>
+        <rect x="48.75" y="297" width="308" height="40" fill="#e2f3ec"/>
+        <rect x="48.75" y="297" width="308" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(58.75 312)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Host kernel</tspan>
+        </text>
+      </g>
+      <g id="Graphic_10">
+        <title>zone internal - purple</title>
+        <rect x="48.75" y="337.5" width="308" height="40" fill="#d4e5fe"/>
+        <rect x="48.75" y="337.5" width="308" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(58.75 352.5)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Hardware</tspan>
+        </text>
+      </g>
+      <g id="Graphic_9">
+        <title>zone internal - yellow</title>
+        <rect x="409.25" y="156" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="409.25" y="156" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(419.25 171)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Application 1</tspan>
+        </text>
+      </g>
+      <g id="Graphic_8">
+        <title>zone internal - yellow</title>
+        <rect x="560" y="156" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="560" y="156" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(570 171)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Application 2</tspan>
+        </text>
+      </g>
+      <g id="Graphic_7">
+        <title>zone internal - yellow</title>
+        <rect x="409.25" y="195" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="409.25" y="195" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(419.25 210)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Libraries</tspan>
+        </text>
+      </g>
+      <g id="Graphic_6">
+        <title>zone internal - yellow</title>
+        <rect x="560" y="195" width="110" height="38.5" fill="#fef7e0"/>
+        <rect x="560" y="195" width="110" height="38.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(570 210)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Libraries</tspan>
+        </text>
+      </g>
+      <g id="Graphic_5">
+        <title>zone internal - green</title>
+        <rect x="387.25" y="297" width="308" height="40" fill="#e2f3ec"/>
+        <rect x="387.25" y="297" width="308" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(397.25 312)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Host kernel</tspan>
+        </text>
+      </g>
+      <g id="Graphic_4">
+        <title>zone internal - grey</title>
+        <rect x="387.25" y="256.5" width="308" height="40" fill="#eaedef"/>
+        <rect x="387.25" y="256.5" width="308" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(397.25 271.5)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">Container runtime</tspan>
+        </text>
+      </g>
+      <g id="Graphic_3">
+        <title>zone internal - purple</title>
+        <rect x="387.25" y="337.5" width="308" height="40" fill="#d4e5ff"/>
+        <rect x="387.25" y="337.5" width="308" height="40" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(397.25 352.5)" fill="#757575">
+          <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#757575" x="0" y="9">(Virtualized) hardware</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
