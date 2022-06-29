@@ -4,11 +4,11 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 03. Docker network
+header: Docker & Kubernetes - [Hands-on] 05. Docker network
 footer: Samsung SDS
 ---
 
-## [Hands-on] 03. Docker network
+## [Hands-on] 05. Docker network
 
 도커 네트워크를 이용해서 아래 그림과 같이 멀티 컨테이너 애플리케이션을 구성해 보겠습니다.
 우리 애플리케이션에 Database(MySQL)를 연결해서 서비스하도록 합니다.

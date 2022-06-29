@@ -221,16 +221,18 @@ git 해시값은 git rev-parse-short명령으로 알수 있습니다.
 ---
 
 ### Avoid running as root
-컨테이너는 Linux Host 상에서 Host와 커널을 공유한 격리된 공간을 제공합니다. 기본적으로 Docker 컨테이너 내의 프로세스는 호스트 머신에 액세스할 수 없지만, 컨테이너는 호스트 머신의 커널을 공유하므로 컨테이너 격리는 Hypervisor의 가상 머신만큼 안전한 격리를 제공하지는 않습니다. 
+기본적으로 Docker 컨테이너 내의 프로세스는 호스트 머신에 액세스할 수 없지만, 컨테이너는 호스트 머신의 커널을 공유하므로 컨테이너 격리는 Hypervisor의 가상 머신만큼 안전한 격리를 제공하지는 않습니다. 
 따라서 해커 등의 공격자가 컨테이너 밖으로 나갈 수 있는 취약점을 발견한다면, 컨테이너 내에서 프로세스가 루트로 실행 중인 경우 공격자는 호스트 머신에 대한 루트 액세스 권한을 얻을 수도 있습니다.
 
-![h:220](img/bp-operating-containers-root.svg)
+![h:210](img/bp-operating-containers-root.svg)
 
 이 가능성을 피하기 위한 권장사항은 컨테이너 내에서 루트로 프로세스를 실행하지 않는 것입니다.
 Dockerfile에서 User를 생성하고 최소한의 권한을 부여하고 `USER` 지시자로 Container를 실행해야 합니다.
 - 유저 및 유저그룹 생성
 - 최소한의 권한부여
 - USER 지시자로 실행 USER 변경
+
+![](./img/handson.png) **Hands-on :** 06_Dockerfile
 
 ---
 
