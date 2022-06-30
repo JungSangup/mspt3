@@ -275,7 +275,24 @@ spec:
 
 ## Summary
 
-- 
+- What is Kubernetes?
+- Kubernetes Components
+    - Control Plane Components
+        - kube-apiserver
+        - etcd
+        - kube-scheduler
+        - kube-controller-manager
+        - cloud-controller-manager
+    - Node Components
+        - kubelet
+        - kube-proxy
+        - Container runtime
+- Kubernetes Objects
+- Object Spec and Status
+- Kubernetes Object Management
+    - Imperative vs. Declarative
+- Namespace
+- Labels and Selectors
 
 <br><br><br><br><br>
 
