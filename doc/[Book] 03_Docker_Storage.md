@@ -10,10 +10,11 @@ footer: Samsung SDS
 
 ## Storage overview
 
-이번 장은 Docker에서 데이터를 관리하는 방법에 관한 내용입니다.
-컨테이너를 실행한 후 컨테이너 내부에서 생성된 모든 파일은 Writable container layer에 저장됩니다.
+이번 장은 Docker에서 **데이터**를 관리하는 방법에 관한 내용입니다.
+
+컨테이너를 실행한 후 컨테이너 내부에서 생성된 모든 파일은 **Writable container layer**에 저장됩니다.
 이전에 본 내용을 다시 떠올려 보겠습니다.
-Writable container layer는 아래 그림에서 Thin R/W layer (Container layer)라고 표시된 부분입니다.
+Writable container layer는 아래 그림에서 **Thin R/W layer** (**Container layer**)라고 표시된 부분입니다.
 
 ![h:400](./img/container-layers.jpeg)
 
@@ -21,13 +22,14 @@ Writable container layer는 아래 그림에서 Thin R/W layer (Container layer)
 
 ## Storage overview
 
-하지만 이러한 매커니즘은 실제 시스템 운영환경에서는 많은 문제를 가지고 있습니다. 예를 들어 컨테이너에서 생성한 파일들이 컨테이너가 재시작 되더라도 유지되어야 한다면, 아래의 내용들을 생각해 보아야 합니다.
+하지만 이러한 매커니즘은 실제 시스템 운영환경에서는 문제가 될 수 있습니다.
+아래와 같은 사항들이 발생할 수 있는 문제점들입니다.
 
-- 컨테이너가 중지되면 데이터는 컨테이너와 함께 제거되고, 유지되지 않습니다.
+- 컨테이너가 중지되면 Container layer의 데이터는 컨테이너와 함께 **제거**되고, 유지되지 않습니다.
 - 다른 프로세스 또는 애플리케이션에서 컨테이너 안의 데이터를 사용하기 위해 컨테이너 밖으로 데이터를 가져오는 것은 번거롭거나 어려운 작업이 될 수 있습니다.
-- 컨테이너의 Writable layer에 데이터를 기록하기 위해서는 파일스시템을 관리 할 [Storage driver](https://docs.docker.com/storage/storagedriver/)가 필요합니다. Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공하기때문에 이러한 추가적인 추상화로 인해 Host 파일시스템에 직접 데이터를 기록하는 것과 비교해보면 성능측면에서 약점으로 작용합니다.
+- 컨테이너의 Writable layer에 데이터를 기록하기 위해서는 파일스시템을 관리 할 [Storage driver](https://docs.docker.com/storage/storagedriver/)가 필요합니다. Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공하기때문에 이러한 추가적인 추상화로 인해 Host 파일시스템에 직접 데이터를 기록하는 것과 비교해보면 **성능**측면에서 약점으로 작용합니다.
 
-Docker에서는 컨테이너가 중지되더라도 데이터를 유지하기 위한 방법으로 Host 머신에 파일을 저장하는 방법을 제공합니다.
+위에서 나열한 문제들을 해결하기 위해서, Docker는 컨테이너가 중지되더라도 데이터를 유지하기 위한 방법으로 **Host 머신에 파일을 저장**하는 방법을 제공합니다.
 
 |  |  |
 | --- | :--- |
@@ -37,6 +39,7 @@ Docker에서는 컨테이너가 중지되더라도 데이터를 유지하기 위
 
 ## Manage data in Docker
 
+다음은 대표적인 데이터 저장 방법(마운트 유형)입니다.
 사용하기로 선택한 마운트 유형에 관계없이 데이터는 컨테이너 내에서 동일하게 보여지지만, 유형별 차이는 데이터가 저장되는 Host 머신의 **위치**에 있습니다.
 
 - **Volumes** : Docker에 의해 관리되는 Host 파일시스템의 정해진 영역(e.g. `/var/lib/docker/volumes/` on Linux)에 데이터를 저장합니다.
@@ -50,7 +53,7 @@ Docker에서는 컨테이너가 중지되더라도 데이터를 유지하기 위
 | [Bind mounts](https://docs.docker.com/storage/bind-mounts/) | - Host 머신의 config.정보의 공유(e.g. /etc/resolve.conf)<br>- Host 머신의 Source code나 Build artifact 공유 |
 | [tmpfs mounts](https://docs.docker.com/storage/tmpfs/) | - 민감정보(e.g. [secrets](https://docs.docker.com/engine/swarm/secrets/))를 컨테이너 lifecycle동안 저장<br>- 영구저장이 필요없는 대용량 데이터의 처리 시 컨테이너의 성능보장 |
 
-<br>
+
 
 ![](./img/hyperlink.png)[Manage data in Docker](https://docs.docker.com/storage/)
 
@@ -60,7 +63,7 @@ Docker에서는 컨테이너가 중지되더라도 데이터를 유지하기 위
 
 ![](img/types-of-mounts-volume.png)
 
-Docker에 의해 만들어지고 관리되는 Volume은  `docker volume create` 명령어로 명시적으로 생성할 수 있습니다.
+Docker에 의해 만들어지고 관리되는 **Volume**은  `docker volume create` 명령어로 명시적으로 생성할 수 있습니다.
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker volume create my-volume
@@ -72,7 +75,7 @@ local     my-volume
 
 ---
 
-Volume을 생성하면 Docker Host 머신의 Docker에서 관리하는 디렉터리에 저장됩니다.
+Volume을 생성하면 Docker Host 머신에서 Docker에서 관리하는 특정영역에 디렉토리가 생성되고 사용됩니다.
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker volume inspect my-volume
@@ -95,7 +98,7 @@ metadata.db	my-volume
 
 ---
 
-Volume을 컨테이너 실행 시 마운트하면 이 디렉터리가 컨테이너의 지정된 디렉터리로 마운트됩니다.
+Volume을 컨테이너 실행 시 마운트하면 이 디렉토리가 컨테이너의 지정된 디렉토리로 마운트됩니다.
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run -it --name myubuntu --mount source=my-volume,target=/volumedata ubuntu
@@ -104,6 +107,7 @@ latest: Pulling from library/ubuntu
 405f018f9d1d: Pull complete
 Digest: sha256:b6b83d3c331794420340093eb706a6f152d9c1fa51b262d9bf34594887c2c7ac
 Status: Downloaded newer image for ubuntu:latest
+
 root@20106b447a75:/# ls
 bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
 boot  etc  lib   lib64  media   opt  root  sbin  sys  usr  volumedata
@@ -113,9 +117,12 @@ root@20106b447a75:/volumedata# ls
 hellovolume
 root@20106b447a75:/volumedata# exit
 exit
+
 ubuntu@ip-10-0-1-14:~$ sudo ls /var/lib/docker/volumes/my-volume/_data
 hellovolume
 ```
+> 위의 예제는 my-volume이라는 Volume이 ubuntu 컨테이너의 /volumedata 에 마운트되어 사용되는 예제입니다.
+
 > `--mount source=my-volume,target=/volumedata`는 `--volume my-volume:/volumedata`과 같이 사용할 수도 있습니다.
 둘의 차이는 [Choose the -v or --mount flag](https://docs.docker.com/storage/volumes/#choose-the--v-or---mount-flag)를 참고하세요.
 
@@ -155,7 +162,7 @@ ubuntu@ip-10-0-1-14:~$ docker inspect myubuntu
 
 ## Volumes
 
-`--mount` 또는 `--volume` 옵션에 `readonly` 옵션을 주어 읽기쓰기 모드를 변경 할 수도 있습니다.
+`--mount` 또는 `--volume` 옵션에 `readonly` 옵션을 추가해서 읽기쓰기 모드를 변경 할 수도 있습니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run -it --name myubuntu_ro --volume my-volume:/volumedata:ro ubuntu
 root@9a16f5ab69b1:/# touch /volumedata/test
@@ -166,9 +173,6 @@ ubuntu@ip-10-0-1-14:~$ docker inspect myubuntu_ro
 [
     {
         "Id": "9a16f5ab69b1b2e887dcf28b397e4338d00786cec4a220b990079d37fbc3fb60",
-        "Created": "2022-06-26T05:50:48.191280897Z",
-        "Path": "bash",
-        "Args": [],
         ... 생략 ...
         "Mounts": [
             {
@@ -186,13 +190,13 @@ ubuntu@ip-10-0-1-14:~$ docker inspect myubuntu_ro
     }
 ]
 ```
+> `"RW": false,` -> Readonly 모드
 
 ---
 
 ## Volumes
 
-Volume은 동시에 여러 컨테이너에 마운트 할 수 있으며, 자동으로 제거되지 않습니다.
-Volume을 제거하기 위해서는 `docker volume rm`,  `docker volume prune`  명령어로 제거 할 수 있습니다.
+Volume은 동시에 여러 컨테이너에 마운트 할 수 있으며, 자동으로 제거되지 않습니다. 제거하기 위해서는 `docker volume rm`,  `docker volume prune`  명령어로 제거 할 수 있습니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker volume rm my-volume
 my-volume
@@ -221,8 +225,8 @@ Are you sure you want to continue? [y/N] y
 
 ## Bind mount
 
-Bind mount는 Volume에 비해 기능이 제한되어 있습니다.
-Bind mount를 사용하면 Host 머신의 특정 파일이나 디렉터리가 컨테이너에 마운트되고, Host 머신의 마운트 경로는 절대경로로 참조됩니다.
+**Bind mount**는 Volume에 비해 기능이 제한되어 있습니다.
+Bind mount를 사용하면 Host 머신의 특정 파일이나 디렉토리가 컨테이너에 마운트되고, Host 머신의 마운트 경로는 절대경로로 참조됩니다.
 
 ![](img/types-of-mounts-bind.png)
 
@@ -243,16 +247,16 @@ ubuntu@ip-10-0-1-14:~$ ls /volume/bindmount/
 testfile
 ```
 > `-v /volume/bindmount:/data/bindmount`는 `--mount type=bind,source=/volume/bindmount,target=/data/bindmount`과 같이 사용할 수도 있습니다.
-`-v`는 Host 머신에 디텍토리가 존재하지 않는경우 자동으로 생성해줍니다. 반면 `--mount`는 오류만 생성합니다.
+`-v`는 Host 머신에 디텍토리가 존재하지 않는경우 자동으로 생성해줍니다. 반면 `--mount`는 오류만 생성합니다.(디렉토리가 있어야 합니다.)
 둘의 차이는 [Choose the -v or --mount flag](https://docs.docker.com/storage/bind-mounts/#choose-the--v-or---mount-flag)를 참고하세요.
 
 ---
 
 ## Bind mount
 
-Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문에 가능하다면 Volume을 사용하는 것이 권장됩니다.
+Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문에, 가능하다면 Volume을 사용하는 것이 권장됩니다.
 
-- Bind mount는 Host의 디렉터리 구조에 의존적입니다.
+- Bind mount는 Host의 디렉토리 구조에 의존적입니다.
 - Docker에 의해 관리되어지지 않습니다.
 - Container의 프로세스가 Host의 파일시스템을 변경할 수 있으므로 보안상 위협이 될 수 있습니다.
 

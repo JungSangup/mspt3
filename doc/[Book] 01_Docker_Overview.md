@@ -10,20 +10,23 @@ footer: Samsung SDS
 
 ## Cloud Native
 
-![h:250](./img/cloud_native_1.png) ![h:250](./img/cloud_native_2.png) ![h:250](./img/cloud_native_3.png)
+![h:220](./img/cloud_native_1.png) ![h:220](./img/cloud_native_2.png) ![h:220](./img/cloud_native_3.png)
 
 #### [ Cloud Native 의 정의 ]
-> **클라우드 네이티브** 기술은 조직이 퍼블릭, 프라이빗, 그리고 하이브리드 클라우드와 같은 현대적이고 동적인 환경에서 **확장 가능**한 애플리케이션을 개발하고 실행할 수 있게 해준다. **컨테이너**, 서비스 메쉬, **마이크로서비스**, 불변(Immutable) 인프라, 그리고 **선언형(Declarative) API**가 이러한 접근 방식의 예시들이다.  
+> **클라우드 네이티브** 기술은 조직이 퍼블릭, 프라이빗, 그리고 하이브리드 클라우드와 같은
+현대적이고 동적인 환경에서 **확장 가능**한 애플리케이션을 개발하고 실행할 수 있게 해준다.
+**컨테이너**, 서비스 메쉬, **마이크로서비스**, 불변(Immutable) 인프라, 그리고
+**선언형(Declarative) API**가 이러한 접근 방식의 예시들이다.  
 이 기술은 회복성, 관리 편의성, 가시성을 갖춘 **느슨하게 결합된** 시스템을 가능하게 한다.  
-견고한 **자동화** 기능을 함께 사용하면, 엔지니어는 영향이 큰 변경을 최소한의 노력으로 자주,  
-예측 가능하게 수행할 수 있다.  
+견고한 **자동화** 기능을 함께 사용하면, 엔지니어는 영향이 큰 변경을 최소한의 노력으로
+자주, 예측 가능하게 수행할 수 있다.  
 ...
 
 ---
 
 ## Cloud Native
 
-![w:1000 center](./img/cloud_native_4.png)
+![w:1000 left](./img/cloud_native_4.png)
 
 ---
 
@@ -33,7 +36,9 @@ footer: Samsung SDS
 **컨테이너**는 **가상화** 기술의 하나로 Host머신 또는 다른 컨테이너와 **분리된 환경**에서 애플리케이션을 실행시킵니다.
 컨테이너는 **소형**이며 **빠르고** **이식성**이 뛰어납니다.
 
-![h:400 center](./img/container.png)
+<br>
+
+![h:350 center](./img/container.png)
 
 ---
 
@@ -78,7 +83,9 @@ footer: Samsung SDS
 
 Docker는 이러한 컨테이너를 위한 플랫폼(또는 런타임)입니다. 
 
-![h:380 center](./img/linuxContainer.jpg)
+<br>
+
+![h:350 center](./img/linuxContainer.jpg)
 
 ---
 ## Linux Container (LXC)
@@ -166,7 +173,9 @@ Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 �
 **Docker daemon**은 컨테이너를 **빌드/실행**하는 작업을 수행하고, **Docker client**는 이 Docker daemon과 통신합니다. (REST API를 사용)  
 Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, 원격지에서 사용될 수도 있습니다.
 
-![h:400 center](img/docker-architecture.svg)
+![h:380 center](img/docker-architecture.svg)
+
+<br>
 
 ![](./img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
@@ -206,12 +215,14 @@ Docker를 사용하면 image, container, network, volume 과 같은 다양한 Do
 
 Image는 Dockerfile을 이용하여 만들어진 이미지 또는 Registry에 게시(publish)된 이미지를 사용할 수 있습니다. 그리고, Image는 Layer라는 개념을 적용하여 자원을 효율적으로 사용합니다.
 
+<br>
+
 ### Containers
-**Container**는 **Image**를 실행하여 생성 된 **인스턴스**이며, Docker API 또는 CLI를 사용하여  
-생성/시작/중지/이동/삭제할 수 있습니다.  
-기본적으로 컨테이너는 다른 컨테이너 및 호스트 시스템과 비교적 잘 격리되어 있습니다.  
+**Container**는 **Image**를 실행하여 생성 된 **인스턴스**이며, Docker API
+또는 CLI를 사용하여 생성/시작/중지/이동/삭제할 수 있습니다.  
+기본적으로 컨테이너는 다른 컨테이너 및 호스트 시스템과 비교적 잘 **격리**되어 있습니다.  
 Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.  
-그리고, Container가 제거될 때는 별도의 저장공간(Persistent storage)에  
+그리고, Container가 제거될 때는 **별도의 저장공간**(**Persistent storage**)에  
 따로 저장하지 않은 변경사항은 모두 사라지게 됩니다.
 
 <br>
@@ -222,7 +233,7 @@ Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.
 
 ## Images and Layers
 Docker **image**는 일련의 계층(**Layer**)으로 이루어져 있으며, 이 계층들은 단일 이미지로 결합됩니다.
-여기서 계층(Layer)이란 애플리케이션을 구동하기위한 runtime, lib, src등으로 구성된 파일시스템으로 아래 dockerfile에서 FROM, COPY, RUN 명령어가 이루어질때마다 각각의 Layer가 추가됩니다.
+여기서 계층(Layer)이란 애플리케이션을 구동하기위한 *runtime*, *lib*, *src*등으로 구성된 파일시스템으로 아래 dockerfile에서 `FROM`, `COPY`, `RUN` 명령어가 실행될 때마다 각각의 Layer가 추가됩니다.
 
 ```dockerfile
 FROM ubuntu:15.04
@@ -241,10 +252,9 @@ CMD python /app/app.py
 ---
 
 ## Container and layers
-Container와 Image의 주요 차이점은 **쓰기 가능**한 최상위 레이어(Thin R/W layer)입니다. 새 데이터를 추가하거나 기존 데이터를 수정하는 컨테이너에 대한 모든 쓰기는 이 layer에 저장됩니다.  
-컨테이너가 삭제되면 쓰기 가능한 레이어도 삭제됩니다. 기본 이미지는 변경되지 않은 상태로 유지됩니다.
+**Container**와 **Image**의 주요 차이점은 **쓰기 가능**한 최상위 레이어(**Thin R/W layer**)입니다. 새 데이터를 추가하거나 기존 데이터를 수정하는 컨테이너에 대한 모든 쓰기는 이 layer에 저장됩니다. 컨테이너가 삭제되면 쓰기 가능한 레이어도 삭제됩니다. 기본 이미지는 변경되지 않은 상태로 유지됩니다.
 
-각 컨테이너에는 쓰기 가능한 자체 컨테이너 레이어가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
+각 컨테이너에는 쓰기 가능한 자체 **컨테이너 레이어**가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
 그리고, 이렇게 공유되는 layer구조로 인해 자원을 효율적으로 사용할 수 있습니다. (저장공간, Provisioning)
 
 ![h:300](./img/sharing-layers.jpeg) 

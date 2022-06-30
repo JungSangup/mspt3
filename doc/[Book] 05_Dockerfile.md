@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 ## Dockerfile
 
-![h:350](img/docker-stages.png)
+![h:380](img/docker-stages.png)
 
 Docker에서 이미지를 생성하는 방법은 다음과 같은 방법들이 있습니다.
 - Dockerfile로 Build하기
@@ -23,7 +23,7 @@ Docker에서 이미지를 생성하는 방법은 다음과 같은 방법들이 �
 
 이중 가장 일반적이고 CI/CD로 활용되어지는 방법은 **Dockerfile**로 빌드해 이미지를 생성하는 방법입니다.
 
-여기서 **Dockerfile**은 이미지를 생성하기 위해 필요한 명령어들을 순차적으로 나열한 Text문서입니다.
+여기서 **Dockerfile**은 이미지를 생성하기 위해 필요한 **명령어**(**Instuction**)들을 순차적으로 나열한 Text문서입니다.
 그리고, 이 **Dockerfile**을 이용해서 이미지를 빌드할 때는 [build context](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#understand-build-context)를 참조하게 됩니다.
 
 Build context는 `docker build`명령을 실행할 때 사용되는 파일들이 위치하는 디렉토리입니다.
@@ -43,14 +43,13 @@ $ Usage:  docker build [OPTIONS] PATH | URL | -
 | --- | :--- |
 | -f, --file string | Name of the Dockerfile (Default is 'PATH/Dockerfile') |
 | -t, --tag list | Name and optionally a tag in the 'name:tag' format |
-| --rm | Remove intermediate containers after a successful build (default true) |
 
 ---
 
 # Dockerfile
 
-`docker build` 명령은 **Docker daemon**에 의해 실행됩니다.(CLI가 아님.)
-빌드 프로세스에서 가장 먼저 하는 일은 전체 Context를 (재귀적으로) Docker daemon으로 보내는 것입니다. 
+`docker build` 명령은 **Docker daemon**에 의해 실행됩니다. (CLI가 아님.)
+빌드 프로세스에서 가장 먼저 하는 일은 전체 **Context**를 (재귀적으로) **Docker daemon**으로 보내는 것입니다.
 그렇기 때문에, Build context에는 이미지 빌드에 필요한 파일들만 유지하는 것이 좋습니다.
 > Context는 PATH 또는 URL(git repository location)을 이용하여 지정함.
 
@@ -65,7 +64,7 @@ INSTRUCTION arguments
 > e.g.) `RUN echo 'Hello docker'`
 
 **INSTRUCTION**은 대소문자를 가리지는 않지만,
-일반적으로는 arguments와 구분하기 위해서 모두 대문자로 표시합니다.
+일반적으로는 arguments와 구분하기 위해서 모두 **대문자**로 표시합니다.
 
 이제 이 **INSTRUCTION**으로 사용되는 것들을 하나씩 자세히 알아보겠습니다.
 
@@ -76,7 +75,7 @@ INSTRUCTION arguments
 ### [FROM](https://docs.docker.com/engine/reference/builder/#from)
 
 Base image를 지정하는 Instruction으로, 지정된 Image를 [Docker Hub](https://hub.docker.com/)와 같은 Registry에서 Pull합니다. Base image를 지정할때는 `ubuntu:18.04` 처럼 Image명과 Tag까지 지정해주는것이 좋습니다.
-> Tag가 생략되면 latest 를 사용하게 됩니다.
+> Tag가 생략되면 **latest** tag 를 사용하게 됩니다.
 
 #### Syntax
 ```dockerfile
@@ -157,7 +156,7 @@ CMD ["/bin/echo", "hello docker"]
 
 이렇게 추가된 Label은 `docker inspect` 명령어로 이미지나 컨테이너의 내용을 확인 할 수 있습니다.
 
-다만 한 가지 주의할 것은 Base 이미지에 포함된 Label 값이 상속된다는 점이고, 만약 같은 Label값이 존재한다면 가장 최근에 적용된 Label값이 우선합니다.
+다만 한 가지 주의할 것은 Base 이미지에 포함된 Label 값이 **상속**된다는 점이고, 만약 같은 Label값이 존재한다면 가장 최근에 적용된 Label값이 우선합니다.
 
 앞의 Dockerfile로 만들어진 이미지나 컨테이너의 Label을 확인해보면 아래와 같습니다.
 
@@ -174,7 +173,7 @@ CMD ["/bin/echo", "hello docker"]
 
 ### [RUN](https://docs.docker.com/engine/reference/builder/#run)
 
- `RUN` Instruction은 Base image위의 새로운 layer에서 Command를 실행하는데 사용됩니다.
+ `RUN` Instruction은 Base image위의 **새로운 layer**에서 **Command를 실행**하는데 사용됩니다.
  일반적으로 패키지를 설치할 때 자주 사용됩니다.
 
 #### Syntax
@@ -204,11 +203,11 @@ RUN apt-get update && apt-get install -y \
 
 ### [CMD](https://docs.docker.com/engine/reference/builder/#cmd)
 
- `CMD` Instruction은 Docker Container가 시작될때 실행 할 커맨드를 지정하는 지시자이며 아래와 같은 특징과 기능을 제공합니다.
+ `CMD` Instruction은 Docker Container가 **시작**될때 실행 할 커맨드를 지정하는 지시자이며 아래와 같은 특징과 기능을 제공합니다.
 
-- **CMD의 주용도는 컨테이너를 실행할 때 사용할 default 명령어를 설정**하는 것입니다.`docker run` 실행 시 실행할 커맨드를 주지 않으면 CMD로 지정한 default 명령이 실행됩니다. 
+- CMD의 주용도는 컨테이너를 실행할 때 사용할 **default 명령어를 설정**하는 것입니다.`docker run` 실행 시 실행할 커맨드를 주지 않으면 CMD로 지정한 default 명령이 실행됩니다. 
 - `ENTRYPOINT`의 파라미터를 설정할 수도 있습니다. 
-- `RUN` Instruction 과 기능은 비슷하지만 차이점은 `CMD`는 image를 빌드할때 실행되는 것이 아니라 container가 시작될때 실행됩니다. 주로 docker image로 빌드된 application을 실행할때 사용됩니다.
+- `RUN` Instruction과 기능은 비슷하지만 차이점은 `CMD`는 image를 빌드할때 실행되는 것이 아니라 container가 시작될때 실행됩니다. 주로 docker image로 빌드된 application을 실행할때 사용됩니다.
 
 #### Syntax
 
@@ -259,7 +258,7 @@ CMD ["catalina.sh","run"]
 `CMD`와 마찬가지로 컨테이너가 실행될때 기본 command를 지정합니다.
 `CMD`와 비슷하지만 `CMD`는 `docker run`명령어의 인자들로 override 되고, `ENTRYPOINT`는 항상 실행된다는 것입니다. 
 
-`docker run` 커맨드에 인자들을 추가하여 실행하면, 그 인자들은 `CMD`의 요소들을 대체하여 `ENTRYPOINT` Instruction에 지정된 커맨드의 인자로 추가됩니다.
+`docker run` 커맨드에 인자들을 추가하여 실행하면, 그 인자들은 `CMD`의 요소들을 **대체**하여 `ENTRYPOINT` Instruction에 지정된 커맨드의 인자로 추가됩니다.
 
 #### Syntax
 
@@ -368,7 +367,7 @@ COPY \$FOO /quux # COPY $FOO /quux
 
 ### [COPY](https://docs.docker.com/engine/reference/builder/#copy)
 
-호스트의 Context 내의 파일 또는 디렉터리들을 Container의 파일시스템으로 복사하는 명령어입니다. 또한 `--chown` 옵션으로 파일 및 디렉터리에 대한 유저와 그룹을 지정할 수 있습니다.
+호스트의 Context 내의 파일 또는 디렉토리들을 Container의 파일시스템으로 복사하는 명령어입니다. 또한 `--chown` 옵션으로 파일 및 디렉토리에 대한 유저와 그룹을 지정할 수 있습니다.
 
 #### Syntax
 
@@ -393,7 +392,7 @@ COPY --chown=1 files* /somedir/
 COPY --chown=10:11 files* /somedir/
 ```
 
-`COPY --chown`에 의해 주어진 유저명과 그룹명으로 지정되지 않은 모든 파일 및 디렉터리들은 Container안에서 UID, GID 0번으로 생성됩니다.
+`COPY --chown`에 의해 주어진 유저명과 그룹명으로 지정되지 않은 모든 파일 및 디렉토리들은 Container안에서 UID, GID 0번으로 생성됩니다.
 
 ---
 
@@ -456,7 +455,7 @@ USER postgres
 
 ### [WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir)
 
-`WORKDIR`명령어는 `WORKDIR`명령어에 뒤따르는 `RUN`, `CMD`, `ENTRYPOINT`, `COPY` , `ADD`명령어의 작업디렉터리를 지정하는 명령어입니다.
+`WORKDIR`명령어는 `WORKDIR`명령어에 뒤따르는 `RUN`, `CMD`, `ENTRYPOINT`, `COPY` , `ADD`명령어의 작업디렉토리를 지정하는 명령어입니다.
 `WORKDIR`로 지정한 디렉토리가 없는 경우에는 자동으로 생성되며, `WORKDIR`을 지정하지 않는경우에는 `\`가 작업 디렉토리로 사용됩니다.
 
 #### Syntax
@@ -467,10 +466,10 @@ WORKDIR /path/to/workdir
 #### Example
 
 ```dockerfile
-WORKDIR /a   # 작업디렉터리를 /a로 이동합니다
-WORKDIR b    # /a에서 하위의 b디렉터리로 이동합니다.
-WORKDIR c    # /a/b에서 하위의 c디렉터리로 이동합니다.
-RUN pwd      # RUN명령어가 실행되는 디렉터리는 WORKDIR로 이동한 /a/b/c가 됩니다.
+WORKDIR /a   # 작업디렉토리를 /a로 이동합니다
+WORKDIR b    # /a에서 하위의 b디렉토리로 이동합니다.
+WORKDIR c    # /a/b에서 하위의 c디렉토리로 이동합니다.
+RUN pwd      # RUN명령어가 실행되는 디렉토리는 WORKDIR로 이동한 /a/b/c가 됩니다.
 ```
 
 아래와 같이 `ENV`로 지정한 환경변수와 함께 쓰일 수도 있습니다.

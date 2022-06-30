@@ -10,22 +10,23 @@ footer: Samsung SDS
 
 ## Docker commands
 
-도커 명령어를 이용하여 컨테이너 이미지와 컨테이너를 다루는 방법을 알아보겠습니다.
+도커 명령어를 이용하여 **이미지**와 **컨테이너**를 다루는 방법을 알아보겠습니다.
 
-![h:450 center](img/docker-stages.png)
+![h:450 left](img/docker-stages.png)
 
 ---
 
 ## Docker commands - 컨테이너 실행하기
 
-`docker run` 명령어를 실행하면, 이미지를 이용해서 만들어진 컨테이너에서 프로세스가 실행되게 됩니다. 이 때 이 컨테이너 프로세스는 자신의 파일시스템, 네트워킹, 프로세스 트리를 가지게 됩니다. (격리된 환경)
+`docker run` 명령어를 실행하면, 이미지를 이용해서 만들어진 컨테이너에서 **프로세스**가 실행되게 됩니다.
+이 때 이 컨테이너 프로세스는 자신의 **파일시스템**, **네트워킹**, **프로세스 트리**를 가지게 됩니다. (**격리된 환경**)
 
 컨테이너를 실행하는 명령인 `docker run` 명령은 다음과 같은 형식을 가지고 있습니다.
 ```bash
 $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 ```
 
-기본적으로 실행 할 이미지(IMAGE[:TAG|@DIGEST])를 지정해야 하고 다음과 같은 옵션들을 추가할 수 있습니다.
+기본적으로 실행 할 **이미지**(IMAGE[:TAG|@DIGEST])를 지정해야 하고 다음과 같은 옵션들을 추가할 수 있습니다.
 - detached(-d) or foreground(-it) running
 - container identification(--name)
 - network settings(--network)
@@ -52,13 +53,12 @@ Options:
   -t, --tty                            Allocate a pseudo-TTY
   -v, --volume list                    Bind mount a volume
   ```
-  위의 옵션들 외에도 많은 옵션들이 있습니다.
 
+<br>
 
-
-실행은 다음 두 가지 유형이 있습니다.
-| Detached (-d) | Foreground (-it) - Default|
-| :---: | :---: |
+컨테이너 실행은 다음 두 가지 유형이 있습니다.
+| Detached (-d) | Foreground (-it)|
+| :--- | :--- |
 | 백그라운드에서 실행되는 모드 | 프로세스의 standard I/O, standard error에 console 로 연결 |
 
 이 두 가지의 차이를 알아보겠습니다.
@@ -127,13 +127,13 @@ Commercial support is available at
 </body>
 </html>
 ```
+> **명령어** : `curl http://localhost:8080`
 
 ---
 
 ## Docker commands - 컨테이너 실행하기 (Foreground)
 
 아래 명령어는 Ubuntu Container를 Foreground 모드로 실행하는 명령어입니다.
-
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run -it ubuntu /bin/bash
 Unable to find image 'ubuntu:latest' locally
@@ -148,10 +148,11 @@ root@4276ef1e8f67:/#
 위 명령어를 실행할때, Docker에서 아래와 같은 일들이 순차적으로 발생합니다.
 1. Ubuntu 이미지가 로컬(Host머신)에 없다면, Docker Registry로부터 이미지를 다운로드(pull) 합니다.
 2. 다운로드 받은 이미지로 신규 Container를 생성합니다.
-3. 생성된 Container에 read-write filesystem을 마지막 Layer로 할당합니다. 이를 통해 실행중인 Container는 로컬파일시스템의 파일과 디렉터리를 생성하거나 수정할 수 있습니다.
+3. 생성된 Container에 read-write filesystem을 마지막 Layer로 할당합니다.
 4. Default Network Interface인 브릿지 네트워크를 생성합니다.
 5. Container를 시작하고 /bin/bash를 실행합니다.
-6. exit를 입력하여 /bin/bash를 종료하면 컨테이너는 중지되지만 삭제되지 않고, 추후에 삭제하거나 다시 재시작 할 수 있습니다.
+> exit를 입력하여 /bin/bash를 종료하면 컨테이너는 중지(stop)되지만 삭제되지 않고,
+> 추후에 삭제하거나 다시 재시작 할 수 있습니다.
 
 ---
 
