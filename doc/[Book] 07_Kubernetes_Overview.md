@@ -37,25 +37,26 @@ footer: Samsung SDS
 
 ## Kubernetes Components
 
-#### [Control Plane Components](https://kubernetes.io/ko/docs/concepts/overview/components/#%EC%BB%A8%ED%8A%B8%EB%A1%A4-%ED%94%8C%EB%A0%88%EC%9D%B8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8)
+<br>
+
+#### Control Plane Components
 | Component | Description |
 | :--- | :--- |
-| kube-apiserver | API를 노출하는 K8S의 프론트엔드 |
-| etcd | K8S의 백엔드 저장소 역할을 하는 Key-value store |
-| kube-scheduler | 새로 생성된 파드 를 감지하고 실행할 노드를 선택 |
-| kube-controller-manager | 컨트롤러 프로세스를 실행 |
-| cloud-controller-manager | 클라우드별 컨트롤 로직을 포함 |
+| [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) | API를 노출하는 K8S의 프론트엔드 |
+| [etcd](https://etcd.io/) | K8S의 백엔드 저장소 역할을 하는 Key-value store |
+| [kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) | 새로 생성된 파드 를 감지하고 실행할 노드를 선택 |
+| [kube-controller-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/) | 컨트롤러 프로세스를 실행 |
+| [cloud-controller-manager](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) | 클라우드별 컨트롤 로직을 포함 |
 > 컨트롤러 프로세스 : Node controller, Job controller, Endpoint controller, Service Account & Token controllers
 
 <br>
 
-#### [Node Components](https://kubernetes.io/ko/docs/concepts/overview/components/#%EC%BB%A8%ED%8A%B8%EB%A1%A4-%ED%94%8C%EB%A0%88%EC%9D%B8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8)
+#### Node Components
 | Component | Description |
 | :--- | :--- |
-| kubelet | 각 Node의 Agent로 Pod의 동작을 관리 |
-| kube-proxy | 각 Node의 Network proxy |
-| Container runtime | 컨테이너의 실행을 담당 |
-> Container runtime :  containerd, CRI-O, etc.
+| [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) | 각 Node의 Agent로 Pod의 동작을 관리 |
+| [kube-proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/) | 각 Node의 Network proxy |
+| [Container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) | 컨테이너의 실행을 담당<br>(e.g. containerd, CRI-O, etc.) |
 
 ---
 
