@@ -128,7 +128,7 @@ Kubernetes의 CLI툴인 `kubectl`을 이용하여 Kubernetes object들을 관리
 그 전에 먼저 **명령형**(**Imperative**)과 **선언형**(**Declarative**)의 차이에 대해 알아보겠습니다.
 | | |
 | --- | :--- |
-| ![h:450](img/k8s_imperative_vs_peclarative.jpg) | - **명령형**(**Imperative**) : 필요한 동작을 지시 (How)<br><br>- **선언형**(**Declarative**) : 원하는 상태를 선언 (What) |
+| [![h:450](img/k8s_imperative_vs_peclarative.jpeg)](https://www.digitalocean.com/community/tutorials/imperative-vs-declarative-kubernetes-management-a-digitalocean-comic) | - **명령형**(**Imperative**) : 필요한 동작을 지시 (How)<br>- **선언형**(**Declarative**) : 원하는 상태를 선언 (What) |
 
 ---
 
@@ -289,11 +289,8 @@ spec:
         - Container runtime
 - Kubernetes Objects
 - Object Spec and Status
-- Kubernetes Object Management
-    - Imperative vs. Declarative
+- Kubernetes Object Management : Imperative vs. Declarative
 - Namespace
 - Labels and Selectors
-
-<br><br><br><br><br>
 
 `문의처` : 정상업 / rogallo.jung@samsung.com
