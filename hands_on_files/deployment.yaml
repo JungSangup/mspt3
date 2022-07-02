@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-list-manager-deployment
+  labels:
+    app: todo-list-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-list-manager
+  template:
+    metadata:
+      labels:
+        app: todo-list-manager
+    spec:
+      containers:
+      - name: todo-list-manager
+        image: rogallo/101-todo-app:1.0.0
+        ports:
+        - containerPort: 3000

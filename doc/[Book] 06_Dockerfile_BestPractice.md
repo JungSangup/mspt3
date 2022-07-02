@@ -17,6 +17,7 @@ footer: Samsung SDS
 <br>
 
 - **Best practices for writing Dockerfiles**
+- **Best practices for building containers**
 
 ---
 
@@ -31,7 +32,7 @@ Container 기반의 클러스터 환경에서는 컨테이너 이미지를 빌�
 <br>
 
 ![](./img/hyperlink.png)[Best practices for writing Dockerfiles(Docker)](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-![](./img/hyperlink.png)[컨테이너 빌드에 대한 권장사항(Google)](https://cloud.google.com/solutions/best-practices-for-building-containers#package_a_single_application_per_container)
+![](./img/hyperlink.png)[Best practices for building containers](https://cloud.google.com/solutions/best-practices-for-building-containers#package_a_single_application_per_container)
 
 ---
 

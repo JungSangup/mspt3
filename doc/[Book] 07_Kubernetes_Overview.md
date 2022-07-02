@@ -30,7 +30,7 @@ footer: Samsung SDS
 
 ## What is container orchestration?
 
-![bg left:45%](img/k8s_container_orchestration.jpeg)
+![bg left:40%](img/k8s_container_orchestration2.jpeg)
 
 <br><br><br><br><br>
 
@@ -115,7 +115,7 @@ CLI인 `kubectl`도 이 API를 이용합니다.
 
 ## Object Spec and Status
 대부분의 Kubernetes object들은 **Spec**과 **Status**를 가지고 있습니다.
-**Spec**은 Object를 생성할 때 원하는 특징에 대한 설정이며, **Status**는 Kubernetes에 의해 제공된 Object의 상태 입니다.
+**Spec**은 Object를 생성할 때 **원하는 특징에 대한 설정**이며, **Status**는 Kubernetes에 의해 **제공된 Object의 상태** 입니다.
 - Spec = **Desired state** of the object
 - Status = **Current(Actual) status** of the object
 
@@ -129,12 +129,12 @@ Kubernetes는 Spec과 Status를 일치시키기 위해서 Object의 상태를 �
 ---
 
 ## Describing a Kubernetes object
-Kubernetes object는 일반적으로 아래와 같이 **YAML**파일로 정의하고 Kubernetes API에게 전달되어 처리됩니다.
+Kubernetes object는 일반적으로 아래와 같이 **YAML**파일로 정의하고 Kubernetes API로 전달되어 처리됩니다.
 모든 Object는 아래와 같은 필드를 가지고 있습니다.
-- apiVersion : Kubernetes API의 버젼
-- kind : Object의 종류
-- metadata : Name, UID, Namespace등의 Object를 구분지을 수 있는 정보
-- spec : Object의 요구되는 상태(= Desired state)
+- **apiVersion** : Kubernetes API의 버젼
+- **kind** : Object의 종류
+- **metadata** : Name, UID, Namespace등의 Object를 구분지을 수 있는 정보
+- **spec** : Object의 요구되는 상태(= Desired state)
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
