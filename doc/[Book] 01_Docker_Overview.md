@@ -8,6 +8,23 @@ header: Docker & Kubernetes - 01. Docker overview
 footer: Samsung SDS
 ---
 
+![bg left:40%](img/docker_k8s.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Cloud native**
+- **Container**
+- **Docker architecture**
+- **Docker objects**
+- **Images and Layers**
+- **Container and Layers**
+
+---
+
 ## Cloud Native
 
 ![h:220](./img/cloud_native_1.png) ![h:220](./img/cloud_native_2.png) ![h:220](./img/cloud_native_3.png)
@@ -100,10 +117,12 @@ Docker는 Linux의 아래와 같은  `namespaces` 기능을 활용하여 격리�
 - **The uts namespace:** Isolating kernel and version identifiers. (UTS: Unix Timesharing System).
 
 ### Control groups
-Docker Engine cgroups 이라는 Linux기술을 이용하여 CPU, Memory와 같은 Container에서 사용하는 하드웨어 리소스를 제어합니다.
+Docker Engine cgroups 이라는 Linux기술을 이용하여 CPU, Memory와 같은
+Container에서 사용하는 하드웨어 리소스를 제어합니다.
 
 ### Union file systems
-Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 매우 가볍고 빠릅니다. Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공합니다.
+Union file systems은 Layer를 생성하여 동작하는 파일시스템으로 매우 가볍고 빠릅니다.
+Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공합니다.
 
 ---
 

@@ -8,6 +8,18 @@ header: Docker & Kubernetes - 08. Kubernetes workload
 footer: Samsung SDS
 ---
 
+# Contents
+
+![bg left:40%](img/docker_k8s.png)
+
+<br>
+
+- **Workload**
+  - **Pod**
+  - 
+  
+---
+
 ## Workload
 
 **워크로드**(**Workload**)는 Kubernetes에서 구동되는 애플리케이션을 말합니다.

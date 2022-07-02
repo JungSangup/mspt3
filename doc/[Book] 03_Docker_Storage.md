@@ -8,6 +8,21 @@ header: Docker & Kubernetes - 03. Docker storage
 footer: Samsung SDS
 ---
 
+![bg left:40%](img/docker_k8s.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Manage data in Docker**
+  - **Volumes**
+  - **Bind mounts**
+  - **tmpfs mounts**
+
+---
+
 ## Storage overview
 
 이번 장은 Docker에서 **데이터**를 관리하는 방법에 관한 내용입니다.

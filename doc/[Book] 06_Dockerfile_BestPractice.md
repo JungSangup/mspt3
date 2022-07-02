@@ -8,6 +8,18 @@ header: Docker & Kubernetes - 06. Dockerfile Best practice
 footer: Samsung SDS
 ---
 
+![bg left:40%](img/docker_k8s.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Best practices for writing Dockerfiles**
+
+---
+
 ## Best practices for writing Dockerfiles
 
 Container 기반의 클러스터 환경에서는 컨테이너 이미지를 빌드하는 과정은 굉장히 중요한 부분입니다. 예를 들어 컨테이너 이미지가 작을 수록 클러스터에 배포되고 실행되는 시간을 단축시킬 수 있으며, 줄어든 크기만큼 클라우드 환경에서의 비용이 감소하게 됩니다. 또한 쉽게 Scale In/Out이 가능한 형태로 애플리케이션을 패키징하여 빌드가 이루어져야 될 것입니다. 여기에서는 이러한 관점에서 컨테이너 이미지를 Build하는 방법에 관한 내용을 다루고 있습니다.

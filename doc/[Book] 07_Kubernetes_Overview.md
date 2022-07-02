@@ -8,9 +8,43 @@ header: Docker & Kubernetes - 07. Kubernetes overview
 footer: Samsung SDS
 ---
 
+![bg left:40%](img/docker_k8s.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **What is Kubernetes?**
+- **Kubernetes Components**
+    - **Control Plane Components**
+    - **Node Components**
+- **Kubernetes Objects**
+- **Object Spec and Status**
+- **Kubernetes Object Management : Imperative vs. Declarative**
+- **Namespace**
+- **Labels and Selectors**
+  
+---
+
+## What is container orchestration?
+
+![bg left:45%](img/k8s_container_orchestration.jpeg)
+
+<br><br><br><br><br>
+
+- Cluster
+- Scheduling
+- Rollout / Rollback
+- Self-healing
+- Scaling
+
+---
+
 ## What id Kubernetes?
 
-쿠버네티스는 **컨테이너**화된 워크로드와 서비스를 관리하기 위한 **이식성**이 있고, **확장가능**한 오픈소스 플랫폼이다. 쿠버네티스는 **선언적 구성**과 **자동화**를 모두 용이하게 해준다. 쿠버네티스는 크고, 빠르게 성장하는 생태계를 가지고 있다. 쿠버네티스 서비스, 기술 지원 및 도구는 어디서나 쉽게 이용할 수 있다.
+쿠버네티스는 **컨테이너**화된 **워크로드**와 서비스를 관리하기 위한 **이식성**이 있고, **확장가능**한 오픈소스 플랫폼이다. 쿠버네티스는 **선언적 구성**과 **자동화**를 모두 용이하게 해준다. 쿠버네티스는 크고, 빠르게 성장하는 생태계를 가지고 있다. 쿠버네티스 서비스, 기술 지원 및 도구는 어디서나 쉽게 이용할 수 있다.
 
 쿠버네티스란 명칭은 키잡이(helmsman)나 파일럿을 뜻하는 그리스어에서 유래했다. **K8S**라는 표기는 "K"와 "S"와 그 사이에 있는 여덟(8) 글자를 나타내는 약식 표기이다. 
 
@@ -21,6 +55,7 @@ footer: Samsung SDS
 <br><br><br><br>
 
 ![](./img/hyperlink.png)[What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+
 
 ---
 

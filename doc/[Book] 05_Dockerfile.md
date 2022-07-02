@@ -8,6 +8,29 @@ header: Docker & Kubernetes - 05. Dockerfile
 footer: Samsung SDS
 ---
 
+![bg left:40%](img/docker_k8s.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Dockerfile**
+- **Instructions**
+    - **FROM**
+    - **LABEL**
+    - **RUN**
+    - **CMD , ENTRYPOINT**
+    - **EXPOSE**
+    - **ENV**
+    - **COPY , ADD**
+    - **USER**
+    - **WORKDIR**
+    - **VOLUME**
+
+---
+
 ## Dockerfile
 
 ![h:380](img/docker-stages.png)
