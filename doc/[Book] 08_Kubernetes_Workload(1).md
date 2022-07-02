@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - 08. Kubernetes workload
+header: Docker & Kubernetes - 08. Kubernetes workload(1)
 footer: Samsung SDS
 ---
 
@@ -16,13 +16,14 @@ footer: Samsung SDS
 
 - **Workload**
   - **Pod**
-  - 
+    - **Pod lifecycle**
+    - **Container probes**
   
 ---
 
 ## Workload
 
-**워크로드**(**Workload**)는 Kubernetes에서 구동되는 애플리케이션을 말합니다.
+**워크로드**(**Workload**)는 Kubernetes에서 구동되는 **애플리케이션**을 말합니다.
 애플리케이션을 컨테이너의 형태로 실행하기 위해서 Kubernetes에서는 **Pod**라는 Object를 이용합니다.
 그리고, 이 **Pod**들의 집합을 관리하기 위해서 또 다른 **Workload resource**들을 사용합니다.
 
@@ -34,11 +35,11 @@ footer: Samsung SDS
 
 ### [Pod](https://kubernetes.io/ko/docs/concepts/workloads/pods/)
 
-**파드**(**Pod**)는 Kubernetes에서 생성하고 관리할 수 있는 배포 가능한 가장 작은 컴퓨팅 단위입니다.
+**파드**(**Pod**)는 Kubernetes에서 생성하고 관리할 수 있는 배포 가능한 **가장 작은 컴퓨팅 단위**입니다.
 Pod는 하나 이상의 컨테이너 그룹으로 구성되며, **스토리지**와 **네트워크**를 공유합니다.
 
 이 **Pod**는 **Node**에서 실행되는데, 이때 Node의 [Cuntainer runtime](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/)을 이용하게 됩니다.
-**Docker**는 대표적인 Kubernetes의 Container runtime이었지만, v1.20이후에는 deprecated 되었습니다. ([참조](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/))
+> **Docker**는 대표적인 Kubernetes의 Container runtime이었지만, Kubernetes v1.20이후에는 deprecated 되었습니다. ([참조](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/))
 하지만, 앞서 배운 Docker환경에서 만들어진 컨테이너 이미지는 Kubernetes에서 문제없이 동작하니 걱정할 필요는 없습니다.
 
 ![h:400](img/module_03_nodes.svg)
@@ -65,10 +66,10 @@ spec:
 - **Pods that run a single container** : "one-container-per-Pod" 모델로, 가장 일반적인 유형
 - **Pods that run multiple containers** : 밀접하게 결합되고 리소스를 공유하는 여러 개의 컨테이너로 구성
 
-**Pod**는 결국 애플리케이션의 단일 인스턴스를 실행하기 위한 Kubernetes의 Object이며, 인스턴스를 확장(Pod의 개수를 증가)하기 위해서는 또 다른 Workload resource(아래)와 컨트롤러를 이용하게 됩니다. 이 부분은 뒤에 더 자세히 다루겠습니다.
-- Deployment
-- StatefulSet
-- DaemonSet
+**Pod**는 결국 애플리케이션의 단일 인스턴스를 실행하기 위한 Kubernetes의 Object이며, 인스턴스를 확장(Pod의 개수를 증가)하기 위해서는 또 다른 **Workload resource**(아래)와 컨트롤러를 이용하게 됩니다. 이 부분은 뒤에 더 자세히 다루겠습니다.
+- **Deployment**
+- **StatefulSet**
+- **DaemonSet**
 
 ---
 
@@ -141,7 +142,7 @@ Pod의 단계(Phase)뿐 아니라, Kubernetes는 Pod 내부 컨테이너의 상�
 ---
 
 #### [Container probes](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%94%84%EB%A1%9C%EB%B8%8C-probe)
-Kublet은 주기적으로 Pod의 상태를 진단하게 되는데, 이때 사용되는것이 Probe 입니다.
+Kublet은 주기적으로 **Pod의 상태를 진단**하게 되는데, 이때 사용되는것이 **Probe** 입니다.
 아래와 같은 체크 메커니즘이 사용됩니다.
 - **exec** : 컨테이너에서 지정된 명령어를 실행 (exits with 0 -> Successful)
 - **httpget** : HTTP GET request (200이상 400미만 -> Successful)
@@ -176,26 +177,91 @@ Probe의 종류는 다음과 같은 것들이 있습니다.
 
 ![h:350](img/google-kubernetes-probe-readiness6ktf.GIF)
 
-![](./img/hyperlink.png)[Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 
 ---
 
+#### Container probes
 
+몇 가지 Container probe의 사용 예시를 보겠습니다.
 
+- [Define a liveness HTTP request](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request)
+**httpGet** 유형의 **livenessProbe** 예제입니다.
+  ```yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    labels:
+      test: liveness
+    name: liveness-http
+  spec:
+    containers:
+    - name: liveness
+      image: k8s.gcr.io/liveness
+      args:
+      - /server
+      livenessProbe:
+        httpGet:
+          path: /healthz
+          port: 8080
+          httpHeaders:
+          - name: Custom-Header
+            value: Awesome
+        initialDelaySeconds: 3
+        periodSeconds: 3  
+  ```
+  > `livenessProbe`는 `initialDelaySeconds`(3초)후 부터 `periodSeconds`(3초) 간격으로 /healthz 로 httpGet 요청을 보냄.
 
+---
 
+#### Container probes
 
+- [Define a TCP liveness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-tcp-liveness-probe)
+tcpSocket 유형의 readinessProbe와 livenessProbe 에제입니다.
+  ```yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: goproxy
+    labels:
+      app: goproxy
+  spec:
+    containers:
+    - name: goproxy
+      image: k8s.gcr.io/goproxy:0.1
+      ports:
+      - containerPort: 8080
+      readinessProbe:
+        tcpSocket:
+          port: 8080
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      livenessProbe:
+        tcpSocket:
+          port: 8080
+        initialDelaySeconds: 15
+        periodSeconds: 20
+  ```
+  > 컨테이너의 8080번 포트의 상태를 이용하여 준비상태(readinessProbe)와 동작상태(livenessProbe)를 검사
 
+---
 
+#### Container probes
 
+[Configure Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes)
+정확한 Probe 설정을 위해서 다음 필드들을 사용할 수 있습니다.
+- `initialDelaySeconds`: Conainer가 시작된 후 probe가 수행되기 전까지의 Delay (Default : 0 , Minimum : 0)
+- `periodSeconds`: probe의 수행빈도 (Default : 10 , Minimum : 1)
+- `timeoutSeconds`: probe 수행응답을 기다리는 timeout 시간을 설정 (Default : 1 , Minimum : 1)
+- `successThreshold`: probe가 실패한 후 성공으로 간주되기 위한 최소 연속 성공 횟수 (Default : 1 , Minimum : 1)
+- `failureThreshold`: probe가 실패로 판단하기 위한 실패 횟수 (Defaults : 3 , Minimum : 1)
 
-
-
-
-
-
-
-
+[HTTP probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#http-probes) 
+HTTP probe는 추가적으로 아래와 같은 필드를 더 설정할 수 있습니다.
+- `host`: 연결하려는 Host Name (Default : pod IP)
+- `scheme`: HTTP or HTTPS (Default : HTTP)
+- `path`: HTTP server에 접근하려는 경로 (Default : /)
+- `httpHeaders`: Custom header 설정 값 
+- `port`: container에 접근하려는 Port
 
 ---
 

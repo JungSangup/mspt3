@@ -108,7 +108,7 @@ K8S는 이 Object의 생성을 보장하기 위해 지속적으로 노력합니�
 이러한 Object의 생성/수정/삭제는 [Kubernetes API](https://kubernetes.io/ko/docs/concepts/overview/kubernetes-api/)를 통해 이루어지는데,
 CLI인 `kubectl`도 이 API를 이용합니다.
 
-앞으로 다루겠지만, 일반적으로 YAML(YAML Ain't Markup Language)
+앞으로 다루겠지만, 일반적으로 [YAML(YAML Ain't Markup Language)](https://yaml.org/)
 형식의 파일로 Object를 정의하고, API를 통해 Kubernetes에 처리를 요청합니다.
 
 --- 
@@ -205,14 +205,13 @@ $ kubectl apply -R -f configs/
 ```
 > configs 디렉토리 이하의 YAML파일을 이용하여 처리함
 
-<br><br><br>
+<br>
 
-| Management technique | Operates on | Recommended environment | Supported writers | Learning curve |
+| 관리기법 | 대상<br>(Operates on) | 권장 환경 | 지원하는 작업자 수 | 학습 난이도 |
 | --- | --- | --- | --- | --- |
-| Imperative commands | Live objects | Development projects | 1+ | Lowest |
-| Imperative object configuration | Individual files | Production projects | 1 | Moderate |
-| Declarative object configuration | Directories of files | Production projects | 1+ | Highest |
-
+| 명령형 커맨드 | 활성 오브젝트 | 개발 환경 | 1+ | 낮음 |
+| 명령형 오브젝트 구성 | 개별 파일 | 프로덕션 환경 | 1 | 보통 |
+| **선언형 오브젝트 구성** | **파일이 있는 디렉토리** | **프로덕션 환경** | **1+** | **높음** |
 
 ---
 
@@ -226,7 +225,8 @@ $ kubectl apply -R -f configs/
 ---
 
 ## Namespace - Not All Objects are in a Namespace
-대부분의 쿠버네티스 리소스(e.g. e.g. pods, services, replication controllers, and others)는 네임스페이스에 속하지만 노드(Node)나 퍼시스턴트 볼륨(PV)과 같은 저수준 리소스는 어느 네임스페이스에도 속하지 않습니다.
+대부분의 쿠버네티스 리소스(e.g. pods, services, replication controllers, and others)는 네임스페이스에 속하지만
+노드(Node)나 퍼시스턴트 볼륨(PV)과 같은 저수준 리소스는 어느 네임스페이스에도 속하지 않습니다.
 아래 대표적인 두 가지 유형의 리소스들을 보겠습니다.
 ```bash
 # 네임스페이스에 속하는 리소스
@@ -260,7 +260,7 @@ storageclasses                    sc           storage.k8s.io/v1                
 ---
 
 ## Labels and Selectors
-**Label**은 Object에 첨부된 **Key/Value 쌍**(pairs)입니다. **Label**은 Object의 특성을 식별하는데 사용되지만, 시스템에 직접적인 의미는 없습니다.
+**Label**은 Object에 첨부된 **Key/Value 쌍**(pairs)입니다. **Label**은 **Object의 특성**을 식별하는데 사용되지만, 시스템에 직접적인 의미는 없습니다.
 Object들의 하위 집합(subsets)을 선책하고 구성하는데 사용됩니다.
 
 아래는 Label을 사용한 예제 입니다.
@@ -306,6 +306,10 @@ spec:
     accelerator: nvidia-tesla-p100
 ```
 > `accelerator=nvidia-tesla-p100` Label을 가진 Node를 선택하여 Pod를 처리함
+
+<br>
+
+![](./img/hyperlink.png)[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
 
 ---
 
