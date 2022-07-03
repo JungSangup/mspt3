@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 03. Dockerfile
+header: Docker & Kubernetes - [Hands-on] 06. Dockerfile
 footer: Samsung SDS
 ---
 

@@ -281,6 +281,10 @@ spec:
 ```
 > `environment: production` , `app: nginx` 두 개의 Label을 가진 경우
 
+<br><br>
+
+![](./img/hyperlink.png)[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
+
 ---
 
 ## Labels and Selectors
@@ -309,7 +313,7 @@ spec:
 
 <br>
 
-![](./img/hyperlink.png)[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
+![](./img/handson.png) **Hands-on :** 07_K8S_Overview
 
 ---
 
