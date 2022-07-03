@@ -18,7 +18,7 @@ footer: Samsung SDS
   - **Pod**
     - **Pod lifecycle**
     - **Container probes**
-  
+ 
 ---
 
 ## Workload
@@ -263,12 +263,25 @@ HTTP probe는 추가적으로 아래와 같은 필드를 더 설정할 수 있�
 - `httpHeaders`: Custom header 설정 값 
 - `port`: container에 접근하려는 Port
 
+<br><br>
+
+
+![](./img/handson.png) **Hands-on :** 08_Kubernetes_Workload(1)
+
 ---
 
 ## Summary
 
-- 
+- Workload
+  - Pod
+    - Pod lifecycle
+      - Pod phase
+      - Container state
+    - Container probe
+      - livenessProbe
+      - readinessProbe
+      - startupProbe
 
-<br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 
 `문의처` : 정상업 / rogallo.jung@samsung.com

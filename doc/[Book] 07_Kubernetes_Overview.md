@@ -313,7 +313,7 @@ spec:
 
 <br>
 
-![](./img/handson.png) **Hands-on :** 07_K8S_Overview
+![](./img/handson.png) **Hands-on :** 07_Kubernetes_Overview
 
 ---
 
