@@ -12,14 +12,48 @@ footer: Samsung SDS
 
 이번 실습은 Deployment의 업데이트 방법 두 가지를 비교해보는 실습입니다.
 
-먼저 실습실로 이동할게요.
-cd /root/lab{{execute T1}}
+그리고, 이번 실습은 Terminal이 두 개 필요합니다.
+미리 준비해주세요.
 
-그리고, 이번 실습은 Terminal이 하나 더 필요합니다.
-Terminal 탭 옆의 +버튼을 클릭해서 하나 더 준비해주세요.
+첫 번째는 **Recreate** 입니다.
+말 그대로 **다시 생성**하는 방법입니다. 기존에 서비스되고 있던 Pod들을 모두 정지하고, 새로운 Pod를 실행하는거죠.
 
-첫 번째는 Recreate 입니다.
-말 그대로 다시 생성하는 방법입니다. 기존에 서비스되고 있던 Pod들을 모두 정지하고, 새로운 Pod를 실행하는거죠.
+먼저 Pod를 생성하기 위한 파일을 준비합니다.
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+  labels:
+    app: my-nginx
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-nginx
+  template:
+    metadata:
+      labels:
+        app: my-nginx
+      name: my-nginx
+    spec:
+      containers:
+      - image: nginx:1.19.3
+        name: my-nginx
+        ports:
+        - containerPort: 80
+```
+> 파일명은 nginx-replicaset.yaml로 합니다.
+
+
+
+
+
+
+
+
 
 nginx Pod를 준비할게요.
 kubectl apply -f nginx-recreate.yaml{{execute T1}}
