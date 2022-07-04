@@ -145,7 +145,7 @@ deployment.apps/nginx-deployment configured
 
 ---
 
-Terminal2에서 어떤 일이 일어나는지 유심히 보세요. 아마도, 있던 Pod들이 모두 삭제되고 새로운 Pod들이 생길거예요.
+두 번째 Terminal에서 어떤 일이 일어나는지 유심히 보세요. 아마도, 있던 Pod들이 모두 삭제되고 새로운 Pod들이 생길거예요.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl get pods --watch
 NAME                                READY   STATUS    RESTARTS   AGE
@@ -308,56 +308,177 @@ deployment.apps "nginx-deployment" deleted
 ### RollingUpdate
 
 이번엔 RollingUpdate 입니다.
+기존에 서비스되고 있던 Pod들을 새로운 Pod로 조금씩(N개씩) 업데이트 하는 방식입니다.
 
+Deployment 의 `.spec.strategy`를 아래와 같이 지정하면 됩니다.
 
-
-테스트를 위한 애플리케이션을 준비하구요.
-kubectl apply -f nginx-rollingupdate.yaml{{execute T1}}
-
-kubectl get all{{execute T1}}
-
-생성된 Deployment의 정보를 보고 현재 실행된 이미지를 확인해봅니다.
-kubectl describe deployment nginx-deployment | grep -i image{{execute T1}}
-
-버젼을 변경하구요.
-sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-rollingupdate.yaml{{execute T1}}
-
-확인할 명령어를 실행한 후에
-kubectl get pods --watch{{execute T2}}
-
-업데이트를 합니다.
-kubectl apply -f nginx-rollingupdate.yaml{{execute T1}}
+```yaml
+spec:
+  strategy:
+    type: RollingUpdate
+```
 
 ---
 
-deployment에 잘 반영이 됐나요?
-kubectl describe deployment nginx-deployment | grep -i image{{execute T1}}
+아래는 **RollingUpdate** 방식을 적용한 **Deployment** 예제파일입니다.
+실습을 위해 아래 파일을 만들어주세요.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: my-nginx
+    tier: frontend
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: my-nginx
+  template:
+    metadata:
+      labels:
+        app: my-nginx
+      name: my-nginx
+    spec:
+      containers:
+      - image: nginx:1.18
+        name: my-nginx
+        ports:
+        - containerPort: 80
+```
+> 파일명은 nginx-rollingupdate.yaml로 합니다.
 
-새로 생성된 Pod의 정보도 확인해봅니다.
-kubectl describe pod [POD-NAME] | grep -i image
+---
 
-앞에서와 마찬가지로 롤백도 해보세요.. 자세한 설명은 생략합니다.
-
-kubectl rollout history deployment nginx-deployment{{execute T1}}
-
-kubectl get pods --watch{{execute T2}}
-
-kubectl rollout undo deployment nginx-deployment --to-revision=1{{execute T1}}
-
-kubectl describe pod [POD-NAME] | grep -i image
-
-kubectl delete -f nginx-rollingupdate.yaml{{execute T1}}
-
-
-
-
-
-
-
-
-
-
+다음과 같이 Deployment를 생성합니다.
 ```bash
+ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-rollingupdate.yaml
+deployment.apps/nginx-deployment created
+```
+> **명령어** : `kubectl apply -f nginx-rollingupdate.yaml`
+
+그리고, 생성된 Object들도 확인해 보겠습니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl get all
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/nginx-deployment-5777d8dcc8-bl2f2   1/1     Running   0          90s
+pod/nginx-deployment-5777d8dcc8-p2qtl   1/1     Running   0          90s
+pod/nginx-deployment-5777d8dcc8-sj4b2   1/1     Running   0          90s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   4h12m
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx-deployment   3/3     3            3           90s
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-deployment-5777d8dcc8   3         3         3       90s
+```
+> **명령어** : `kubectl get all`
+
+---
+
+생성된 Deployment의 정보를 보고 현재 실행된 이미지를 확인해봅니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl describe deployment nginx-deployment | grep -i image
+    Image:        nginx:1.18
+```
+> **명령어** : `kubectl describe deployment nginx-deployment | grep -i image`
+
+사용된 Image는 `nginx:1.18` 입니다.
+
+업데이트를 위해서 Deployment yaml파일에서 버젼을 변경하구요.
+```bash
+ubuntu@ip-10-0-1-161:~$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-rollingupdate.yaml
+```
+> **명령어** : `sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-rollingupdate.yaml`
+
+---
+
+두 번째 Terminal에는 확인할 명령어를 실행한 후에
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl get pods --watch
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-5777d8dcc8-bl2f2   1/1     Running   0          7m21s
+nginx-deployment-5777d8dcc8-p2qtl   1/1     Running   0          7m21s
+nginx-deployment-5777d8dcc8-sj4b2   1/1     Running   0          7m21s
 
 ```
-> **명령어** : `kubectl `
+> **명령어** : `kubectl get pods --watch`
+
+첫 번재 Terminal에서 업데이트를 합니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-rollingupdate.yaml
+deployment.apps/nginx-deployment configured
+```
+> **명령어** : `kubectl apply -f nginx-rollingupdate.yaml`
+
+---
+
+두 번째 Terminal은 아래와 비슷한 걸 볼 수 있을겁니다. **Recreate**때와는 달리 Pod들이 순차적으로 변경되는 걸 볼 수 있습니다.
+```bash
+ubuntu@ip-10-0-1-161:~/mspt2$ kubectl get pods --watch
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-5777d8dcc8-bl2f2   1/1     Running   0          7m21s
+nginx-deployment-5777d8dcc8-p2qtl   1/1     Running   0          7m21s
+nginx-deployment-5777d8dcc8-sj4b2   1/1     Running   0          7m21s
+
+nginx-deployment-6866dc769c-tld28   0/1     Pending   0          0s
+nginx-deployment-6866dc769c-tld28   0/1     Pending   0          0s
+nginx-deployment-6866dc769c-tld28   0/1     ContainerCreating   0          0s
+nginx-deployment-6866dc769c-tld28   1/1     Running             0          1s
+nginx-deployment-5777d8dcc8-bl2f2   1/1     Terminating         0          8m11s
+nginx-deployment-6866dc769c-vznpg   0/1     Pending             0          0s
+nginx-deployment-6866dc769c-vznpg   0/1     Pending             0          0s
+nginx-deployment-6866dc769c-vznpg   0/1     ContainerCreating   0          0s
+nginx-deployment-6866dc769c-vznpg   1/1     Running             0          1s
+nginx-deployment-5777d8dcc8-bl2f2   0/1     Terminating         0          8m12s
+nginx-deployment-5777d8dcc8-sj4b2   1/1     Terminating         0          8m12s
+nginx-deployment-6866dc769c-t2p6n   0/1     Pending             0          0s
+nginx-deployment-5777d8dcc8-bl2f2   0/1     Terminating         0          8m12s
+nginx-deployment-6866dc769c-t2p6n   0/1     Pending             0          0s
+nginx-deployment-5777d8dcc8-bl2f2   0/1     Terminating         0          8m12s
+nginx-deployment-6866dc769c-t2p6n   0/1     ContainerCreating   0          0s
+nginx-deployment-5777d8dcc8-sj4b2   0/1     Terminating         0          8m13s
+nginx-deployment-5777d8dcc8-sj4b2   0/1     Terminating         0          8m13s
+nginx-deployment-5777d8dcc8-sj4b2   0/1     Terminating         0          8m13s
+nginx-deployment-6866dc769c-t2p6n   1/1     Running             0          1s
+nginx-deployment-5777d8dcc8-p2qtl   1/1     Terminating         0          8m13s
+nginx-deployment-5777d8dcc8-p2qtl   0/1     Terminating         0          8m14s
+nginx-deployment-5777d8dcc8-p2qtl   0/1     Terminating         0          8m14s
+nginx-deployment-5777d8dcc8-p2qtl   0/1     Terminating         0          8m14s
+```
+
+---
+
+첫 번째 Terminal에서 아래와 같이 업데이트 이후의 변경사항도 확인해보세요.
+
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl describe deployment nginx-deployment | grep -i image
+    Image:        nginx:1.19
+```
+> **명령어** : `kubectl describe deployment nginx-deployment | grep -i image`
+
+새로 생성된 Pod의 정보도 확인해봅니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl describe pod nginx-deployment-6866dc769c-t2p6n | grep -i image
+    Image:          nginx:1.19
+    Image ID:       docker-pullable://nginx@sha256:df13abe416e37eb3db4722840dd479b00ba193ac6606e7902331dcea50f4f1f2
+  Normal  Pulled     6m55s  kubelet            Container image "nginx:1.19" already present on machine
+```
+> **명령어** : `kubectl describe pod [POD-NAME] | grep -i image`
+> [POD-NAME] 에는 앞에서 조회된 POD 중 하나의 이름을 넣어주세요.
+
+앞에서와 마찬가지로 롤백도 해보세요.. 자세한 설명은 생략합니다.
+`kubectl rollout history deployment nginx-deployment`
+
+`kubectl get pods --watch`
+
+`kubectl rollout undo deployment nginx-deployment --to-revision=1`
+
+`kubectl describe pod [POD-NAME] | grep -i image`
+
+`kubectl delete -f nginx-rollingupdate.yaml`
