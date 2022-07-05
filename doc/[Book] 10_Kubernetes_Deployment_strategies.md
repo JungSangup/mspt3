@@ -179,8 +179,6 @@ spec:
 
 ![h:200](./img/canary_testing.jpg)
 
-![](./img/handson.png) **Hands-on :** 10_Kubernetes_Deployment_strategies
-
 ---
 
 ### Canary deployments
@@ -226,6 +224,10 @@ spec:
      app: guestbook
      tier: frontend
 ```
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+![](./img/handson.png) **Hands-on :** 10_Kubernetes_Deployment_strategies
 
 ---
 
