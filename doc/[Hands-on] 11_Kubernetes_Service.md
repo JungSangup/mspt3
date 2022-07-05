@@ -12,8 +12,7 @@ footer: Samsung SDS
 
 이번 실습에서는 **Service**를 이용하는 방법을 알아보겠습니다.
 
-먼저 **Service**가 없을 경우 어떤 문제가 있는지 알아볼까요?
-**Deployment**를 이용해서 Pod를 몇 개 생성해 보겠습니다.
+먼저 **Deployment**를 이용해서 Pod를 몇 개 생성해 보겠습니다.
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -45,27 +44,18 @@ spec:
 
 ---
 
+그리고, 아래와 같이 생성한 다음, 생성된 Pod을 조회합니다.
 ```bash
+ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-deployment.yaml
+deployment.apps/nginx-deployment created
 
+ubuntu@ip-10-0-1-161:~$ kubectl get pods --show-labels
+NAME                                READY   STATUS    RESTARTS   AGE   LABELS
+nginx-deployment-56cb9cc9db-6zv82   1/1     Running   0          10s   app=my-nginx,pod-template-hash=56cb9cc9db
+nginx-deployment-56cb9cc9db-7vgpl   1/1     Running   0          10s   app=my-nginx,pod-template-hash=56cb9cc9db
 ```
 
-
-현재 있는 Pod들을 조회해 보겠습니다.
-kubectl get pods -o wide{{execute}}
-
-그 중에 한 Pod의 IP를 이용해서 볼까요?
-curl http://[IP-Addr.]
-
-nginx가 잘 동작하고 있나요?
-
-위에서 조회한 Pod를 한 번 삭제해 볼게요.
-kubectl delete pods [POD-NAME]{{copy}}
-
-무슨일이 일어났나요? 우리의 ReplicaSet이 살려는 줬어요.
-그런데, IP가 바뀌어 있을거예요.
-이런식으로는 쓸 수가 없죠.
-
-Service를 만들어서 이 문제를 해결해 볼게요.
+이제 **Service**를 생성해보겠습니다.
 
 먼저 한 번 볼까요?
 cat nginx-clusterip-service.yaml{{execute}}
