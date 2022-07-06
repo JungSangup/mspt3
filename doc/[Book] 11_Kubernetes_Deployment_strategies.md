@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - 10. Kubernetes Deployment strategies
+header: Docker & Kubernetes - 11. Kubernetes Deployment strategies
 footer: Samsung SDS
 ---
 
@@ -227,7 +227,7 @@ spec:
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
-![](./img/handson.png) **Hands-on :** 10_Kubernetes_Deployment_strategies
+![](./img/handson.png) **Hands-on :** 11_Kubernetes_Deployment_strategies
 
 ---
 

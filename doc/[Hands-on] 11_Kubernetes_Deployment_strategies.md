@@ -4,11 +4,11 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 10. Kubernetes Deployment strategies
+header: Docker & Kubernetes - [Hands-on] 11. Kubernetes Deployment strategies
 footer: Samsung SDS
 ---
 
-## [Hands-on] 10. Kubernetes Deployment strategies
+## [Hands-on] 11. Kubernetes Deployment strategies
 
 이번 실습은 Deployment의 업데이트 방법 두 가지를 비교해보는 실습입니다.
 
