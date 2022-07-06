@@ -139,7 +139,7 @@ service/nginx-clusterip-service created
 
 ---
 
-생성된걸 조회할 대는 아래와 같이 합니다.
+생성된걸 조회할 때는 아래와 같이 합니다.
 ```
 ubuntu@ip-10-0-1-161:~$ kubectl get services
 NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE

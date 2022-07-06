@@ -66,7 +66,7 @@ Events:  <none>
 database.url=192.168.0.88
 database.port=5432
 database.db=employee
-database.user=samsung
+database.user=hojoon
 database.password=elqlvotmdnjem
 ```
 > 파일명은 app.properties 로 합니다.
