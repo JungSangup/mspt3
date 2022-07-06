@@ -308,6 +308,50 @@ database.password=elqlvotmdnjem
 
 kubectl exec -it configmap-pod -- cat /etc/config/app.properties 를 실행해 봅니다.
 
+---
 
+이제 **Secret**을 작성하고 사용하는 방법을 알아보겠습니다.
+
+**Secret**은 **ConfigMap**과 동일하게 **Key:Value** 형식으로 저장이 됩니다.
+
+차이점은, 저장될 때 base64 encoding이 되어서 저장된다는 점입니다. 사실 암호화되어 저장되는 것도 아니고 단순히 base64 encoding만 되기 때문에 안전하다고 할 수는 없으나 공격자(?)에게는 혼란을 줄 수 있습니다.
+
+### Secret from Yaml
+Secret도 ConfigMap과 동일하게 `--from-literal` 이나 `--from-file`, `--from-env-file`을 사용할 수 있습니다.
+이번 실습에는 YAML파일을 사용하는 방법만 사용해보겠습니다.
+
+
+
+먼저 Secret을 위한 yaml파일을 하나 작성합니다.
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: yaml-secret
+data:
+  location: SmFtc2ls
+  business: SVRTZXJ2aWNl
+```
+> 파일명은 yaml-secret.yaml 로 합니다.
+
+---
+
+configmap과 달리 secret을 생성할 때는, value를 base64 encoding한 값으로 작성해야만 합니다.
+location의 value는 Jamsil 을 base64 encoding 한 값이며, business의 value는 ITService를 base64 encoding 한 값입니다.
+
+아래를 참고하세요.
+```bash
+ubuntu@ip-10-0-1-161:~$ echo -n 'Jamsil' | base64
+SmFtc2ls
+ubuntu@ip-10-0-1-161:~$ echo -n 'ITService' | base64
+SVRTZXJ2aWNl
+```
+> **명령어** : `echo -n 'Jamsil' | base64`, `echo -n 'ITService' | base64`
+
+작성된 yaml을 적용하겠습니다. kubectl apply -f yaml-secret.yaml
+
+동일하게 describe로 확인해 봅니다.
+
+kubectl describe secret yaml-secret
 
 
