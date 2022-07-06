@@ -54,11 +54,19 @@ NAME                                READY   STATUS    RESTARTS   AGE   IP       
 nginx-deployment-56cb9cc9db-bh4q6   1/1     Running   0          53s   172.17.0.4   minikube   <none>           <none>
 nginx-deployment-56cb9cc9db-hgp6h   1/1     Running   0          53s   172.17.0.3   minikube   <none>           <none>
 ```
+> **명령어** : `kubectl apply -f nginx-deployment.yaml`
 
-첫 번째 Pod에서 두 번째 Pod의 서비스를 사용하는 상황을 가정해 보겠습니다.
+이제 위에서 생성한 Pod들을 사용하는 또다른 Pod를 하나 만들겠습니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl run curlpod --image=radial/busyboxplus:curl --command -- /bin/sh -c "while true; do echo hi; sleep 10; done"
+pod/curlpod created
+```
+> **명령어** : `kubectl run curlpod --image=radial/busyboxplus:curl --command -- /bin/sh -c "while true; do echo hi; sleep 10; done"`
+
+그리고,앞에서 만들어진 Nginx Pod의 IP를 이용해서 접속해보겠습니다.
 
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl exec -it nginx-deployment-56cb9cc9db-bh4q6 -- curl http://172.17.0.4
+ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl http://172.17.0.3
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,8 +93,9 @@ Commercial support is available at
 </body>
 </html>
 ```
-> **명령어** : `kubectl exec -it [POD1_NAME] -- curl http://[POD2_IP]`
-> [POD1_NAME] 은 첫 번째 Pod의 NAME, [POD2_IP] 는 두 번째 Pod의 IP
+> **명령어** : `kubectl exec -it curlpod -- curl http://[POD_IP]`
+> [POD_IP]는 Nginx Pod 중 하나의 IP
+
 
 잘 동작하네요.
 
@@ -125,9 +134,9 @@ service/nginx-clusterip-service created
 생성된걸 조회할 대는 아래와 같이 합니다.
 ```
 ubuntu@ip-10-0-1-161:~$ kubectl get services
-NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-kubernetes                ClusterIP   10.96.0.1       <none>        443/TCP   40h
-nginx-clusterip-service   ClusterIP   10.107.31.242   <none>        80/TCP    34s
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP   45h
+nginx-clusterip-service   ClusterIP   10.105.111.120   <none>        80/TCP    10s
 ```
 > **명령어** : `kubectl get services`
 
@@ -135,7 +144,7 @@ nginx-clusterip-service   ClusterIP   10.107.31.242   <none>        80/TCP    34
 이 아이피로 Pod까지 접근할 수도 있습니다.
 
 ```bash
-ubuntu@ip-10-0-1-161:~$  kubectl exec -it nginx-deployment-56cb9cc9db-bh4q6 -- curl http://10.107.31.242
+ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl http://10.105.111.120
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,13 +171,13 @@ Commercial support is available at
 </body>
 </html>
 ```
-> **명령어** : `kubectl exec -it [POD1_NAME] -- curl http://[SVC_CLUSTER_IP]`
-> [POD1_NAME] 은 첫 번째 Pod의 NAME, [SVC_CLUSTER_IP] 는 Service의 CLUSTER-IP
+> **명령어** : `kubectl exec -it curlpod -- curl http://[SVC_IP]`
+> [SVC_IP]는 Service의 CLUSTER-IP
 
 IP가 아닌 Name으로도 가능합니다.
 이렇게요.
 ```bash
-ubuntu@ip-10-0-1-161:~/mspt2/hands_on_files$ kubectl exec -it  nginx-deployment-56cb9cc9db-bh4q6 -- curl http://nginx-clusterip-service
+ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl nginx-clusterip-service
 <!DOCTYPE html>
 <html>
 <head>
@@ -195,8 +204,8 @@ Commercial support is available at
 </body>
 </html>
 ```
-> **명령어** : `kubectl exec -it [POD1_NAME] -- curl http://[SVC_NAME]`
-> [POD1_NAME] 은 첫 번째 Pod의 NAME, [SVC_NAME] 는 Service의 NAME
+> **명령어** : `kubectl exec -it curlpod -- curl [SVC_NAME]`
+> [SVC_NAME] 는 Service의 NAME
 
 잘 되네요...
 이제 Service를 만들면 클러스터 내에서는 이름으로도 접근이 가능합니다.
