@@ -19,38 +19,36 @@ footer: Samsung SDS
 
 ---
 
-# Helm
+## Helm
 
-Helm은 Kuberentes Package Managing Tool 입니다. node.js의 npm과 유사하게 Kuberentes의 Package를 배포 가능하게 하는 Tool 이라고 생각하시면 됩니다. 
+Helm은 Kuberentes **Package Managing Tool**입니다. node.js의 npm과 유사하게 Kuberentes의 Package를 배포 가능하게 하는 Tool 이라고 생각하시면 됩니다. 
 
-Chart 라고 부르는 Package Format을 사용하게되는데, 이 Chart는 Kubernetes의 Resource들을 정의하는 파일들의 집합입니다.
+**Chart** 라고 부르는 Package Format을 사용하게되는데, 이 Chart는 **Kubernetes Resource**들을 정의하는 파일들의 집합입니다.
 
 Helm을 통해 다음과 같은 일을 할 수 있습니다.
 
 - 새로운 Chart를 생성할 수 있습니다.
-- Chart들을 통해 Chart 아카이프 (tgz) 파일을 생성할 수 있습니다.
+- Chart들을 통해 Chart 아카이브(tgz) 파일을 생성할 수 있습니다.
 - Chart들이 저장된 Repositories와 상호작용(가져오기 등)을 할 수 있습니다.
 - Chart들을 Kubernetes Cluster에 설치/제거 할 수 있습니다.
 - Helm을 통해 설치된 Chart들에 대한 Release Cycle을 관리할 수 있습니다.
 
 ---
 
+## Helm
 
-![h:400](img/helmchart.png)
-
-
+![h:380](img/helmchart.png)
 
 Helm은 다음과 같은 3가지 중요한 Concept을 가지고 있습니다.
-
-- Chart : Helm의 package 이며, 이 package에는 Kubernetes Cluster내에서 application, tool, service 등을 동작시키는데 필요한 모든 Resource들을 담고 있음
-- Repository : Chart (Kubernetes Package) 들이 모아지고, 공유되는 저장소
-- Release : Kubernetes Cluster에서 구동되는 Chart의 Instance이며, 하나의 Chart는 동일한 Cluster에 여러번 설치될 수 있으며, 각각 설치될 때마다 새로운 release 가 생성 (물론 release 명은 달라야 합니다)
+- **Chart** : Helm의 package이며, 이 package에는 Kubernetes Resource들을 담고 있음
+- **Repository** : Chart(Kubernetes Package) 저장소
+- **Release** : Kubernetes Cluster에서 구동되는 Chart의 Instance
 
 ---
 
-## Charts
+### Charts
 
-Chart는 디렉토리 내부에 파일들으로 구성됩니다. 디렉토리 이름이 Chart의 이름이 됩니다.
+Chart는 디렉토리 내부에 파일들로 구성됩니다. 디렉토리 이름이 Chart의 이름이 됩니다.
 예를들어, WordPress라는 Chart는 `wordpress/` 디렉토리에 저장이 됩니다.
 
 디렉토리 내에는 아래와 같은 구조로 파일들이 존재 합니다.
@@ -73,7 +71,7 @@ Helm은 `charts/` 와 `templates/` 디렉토리와, 지정된 파일명을 사�
 
 ---
 
-### Chart.yaml 파일
+#### Chart.yaml 파일
 
 Chart.yaml 파일은 Chart에 필수적인 파일입니다. 다음과 같은 Field를 포함하고 있습니다.
 
@@ -118,7 +116,7 @@ annotations:
 > Helm 3를 사용하는 경우 `apiVersion` 은 `v2`를 이어야 합니다. (Helm 2는 `v1`)
 > `name`은 Chart의 이름이며, `version`은 Chart의 version을 의미합니다.
 
-### Template 파일
+#### Template 파일
 
 Helm Chart의 Template들은 Go template language로 작성되어 있으며, 다양한 template funtion들을 사용할 수 있습니다.
 
@@ -213,9 +211,9 @@ spec:
 
 ---
 
-### values.yaml 파일
+#### values.yaml 파일
 
-template 파일에서 보았듯이, template에 필요한 value 들은 values.yaml 파일에서 제공될 수 있습니다.
+template 파일에서 보았듯이, template에 필요한 value 들은 **values.yaml** 파일에서 제공될 수 있습니다.
 Chart에 포함되어 있는 values.yaml 파일의 value 들은 Chart를 설치하는데 기본값으로 사용됩니다.
 
 values.yaml 파일의 예는 다음과 같습니다.
@@ -335,7 +333,7 @@ Chart에 포함되는 values.yaml 파일의 이름은 변경할 수 없으며, h
 
 ---
 
-## Helm 명령어
+### Helm 명령어
 
 helm은 helm cli를 통해 사용 가능하며, 만약 설치되어 있지 않다면, 공식 release binary (아래 링크)를 설치하여 사용 가능합니다.
 
@@ -345,7 +343,7 @@ helm은 helm cli를 통해 사용 가능하며, 만약 설치되어 있지 않�
 
 
 
-### helm search
+#### helm search
 
 chart를 검색하기 위한 command 이며, 두가지 소스 유형을 검색할 수 있습니다.
 
@@ -384,7 +382,7 @@ search 통해 설치하고자 하는 package를 찾았다면, helm install을 �
 
 ---
 
-### helm install
+#### helm install
 
 chart를 설치하는 방법은 helm install을 사용하는 것이고, 사용 방법은 `helm install 'release명' 'chart명'` 을 통해 chart가 설치됩니다.
 
@@ -458,7 +456,7 @@ NAME                                    READY   AGE
 statefulset.apps/my-wordpress-mariadb   0/1     5m36s
 ```
 
-my-wordpress 라는 이름으로, service, deployment, statefulset 등이 생성된 것을 확인할 수 있습니다.
+my-wordpress 라는 이름으로, **service**, **deployment**, **statefulset** 등이 생성된 것을 확인할 수 있습니다.
 
 ---
 
@@ -515,7 +513,7 @@ value 들이 반영된 manifest를 확인해 보고자 한다면, `--dry-run` �
 
 ---
 
-### helm uninstall
+#### helm uninstall
 
 설치된 chart (release)를 삭제하는 방법은 `helm uninstall 'release명'`을 사용하는 것입니다.
 
@@ -528,7 +526,7 @@ helm install을 통해 설치된 모든 resource가 삭제되는 것을 알 수 
 
 
 
-### helm upgrade
+#### helm upgrade
 
 설치된 chart (release)를 업그레이드 하는 방법은 helm upgrade 를 사용하는 것입니다.
 
@@ -545,7 +543,7 @@ helm install을 통해 설치된 모든 resource가 삭제되는 것을 알 수 
 
 ---
 
-### helm create
+#### helm create
 
 나만의 helm chart를 만들고자 한다면, `helm create 'chart명'`명령을 통해 새로운 chart를 생성할 수 있습니다.
 
@@ -576,7 +574,7 @@ mychart/
 
 ---
 
-### helm lint
+#### helm lint
 
 작성된 chart를 오류가 있는지 검증하려면, `helm lint 'chart명'` 명령을 사용하면 됩니다.
 
@@ -589,22 +587,22 @@ $ helm lint mychart
 ```
 
 만약 오류가 있다면 아래와 같이 오류에 대한 정보를 표시해 줍니다.
-
 (아래는 deployment.yaml 에서 deployment name을 지우고 lint를 한 결과입니다.)
-
 ```
 $ helm lint mychart
 ==> Linting mychart
 [INFO] Chart.yaml: icon is recommended
-[WARNING] templates/deployment.yaml: object name does not conform to Kubernetes naming requirements: "": metadata.name: Invalid value: "": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+[WARNING] templates/deployment.yaml: object name does not conform to Kubernetes naming requirements: "":
+ metadata.name: Invalid value: "": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric
+  characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com',
+   regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
 
 1 chart(s) linted, 0 chart(s) failed
 ```
 
 ---
 
-
-### helm package
+#### helm package
 
 chart 디렉토리를 아카이브(압축) 합니다.
 
@@ -619,8 +617,21 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
 
 ## Summary
 
-- 
+- Helm
+  - Helm concept
+    - Chart : Chart.yaml / Template / values.yaml
+    - Repository
+    - Release
+  - Helm 명령어
+    - helm search
+    - helm install
+    - helm uninstall
+    - helm upgrade
+    - helm create
+    - helm lint
+    - helm template
+    - helm package
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
 
 `문의처` : 정상업 / rogallo.jung@samsung.com
