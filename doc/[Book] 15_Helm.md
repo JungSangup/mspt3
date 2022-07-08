@@ -14,8 +14,9 @@ footer: Samsung SDS
 
 <br>
 
-- **Horizontal Pod Autoscaler**
-- **Kubernetes Metrics Server**
+- **Helm**
+  - **Helm concept**
+  - **Helm Commands**
 
 ---
 
@@ -333,7 +334,7 @@ Chart에 포함되는 values.yaml 파일의 이름은 변경할 수 없으며, h
 
 ---
 
-### Helm 명령어
+### Helm Commands
 
 helm은 helm cli를 통해 사용 가능하며, 만약 설치되어 있지 않다면, 공식 release binary (아래 링크)를 설치하여 사용 가능합니다.
 
@@ -613,6 +614,10 @@ $ helm package ./mychart
 Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
 ```
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+![](./img/handson.png) **Hands-on :** 15_Helm
+
 ---
 
 ## Summary
@@ -622,7 +627,7 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
     - Chart : Chart.yaml / Template / values.yaml
     - Repository
     - Release
-  - Helm 명령어
+  - Helm Commands
     - helm search
     - helm install
     - helm uninstall

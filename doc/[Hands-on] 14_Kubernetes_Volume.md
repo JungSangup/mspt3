@@ -63,7 +63,7 @@ spec:
   clusterIP: None
 ---
 ```
-> MySql의 Service
+> MySQL의 Service
 
 ---
 
@@ -83,7 +83,7 @@ spec:
       storage: 20Gi
 ---
 ```
-> MySql에서 사용할 PVC (동적 Provisioning)
+> MySQL에서 사용할 PVC (동적 Provisioning)
 
 ---
 
@@ -127,7 +127,7 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-pv-claim
 ```
-> MySql Deployment
+> MySQL Deployment
 
 ---
 
