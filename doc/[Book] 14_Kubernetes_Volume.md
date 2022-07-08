@@ -127,7 +127,7 @@ Volume은 아래와 같은 단계(Phase)를 가집니다. 해당 단계는 Persi
 ## Persistent Volume(PV)
 
 ### Access Modes
-Access 유형에 따라 다음과 같이 구부됩니다.
+Access 유형에 따라 다음과 같이 구분됩니다.
 - **ReadWriteOnce**(**RWO**) – 단일 노드에 의한 읽기-쓰기로 볼륨이 마운트될 수 있습니다.
 - **ReadOnlyMany**(**ROX**) – 여러 노드에 의한 읽기 전용으로 볼륨이 마운트될 수 있습니다.
 - **ReadWriteMany**(**RWX**) – 여러 노드에 의한 읽기-쓰기로 볼륨이 마운트될 수 있습니다.

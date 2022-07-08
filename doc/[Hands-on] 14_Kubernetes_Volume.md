@@ -272,7 +272,7 @@ service/wordpress created
 persistentvolumeclaim/wp-pv-claim created
 deployment.apps/wordpress created
 ```
-> **명령어1** : `kubectl get po` , `kubectl
+> **명령어1** : `kubectl apply -f wordpress-deployment.yaml`
 
 그리고, MySQL과 마찬가지로 생성된
 - PVC
