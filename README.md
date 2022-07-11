@@ -10,11 +10,9 @@
 | ./doc/pdf | 교재의 slides 형식 출력본(pdf) |
 | ./hands_on_files | 실습교재에 사용되는 파일들 |
 
-
+> ppt 형색의 파일은 이미지 형식임. (내용 중 text를 복사하여 사용할 수 없음.)
 
 ---
-
-
 
 ### 이론/실습 교재 Contents
 
@@ -36,13 +34,7 @@
 | 14 | [Book] 14_Kubernetes_Volume.md | [Hands-on] 14_Kubernetes_Volume.md |
 | 15 | [Book] 15_Helm.md | [Hands-on] 15_Helm.md |
 
-
-
-
-
 ---
-
-
 
 ### 교재(markdown with marp) 작성/수정 및 출력(ppt,pdf) 방법
 
@@ -70,15 +62,15 @@ Visual Studio Code 에서 File > Open Folder 실행 후 본 Repository 최상위
 ![](doc/img/VSCode2.png)
 
 
-이후 편집 과정은 일반적인 Markdown 문서와 동일함.
+이후 편집 과정은 일반적인 Markdown 문서와 동일함.  
 편집 과정 중 문서 우측상단의 **Preview** 버튼을 클릭하여 출력형태를 확인할 수 있음.
 
 ![](doc/img/VSCode4.gif)
 
+기타 자세한 marp 사용법은 [Marpit Markdown](https://marpit.marp.app/markdown)를 참조.
 
 #### Slide 형식의 파일(ppt, pdf)로 출력하는 방법
 
-편집을 마친 Markdown 문서의 출력(e.g. ppt, pdf)은 아래와 같이 Marp 아이콘 클릭 후 Export Slide Deck 선택  
-이후 출력형식과 디렉토리 선택 후 실행.
+편집을 마친 Markdown 문서의 출력은 아래 그림과 같이 진행.  (Marp 아이콘 > Export Slide Deck...)
 
 ![](doc/img/marp_export.gif)
