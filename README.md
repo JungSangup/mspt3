@@ -46,11 +46,23 @@
 
 ### 교재(markdown with marp) 작성/수정 및 출력(ppt,pdf) 방법
 
-교재(.doc/*.md)는 모두 markdown문서로 작성되었고, slide 형식(ppt, pdf)으로 출력하기 위해서 [Marp](https://marp.app/)를 사용함.
+교재(.doc/*.md)는 모두 [markdown](https://www.markdownguide.org/)문서로 작성되었고, slide 형식(ppt, pdf)으로 출력하기 위해서 [Marp](https://marp.app/)를 사용함.
 
-교재(.doc/*.md) 작성/수정을 위해서는
+본 교재의 수정과 출력이 필요한 경우
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
 
 설치가 필요함.
+
+
+
+
+
+##### 교재 작성/수정 방법
+
+
+
+
+
+##### Slide 형식의 파일(ppt, pdf)로 출력하는 방법
