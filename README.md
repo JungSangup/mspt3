@@ -18,7 +18,7 @@
 
 | No. | 이론교재 | 실습교재 |
 | :---: | :--- | :--- |
-| 1 | [Book] 01_Docker_Overview.md | [Hands-on] 01_Docker_Intro.md<br>[Hands-on] 02_Docker_Layers.md |
+| 1 | [[Book] 01_Docker_Overview.md](./doc/%5BBook%5D%2001_Docker_Overview.md) | [Hands-on] 01_Docker_Intro.md<br>[Hands-on] 02_Docker_Layers.md |
 | 2 | [Book] 02_Docker_Commands.md | [Hands-on] 03_Docker_Commands.md |
 | 3 | [Book] 03_Docker_Storage.md | [Hands-on] 04_Docker_Volumes.md |
 | 4 | [Book] 04_Docker_Network.md | [Hands-on] 05_Docker_Network.md |
