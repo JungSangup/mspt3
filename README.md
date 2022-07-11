@@ -47,7 +47,7 @@
 
 설치가 필요함.
 
-Visual Studio Code 설치/실행 후 Extension 에서 marp 검색 후 Install
+Visual Studio Code 설치/실행 후 Extension 에서 marp 검색하여 Install
 ![](doc/img/marp.png)
 
 
