@@ -18,21 +18,21 @@
 
 | No. | 이론교재 | 실습교재 |
 | :---: | :--- | :--- |
-| 1 | [[Book] 01_Docker_Overview.md](./doc/%5BBook%5D%2001_Docker_Overview.md) | [Hands-on] 01_Docker_Intro.md<br>[Hands-on] 02_Docker_Layers.md |
-| 2 | [Book] 02_Docker_Commands.md | [Hands-on] 03_Docker_Commands.md |
-| 3 | [Book] 03_Docker_Storage.md | [Hands-on] 04_Docker_Volumes.md |
-| 4 | [Book] 04_Docker_Network.md | [Hands-on] 05_Docker_Network.md |
-| 5 | [Book] 05_Dockerfile.md | - |
-| 6 | [Book] 06_Dockerfile_BestPractice.md | [Hands-on] 06_Dockerfile.md |
-| 7 | [Book] 07_Kubernetes_Overview.md | [Hands-on] 07_Kubernetes_Overview.md |
-| 8 | [Book] 08_Kubernetes_Workload(1).md | [Hands-on] 08_Kubernetes_Workload(1).md |
-| 9 | [Book] 09_Kubernetes_Workload(2).md | [Hands-on] 09_Kubernetes_Workload(2).md |
-| 10 | [Book] 10_Kubernetes_Service.md | [Hands-on] 10_Kubernetes_Service.md |
-| 11 | [Book] 11_Kubernetes_Deployment_strategies.md | [Hands-on] 11_Kubernetes_Deployment_strategies.md |
-| 12 | [Book] 12_Kubernetes_ConfigMaps & Secrets.md | [Hands-on] 12_Kubernetes_ConfigMaps & Secrets.md |
-| 13 | [Book] 13_Kubernetes_Horizontal Pod Autoscaler.md | [Hands-on] 13_Kubernetes_Horizontal Pod Autoscaler.md |
-| 14 | [Book] 14_Kubernetes_Volume.md | [Hands-on] 14_Kubernetes_Volume.md |
-| 15 | [Book] 15_Helm.md | [Hands-on] 15_Helm.md |
+|  1 | [[Book] 01_Docker_Overview.md](./doc/%5BBook%5D%2001_Docker_Overview.md)                                             | [[Hands-on] 01_Docker_Intro.md](doc/%5BHands-on%5D%2001_Docker_Intro.md)<br>[[Hands-on] 02_Docker_Layers.md](doc/%5BHands-on%5D%2002_Docker_Layers.md) |
+|  2 | [[Book] 02_Docker_Commands.md](./doc/%5BBook%5D%2002_Docker_Commands.md)                                             | [[Hands-on] 03_Docker_Commands.md](doc/%5BHands-on%5D%2003_Docker_Commands.md)                                                                         |
+|  3 | [[Book] 03_Docker_Storage.md](./doc/%5BBook%5D%2003_Docker_Storage.md)                                               | [[Hands-on] 04_Docker_Volumes.md](doc/%5BHands-on%5D%2004_Docker_Volumes.md)                                                                           |
+|  4 | [[Book] 04_Docker_Network.md](./doc/%5BBook%5D%2004_Docker_Network.md)                                               | [[Hands-on] 05_Docker_Network.md](doc/%5BHands-on%5D%2005_Docker_Network.md)                                                                           |
+|  5 | [[Book] 05_Dockerfile.md](./doc/%5BBook%5D%2005_Dockerfile.md)                                                       | -                                                                                                                                                      |
+|  6 | [[Book] 06_Dockerfile_BestPractice.md](./doc/%5BBook%5D%2006_Dockerfile_BestPractice.md)                             | [[Hands-on] 06_Dockerfile.md](doc/%5BHands-on%5D%2006_Dockerfile.md)                                                                                   |
+|  7 | [[Book] 07_Kubernetes_Overview.md](./doc/%5BBook%5D%2007_Kubernetes_Overview.md)                                     | [[Hands-on] 07_Kubernetes_Overview.md](doc/%5BHands-on%5D%2007_Kubernetes_Overview.md)                                                                 |
+|  8 | [[Book] 08_Kubernetes_Workload(1).md](./doc/%5BBook%5D%2008_Kubernetes_Workload(1).md)                               | [[Hands-on] 08_Kubernetes_Workload(1).md](doc/%5BHands-on%5D%2008_Kubernetes_Workload(1).md)                                                           |
+|  9 | [[Book] 09_Kubernetes_Workload(2).md](./doc/%5BBook%5D%2009_Kubernetes_Workload(2).md)                               | [[Hands-on] 09_Kubernetes_Workload(2).md](doc/%5BHands-on%5D%2009_Kubernetes_Workload(2).md)                                                           |
+| 10 | [[Book] 10_Kubernetes_Service.md](./doc/%5BBook%5D%2010_Kubernetes_Service.md)                                       | [[Hands-on] 10_Kubernetes_Service.md](doc/%5BHands-on%5D%2010_Kubernetes_Service.md)                                                                   |
+| 11 | [[Book] 11_Kubernetes_Deployment_strategies.md](./doc/%5BBook%5D%2011_Kubernetes_Deployment_strategies.md)           | [[Hands-on] 11_Kubernetes_Deployment_strategies.md](doc/%5BHands-on%5D%2011_Kubernetes_Deployment_strategies.md)                                       |
+| 12 | [[Book] 12_Kubernetes_Configmaps & Secrets](doc/%5BBook%5D%2012_Kubernetes_ConfigMaps%20&%20Secrets.md)              | [[Hands-on] 12_Kubernetes_ConfigMaps & Secrets.md](doc/%5BHands-on%5D%2012_Kubernetes_ConfigMaps%20&%20Secrets.md)                                     |
+| 13 | [[Book] 13_Kubernetes_Horizontal Pod Autoscaler.md](doc/%5BBook%5D%2013_Kubernetes_Horizontal%20Pod%20Autoscaler.md) | [[Hands-on] 13_Kubernetes_Horizontal Pod Autoscaler.md](doc/%5BHands-on%5D%2013_Kubernetes_Horizontal%20Pod%20Autoscaler.md)                           |
+| 14 | [[Book] 14_Kubernetes_Volume.md](./doc/%5BBook%5D%2014_Kubernetes_Volume.md)                                         | [[Hands-on] 14_Kubernetes_Volume.md](doc/%5BHands-on%5D%2014_Kubernetes_Volume.md)                                                                     |
+| 15 | [[Book] 15_Helm.md](./doc/%5BBook%5D%2015_Helm.md)                                                                   | [[Hands-on] 15_Helm.md](doc/%5BHands-on%5D%2015_Helm.md)                                                                                               |
 
 ---
 
