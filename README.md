@@ -11,6 +11,11 @@
 | ./hands_on_files | 실습교재에 사용되는 파일들 |
 
 
+
+---
+
+
+
 ### 이론/실습 교재 Contents
 
 | No. | 이론교재 | 실습교재 |
@@ -30,3 +35,22 @@
 | 13 | [Book] 13_Kubernetes_Horizontal Pod Autoscaler.md | [Hands-on] 13_Kubernetes_Horizontal Pod Autoscaler.md |
 | 14 | [Book] 14_Kubernetes_Volume.md | [Hands-on] 14_Kubernetes_Volume.md |
 | 15 | [Book] 15_Helm.md | [Hands-on] 15_Helm.md |
+
+
+
+
+
+---
+
+
+
+### 교재(markdown with marp) 작성/수정 및 출력(ppt,pdf) 방법
+
+교재(.doc/*.md)는 모두 markdown문서로 작성되었고, slide 형식(ppt, pdf)으로 출력하기 위해서 [Marp](https://marp.app/)를 사용함.
+
+교재(.doc/*.md) 작성/수정을 위해서는
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
+
+설치가 필요함.
