@@ -29,6 +29,9 @@ apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
 ```
 > **명령어** : `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
 
+> Minikube에서는 Addon을 Enable 시키면 됩니다.
+> **명령어** : `minikube addons enable metrics-server`
+
 바로 적용되지는 않습니다. 아래와 같이 명령어의 결과가 나올 때 까지 조금 기다려주세요.
 ```bash
 ubuntu@ip-10-0-10-180:~$ kubectl top node
