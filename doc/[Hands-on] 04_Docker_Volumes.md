@@ -156,6 +156,8 @@ bc7ab606fe61d12ec50ec8580963f0c169c4b6da428a3e67ecc384653cd1d161
 > **명령어** : `docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/101-todo-app:1.0.0`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
+그리고 다시 우리 애플리케이션으로 접속해보세요. (e.g. http://IP:3000/)
+
 어떤가요? 오늘 할 일 목록이 그대로 남아있나요? **정국이와 저녁식사**도 **장보기**도 잊지않고 할 수 있게 되었습니다.
 
 ![h:250](./img/todo-list-sample3.png)
