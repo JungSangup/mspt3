@@ -277,7 +277,7 @@ ubuntu@ip-10-0-1-14:~$ docker rm -f $(docker ps --filter "label=color=red" -q)
 > **명령어** : `docker rm -f $(docker ps --filter "label=color=red" -q)`
 
 ​     
-이제 overlay 디렉토리는 어떻게 되었을까요?
+이제 `overlay2` 디렉토리는 어떻게 되었을까요?
 ```bash
 ubuntu@ip-10-0-1-14:~$ sudo ls -alt /var/lib/docker/overlay2
 total 48
