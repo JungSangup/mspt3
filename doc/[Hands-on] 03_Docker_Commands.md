@@ -404,7 +404,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 ```
 > **명령어** : `docker login -u [USER-NAME]`
-> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요. tag는 1.0.0으로 해보겠습니다.
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
 아래 명령어로 docker hub의 우리 repository에 업로드(`push`) 해볼까요?
 ```bash
