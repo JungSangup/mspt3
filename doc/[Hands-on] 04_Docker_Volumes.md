@@ -29,7 +29,7 @@ Status: Downloaded newer image for ubuntu:latest
 > **명령어** : `docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"`
 
 "Hello Docker..." 라는 문자열을 담은 txt파일(/test.txt)을 하나 만들고,
-컨테이너를 running상태로 두기 위해서 tail명령을 실행했습니다.
+컨테이너를 running상태로 두기 위해서 `tail명령을 실행했습니다.
 
 ---
 
