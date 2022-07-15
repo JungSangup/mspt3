@@ -57,8 +57,6 @@ boot  etc  lib	 lib64	media	opt  root  sbin  sys  usr
 
 ---
 
-다음 스텝에서는 영속성을 위한 방법을 알아보겠습니다.
-
 이제 도커 볼륨(Volume)을 이용해서 데이터를 유지하는 방법을 알아보겠습니다.
 
 우리 샘플 애플리케이션(Todo List Manager)는 SQLite database를 사용하고 있습니다.
