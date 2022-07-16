@@ -28,9 +28,9 @@ Deleted: sha256:6df32015dd8fca2d2723961255c5131350122e035b0e57b9ba52ad47a50a9231
 
 모두 삭제됐는지 볼까요?
 ```bash
-> docker images
+ubuntu@ip-10-0-1-14:~$ docker images
 REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
->
+ubuntu@ip-10-0-1-14:~$
 ```
 > **명령어** : `docker images`
 
