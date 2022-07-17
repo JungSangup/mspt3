@@ -16,7 +16,7 @@ footer: Samsung SDS
 <br>
 
 #### Java Application
-먼저 간단한 Java 파일(HelloDocker.java)을 준비합니다.
+먼저 간단한 Java 파일(`HelloDocker.java`)을 준비합니다.
 ```java
 public class HelloDocker {
     public static void main(String[] args) {
