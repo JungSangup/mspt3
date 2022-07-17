@@ -21,9 +21,9 @@ footer: Samsung SDS
 ubuntu@ip-10-0-1-14:~$ docker network create todo-app
 8440c866efe789d8dac94820c2bbbdca4ca7a6985acff2c3136dd3be31f13203
 ```
-> **명령어** : `docker network create todo-app`
-> - 생성된 `network`는 `docker network inspect [OPTIONS] NETWORK [NETWORK...]`
-명령어를 이용하여 상세 내용을 확인할 수 있습니다.
+> **명령어** : `docker network create todo-app`  
+- 생성된 `network`는 `docker network inspect [OPTIONS] NETWORK [NETWORK...]` 명령어를 이용하여 상세 내용을 확인할 수 있습니다.
+
 ---
 
 그리고, 생성한 네트워크를 이용해서 mysql을 실행합니다.
