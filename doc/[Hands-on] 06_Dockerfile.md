@@ -111,7 +111,8 @@ Hello Docker!!!
 
 ### Multi-stage builds
 
-이전 Step에서 Java Application을 포함하는 docker 이미지를 생성해 보았는데, base image로 java8을 사용하였기 때문에, Compiler를 포함하여 JDK가 모두 포함되어 이미지의 크기가 큽니다. (앞의 결과는 **526MB**)
+이전 Step에서 Java Application을 포함하는 docker 이미지를 생성해 보았습니다.  
+Base image로 openjdk:8 (JDK)을 사용했기 때문에 이미지의 크기가 큽니다. (앞의 결과는 **526MB**)
 
 docker는 multi-stage build 기능을 제공하기 때문에 최종 docker 이미지에는 binary만 포함될 수 있도록 할 수가 있습니다.
 
@@ -190,7 +191,7 @@ openjdk       8         2a8331246713   6 days ago           526MB
 ```
 > **명령어** : `docker images`
 
-v1 과 v2 는 Java Application은 동일하지만, base image의 차이때문에 이미지 전체의 사이즈가 크게 차이가 납니다.
+v1 과 v2 는 Java Application은 동일하지만, base image의 차이 때문에 이미지 전체의 사이즈가 크게 차이가 납니다.
 - **v1** : 526MB -> **v2** : 274MB   （°o°；）
 
 Cloud native 환경에서는 가능하면 이미지 사이즈를 작게 가져가는게 좋겠죠?
