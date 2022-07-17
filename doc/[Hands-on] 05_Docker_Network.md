@@ -110,7 +110,7 @@ Bye
 ubuntu@ip-10-0-1-14:~$
 ```
 > **명령어** : `exit`
-> 
+
 ---
 
 이번에는 우리의 샘플 애플리케이션을 mysql과 연계해서 실행해 보겠습니다.
@@ -125,10 +125,20 @@ ubuntu@ip-10-0-1-14:~$ docker run -dp 3000:3000 \
 rogallo/101-todo-app:1.0.0
 e831c21bfbbc9fbb6402c8dc3bbf4b0bd906ab1f0e0ad727f3fad1d37063a0db
 ```
-> **명령어** : `docker run -dp 3000:3000 --network todo-app --env MYSQL_HOST=mysql --env MYSQL_USER=root --env MYSQL_PASSWORD=secret --env MYSQL_DB=todos --name my-todo-manager [USER-NAME]/101-todo-app:1.0.0`
+> **명령어** : 
+> ```bash
+> docker run -dp 3000:3000 \
+>  --network todo-app \
+>  --env MYSQL_HOST=mysql \
+>  --env MYSQL_USER=root \
+>  --env MYSQL_PASSWORD=secret \
+>  --env MYSQL_DB=todos \
+>  --name my-todo-manager \
+> [USER-NAME]/101-todo-app:1.0.0
+> ```  
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
-`--network`옵션으로 mysql과 동일한 네트워크로 설정했고,
+`--network`옵션으로 mysql과 동일한 네트워크로 설정했고,  
 `--env`를 이용해서 mysql 연계에 필요한 환경변수들을 설정해 주었습니다.
 
 ---
@@ -192,11 +202,11 @@ mysql> select * from todo_items;
 +--------------------------------------+---------------------------+-----------+
 3 rows in set (0.00 sec)
 ```  
-> **명령어** : `select * from todo_items;`{{exec}}  
+> **명령어** : `select * from todo_items;` 
 
 화면에서 입력한 오늘의 할 일이 todo_items table에 잘 저장되어 있나요?
 
-`exit;` 명령으로 나와주시구요.
-> **명령어** : `exit;`{{exec}}  
+`exit` 명령으로 나와주시구요.
+> **명령어** : `exit`  
 
 여기까지 실습을 마치겠습니다.  ˘◡˘
