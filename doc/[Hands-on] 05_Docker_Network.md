@@ -109,7 +109,7 @@ mysql> exit
 Bye
 ubuntu@ip-10-0-1-14:~$
 ```
-> **명령어** :`exit`
+> **명령어** : `exit`
 > 
 ---
 
