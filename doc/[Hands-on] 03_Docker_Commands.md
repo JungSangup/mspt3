@@ -125,7 +125,7 @@ root@060b1a36d1e5:/#
 ```
 > **명령어** : `docker run --interactive --tty ubuntu /bin/bash`
 
-`--interactive --tty` 로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
+- `--interactive --tty` 로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
 
 ---
 
