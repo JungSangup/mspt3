@@ -144,7 +144,7 @@ To access your WordPress site from outside the cluster follow the steps below:
   echo Username: user
   echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
 ```
-> **명령어** : `helm repo update` , `helm install my-wordpress bitnami/wordpress`
+> **명령어** : `helm install my-wordpress bitnami/wordpress`
 
 
 설치된 Helm chart는 **Release**라고 합니다.
