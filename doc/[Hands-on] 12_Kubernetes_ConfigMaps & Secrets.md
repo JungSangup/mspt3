@@ -294,8 +294,8 @@ HOME=/root
 
 ---
 
-마지막으로, Volume으로 Mount된 파일의 내용도 확인해 보겠습니다.
-
+마지막으로, Volume으로 Mount된 파일의 내용도 확인해 보겠습니다.  
+`kubectl exec` 명령어를 실행해 봅니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl exec -it configmap-pod -- cat /etc/config/app.properties
 database.url=192.168.0.88
@@ -306,7 +306,6 @@ database.password=elqlvotmdnjem
 ```
 > **명령어** : `kubectl exec -it configmap-pod -- cat /etc/config/app.properties`
 
-kubectl exec -it configmap-pod -- cat /etc/config/app.properties 를 실행해 봅니다.
 
 ---
 
