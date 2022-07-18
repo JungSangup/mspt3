@@ -197,7 +197,7 @@ ubuntu@ip-10-0-1-161:~$ kubectl describe pod nginx-deployment-6866dc769c-lk922 |
   Normal  Pulling    5m46s  kubelet            Pulling image "nginx:1.19"
   Normal  Pulled     5m36s  kubelet            Successfully pulled image "nginx:1.19" in 9.660078609s
 ```
-> **명령어** : `kubectl describe pod [POD-NAME] | grep -i`
+> **명령어** : `kubectl describe pod [POD-NAME] | grep -i image`
 > [POD-NAME] 에는 앞에서 조회된 POD 중 하나의 이름을 넣어주세요.
 
 어떤가요? 업데이트가 잘 이루어졌나요?
