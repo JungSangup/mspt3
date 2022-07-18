@@ -31,7 +31,7 @@ ubuntu@ip-10-0-1-161:~$ ls -al *-deployment.yaml
 -rw-rw-r-- 1 ubuntu ubuntu 1193 Jul  7 16:46 mysql-deployment.yaml
 -rw-rw-r-- 1 ubuntu ubuntu 1278 Jul  7 16:47 wordpress-deployment.yaml
 ```
-> **명령어1** : `curl -LO https://k8s.io/examples/application/wordpress/mysql-deployment.yaml`
+> **명령어1** : `curl -LO https://k8s.io/examples/application/wordpress/mysql-deployment.yaml`  
 > **명령어2** : `curl -LO https://k8s.io/examples/application/wordpress/wordpress-deployment.yaml`
 
 ---
