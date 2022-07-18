@@ -72,7 +72,7 @@ minikube   Ready    control-plane,master   4d23h   v1.23.3
 
 ---
 
---output wide옵션(또는, -o wide)을 주면 더 많은 정보를 보여줍니다.
+`--output wide`옵션(또는, `-o wide`)을 주면 더 많은 정보를 보여줍니다.
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl get nodes --output wide
