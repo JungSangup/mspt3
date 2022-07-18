@@ -207,6 +207,3 @@ Service로 라우팅하는 rule이 정의되어 있으며, Ingress Controller에
   - DNS
 - Ingress
 
-<br><br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

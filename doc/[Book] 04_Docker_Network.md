@@ -211,6 +211,3 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
     - Subnet, Gateway
     - 기본 bridge network, 사용자 생성 bridge network
 
-<br><br><br><br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

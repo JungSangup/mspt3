@@ -263,6 +263,3 @@ Dockerfile에서 User를 생성하고 최소한의 권한을 부여하고 `USER`
 - Properly tag your images
 - Avoid running as root
 
-<br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

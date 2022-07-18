@@ -637,6 +637,3 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
     - helm template
     - helm package
 
-<br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

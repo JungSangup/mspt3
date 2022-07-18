@@ -554,6 +554,3 @@ $ docker run -it --name volumetest --mount source=my-volume,target=/myvol volume
     - WORKDIR
     - VOLUME
 
-<br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

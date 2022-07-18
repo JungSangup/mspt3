@@ -302,4 +302,3 @@ CMD python /app/app.py
     - etc.
 - Images and Layers , Container and Layers
 
-`문의처` : 정상업 / rogallo.jung@samsung.com

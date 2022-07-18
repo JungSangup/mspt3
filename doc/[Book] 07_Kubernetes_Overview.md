@@ -337,4 +337,3 @@ spec:
 - Namespace
 - Labels and Selectors
 
-`문의처` : 정상업 / rogallo.jung@samsung.com

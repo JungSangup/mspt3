@@ -292,6 +292,3 @@ $ docker cp ./some_file my-ubuntu:/work # some_file을 my-ubuntu 컨테이너의
   - 기타 명령어
     - `docker cp` , `docker login` , `docker logout` , `docker logs`
 
-<br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

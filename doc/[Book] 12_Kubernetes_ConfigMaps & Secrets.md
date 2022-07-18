@@ -160,6 +160,3 @@ spec:
 - ConfigMap
 - Secret
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

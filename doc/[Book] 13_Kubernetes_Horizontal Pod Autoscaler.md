@@ -115,6 +115,3 @@ node2    42m          2%     2141Mi          55%
 - Horizontal Pod Autoscaler
 - Kubernetes Metrics Server
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

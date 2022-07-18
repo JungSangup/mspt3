@@ -306,6 +306,3 @@ Node마다 실행되어야 하는 Pod가 있을때 사용되며 대표적으로 
   - StatefulSets
   - DaemonSet
 
-<br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

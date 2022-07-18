@@ -293,6 +293,3 @@ Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문�
   - `--volume` (`-v`) flag를 사용하는 방법
     - 사용 예시 : `--volume my-volume:/volumedata:ro`
 
-<br><br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com

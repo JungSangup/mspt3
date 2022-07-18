@@ -282,6 +282,3 @@ HTTP probe는 추가적으로 아래와 같은 필드를 더 설정할 수 있�
       - readinessProbe
       - startupProbe
 
-<br><br><br><br><br><br><br><br>
-
-`문의처` : 정상업 / rogallo.jung@samsung.com
