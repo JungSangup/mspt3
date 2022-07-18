@@ -53,7 +53,7 @@ NAME                                READY   STATUS    RESTARTS   AGE   IP       
 nginx-deployment-56cb9cc9db-bh4q6   1/1     Running   0          53s   172.17.0.4   minikube   <none>           <none>
 nginx-deployment-56cb9cc9db-hgp6h   1/1     Running   0          53s   172.17.0.3   minikube   <none>           <none>
 ```
-> **명령어** : `kubectl apply -f nginx-deployment.yaml`
+> **명령어** : `kubectl apply -f nginx-deployment.yaml` , `kubectl get pods -o wide`
 
 <br><br>
 
