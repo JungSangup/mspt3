@@ -11,7 +11,7 @@ header: Docker & Kubernetes - [Hands-on] 13. Kubernetes Horizontal Pod Autoscale
 
 Horizontal Pod Autoscaler(HPA)를 이용하여 자동으로 Pod의 개수를 조절하는 실습입니다.
 
-실습 내용은 https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/ 를 기반으로 하였습니다.
+실습 내용은 [HorizontalPodAutoscaler Walkthrough](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) 를 기반으로 하였습니다.
 
 먼저 자원 모니터링을 위한 metrics-server를 준비합니다.
 
