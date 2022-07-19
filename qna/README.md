@@ -70,9 +70,69 @@
 - 교재에 hands-on 링크가 있나요?
 - container 한 개가 두 개 이상 bridge에 연결 가능한가요?
   - [docker network connect](https://docs.docker.com/engine/reference/commandline/network_connect/) 명령어로 가능.
+  - (1) bridge network 2개(my-bridge1, my-bridge2) 생성 > (2) my-bridge1에 연결된 my-nginx 생성 > (3) my-bridge2를 my-nginx에 연결
+```bash
+ubuntu $ docker network create my-bridge1
+28068e76692ed1a0e01894253eb2f4ba59fc9b92c8c0c9f015069dd4ed92955d
+ubuntu $ docker network create my-bridge2
+bc40ca60e09aa0ad1389a56df646bc5f4972d615943b91409b70518cad898f85
 
+ubuntu $ docker network ls
+NETWORK ID     NAME         DRIVER    SCOPE
+085e570ce889   bridge       bridge    local
+a899d8446de2   host         host      local
+28068e76692e   my-bridge1   bridge    local
+bc40ca60e09a   my-bridge2   bridge    local
+75c0cb25cf9e   none         null      local
 
+ubuntu $ docker run -d -p 8080:80 --name my-nginx --network my-bridge1 nginx
+097e83f590e2174903b474c71a05ce22278bb0b5a01dc1c4d892f375b8c2c34b
 
+ubuntu $ docker network connect my-bridge2 my-nginx
+
+ubuntu $ docker inspect my-nginx
+[
+...생략...
+            "Networks": {
+                "my-bridge1": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "097e83f590e2"
+                    ],
+                    "NetworkID": "28068e76692ed1a0e01894253eb2f4ba59fc9b92c8c0c9f015069dd4ed92955d",
+                    "EndpointID": "c2039c93b10862c906e4403acecb1e37ec8f8ea63ca62320517cc077f5527399",
+                    "Gateway": "172.18.0.1",
+                    "IPAddress": "172.18.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:12:00:02",
+                    "DriverOpts": null
+                },
+                "my-bridge2": {
+                    "IPAMConfig": {},
+                    "Links": null,
+                    "Aliases": [
+                        "097e83f590e2"
+                    ],
+                    "NetworkID": "bc40ca60e09aa0ad1389a56df646bc5f4972d615943b91409b70518cad898f85",
+                    "EndpointID": "0c25934cad9efd24423833d16e9222f6d66d36f9072f5ac99f3994e5ffdb9ff7",
+                    "Gateway": "172.19.0.1",
+                    "IPAddress": "172.19.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:13:00:02",
+                    "DriverOpts": {}
+                }
+            }
+        }
+    }
+]
+```
 - volume/db 저장 어디 옵션으로 결정되나요?
 - docker0와 내가 만든 port가 충돌되면?
 - docker run 할 때 dockerfile의 label은 동일한가요?
