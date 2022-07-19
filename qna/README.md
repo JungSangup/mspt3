@@ -35,3 +35,12 @@
 - detach/attach, background/foreground 차이를 모르겠어요.
 - docker ps -aq로 검색해서 모두 삭제하면 안되지 않나요?
 - docker exec -it my-ubuntu bash 에서 bash를 빼면요?
+
+---
+
+- AWS Public subnet을 새로 생성해야 하나요?
+- Connection timeout 조치??? (아마도 EC2에 SSH로 접속)
+- docker ps -aq 질문 -> 실행중이지 않은 컨테이너도 삭제되는 것 같아 질문 드렸습니다.
+- 설명을 듣다보니 컨테이너에 OS(e.g. Ubuntu)이야기가 나와서 VM과 구분이??? 공유되는 os커널은 도커를 실행시키기 위한것이고, 컨테이너에서 app이 실행되기 위해서 가벼운 os를 포함시켜야 하나요?
+- Play with Docker에서는 안되나요?
+- tag와 name차이?
