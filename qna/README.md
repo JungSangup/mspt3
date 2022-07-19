@@ -44,3 +44,5 @@
 - 설명을 듣다보니 컨테이너에 OS(e.g. Ubuntu)이야기가 나와서 VM과 구분이??? 공유되는 os커널은 도커를 실행시키기 위한것이고, 컨테이너에서 app이 실행되기 위해서 가벼운 os를 포함시켜야 하나요?
 - Play with Docker에서는 안되나요?
 - tag와 name차이?
+- detach/foregroud 차이? 
+- docker hub 가입해야하나요?
