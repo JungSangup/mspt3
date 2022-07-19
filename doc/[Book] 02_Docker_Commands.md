@@ -246,7 +246,7 @@ $ docker info [OPTIONS]
 | Command | Description |
 | :--- | :--- |
 | [docker cp](https://docs.docker.com/engine/reference/commandline/cp/) | Copy files/folders between a container and the local filesystem |
-| [docker login](https://docs.docker.com/engine/reference/commandline/login/) | Log in to a Docker registry (e.g. [Docker hub](https://hub.docker.com/) , [ReDii](https://sds.redii.net:443)) |
+| [docker login](https://docs.docker.com/engine/reference/commandline/login/) | Log in to a Docker registry (e.g. [Docker hub](https://hub.docker.com/)) |
 | [docker logout](https://docs.docker.com/engine/reference/commandline/logout/) | Log out from a Docker registry |
 | [docker logs](https://docs.docker.com/engine/reference/commandline/logs/) | Fetch the logs of a container |
 | [docker create](https://docs.docker.com/engine/reference/commandline/create/) | Create a new container (**without starting it**)|
