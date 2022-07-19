@@ -57,3 +57,5 @@
 - volume경로는 어떻게 지정하나요? 아니면 정해져있나요?
 - Unable to find image 'yss:latest'... pull access denied for yss... repository does not exist or may require 'docker login'... 해결해주세요~
 - --publish 3000:3000 앞은 호스트머신 포트인건 알겠는데, 뒤의 3000는 뭥미?
+- docker attach, ctrl+c , exit 동작 
+- volume이 지워지는 시점이 다로 있거나 정책같은게 있나요?
