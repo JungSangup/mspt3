@@ -5,10 +5,14 @@
 
 ## Q&A
 - 도커 이미지에서 여러 OS가 사용되는데, 도커가 구동되는 OS와 충돌이나 호환성 이슈는 없나요?
+  - 커널영역을 공유하고, 그 위에서 다양한 배포판들이 구동되기 때문에 서로의 영역이 다릅니다. ( [참고](https://bluese05.tistory.com/10) )
 - 격리수준이 VM보다 떨어지면 실제 운영시 장애전파에 대한 대비책같은게 있을까요?
+  - [Docker security](https://docs.docker.com/engine/security/) 참조
 - EC2? 어제 생성한 것 사용 가능한가요? (어제는 Windows)
 - 도커 올릴 수 있는 Host OS는 Linux만 가능한가요? 윈도우 컨테이너는?
+  - [Windows and Containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/)
 - 단일 컨테이너만 동작하는 경우 Host리소스를 최대로 사용하도록 설정 가능한가요?
+  - [Runtime options with Memory, CPUs, and GPUs](https://docs.docker.com/config/containers/resource_constraints/#:~:text=By%20default%2C%20a%20container%20has,of%20the%20docker%20run%20command.) 참조
 - 위와 같은 경우 한계점은?
 - 컨테이너가 요청하는 총 리소스의 합이 하드웨어 총량을 초과하면?
 - EC2에서 Command 'docker' not found 라고 나오면?
@@ -19,8 +23,10 @@
 - 컨테이너의 R/W, R/O(공유)레이어를 구분하는 기준은 뭔가요?
 - nginx 이미지를 만들때 사용한 도커파일은 명령어가 6개 있어서 레이어가 6층인가요? (무한대면 무한태로 늘어나나요?)
 - docker run 할 때 name은 임의로 생성되나요?
+  - --name my-nginx 와 같이 지정 가능합니다. [Assign name and allocate pseudo-TTY (--name, -it)](https://docs.docker.com/engine/reference/commandline/run/#assign-name-and-allocate-pseudo-tty---name--it) 참조.
 - 개발/운영할 때 레이어단위로 관리하거나 레이어별로 분석하거나 하는 경우도 있나요?
 - R/O 레이어에서 필요없어진 파일을 다음 레이어에서 삭제하거나, 용량이 큰 이전버젼 레이어를 수정하는 경우에도 도커 이미지 안에는 모든 파일이 존재하는건가요?
+  - [multi-line arguments , reducing clutter](https://github.com/JungSangup/mspt2/blob/main/doc/%5BBook%5D%2006_Dockerfile_BestPractice.md#multi-line-arguments--reducing-clutter) 에 사례가 있습니다. ("추가 패키지를 설치했다가 나중에 패키지를 제거할 수도 있지만 이러한 방법으로는 충분하지 않습니다. Dockerfile의 각 명령이 하나의 레이어를 생성하므로, 이미지를 만든 단계보다 나중의 단계에서 이미지의 데이터를 제거해도 전체 이미지의 크기는 줄어들지 않습니다. ***데이터가 더 깊은 레이어에 숨겨질 뿐 여전히 존재합니다.***")
 - 도커는 결국 리눅스 기반의 앱만 쓸 수 있나요? 윈도우 앱은 어떻게???
 - OS를 공유한다면 같은 OS기반의 애플리케이션만 하나의 도커에 올릴 수 있나요?
 - 실습 마지막 커스텀 이미지 추가할 때(docker commit) 레이어가 하나 더 추가되는 이유는요?
