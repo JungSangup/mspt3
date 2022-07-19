@@ -46,3 +46,14 @@
 - tag와 name차이?
 - detach/foregroud 차이? 
 - docker hub 가입해야하나요?
+
+---
+
+- docker stop되어도 데이터가 사라지지 않는 것 아닌가요?
+- volume -> 설정 (e.g. NAS같은걸 사용할 때) 어떻게 하나요?
+- volume 용량제한 가능한가요?
+- 회사에서 -v로 그냥 nas를 붙였는데, 아마도 bind mount였나보네요. ㅎㅎ
+- killercoda 에서 cmd delete안되게 가능한가요? 전에 실습한 내용이 사라져요...
+- volume경로는 어떻게 지정하나요? 아니면 정해져있나요?
+- Unable to find image 'yss:latest'... pull access denied for yss... repository does not exist or may require 'docker login'... 해결해주세요~
+- --publish 3000:3000 앞은 호스트머신 포트인건 알겠는데, 뒤의 3000는 뭥미?
