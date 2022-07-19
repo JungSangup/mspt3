@@ -48,6 +48,7 @@
 - Connection timeout 조치??? (아마도 EC2에 SSH로 접속)
 - docker ps -aq 질문 -> 실행중이지 않은 컨테이너도 삭제되는 것 같아 질문 드렸습니다.
 - 설명을 듣다보니 컨테이너에 OS(e.g. Ubuntu)이야기가 나와서 VM과 구분이??? 공유되는 os커널은 도커를 실행시키기 위한것이고, 컨테이너에서 app이 실행되기 위해서 가벼운 os를 포함시켜야 하나요?
+  - 리눅스 커널 외에 추가로 필요한 것들이 포함된 것을 Base image로 해서 나의 이미지를 만들면 됩니다. 이 때 가벼운 리눅스 배포판을 base로 하거나, jdk같은것을 사용할 수 있습니다.
 - Play with Docker에서는 안되나요?
 - tag와 name차이?
 - detach/foregroud 차이? 
@@ -56,6 +57,7 @@
 ---
 
 - docker stop되어도 데이터가 사라지지 않는 것 아닌가요?
+  - stop되어도 R/W Layer는 사라지지 않습니다. `docker rm`명령어를 써서 삭제할 때 데이터도 사라집니다.
 - volume -> 설정 (e.g. NAS같은걸 사용할 때) 어떻게 하나요?
   - [Share data among machines](https://docs.docker.com/storage/volumes/#share-data-among-machines)
 - volume 용량제한 가능한가요?
@@ -63,12 +65,14 @@
 - 회사에서 -v로 그냥 nas를 붙였는데, 아마도 bind mount였나보네요. ㅎㅎ
 - killercoda 에서 cmd delete안되게 가능한가요? 전에 실습한 내용이 사라져요...
 - volume경로는 어떻게 지정하나요? 아니면 정해져있나요?
+  - default 경로는 지정되어 있습니다. (/var/lib/docker/volumes/)
+  - 경로를 변경하려면 dockerd 실행 시 옵션 (https://docs.docker.com/engine/reference/commandline/dockerd/ , --data-root) 으로 변경할 수 있습니다.
 - Unable to find image 'yss:latest'... pull access denied for yss... repository does not exist or may require 'docker login'... 해결해주세요~
-- --publish 3000:3000 앞은 호스트머신 포트인건 알겠는데, 뒤의 3000는 뭥미?
+- --publish 3000:3000 앞은 호스트머신 포트인건 알겠는데, 뒤의 3000는 뭔가요?
 - docker attach, ctrl+c , exit 동작
   - [docker attach](https://docs.docker.com/engine/reference/commandline/attach/)  -> ctrl+c는 SIGKILL , ctrl+p ctrl+q는 container를 running상태로 두고 detach
 - volume이 지워지는 시점이 다로 있거나 정책같은게 있나요?
-
+  - [Prune unused Docker objects](https://docs.docker.com/config/pruning/) 참조. 이걸 주기적으로 실행할 수도 있을 것 같습니다.
 ---
 
 - bridge / host 차이 좀 다시 설명해주세요
@@ -143,3 +147,4 @@ ubuntu $ docker inspect my-nginx
 - docker0와 내가 만든 port가 충돌되면?
 - docker run 할 때 dockerfile의 label은 동일한가요?
 - 이론교재 마지막 web과 db를 다른 브릿지에 구성했는데, 다른 브릿지간 라우팅 설정도 가능한가요?
+  - 위의 `docker network connect` 명령어를 이용하면 컨테이너에 다수의 bridge를 연결할 수 있습니다. 이 방법을 사용하면 가능할 것 같습니다. 더 좋은 방법은 아직 찾질 못했습니다. ㅠㅠ
