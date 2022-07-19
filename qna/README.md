@@ -71,11 +71,10 @@
 - container 한 개가 두 개 이상 bridge에 연결 가능한가요?
   - [docker network connect](https://docs.docker.com/engine/reference/commandline/network_connect/)
     - (1) 먼저 [[Hands-on] 05_Docker_Network.md](https://github.com/JungSangup/mspt2/blob/main/doc/%5BHands-on%5D%2005_Docker_Network.md) 와 같이 실행 한 후
-    - (2) `docker network create OOO` 명령어로 새로운 bridge network를 하나 더 만들고
-    - (3) `docker network connect OOO todo-app` 명령어로 새로운 Bridge network를 실행된 Container에 connect 시킴.
-    - 결과는 아래처럼 보임.
-    - ```
-            "Networks": {
+    - (2) `docker network create todo-app2` 명령어로 새로운 bridge network를 하나 더 만들고
+    - (3) `docker network connect todo-app2 my-todo-manager` 명령어로 새로운 Bridge network(todo-app2)를 실행된 Container(my-todo-manager)에 connect 시킴.
+    - 결과는 아래처럼 보임. (docker inspect my-todo-manager 결과)
+    - ```   "Networks": {
                 "todo-app": {
                     "IPAMConfig": null,
                     "Links": null,
@@ -110,8 +109,7 @@
                     "MacAddress": "02:42:ac:13:00:02",
                     "DriverOpts": {}
                 }
-            }
-            ```
+            }```
 - volume/db 저장 어디 옵션으로 결정되나요?
 - docker0와 내가 만든 port가 충돌되면?
 - docker run 할 때 dockerfile의 label은 동일한가요?
