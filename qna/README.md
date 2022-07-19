@@ -59,3 +59,14 @@
 - --publish 3000:3000 앞은 호스트머신 포트인건 알겠는데, 뒤의 3000는 뭥미?
 - docker attach, ctrl+c , exit 동작 
 - volume이 지워지는 시점이 다로 있거나 정책같은게 있나요?
+
+---
+
+- bridge / host 차이 좀 다시 설명해주세요
+- ifconfig에서 bridge를 어떻게 식별하나요?
+- 교재에 hands-on 링크가 있나요?
+- container 한 개가 두 개 이상 bridge에 연결 가능한가요?
+- volume/db 저장 어디 옵션으로 결정되나요?
+- docker0와 내가 만든 port가 충돌되면?
+- docker run 할 때 dockerfile의 label은 동일한가요?
+- 이론교재 마지막 web과 db를 다른 브릿지에 구성했는데, 다른 브릿지간 라우팅 설정도 가능한가요?
