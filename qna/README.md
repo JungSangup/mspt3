@@ -197,3 +197,18 @@ ubuntu $ docker inspect my-nginx
 - minikube 는 하나의 노드에 control plane과 node가 다 구성되는건가요?
   - 네, 맞습니다. 일반적으로는 Control plane에는 kube-system의 컴포넌트들만 배치되고, node에는 사용자의 pod들만 배치되도록 합니다.
   - minikube는 위의 제약을 없애고 간단하게 실습을 해볼수 있도록 한 환경입니다. (하나의 노드에 control plane컴포넌트들과 사용자 pod들이 모두 배치됨.)
+
+---
+
+- workload(2)의 deployment yaml에서 deployment의 label과 pod template의 label이 같은데, 그러면 selector가 선택할 때 둘 다 선택되는 것 같아요.
+  - 네, 그럴수도 있을 것 같습니다. 실제 업무에서는 이 예제보다는 더 정교하게 label을 구성해서 사용하는 것이 좋습니다.
+- key-value 구성 시 value가 비어있으면 어떻게 되나요?
+  - 
+- Pod를 만들어주는건 ReplicaSet인가요 Deployment인가요?
+  - ReplicaSet 입니다. Deployment는 ReplicaSet을 만들고, ReplicaSet이 정해진 Spec에 따라 Pod를 만들게 됩니다.
+- Recreate / Rollingupdate 중 default는?
+  - RollingUpdate 입니다. (@박민선 프로님 감사합니다.)
+- 선언형은 `kubectl apply`만 있나요? 명령형과 큰 차이가 없는 것 같은데(명령어 자체만 봐서는), 선언형을 중시하는 이유는 뭔가요?
+  - 참고 : [쿠버네티스 오브젝트 관리](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/object-management/)
+- cpu,memory에 따라 replicas를 조정하는 전략도 있나요?
+  - [Horizontal Pod Autoscaler(HPA)](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/)를 사용하면 됩니다. 
