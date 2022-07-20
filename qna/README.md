@@ -247,3 +247,8 @@ ubuntu $ docker inspect my-nginx
 - metric정보를 사용자정의 할 수 있나요? (e.g. queue의 잔여 메시지 수)
 - scale-out 할 때 노드의 가용성 부분이 확보되어야 할 텐데, 그 부분은 k8s가 체크를 하나요?
 - hpa max replication값이 서버 자원을 초과하면 자동으로 scale-out을 중단하나요? 아니면 오류가 발생하나요?
+
+---
+
+- 실무에서 helm을 많이 사용하나요?
+- values.yaml에서 대소문자를 구분하나요?
