@@ -232,3 +232,18 @@ ubuntu $ docker inspect my-nginx
   - port는 svc의 port, targetPort는 pod의 port, nodePort는 node의 port입니다.
 - replicaset의 label은 pod의 label과 같아야하나요?
   - 달라도 됩니다.
+
+---
+
+- kubectl apply 로 deployment 생성 후 kubectl get all 해서 나오는 pod가 다 앞의 결과인가요?
+  - 그렇지는 않습니다. get all하면 다른 deployment에 의해서 만들어진 것도 다 보입니다.
+  - 특정해서 보려면, label같은걸로 필터링해서 보거나 해야 합니다.
+- 버티컬바(|)는 어떤 의미인가요?
+  - 리눅스의 파이프라인 입니다. [Pipeline (Unix)](https://en.wikipedia.org/wiki/Pipeline_(Unix))
+- env와 envFrom의 차이는 뭔가요?
+- configMap을 사용할 수 있는 바운더리는 어떻게 되나요? (e.g. namespace?)
+- kubectl exec -it 를 이용해서 pod 에서 docker ps -a 명령을 실행할 수 있나요? (또는 런타임이 다르니 안되나요?)
+- 최근 이슈(클라우드 사용료 과다 부과)가 configmap이나 secret이 git을통해 노출되어 그런건가요?
+- metric정보를 사용자정의 할 수 있나요? (e.g. queue의 잔여 메시지 수)
+- scale-out 할 때 노드의 가용성 부분이 확보되어야 할 텐데, 그 부분은 k8s가 체크를 하나요?
+- hpa max replication값이 서버 자원을 초과하면 자동으로 scale-out을 중단하나요? 아니면 오류가 발생하나요?
