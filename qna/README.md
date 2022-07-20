@@ -222,5 +222,13 @@ ubuntu $ docker inspect my-nginx
 - 클러스터 안에 노드가 있고, 그 안에 pod(container)가 있는걸로 이해했는데 왜 NodePort가 ClusterIP보다 밖에 있나요?
 - Pod가 ReplicaSet에 의해서 여러 노드에 걸쳐 존재하고, Service가 Nodeport로 구성되면 특정 노드의 NodePort로 서비스가 요청되면 해당 노드에 존재하는 Pod에 대해서만 LB가 되나요? 아니면 전체 노드에 대해서 되나요?
 - Service의 Port방향이 헷갈리네요. (e.g. NodePort타입의 경우 80:30007/TCP) 어디가 외부로 연결되는건가요?
-- Pod에 Container가 여러개 일대 그 중 하나의 Container로 통신하려면? (selector로 ?)
-- 
+- Pod에 Container가 여러개 일때 그 중 하나의 Container로 통신하려면? (selector로 ?)
+
+---
+
+- 각 노드의 포트는 동일해야하나요? (NodePort?)
+  - nodeport타입의 service를 생성하면 모든 노드에 동일하게 같은 port로 노출됩니다.
+- 노드포트에서 svc의 포트는 어떻게 정해지나요?
+  - port는 svc의 port, targetPort는 pod의 port, nodePort는 node의 port입니다.
+- replicaset의 label은 pod의 label과 같아야하나요?
+  - 달라도 됩니다.
