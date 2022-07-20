@@ -171,4 +171,29 @@ ubuntu $ docker inspect my-nginx
 - Declarative과정들이 작동하기 위해서는 Imparative 과정들이 내부적으로 작동해야 될 것 같은데, 이 내부적인 과정은 최적화해서 만들어주는건가요? (ai?)
   - 여러가지가 복합적으로 작동하게 됩니다. 어떤 명령을 처리할지, 처리할 때 어떤 알고리즘을 적용할지 등이 적용되는데, 자세한건 쿠버네티스 문서를 참조하세요.
 
+---
 
+- 선언형처리 시 생성/변경/삭제가 어떻게 내부적으로 감지되어 처리되는지 알려주세요.
+  - 생성/변경은 k8s에서 내부적으로 diff한 후 없으면 create, 있으면 update(만약에 바뀐게 있으면) 또는 아무일도 안함.(바뀐게 없으면)
+  - 삭제만 `kubectl delete -f OOO.yaml` 로 실행. (삭제도 apply로 할 수도 있지만 권장방법이 아님.) 
+  - [구성 파일을 이용한 쿠버네티스 오브젝트의 선언형 관리](https://kubernetes.io/ko/docs/tasks/manage-kubernetes-objects/declarative-config/) 참조
+- label의 key는 정해진 key만 사용해야 하나요?
+  - 아니오, 자유롭게 정의할 수 있습니다.
+  - [Recommended Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/)이 이있긴 하지만, 이 외에도 자유롭게 정의해서 쓰면 됩니다.
+- Label관리가 중요할 것 같은데, 관리 방법이 있을까요?
+  - 위 질문의 답을 참조하세요. 일반적인 label 작성방법이나 사용규칙을 따르면 됩니다.
+- etcd가 중요한 것 같은데, 임의로 삭제할 수 있나요? 또는 그런경우 원복 가능한가요?
+  - 그래서, 아래 링크와 같이 고가용성 구성을 합니다. 당연히 백업/복구도 가능하구요.
+  - [Set up a High Availability etcd Cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/)
+- yaml형식에서 -(dash)표시를 하는 이유나 기준이 있나요?
+  - 복수형 key-value 쌍인경우 사용됩니다. (e.g. containers: 다음 에 -를 붙여서 복수개의 container spec.을 정의합니다.)
+- probe가 비정상적인것을 감지하는 것도 있나요?
+- yaml파일을 쓴다고 다 선언형은 아닌 것 같아요. yaml을 쓰더라도 create명 명령형 apply면 선언형 이네요.
+  - 네, 맞습니다. 선언형은 `kubectl apply -f OOO.yaml` 형태로 씁니다.
+- Control plane은 운영환경에서 복수개 구성하나요? 장애가 생기면 문제가 될 것 같아서요.
+  - 네, 맞습니다. control plane의 경우 고가용성 구성()을 할 수 있습니다.
+  - [Creating Highly Available Clusters with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
+  - [고가용성 토폴로지 선택](https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/ha-topology/)
+- minikube 는 하나의 노드에 control plane과 node가 다 구성되는건가요?
+  - 네, 맞습니다. 일반적으로는 Control plane에는 kube-system의 컴포넌트들만 배치되고, node에는 사용자의 pod들만 배치되도록 합니다.
+  - minikube는 위의 제약을 없애고 간단하게 실습을 해볼수 있도록 한 환경입니다. (하나의 노드에 control plane컴포넌트들과 사용자 pod들이 모두 배치됨.)
