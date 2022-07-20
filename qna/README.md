@@ -203,7 +203,7 @@ ubuntu $ docker inspect my-nginx
 - workload(2)의 deployment yaml에서 deployment의 label과 pod template의 label이 같은데, 그러면 selector가 선택할 때 둘 다 선택되는 것 같아요.
   - 네, 그럴수도 있을 것 같습니다. 실제 업무에서는 이 예제보다는 더 정교하게 label을 구성해서 사용하는 것이 좋습니다.
 - key-value 구성 시 value가 비어있으면 어떻게 되나요?
-  - 
+  - .
 - Pod를 만들어주는건 ReplicaSet인가요 Deployment인가요?
   - ReplicaSet 입니다. Deployment는 ReplicaSet을 만들고, ReplicaSet이 정해진 Spec에 따라 Pod를 만들게 됩니다.
 - Recreate / Rollingupdate 중 default는?
