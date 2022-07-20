@@ -203,7 +203,7 @@ ubuntu $ docker inspect my-nginx
 - workload(2)의 deployment yaml에서 deployment의 label과 pod template의 label이 같은데, 그러면 selector가 선택할 때 둘 다 선택되는 것 같아요.
   - 네, 그럴수도 있을 것 같습니다. 실제 업무에서는 이 예제보다는 더 정교하게 label을 구성해서 사용하는 것이 좋습니다.
 - key-value 구성 시 value가 비어있으면 어떻게 되나요?
-  - .
+  - 안되네요.
 - Pod를 만들어주는건 ReplicaSet인가요 Deployment인가요?
   - ReplicaSet 입니다. Deployment는 ReplicaSet을 만들고, ReplicaSet이 정해진 Spec에 따라 Pod를 만들게 됩니다.
 - Recreate / Rollingupdate 중 default는?
@@ -212,3 +212,15 @@ ubuntu $ docker inspect my-nginx
   - 참고 : [쿠버네티스 오브젝트 관리](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/object-management/)
 - cpu,memory에 따라 replicas를 조정하는 전략도 있나요?
   - [Horizontal Pod Autoscaler(HPA)](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/)를 사용하면 됩니다. 
+
+---
+
+- 쿠버네티스 DNS나 방화벽 같은 보안 서비스는 어떻게 구성되나요?
+- 하나의 ReplicaSet에 여러 종류의 pod를 서로 다른 개수로 실행할 수 있나요?
+- EC2 같은경우 inbound/outbound security group을 설정해서 제어하는데, k8s에 이런 개념이 있나요?
+- 개발/운영 환경을 격리시키려고 할 때 어떤 구성방식을 쓰나요?
+- 클러스터 안에 노드가 있고, 그 안에 pod(container)가 있는걸로 이해했는데 왜 NodePort가 ClusterIP보다 밖에 있나요?
+- Pod가 ReplicaSet에 의해서 여러 노드에 걸쳐 존재하고, Service가 Nodeport로 구성되면 특정 노드의 NodePort로 서비스가 요청되면 해당 노드에 존재하는 Pod에 대해서만 LB가 되나요? 아니면 전체 노드에 대해서 되나요?
+- Service의 Port방향이 헷갈리네요. (e.g. NodePort타입의 경우 80:30007/TCP) 어디가 외부로 연결되는건가요?
+- Pod에 Container가 여러개 일대 그 중 하나의 Container로 통신하려면? (selector로 ?)
+- 
