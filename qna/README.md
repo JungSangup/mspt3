@@ -4,6 +4,9 @@
 [https://github.com/JungSangup/mspt2](https://github.com/JungSangup/mspt2)
 
 ## Q&A
+
+### Docker
+
 - 도커 이미지에서 여러 OS가 사용되는데, 도커가 구동되는 OS와 충돌이나 호환성 이슈는 없나요?
   - 커널영역을 공유하고, 그 위에서 다양한 배포판들이 구동되기 때문에 서로의 영역이 다릅니다. ( [참고](https://bluese05.tistory.com/10) )
 - 격리수준이 VM보다 떨어지면 실제 운영시 장애전파에 대한 대비책같은게 있을까요?
@@ -148,3 +151,16 @@ ubuntu $ docker inspect my-nginx
 - docker run 할 때 dockerfile의 label은 동일한가요?
 - 이론교재 마지막 web과 db를 다른 브릿지에 구성했는데, 다른 브릿지간 라우팅 설정도 가능한가요?
   - 위의 `docker network connect` 명령어를 이용하면 컨테이너에 다수의 bridge를 연결할 수 있습니다. 이 방법을 사용하면 가능할 것 같습니다. 더 좋은 방법은 아직 찾질 못했습니다. ㅠㅠ
+  
+  
+---
+
+### Kubernetes
+
+- Node = Host machine 인가요?
+  - 
+- 실습환경은 언제까지 쓸 수 있나요?
+  - Killercoda가 사라지는 그날까지요.
+- K8S cluster는 물리적인 서버 안에 있고, Node들도 하나의 물리적인 서버에 올라가있는 VM 머신인가요?
+  - 맞습니다. Control plane과 (worker)node 모두 일반적으로 VM에 구성됩니다. Node중 특별한 경우(e.g. 고성능) baremetal 서버를 쓰기도 합니다.
+
