@@ -191,7 +191,7 @@ ubuntu $ docker inspect my-nginx
 - yaml파일을 쓴다고 다 선언형은 아닌 것 같아요. yaml을 쓰더라도 create명 명령형 apply면 선언형 이네요.
   - 네, 맞습니다. 선언형은 `kubectl apply -f OOO.yaml` 형태로 씁니다.
 - Control plane은 운영환경에서 복수개 구성하나요? 장애가 생기면 문제가 될 것 같아서요.
-  - 네, 맞습니다. control plane의 경우 고가용성 구성()을 할 수 있습니다.
+  - 네, 맞습니다. control plane의 경우 고가용성 구성을 할 수 있습니다.
   - [Creating Highly Available Clusters with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
   - [고가용성 토폴로지 선택](https://kubernetes.io/ko/docs/setup/production-environment/tools/kubeadm/ha-topology/)
 - minikube 는 하나의 노드에 control plane과 node가 다 구성되는건가요?
