@@ -1,4 +1,4 @@
-# Docker & Kubernetes 노트 (MSP T2 6차)
+# Docker & Kubernetes 노트 (MSP T2 6차)   ٩(ˊᗜˋ*)و
 
 
 [https://github.com/JungSangup/mspt2](https://github.com/JungSangup/mspt2)
