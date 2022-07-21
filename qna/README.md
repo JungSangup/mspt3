@@ -216,6 +216,9 @@ ubuntu $ docker inspect my-nginx
 ---
 
 - 쿠버네티스 DNS나 방화벽 같은 보안 서비스는 어떻게 구성되나요?
+  - 아래 두 개의 글 참조 바랍니다.
+  - [서비스 및 파드용 DNS](https://kubernetes.io/ko/docs/concepts/services-networking/dns-pod-service/)
+  - [클라우드 네이티브 보안 개요](https://kubernetes.io/ko/docs/concepts/security/overview/)
 - 하나의 ReplicaSet에 여러 종류의 pod를 서로 다른 개수로 실행할 수 있나요?
 - EC2 같은경우 inbound/outbound security group을 설정해서 제어하는데, k8s에 이런 개념이 있나요?
 - 개발/운영 환경을 격리시키려고 할 때 어떤 구성방식을 쓰나요?
