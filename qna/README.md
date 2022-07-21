@@ -281,3 +281,7 @@ ubuntu $ docker inspect my-nginx
 ## Playlist
 [[MV] 김연지(Kim Yeon-Ji) - Whisky on the Rock | 우리들의 블루스(Our Blues) OST Part 1](https://youtu.be/7h3ndp05JN0)  
 [아내에게 게임기 사자고 하는 노래](https://youtu.be/3oYZ9rlF08M)   
+[린 킬링보이스](https://youtu.be/0vvCe4EHtus)  
+[아이유 킬링보이스](https://youtu.be/wDfqXR_5yyQ)  
+[장기하 킬링벌스](https://youtu.be/ImapK-6lOvA)  
+[어른이들을 위한 1990 힛트쏭](https://youtu.be/4zPpLcMNZT4)  
