@@ -238,7 +238,7 @@ ubuntu $ docker inspect my-nginx
 ---
 
 - 각 노드의 포트는 동일해야하나요? (NodePort?)
-  - nodeport타입의 service를 생성하면 모든 노드에 동일하게 같은 port로 노출됩니다.
+  - nodeport타입의 service를 생성하면 모든 노드에 동일하게 같은 port로 노출됩니다. (Service를 하나만 만들어도 모든 Node에 동일한 Port로 노출됨.)
 - 노드포트에서 svc의 포트는 어떻게 정해지나요?
   - port는 svc의 port, targetPort는 pod의 port, nodePort는 node의 port입니다.
 - replicaset의 label은 pod의 label과 같아야하나요?
@@ -252,6 +252,9 @@ ubuntu $ docker inspect my-nginx
 - 버티컬바(|)는 어떤 의미인가요?
   - 리눅스의 파이프라인 입니다. [Pipeline (Unix)](https://en.wikipedia.org/wiki/Pipeline_(Unix))
 - env와 envFrom의 차이는 뭔가요?
+  - env는 개별 환경변수를, envFrom은 환경변수 리스트를 적용합니다. 아래 두 가지 비교해서 보세요.
+  - [Define container environment variables using ConfigMap data](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables)
+  - [Configure all key-value pairs in a ConfigMap as container environment variables](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables)
 - configMap을 사용할 수 있는 바운더리는 어떻게 되나요? (e.g. namespace?)
 - kubectl exec -it 를 이용해서 pod 에서 docker ps -a 명령을 실행할 수 있나요? (또는 런타임이 다르니 안되나요?)
 - 최근 이슈(클라우드 사용료 과다 부과)가 configmap이나 secret이 git을통해 노출되어 그런건가요?
