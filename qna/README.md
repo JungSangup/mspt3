@@ -220,6 +220,7 @@ ubuntu $ docker inspect my-nginx
   - [서비스 및 파드용 DNS](https://kubernetes.io/ko/docs/concepts/services-networking/dns-pod-service/)
   - [클라우드 네이티브 보안 개요](https://kubernetes.io/ko/docs/concepts/security/overview/)
 - 하나의 ReplicaSet에 여러 종류의 pod를 서로 다른 개수로 실행할 수 있나요?
+  - ReplicaSet의 template은 단수 지정 가능합니다.(Pod는 한 가지만) template내의 Container는 복수지정 가능합니다.
 - EC2 같은경우 inbound/outbound security group을 설정해서 제어하는데, k8s에 이런 개념이 있나요?
 - 개발/운영 환경을 격리시키려고 할 때 어떤 구성방식을 쓰나요?
 - 클러스터 안에 노드가 있고, 그 안에 pod(container)가 있는걸로 이해했는데 왜 NodePort가 ClusterIP보다 밖에 있나요?
