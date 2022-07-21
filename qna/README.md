@@ -261,11 +261,20 @@ ubuntu $ docker inspect my-nginx
   - Container에 Docker가 존재한다면 가능하지만, 아니라면 안됩니다.
   - docker명령어를 사용하려는 이유가 컨테이너에 대한 처리와 확인때문이라면, pod의 container에 대해서는 kubectl 명령어로도 대부분 커버됩니다.(e.g. 로그확인, console연결 etc.)
 - 최근 이슈(클라우드 사용료 과다 부과)가 configmap이나 secret이 git을통해 노출되어 그런건가요?
+  - 말씀하신 사례는 아마도 클라우드에 사용되는 키나 개인정보가 누출되어 발생한 것 같습니다.
+  - 하지만, ConfigMap이나 Secret도 중요정보가 있다면 보안에 유의해서 관리하셔야 합니다. (e.g. git repo는 private으로 설정, 2FA설정 etc.)
 - metric정보를 사용자정의 할 수 있나요? (e.g. queue의 잔여 메시지 수)
+  - [사용자 정의 메트릭을 이용하는 스케일링](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/#%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-%EB%A9%94%ED%8A%B8%EB%A6%AD%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EB%8A%94-%EC%8A%A4%EC%BC%80%EC%9D%BC%EB%A7%81)을 참조하세요.
+  - 사용자정의 메트릭이나 외부 메트릭도 사용 가능합니다. (저도 이번에 알았습니다. 꾸벅)
 - scale-out 할 때 노드의 가용성 부분이 확보되어야 할 텐데, 그 부분은 k8s가 체크를 하나요?
+  - 결국 Node에 Pod를 배치하는 것은 kube-scheduler가 하게되는데, 이 때 가용한 자원이 없다면 배치에 실패하게 됩니다.
 - hpa max replication값이 서버 자원을 초과하면 자동으로 scale-out을 중단하나요? 아니면 오류가 발생하나요?
+  - 위의 내용 참조 바랍니다.
 
 ---
 
 - 실무에서 helm을 많이 사용하나요? 
+  - 네, 많이 사용됩니다. K8S리소스들을 개별 관리하는것 보다는 Helm chart(패키지)로 관리하는 것이 훨씬 장점이 많습니다.
+  - 사내 시스템들도 모두 Helm chart를 기반으로 동작하고 있습니다.
 - values.yaml에서 대소문자를 구분하나요?
+  - 네, 구분합니다. [Values](https://helm.sh/docs/chart_best_practices/values/) 도 참고하세요.
