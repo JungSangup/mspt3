@@ -279,9 +279,9 @@ ubuntu $ docker inspect my-nginx
 ---
 
 ## Playlist
-[[MV] 김연지(Kim Yeon-Ji) - Whisky on the Rock | 우리들의 블루스(Our Blues) OST Part 1](https://youtu.be/7h3ndp05JN0)  
-[아내에게 게임기 사자고 하는 노래](https://youtu.be/3oYZ9rlF08M)   
-[린 킬링보이스](https://youtu.be/0vvCe4EHtus)  
-[아이유 킬링보이스](https://youtu.be/wDfqXR_5yyQ)  
-[장기하 킬링벌스](https://youtu.be/ImapK-6lOvA)  
-[어른이들을 위한 1990 힛트쏭](https://youtu.be/4zPpLcMNZT4)  
+- [[MV] 김연지(Kim Yeon-Ji) - Whisky on the Rock | 우리들의 블루스(Our Blues) OST Part 1](https://youtu.be/7h3ndp05JN0)  
+- [아내에게 게임기 사자고 하는 노래](https://youtu.be/3oYZ9rlF08M)   
+- [린(LYN)의 킬링보이스를 라이브로! - My Destiny, …사랑했잖아…, 곰인형, 자기야 여보야 사랑아, 시간을 거슬러, 통화연결음](https://youtu.be/0vvCe4EHtus)  
+- [아이유(IU)의 킬링보이스를 라이브로! - 하루 끝, 너의 의미, 스물셋, 밤편지, 팔레트, 가을 아침, 삐삐, Blueming, 에잇, Coin, 라일락](https://youtu.be/wDfqXR_5yyQ)  
+- [장기하의 킬링벌스를 라이브로! | 그건 니 생각이고, 싸구려커피, 땡큐땡큐, 그렇고 그런 사이, 빠지기는 빠지더라, ㅋ, 얼마나 가겠어, 부럽지가 않어 등](https://youtu.be/ImapK-6lOvA)  
+- [[가정의 달 특집] 어른이들을 위한 1990's 0.1세기 힛-트쏭 | KBS 방송](https://youtu.be/4zPpLcMNZT4)  
