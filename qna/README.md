@@ -256,7 +256,10 @@ ubuntu $ docker inspect my-nginx
   - [Define container environment variables using ConfigMap data](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables)
   - [Configure all key-value pairs in a ConfigMap as container environment variables](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables)
 - configMap을 사용할 수 있는 바운더리는 어떻게 되나요? (e.g. namespace?)
+  - Namespace내에서 사용됩니다.
 - kubectl exec -it 를 이용해서 pod 에서 docker ps -a 명령을 실행할 수 있나요? (또는 런타임이 다르니 안되나요?)
+  - Container에 Docker가 존재한다면 가능하지만, 아니라면 안됩니다.
+  - docker명령어를 사용하려는 이유가 컨테이너에 대한 처리와 확인때문이라면, pod의 container에 대해서는 kubectl 명령어로도 대부분 커버됩니다.(e.g. 로그확인, console연결 etc.)
 - 최근 이슈(클라우드 사용료 과다 부과)가 configmap이나 secret이 git을통해 노출되어 그런건가요?
 - metric정보를 사용자정의 할 수 있나요? (e.g. queue의 잔여 메시지 수)
 - scale-out 할 때 노드의 가용성 부분이 확보되어야 할 텐데, 그 부분은 k8s가 체크를 하나요?
