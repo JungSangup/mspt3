@@ -250,5 +250,5 @@ ubuntu $ docker inspect my-nginx
 
 ---
 
-- 실무에서 helm을 많이 사용하나요?
+- 실무에서 helm을 많이 사용하나요? 
 - values.yaml에서 대소문자를 구분하나요?
