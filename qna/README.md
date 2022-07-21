@@ -228,6 +228,8 @@ ubuntu $ docker inspect my-nginx
 - 클러스터 안에 노드가 있고, 그 안에 pod(container)가 있는걸로 이해했는데 왜 NodePort가 ClusterIP보다 밖에 있나요?
   - 교재의 그림은 Service 타입에 따른 노출 범위를 나타낸 것입니다. NodePort타입(Cluster외부에서 접근 가능)이 ClusterIP타입(Cluster 내부에서만 접근 가능)보다 넓은 범위를 가진다는 것을 표현한 것입니다. 단, ClusterIP타입도 다른 Proxy를 사용한다면 외부로도 노출시킬수 있습니다.
 - Pod가 ReplicaSet에 의해서 여러 노드에 걸쳐 존재하고, Service가 Nodeport로 구성되면 특정 노드의 NodePort로 서비스가 요청되면 해당 노드에 존재하는 Pod에 대해서만 LB가 되나요? 아니면 전체 노드에 대해서 되나요?
+  - NodePort타입의 서비스를 생성하면 지정한 Port로 모든 Node에서 접근 가능합니다. 어떤 node로 접근해도 그 클러스터 내에 분산되어 있는 Pod로 모두 연결 가능합니다.
+  - [Kubernetes - Services Explained in 15 Minutes!](https://youtu.be/5lzUpDtmWgM) 참고하세요.
 - Service의 Port방향이 헷갈리네요. (e.g. NodePort타입의 경우 80:30007/TCP) 어디가 외부로 연결되는건가요?
 - Pod에 Container가 여러개 일때 그 중 하나의 Container로 통신하려면? (selector로 ?)
 
