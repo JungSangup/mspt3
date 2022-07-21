@@ -231,7 +231,9 @@ ubuntu $ docker inspect my-nginx
   - NodePort타입의 서비스를 생성하면 지정한 Port로 모든 Node에서 접근 가능합니다. 어떤 node로 접근해도 그 클러스터 내에 분산되어 있는 Pod로 모두 연결 가능합니다.
   - [Kubernetes - Services Explained in 15 Minutes!](https://youtu.be/5lzUpDtmWgM) 참고하세요.
 - Service의 Port방향이 헷갈리네요. (e.g. NodePort타입의 경우 80:30007/TCP) 어디가 외부로 연결되는건가요?
+  - 30007이 노드의 포트이고 80은 서비스의 포트입니다. 30007이 외부에서 접근가능한 포트입니다.
 - Pod에 Container가 여러개 일때 그 중 하나의 Container로 통신하려면? (selector로 ?)
+  - Pod spec.에 여러개의 Container를 정의할 수 있고, 그 때 각 Container마다 사용할 Port를 지정할 수 있습니다. Service에서는 Selector로 Pod를 선택하고 Port로 Container를 지정하면 됩니다.
 
 ---
 
