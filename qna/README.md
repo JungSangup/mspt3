@@ -275,3 +275,8 @@ ubuntu $ docker inspect my-nginx
   - 사내 시스템들도 모두 Helm chart를 기반으로 동작하고 있습니다.
 - values.yaml에서 대소문자를 구분하나요?
   - 네, 구분합니다. [Values](https://helm.sh/docs/chart_best_practices/values/) 도 참고하세요.
+
+---
+
+## Playlist
+[[MV] 김연지(Kim Yeon-Ji) - Whisky on the Rock | 우리들의 블루스(Our Blues) OST Part 1](https://youtu.be/7h3ndp05JN0)  
