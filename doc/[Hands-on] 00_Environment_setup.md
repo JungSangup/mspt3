@@ -35,7 +35,7 @@ PowerShell을 관리자 권한으로 실행.
 ---
 
 PowerShell에서 `wsl --install` 실행 
-> **조건** : Windows 10 버전 2004 이상(빌드 19041 이상) 또는 Windows 11
+> **조건** : Windows 10 버전 2004 이상(빌드 19041 이상) 또는 Windows 11  
 > 위 조건에 해당하지 않는 경우 [WSL 수동설치](https://docs.microsoft.com/ko-kr/windows/wsl/install-manual)를 참고하세요.
 
 ![w:600](./img/wsl2.png)
