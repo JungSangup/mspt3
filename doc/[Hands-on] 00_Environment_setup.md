@@ -40,18 +40,18 @@ PowerShell에서 `wsl --install` 실행
 
 ![w:600](./img/wsl2.png)
 
-완료 후 시스템 재시작
+완료 후 시스템 재시작  
 ![w:600](./img/wsl3.png)
 
 ---
 
 시스템 재시작 후 아래와 같은 창이 자동으로 열립니다.  
-리눅스 사용자 계정과 암호를 설정합니다.
+리눅스 사용자 계정과 암호를 설정합니다.  
 ![w:800](./img/wsl4.png)
 
 ---
 
-![w:800](./img/wsl5.png)
+![w:800](./img/wsl5.png)  
 여기까지 하면 **리눅스(Ubuntu)** 환경은 준비가 됐습니다.
 
 ---
@@ -59,8 +59,7 @@ PowerShell에서 `wsl --install` 실행
 이제 필요할 때는 아래와 같이 시작메뉴의 **Ubuntu**를 실행하면 됩니다.  
 ![h:400](./img/wsl6.png)
 
-사용을 마치고 리눅스를 종료하려면 PowerShell에서 `wsl --shutdown` 명령어를 실행하면 됩니다.
-
+사용을 마치고 리눅스를 종료하려면 PowerShell에서 `wsl --shutdown` 명령어를 실행하면 됩니다.  
 ![h:100](./img/wsl7.png)
 
 ---
@@ -69,12 +68,12 @@ PowerShell에서 `wsl --install` 실행
 여러가지 명령줄 도구나 Shell을 편리하게 사용하려면, 이 툴을 사용하는 것을 추천드립니다.  
 하나의 툴로 PowerShell, Ubuntu shell 등을 탭으로 구분하여 실행할 수 있습니다.  
 
-[설치](https://aka.ms/terminal) -> Microsoft store에서 설치
+[설치](https://aka.ms/terminal) -> Microsoft store에서 설치  
 ![h:400](./img/windows_terminal1.png)
 
 ---
 
-Windows terminal에서는 아래와 같이 **Ubuntu**를 실행하면 됩니다. (v 버튼 > Ubuntu)
+Windows terminal에서는 아래와 같이 **Ubuntu**를 실행하면 됩니다. (v 버튼 > Ubuntu)  
 
 ![h:450](./img/windows_terminal2.png)
 
@@ -84,23 +83,23 @@ Windows terminal에서는 아래와 같이 **Ubuntu**를 실행하면 됩니다.
 
 ### 2. [Docker desktop](https://docs.docker.com/desktop/install/windows-install/) 설치
 
-> 사전조건 : WSL2 설치완료, 리눅스 배포판(e.g. Ubuntu) 설치완료
+> 사전조건 : WSL2 설치완료, 리눅스 배포판(e.g. Ubuntu) 설치완료  
 
 리눅스가 준비됐으면, 이제 Docker desktop을 설치합니다.  
-[설치 가이드](https://docs.docker.com/desktop/install/windows-install/)페이지에서 설치파일을 다운로드 하여 실행합니다.
+[설치 가이드](https://docs.docker.com/desktop/install/windows-install/)페이지에서 설치파일을 다운로드 하여 실행합니다.  
 ![h:450](./img/docker-desktop1.png)
 
 ---
 
-![h:180](./img/docker-desktop2.png)
-![h:180](./img/docker-desktop3.png)
-![h:180](./img/docker-desktop4.png)
+![h:180](./img/docker-desktop2.png)  
+![h:180](./img/docker-desktop3.png)  
+![h:180](./img/docker-desktop4.png)  
 설치완료 (ง˙∇˙)ว
 
 ---
 
 설치완료 후 처음 실행하면 아래 그림과 같은 Service agreement 페이지가 열립니다.  
-확인 후 시작합니다.
+확인 후 시작합니다.  
 
 - **주의** : **Commercial use** of Docker Desktop in larger enterprises (more than 250 employees OR more than $10 million USD in annual revenue) now requires a **paid subscription**.  
 
@@ -111,7 +110,7 @@ Windows terminal에서는 아래와 같이 **Ubuntu**를 실행하면 됩니다.
 Docker Desktop 실행 후 Windows terminal에서 아래와 같이 `docker` 명령어를 실행할 수 있습니다.  
 ![h:500](./img/docker-desktop6.png)
 
-여기까지 하면 Docker 환경은 준비가 됐습니다.
+여기까지 하면 Docker 환경은 준비가 됐습니다.  
 
 ---
 
