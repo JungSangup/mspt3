@@ -89,7 +89,7 @@ footer: Samsung SDS
 
 <br><br><br><br><br><br>
 
-![](./img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/)
+![](./img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/) ![](./img/hyperlink.png)[Windows container](https://docs.microsoft.com/ko-kr/virtualization/windowscontainers/about/)  
 
 ---
 
