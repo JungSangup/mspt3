@@ -21,9 +21,7 @@ Pod를 직접 동작시키는 방법입니다.
 ubuntu@ip-10-0-1-14:~$ kubectl run my-nginx1 --image=nginx
 pod/my-nginx1 created
 ```
-> **명령어** : ```
-> kubectl run my-nginx1 --image=nginx:1.19.3
-> ```
+> **명령어** : `kubectl run my-nginx1 --image=nginx:1.19.3`
 
 생성된 Pod를 볼까요?
 ```bash
