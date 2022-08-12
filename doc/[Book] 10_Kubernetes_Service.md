@@ -184,10 +184,10 @@ Ingress는 `NodePort`, `LoadBalancer` 와 마찬가지로 애플리케이션의 
 외부에서 들어온 HTTP와 HTTPS 트래픽을 ingress resouce를 생성하여 Cluster내부의 Service로 L7영역에서 라우팅하며  로드밸런싱, TLS, 도메인 기반의 Virtual Hosting을 제공합니다.
 이러한 기능은 NodePort로 서비스를 노출하는 것에 비해 외부의 서비스를 보다 손쉽게 관리할 수 있도록해줍니다.
 ![h:250](img/k8s_ingress3.png)
-Ingress는 실질적인 라우팅 기능을 제공하는 Ingress Controller와 Ingress
+Ingress는 실질적인 라우팅 기능을 제공하는 [Ingress Controller](https://kubernetes.io/ko/docs/concepts/services-networking/ingress-controllers/)와 [Ingress](https://kubernetes.io/ko/docs/concepts/services-networking/ingress/)
 리소스로 구성할 수 있는데, ingress 리소스는 외부의 URLs을 Cluster 내부의
 Service로 라우팅하는 rule이 정의되어 있으며, Ingress Controller에는
-다양한 구현체가 존재하며, 대표적인 Ingress controller로 **Nginx**가 있습니다.
+다양한 구현체가 존재하며, 대표적인 Ingress controller로 [Nginx Ingress Controller](https://kubernetes.github.io/ingress-nginx/)가 있습니다.
 > HTTP/HTTPS 외의 서비스를 노출하려면 Ingress가 아닌 다른 방법을 적용해야 합니다. (e.g. NodePort) 
 
 
