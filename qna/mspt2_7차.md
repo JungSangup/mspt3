@@ -23,4 +23,9 @@
 - 하나의 볼륨을 여러 인스턴스(컨테이너)가 사용 가능한가요?
   - 가능합니다. 위의 질문/답변 참조하세요.
 - hub없이 repo를 리눅스 로컬에 만드는 방법도 알려주시나요?
-- 
+  - [E2E개발과정](https://devops.sdsdev.co.kr/confluence/x/t4ITAw) 의 교재 참고하세요.
+
+---
+
+- 윈도우 가상환경에서는 docker0가 안보입니다.
+  - [There is no docker0 bridge on the host](https://docs.docker.com/desktop/networking/#there-is-no-docker0-bridge-on-the-host)
