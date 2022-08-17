@@ -20,10 +20,13 @@
   - 해결됐습니다. ^^;
 - Docker desktop 설치 시 에러 메시지가 발생하고, 설치가 안됩니다. (Windows 10 최신버젼)
 - 왜 다 Linux 기반인가요?
+  - 컨테이너 기술의 시작이 Linux이고, 더 다양한 컨테이너들을 만들고 사용할 수 있기 때문이 아닐까 합니다.
+  - [Windows container](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/)도 있지만, 제한적인 [Container Base Images](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-base-images) 를 사용해야 하는 등 제약이 많습니다.
 - 하나의 볼륨을 여러 인스턴스(컨테이너)가 사용 가능한가요?
-  - 가능합니다. 위의 질문/답변 참조하세요.
+  - 가능합니다. 이 구역의 첫 번째 질문/답변 참조하세요.
 - hub없이 repo를 리눅스 로컬에 만드는 방법도 알려주시나요?
   - [E2E개발과정](https://devops.sdsdev.co.kr/confluence/x/t4ITAw) 의 교재 참고하세요.
+  - [Docker Registry](https://docs.docker.com/registry/) 도 
 
 ---
 
