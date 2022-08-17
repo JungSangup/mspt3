@@ -26,7 +26,7 @@
   - 가능합니다. 이 구역의 첫 번째 질문/답변 참조하세요.
 - hub없이 repo를 리눅스 로컬에 만드는 방법도 알려주시나요?
   - [E2E개발과정](https://devops.sdsdev.co.kr/confluence/x/t4ITAw) 의 교재 참고하세요.
-  - [Docker Registry](https://docs.docker.com/registry/) 도 
+  - [Docker Registry](https://docs.docker.com/registry/) 도 참고하세요.
 
 ---
 
