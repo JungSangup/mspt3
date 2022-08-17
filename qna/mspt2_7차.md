@@ -48,4 +48,5 @@
   - [typora](https://typora.io/) 유사한 [MarkText](https://github.com/marktext/marktext) 도 있네요.
 - killercoda의 포트접속 다시 한 번 보여주세요.
   - Killercoda의 [For creators](https://killercoda.com/creators) 문서에서 `Network Traffic into Environments` 부분 참조하세요.
-- Docker desktop for Windows 사용 시 \\wsl$\Ubuntu\home\사용자명 참조.
+- Docker desktop for Windows 사용 시 \\\\wsl$\Ubuntu\home\사용자명 참조.
+- \\\\wsl$\docker-desktop-data\version-pack-data\community\docker
