@@ -36,3 +36,4 @@
 - AWS 사용료는 어떻게 결재되나요?
 - MD파일 어떻게 작성하셨나요? typora는 유료화되어서 못쓰네요. ㅠㅠ
 - killercoda의 포트접속 다시 한 번 보여주세요.
+- Docker desktop for Windows 사용 시 \\wsl$\Ubuntu\home\사용자명 참조.
