@@ -29,3 +29,10 @@
 
 - 윈도우 가상환경에서는 docker0가 안보입니다.
   - [There is no docker0 bridge on the host](https://docs.docker.com/desktop/networking/#there-is-no-docker0-bridge-on-the-host)
+
+---
+
+- MSA관점에서의 컨테이너 설계, Bounded context기준의 그룹핑?
+- AWS 사용료는 어떻게 결재되나요?
+- MD파일 어떻게 작성하셨나요? typora는 유료화되어서 못쓰네요. ㅠㅠ
+- killercoda의 포트접속 다시 한 번 보여주세요.
