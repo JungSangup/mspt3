@@ -6,7 +6,10 @@
 ### Docker
 
 - 컨테이너별 이미지가 있는건가요?
+  - 이미지는 컨테이너를 생성하기위한 패키지 입니다. 이미지가 있으면 컨테이너를 얼마든지 만들 수 있습니다. 
 - 컨테이너 로그파일은 컨테이너 내부에 생성되나요? 외부에 생성되나요? 내부라면 컨테이너 레이어인가요?
+  - 기본적으로는 실행된 컨테이너의 컨테이너 레이어(R/W layer)에 생성됩니다.
+  - 하지만, 외부에 생성할 수도 있습니다. Volume이나 Bind mount를 이용해서 호스트 머신의 영역에 데이터를 저장할 수 있습니다.
 - /var/lib/docker/overlay2를 조회하니 cannot access...no such file or directory라고 나옵니다. Storage driver는 overlay2 입니다. (추가. /var/lib/docker 도 없네요.)
 
 ---
@@ -41,5 +44,8 @@
 - MSA관점에서의 컨테이너 설계, Bounded context기준의 그룹핑?
 - AWS 사용료는 어떻게 결재되나요?
 - MD파일 어떻게 작성하셨나요? typora는 유료화되어서 못쓰네요. ㅠㅠ
+  - VS Code를 사용하신다면, [Markdown and Visual Studio Code](https://code.visualstudio.com/docs/languages/markdown) 참고하세요.
+  - [typora](https://typora.io/) 유사한 [MarkText](https://github.com/marktext/marktext) 도 있네요.
 - killercoda의 포트접속 다시 한 번 보여주세요.
+  - Killercoda의 [For creators](https://killercoda.com/creators) 문서에서 `Network Traffic into Environments` 부분 참조하세요.
 - Docker desktop for Windows 사용 시 \\wsl$\Ubuntu\home\사용자명 참조.
