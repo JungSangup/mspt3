@@ -29,6 +29,9 @@
 
 - 윈도우 가상환경에서는 docker0가 안보입니다.
   - [There is no docker0 bridge on the host](https://docs.docker.com/desktop/networking/#there-is-no-docker0-bridge-on-the-host)
+- docker run 의 옵션 중 --network-alias의 사용처에 대해 설명해주세요.
+  - [Differences between user-defined bridges and the default bridge](https://docs.docker.com/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge) 참조.
+  - User-defined bridge network를 생성하면, 그 네트워크에 속한 컨테이너들은 이름 또는 Alias를 이용하여 resolve가능합니다. (User-defined bridges provide automatic DNS resolution between containers.)  
 
 ---
 
