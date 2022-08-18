@@ -57,3 +57,12 @@
 - CSP 상품으로 K8S구성할 경우 사용자는 어디에서 YAML파일을 작성하고 kubectl을 실행하나요? CMP에서 모두 가능한가요?
   - 보통은 Bastion server를 별도로 하나 두고, Bastion server로 ssh 접속해서 kubectl 을 사용할 수 있습니다.
   - 또는 CSP마다 제공되는 Web shell(Browser-based shell)상품같은 것을 사용할 수도 있습니다.
+
+---
+
+- Probe는 복수 개 지정 가능한가요?
+- Probe가 pod의 상태를 확인한다고 이해했는데요, 어떤 pod가 문제인지 확인하는 방법은 뭔가요?
+- Probe를 만들 때 대상 컨테이너를 지정할 수 있나요?
+- 지금 실습하는 pod들은 도커 이미지 없이 기동되는건가요? pod기동 후 docker image나 ps 조회가 되나요?
+- K8S 1.20 이후에는 Docker가 deprecated 되었다고 했는데, 하위버젼을 계속사용하는경우 문제가 될까요?
+- Probe를 지정해서 workload를 생성했을 때 probe의 로그도 따로 확인할 수 있나요?
