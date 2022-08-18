@@ -147,6 +147,10 @@ Error from server (AlreadyExists): error when creating "nginx-clusterip-service2
 - NodeIP 타임은 node의 ip가 열려있다면 어디서든 이 아이피로 접근 가능한가요?
   - 교재내용을 업데이트 해 놓겠습니다. External IP가 할당되고 그 아이피가 열려있다면 어디서든 접근 가능하다가 맞습니다. (감사합니다.)
 - DNS에 어떻게 기록되어 있는지 알 수 있나요?
+  - [서비스 및 파드용 DNS](https://kubernetes.io/ko/docs/concepts/services-networking/dns-pod-service/) 참조 바랍니다.
+  - Service와 Pod 가 생성되면 DNS (현재는 CoreDNS를 사용합니다.)에 자동으로 레코드가 생성됩니다.
+  - Service 레코드 형식 : my-svc.my-namespace.svc.cluster-domain.example (e.g. nginx-svc.default.svc.cluster.local)
+  - Pod 레코드 형식 : pod-ip-address.my-namespace.pod.cluster-domain.example
 - Nodeport생성 시 ClusterIP가 필수인건가요? 아니면 없어도 되나요?
   - Nodeport타입은 ClusterIP타입의 특징을 그대로 가지면서 추가로 nodeport (30000~32767)를 할당합니다. ClusterIP타입을 추가로 만들 필요는 없습니다.
 - Deployment에서 Scale-out 말고 Scale-up은 안되나요? (추가질문, Spec.에 cpu, memory등 설정 가능한가요?)
