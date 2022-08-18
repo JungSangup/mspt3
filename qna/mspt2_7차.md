@@ -98,12 +98,49 @@
   - 할 수도 있습니다.  nodeSelector를 사용하면 특정 노드를 지정할 수 있습니다.
   - [노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/) 참조하세요.
 - LoadBalancer의 의미상 뒷 단의 Service가 복수개 필요할 것 같은데요...
+  - [Kubernetes Services explained](https://youtu.be/T4Z7visMM4E?t=1282) 참고하세요.
 - 10.Kubernetes service교재의 7페이지 그림에서 (2)ClusterIP를 안쓰면 어떻게 되나요?
+  - 여러가지 타입 중 한 가지를 사용하면 됩니다. ClusterIP < NodePort < LoadBalancer 타입 순으로 범위가 넓어지는 구조입니다. (e.g. NodePort타입은 ClusterIP타입의 특징을 포함하고, 추가로 Node의 Port를 할당합니다.) 
 - Kubernetes에 containerd를 사용하려면 별도로 설치해야 하나요?
   - 네, 설치해야 합니다. 
   - [컨테이너 런타임](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/) 를 참고하여 선택 후 설치하시면 됩니다.
+  - 설치 방법은 [Getting started with containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)를 참고하세요.
 - service도 여러개 만들 수 있는 것 같은데요, metadata의 이름은 중복되면 안되겠죠?
-  - ...
+  - 해볼까요?
+  - 안되네요. (예상했던 대로...) 아래처럼 에러 메시지(`services OOO already exists`)를 보여주면서 생성되지 않습니다.
+```bash
+ubuntu@ip-10-0-1-84:~/mspt2/hands_on_files$ cat nginx-clusterip-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: my-nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+ubuntu@ip-10-0-1-84:~/mspt2/hands_on_files$ cat nginx-clusterip-service2.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: my-nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+ubuntu@ip-10-0-1-84:~/mspt2/hands_on_files$ kubectl create -f nginx-clusterip-service.yaml
+service/nginx-clusterip-service created
+ubuntu@ip-10-0-1-84:~/mspt2/hands_on_files$ kubectl create -f nginx-clusterip-service2.yaml
+Error from server (AlreadyExists): error when creating "nginx-clusterip-service2.yaml": services "nginx-clusterip-service" already exists
+
+```
 
 ---
 
