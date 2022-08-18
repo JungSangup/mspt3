@@ -102,3 +102,4 @@
   - Nodeport타입은 ClusterIP타입의 특징을 그대로 가지면서 추가로 nodeport (30000~32767)를 할당합니다. ClusterIP타입을 추가로 만들 필요는 없습니다.
 - Deployment에서 Scale-out 말고 Scale-up은 안되나요?
 - Loadbalancer는 ingress와 같이 rule을 등록하여 path별 호출 분리가 불가능한거죠? 서비스를 LB를 따로 구성하는 방법으로만 구현 가능한건가요?
+- 필드에서 가장 많이 구성하는 서비스는 어떤 유형인가요?
