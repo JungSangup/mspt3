@@ -50,3 +50,10 @@
   - Killercoda의 [For creators](https://killercoda.com/creators) 문서에서 `Network Traffic into Environments` 부분 참조하세요.
 - Docker desktop for Windows 사용 시 \\\\wsl$\Ubuntu\home\사용자명 참조.
 - \\\\wsl$\docker-desktop-data\version-pack-data\community\docker
+
+
+
+### Kubernetes
+- CSP 상품으로 K8S구성할 경우 사용자는 어디에서 YAML파일을 작성하고 kubectl을 실행하나요? CMP에서 모두 가능한가요?
+  - 보통은 Bastion server를 별도로 하나 두고, Bastion server로 ssh 접속해서 kubectl 을 사용할 수 있습니다.
+  - 또는 CSP마다 제공되는 Web shell(Browser-based shell)상품같은 것을 사용할 수도 있습니다.
