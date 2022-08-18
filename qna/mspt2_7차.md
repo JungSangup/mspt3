@@ -52,7 +52,7 @@
 - AWS 사용료는 어떻게 결재되나요?
 - MD파일 어떻게 작성하셨나요? typora는 유료화되어서 못쓰네요. ㅠㅠ
   - VS Code를 사용하신다면, [Markdown and Visual Studio Code](https://code.visualstudio.com/docs/languages/markdown) 참고하세요.
-  - [typora](https://typora.io/) 유사한 [MarkText](https://github.com/marktext/marktext) 도 있네요.
+  - [typora](https://typora.io/)와 유사한 [MarkText](https://github.com/marktext/marktext) 도 있네요.
 - killercoda의 포트접속 다시 한 번 보여주세요.
   - Killercoda의 [For creators](https://killercoda.com/creators) 문서에서 `Network Traffic into Environments` 부분 참조하세요.
 
