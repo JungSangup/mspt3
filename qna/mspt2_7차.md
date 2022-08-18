@@ -59,7 +59,8 @@
 
 ### Kubernetes
 
-[Kubernetes Overview Diagrams](https://shipit.dev/posts/kubernetes-overview-diagrams.html)  ( -> 김순홍프로님이 공유해주신 정보입니다.)
+[Kubernetes Overview Diagrams](https://shipit.dev/posts/kubernetes-overview-diagrams.html)  ( -> 김순홍프로님이 공유해주신 정보입니다. 👍 )
+
 
 - CSP 상품으로 K8S구성할 경우 사용자는 어디에서 YAML파일을 작성하고 kubectl을 실행하나요? CMP에서 모두 가능한가요?
   - 보통은 Bastion server를 별도로 하나 두고, Bastion server로 ssh 접속해서 kubectl 을 사용할 수 있도록 구성합니다.
