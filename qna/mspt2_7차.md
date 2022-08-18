@@ -160,6 +160,8 @@ Error from server (AlreadyExists): error when creating "nginx-clusterip-service2
   - 가능합니다. 아래 링크 참조하세요. (교재에는 다루지 않았지만 spec.에 리소스 request/limit을 설정할 수 있고 변경할 수도 있습니다.)
   - [파드 및 컨테이너 리소스 관리](https://kubernetes.io/ko/docs/concepts/configuration/manage-resources-containers/)
 - Loadbalancer는 ingress와 같이 rule을 등록하여 path별 호출 분리가 불가능한거죠? 서비스를 LB를 따로 구성하는 방법으로만 구현 가능한건가요?
+  - [AWS Load Balancer Controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller) 참고하세요.
+  - [로드 밸런서 유형](https://docs.aws.amazon.com/ko_kr/AmazonECS/latest/developerguide/load-balancer-types.html) 문서도 참고하면 좋겠네요.
 - 필드에서 가장 많이 구성하는 서비스는 어떤 유형인가요? CSP별로 달라서 CSP 디펜던트 한가요?
   - ClusterIP타입이 default이고, 앞에 proxy역할을 하는 ingress resource를 두는 형태를 가장 많이 씁니다.
   - ingress controller는 Nginx같은걸 쓸 수도 있고, CSP에서 제공하는 상품으로 구성할 수도 있습니다. (e.g. AWS ALB)
