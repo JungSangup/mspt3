@@ -12,7 +12,8 @@
   - 하지만, 외부에 생성할 수도 있습니다. Volume이나 Bind mount를 이용해서 호스트 머신의 영역에 데이터를 저장할 수 있습니다.
 - /var/lib/docker/overlay2를 조회하니 cannot access...no such file or directory라고 나옵니다. Storage driver는 overlay2 입니다. (추가. /var/lib/docker 도 없네요.)
   - [Docker 이미지 스토리지 폴더 찾기 문제](https://docs.microsoft.com/ko-kr/windows/wsl/tutorials/wsl-containers#trouble-finding-docker-image-storage-folder) 를 참고하세요.
-  - 
+  - Overlay2 위치 : \\wsl.localhost\docker-desktop-data\data\docker\overlay2
+  - volumes 위치 : \\wsl.localhost\docker-desktop-data\data\docker\volumes
 
 ---
 
