@@ -63,6 +63,10 @@ drwx------  2 root root  4096 Jun 17 05:55 l
 
 위 그림처럼 깨끗하게 정리된 상태에서 시작해볼게요.
 
+> **Docker desktop for widows**를 설치한 환경인 경우(WSL2기반), Docker Root dir.의 위치가 다릅니다.
+> 탐색기에서 `\\wsl.localhost\docker-desktop-data\data\docker`를 찾아보면 됩니다.
+> **Overlay2**인 경우 `\\wsl.localhost\docker-desktop-data\data\docker\overlay2` 가 이미지가 저장되는 장소입니다. 
+
 ---
 
 nginx 이미지를 하나 pull 하구요.
