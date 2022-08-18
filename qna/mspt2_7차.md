@@ -62,13 +62,13 @@
 [Kubernetes Overview Diagrams](https://shipit.dev/posts/kubernetes-overview-diagrams.html)  ( -> 김순홍프로님이 공유해주신 정보입니다.)
 
 - CSP 상품으로 K8S구성할 경우 사용자는 어디에서 YAML파일을 작성하고 kubectl을 실행하나요? CMP에서 모두 가능한가요?
-  - 보통은 Bastion server를 별도로 하나 두고, Bastion server로 ssh 접속해서 kubectl 을 사용할 수 있습니다.
+  - 보통은 Bastion server를 별도로 하나 두고, Bastion server로 ssh 접속해서 kubectl 을 사용할 수 있도록 구성합니다.
   - 또는 CSP마다 제공되는 Web shell(Browser-based shell)상품같은 것을 사용할 수도 있습니다.
 
 ---
 
 - Probe는 복수 개 지정 가능한가요?
-  - 원칙은 하나의 probe만 지정 가능합니다.
+  - 원칙은 종류별로 하나의 probe만 지정 가능합니다. (e.g. liveness probe 하나 + rediness probe 하나)
   - Workaround로 여러개의 probe를 사용하는 것과 같이 환경을 만들 수는 있습니다. (e.g. 여러 http request를 체크하는 shell프로그램을 만들고, probe는 shell을 exec로 체크)
 - Probe가 pod의 상태를 확인한다고 이해했는데요, 어떤 pod가 문제인지 확인하는 방법은 뭔가요?
   - probe에의해 fail로 판단되면 restart를 하게되는데, `kubectl get pods`명령어로 조회되는 pod들 중 RESTARTS 횟수가 비정상적으로 많은경우 확인을 해보면 됩니다.
@@ -87,8 +87,13 @@
 - containerd가 대세인가요? docker명령어 대신 익혀야 하는지?
   - [컨테이너 런타임](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/)
   - [Google trend](https://trends.google.com/trends/explore?date=today%205-y&q=containerd,cri-o)
+  - containerd의 경우 이미지 관리등을 위해 [podman](https://podman.io/)과 같은 툴을 사용할 수 있습니다.
 - replicas를 변경할 때(줄일 때) pod 삭제 우선순위가 있나요?
+  - [파드 삭제 비용](https://kubernetes.io/ko/docs/concepts/workloads/controllers/replicaset/#%ED%8C%8C%EB%93%9C-%EC%82%AD%EC%A0%9C-%EB%B9%84%EC%9A%A9) 문서를 참조 바랍니다.
+  - 비용을 기준으로 삭제 우선순위 지정 가능합니다. (저도 이번에 알았네요. 감사합니다. 꾸벅)
+  - 추가로 [Annotation](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/annotations/) 에 대해 아셔야 합니다.
 - replicas를 2로 설정하면 pod도 무조건 2개 생기는건가요?
+  - K8S는 그렇게 하려고 노력하겠지만, 안되는 경우(e.g. 클러스터에 pod를 생성할 수 있는 리소스가 부족한 경우)에는 어쩔 수 없겠죠? 이 겨우에는 생성 못한다고 이벤트 로그에 표시됩니다. (no nodes available to schedule pods ) 
 - pod개수 조정할 때 node를 지정할 수 있나요?
   - 할 수도 있습니다.  nodeSelector를 사용하면 특정 노드를 지정할 수 있습니다.
   - [노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/) 참조하세요.
