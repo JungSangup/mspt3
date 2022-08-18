@@ -74,3 +74,21 @@
   - 기본기능은 그대로 사용 가능하나, 패치지원 불가와 같은 문제들은 감안하셔야 합니다.
 - Probe를 지정해서 workload를 생성했을 때 probe의 로그도 따로 확인할 수 있나요?
   - Pod의 event log를 참조하시면 됩니다.
+
+---
+
+- containerd가 대세인가요? docker명령어 대신 익혀야 하는지?
+  - [컨테이너 런타임](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/)
+  - [Google trend](https://trends.google.com/trends/explore?date=today%205-y&q=containerd,cri-o)
+- replicas를 변경할 때(줄일 때) pod 삭제 우선순위가 있나요?
+- replicas를 2로 설정하면 pod도 무조건 2개 생기는건가요?
+- pod개수 조정할 때 node를 지정할 수 있나요?
+  - 할 수도 있습니다.  nodeSelector를 사용하면 특정 노드를 지정할 수 있습니다.
+  - [노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/) 참조하세요.
+- LoadBalancer의 의미상 뒷 단의 Service가 복수개 필요할 것 같은데요...
+- 10.Kubernetes service교재의 7페이지 그림에서 (2)ClusterIP를 안쓰면 어떻게 되나요?
+- Kubernetes에 containerd를 사용하려면 별도로 설치해야 하나요?
+  - 네, 설치해야 합니다. 
+  - [컨테이너 런타임](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/) 를 참고하여 선택 후 설치하시면 됩니다.
+- service도 여러개 만들 수 있는 것 같은데요, metadata의 이름은 중복되면 안되겠죠?
+  - 한 번 해볼까요?
