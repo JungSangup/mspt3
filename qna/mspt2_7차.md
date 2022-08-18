@@ -91,4 +91,14 @@
   - 네, 설치해야 합니다. 
   - [컨테이너 런타임](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/) 를 참고하여 선택 후 설치하시면 됩니다.
 - service도 여러개 만들 수 있는 것 같은데요, metadata의 이름은 중복되면 안되겠죠?
-  - 한 번 해볼까요?
+  - ...
+
+---
+
+- NodeIP 타임은 node의 ip가 열려있다면 어디서든 이 아이피로 접근 가능한가요?
+  - 교재내용을 업데이트 해 놓겠습니다. External IP가 할당되고 그 아이피가 열려있다면 어디서든 접근 가능하다가 맞습니다. (감사합니다.)
+- DNS에 어떻게 기록되어 있는지 알 수 있나요?
+- Nodeport생성 시 ClusterIP가 필수인건가요? 아니면 없어도 되나요?
+  - Nodeport타입은 ClusterIP타입의 특징을 그대로 가지면서 추가로 nodeport (30000~32767)를 할당합니다. ClusterIP타입을 추가로 만들 필요는 없습니다.
+- Deployment에서 Scale-out 말고 Scale-up은 안되나요?
+- Loadbalancer는 ingress와 같이 rule을 등록하여 path별 호출 분리가 불가능한거죠? 서비스를 LB를 따로 구성하는 방법으로만 구현 가능한건가요?
