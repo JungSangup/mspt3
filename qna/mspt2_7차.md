@@ -61,8 +61,48 @@
 ---
 
 - Probe는 복수 개 지정 가능한가요?
+  - 원칙은 하나의 probe만 지정 가능합니다.
+  - Workaround로 여러개의 probe를 사용하는 것과 같이 환경을 만들 수는 있습니다. (e.g. 여러 http request를 체크하는 shell프로그램을 만들고, probe는 shell을 exec로 체크)
 - Probe가 pod의 상태를 확인한다고 이해했는데요, 어떤 pod가 문제인지 확인하는 방법은 뭔가요?
+  - probe에의해 fail로 판단되면 restart를 하게되는데, `kubectl get pods`명령어로 조회되는 pod들 중 RESTARTS 횟수가 비정상적으로 많은경우 확인을 해보면 됩니다.
 - Probe를 만들 때 대상 컨테이너를 지정할 수 있나요?
+  - probe spec.은 container spec.하위에 있습니다. 즉, 컨테이너 마다 지정할 수 있습니다.
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness1
+    image: k8s.gcr.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+  - name: liveness2
+    image: k8s.gcr.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 3
+      periodSeconds: 3      
+```
 - 지금 실습하는 pod들은 도커 이미지 없이 기동되는건가요? pod기동 후 docker image나 ps 조회가 되나요?
 - K8S 1.20 이후에는 Docker가 deprecated 되었다고 했는데, 하위버젼을 계속사용하는경우 문제가 될까요?
 - Probe를 지정해서 workload를 생성했을 때 probe의 로그도 따로 확인할 수 있나요?
