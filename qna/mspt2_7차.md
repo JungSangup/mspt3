@@ -107,7 +107,7 @@
   - 설치 방법은 [Getting started with containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)를 참고하세요.
 - service도 여러개 만들 수 있는 것 같은데요, metadata의 이름은 중복되면 안되겠죠?
   - 해볼까요?
-  - 안되네요. (예상했던 대로...) 아래처럼 에러 메시지(`services OOO already exists`)를 보여주면서 생성되지 않습니다.
+  - 안되네요. (예상했던 대로...) 아래처럼 에러 메시지(`services OOO already exists`)를 보여주면서 생성에 실패합니다.
 ```bash
 ubuntu@ip-10-0-1-84:~/mspt2/hands_on_files$ cat nginx-clusterip-service.yaml
 apiVersion: v1
