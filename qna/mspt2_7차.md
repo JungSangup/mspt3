@@ -72,7 +72,7 @@
 ---
 
 - Probe는 복수 개 지정 가능한가요?
-  - 원칙은 종류별로 하나의 probe만 지정 가능합니다. (e.g. liveness probe 하나 + rediness probe 하나)
+  - 원칙은 종류별로 하나의 probe만 지정 가능합니다. (e.g. liveness probe 하나 + readiness probe 하나)
   - Workaround로 여러개의 probe를 사용하는 것과 같이 환경을 만들 수는 있습니다. (e.g. 여러 http request를 체크하는 shell프로그램을 만들고, probe는 shell을 exec로 체크)
 - Probe가 pod의 상태를 확인한다고 이해했는데요, 어떤 pod가 문제인지 확인하는 방법은 뭔가요?
   - probe에의해 fail로 판단되면 restart를 하게되는데, `kubectl get pods`명령어로 조회되는 pod들 중 RESTARTS 횟수가 비정상적으로 많은경우 확인을 해보면 됩니다.
