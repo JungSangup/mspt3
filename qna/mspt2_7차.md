@@ -27,7 +27,7 @@
 - todo 애플리케이션에서 어떻게 DB만 볼륨에 저장한건가요?
   - 해결됐습니다. ^^;
 - Docker desktop 설치 시 에러 메시지가 발생하고, 설치가 안됩니다. (Windows 10 최신버젼)
-  - [WSL을 사용하여 Windows에 Linux 설치](WSL을 사용하여 Windows에 Linux 설치) 를 참고해서 다시한 번 해보세요.
+  - [WSL을 사용하여 Windows에 Linux 설치](https://docs.microsoft.com/ko-kr/windows/wsl/install) 를 참고해서 다시한 번 해보세요.
   - [WSL 개발 환경 설정](https://docs.microsoft.com/ko-kr/windows/wsl/setup/environment) 도 참고하면 좋을 듯 합니다.
   - 만약, 계속 안된다면 힘들게 하려고 하지 마시고 다른 방법을 써도 됩니다. (e.g. 사내 Dogether에 올라와 있는 도커 설치방법 등을 참조하세요.)
 - 왜 다 Linux 기반인가요?
