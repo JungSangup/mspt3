@@ -8,6 +8,7 @@
 | ./doc/img | 교재에 사용된 이미지 |
 | ./doc/pdf | 교재의 slides 형식 출력본(pdf) |
 | ./hands_on_files | 실습교재에 사용되는 파일들 |
+| ./qna | 각 차수별 Note와 질문/답변 |
 
 > ppt 파일은 이미지 형식임. (내용 중 text를 복사하여 사용할 수 없음.)
 
