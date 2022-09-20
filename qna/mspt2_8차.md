@@ -87,5 +87,6 @@ ubuntu@ip-10-0-1-205:~$ docker run -it busybox sh
 
 - 컨테이너는 OS커널영역을 공유한다고 했는데, 그럼 다른 OS가 설치된 H/W에서 OS까지 동일버젼으로 맞추려면 H/W별로 동일 OS VM을 생성해서 커널버젼을 맞추고 VM안에서 도커를 설치해야 하나요?
   - 네, 이론적으로는 그렇습니다. 
+  - [참고](https://docs.docker.com/engine/install/binaries/#prerequisites)
 
 ### Kubernetes
