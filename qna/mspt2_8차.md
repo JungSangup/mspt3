@@ -107,4 +107,9 @@ ubuntu@ip-10-0-1-205:~$ docker run -it busybox sh
 
 - host네트워크는 직접 통신하니 bridge와 달리 docker0와 veth가 없나요?
 
+---
+- EXPOSE에 설정된 포트와 -p옵션으로 지정한 포트가 다를경우 실제 포트 사용이 불가능한가요?
+
+- EXPOSE포트 설정을 build시에 하지 않을경우 -p에서만 지정하면 되나요? 아님, 둘 다 맞춰줘야 하나요?
+
 ### Kubernetes
