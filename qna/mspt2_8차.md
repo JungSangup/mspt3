@@ -95,6 +95,7 @@ ubuntu@ip-10-0-1-205:~$ docker run -it busybox sh
 - Bind mount 시 host머신과 컨테이너에 동일한 파일이 있으면 mount가 실패하나요? 아니면 override가 되나요?
   - override 되네요. 아래 참고하세요.
   - Container의 /tmp/test.txt에는 'Test : Container'라는 문자열을 기록하고 Host의 /tmp/test.txt에는 'Test : Host'라고 기록한 후, /tmp를 마운트 하면 Host의 내용을 우선하게 됩니다.
+  - [Mount into a non-empty directory on the container](https://docs.docker.com/storage/bind-mounts/#mount-into-a-non-empty-directory-on-the-container) 도 참고하세요.
 ```bash
 ubuntu@ip-10-0-1-205:~/app$ cat Dockerfile2
 FROM node:10-alpine
@@ -118,25 +119,145 @@ ubuntu@ip-10-0-1-205:~/app$ docker run -d -v /tmp:/tmp --name my-todo todo-test
 ubuntu@ip-10-0-1-205:~/app$ docker exec -it my-todo cat /tmp/test.txt
 Test : Host
 ```
-  - [Mount into a non-empty directory on the container](https://docs.docker.com/storage/bind-mounts/#mount-into-a-non-empty-directory-on-the-container) 도 참고하세요.
-
+  
 - `docker exec`말고 -it로 run했을 때(foreground), container prompt나오는 화면으로 어떻게 들어가나요?
-
+  - [docker attach](https://docs.docker.com/engine/reference/commandline/attach/)도 참고하세요.
+  
 - Volume 사용시 단점도 있나요?
-
+  - 딱히 단점이라면, 잘 못 사용했을 경우(남발하거나, 정리를 제대로 하지 않거나) host나 다른 storage공간의 낭비요소가 될 수도 있다는 것 정도가 있을 것 같습니다.
+  
 - docker0가 Gateway인가요? IP는 고정인가요?
+  - 네, 맞습니다. docker0는 기본 bridge network이고 g/w로 동작하며 (내부)아이피를 가지고 있습니다.
 
 - host방식은 publish옵션으로 포워딩 설정한 것 말고, 컨테이너 내부 포트도 중복이 불가능한가요?
-
+  - 네, 그렇습니다. (e.g. 80을 사용하는 nginx를 host방식으로 하나 실행하고 나면, 두 번째는 동일포트를 사용하기 때문에 문제가 발생합니다. (아래 예제 참고)
+  - [Use host networking](https://docs.docker.com/network/host/) 참고하세요.
+```bash
+ubuntu@ip-10-0-1-205:~$ docker run -d --network host --name my-nginx1 nginx
+0124f07b7c32f4ac0ceb1c0e59f9c13339c8991c45fcb0a9f9a002b7990a3d56
+ubuntu@ip-10-0-1-205:~$ docker run -d --network host --name my-nginx2 nginx
+524a51d9230ca1419f49749c79290a226c601b8e62bdd3bff3bac7ff1e99b008
+ubuntu@ip-10-0-1-205:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+524a51d9230c   nginx     "/docker-entrypoint.…"   8 seconds ago    Exited (1) 5 seconds ago             my-nginx2
+0124f07b7c32   nginx     "/docker-entrypoint.…"   15 seconds ago   Up 14 seconds                        my-nginx1
+ubuntu@ip-10-0-1-205:~$ docker logs my-nginx1
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2022/09/20 13:10:48 [notice] 1#1: using the "epoll" event method
+2022/09/20 13:10:48 [notice] 1#1: nginx/1.23.1
+2022/09/20 13:10:48 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
+2022/09/20 13:10:48 [notice] 1#1: OS: Linux 5.15.0-1019-aws
+2022/09/20 13:10:48 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2022/09/20 13:10:48 [notice] 1#1: start worker processes
+2022/09/20 13:10:48 [notice] 1#1: start worker process 32
+2022/09/20 13:10:48 [notice] 1#1: start worker process 33
+ubuntu@ip-10-0-1-205:~$ docker logs my-nginx2
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2022/09/20 13:10:55 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [emerg] 1#1: bind() to [::]:80 failed (98: Address already in use)
+nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [notice] 1#1: try again to bind() after 500ms
+2022/09/20 13:10:55 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [emerg] 1#1: bind() to [::]:80 failed (98: Address already in use)
+nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [notice] 1#1: try again to bind() after 500ms
+2022/09/20 13:10:55 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [emerg] 1#1: bind() to [::]:80 failed (98: Address already in use)
+nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [notice] 1#1: try again to bind() after 500ms
+2022/09/20 13:10:55 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [emerg] 1#1: bind() to [::]:80 failed (98: Address already in use)
+nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [notice] 1#1: try again to bind() after 500ms
+2022/09/20 13:10:55 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [emerg] 1#1: bind() to [::]:80 failed (98: Address already in use)
+nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+2022/09/20 13:10:55 [notice] 1#1: try again to bind() after 500ms
+2022/09/20 13:10:55 [emerg] 1#1: still could not bind()
+nginx: [emerg] still could not bind()
+```
+  
 - 가상 G/W로 외부접속하는건 bridge, none은 미사용, host는 직접 host 포트사용 맞나요?
+  - 네, 맞습니다. 정리를 잘 해주셨네요. ^^
 
 - 브릿지간 통신이 가능하게 할 수 있나요?
+  - 하나의 컨테이너를 다수의 브릿지에 연결할 수 있습니다.
+  - 아래 예제는 box1 과 box2를 다른 브릿지에 생성하여 둘 간의 통신을 테스트하고(ping 실패), box1에 추가로 브릿지 네트워크에 연결해서 통신을 테스트(ping 성공)하는 예제입니다.
+  - 마지막에 box1의 `ip addr`결과를 보세요. 두 bridge network(my-bridge1, my-bridge2)의 서브넷 아이피를 각각 가지고 있습니다. (172.20.0.2, 172.21.0.3)
+  - [Use user-defined bridge networks](https://docs.docker.com/network/network-tutorial-standalone/#use-user-defined-bridge-networks)도 참고하세요.
+  - 그리고, 질문주신 방법 (reverse proxy...)도 가능은 할 것 같습니다.
+```bash
+ubuntu@ip-10-0-1-205:~$ docker network ls
+NETWORK ID     NAME         DRIVER    SCOPE
+76b4b5660956   bridge       bridge    local
+c475ecd75c2d   host         host      local
+192a4aeccb5f   my-bridge1   bridge    local
+5f7b6c129036   my-bridge2   bridge    local
+03735c3155ea   none         null      local
+ubuntu@ip-10-0-1-205:~$ docker run -itd --network my-bridge1 --name box1 busybox
+681383e45a054a6383db2472d3f8d45a7931552c8c9f3058986c1d4788d5d19b
+ubuntu@ip-10-0-1-205:~$ docker run -itd --network my-bridge2 --name box2 busybox
+461be088169506c6a7d260c79749d905ea86424a512594dcb574774b2f89cc40
+ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ping box2
+ping: bad address 'box2'
+ubuntu@ip-10-0-1-205:~$ docker network connect my-bridge2 box1
+ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ping box2
+PING box2 (172.21.0.2): 56 data bytes
+64 bytes from 172.21.0.2: seq=0 ttl=64 time=0.155 ms
+64 bytes from 172.21.0.2: seq=1 ttl=64 time=0.098 ms
+64 bytes from 172.21.0.2: seq=2 ttl=64 time=0.092 ms
+64 bytes from 172.21.0.2: seq=3 ttl=64 time=0.103 ms
+64 bytes from 172.21.0.2: seq=4 ttl=64 time=0.097 ms
+64 bytes from 172.21.0.2: seq=5 ttl=64 time=0.101 ms
+64 bytes from 172.21.0.2: seq=6 ttl=64 time=0.091 ms
+64 bytes from 172.21.0.2: seq=7 ttl=64 time=0.097 ms
+64 bytes from 172.21.0.2: seq=8 ttl=64 time=0.103 ms
+^C
+--- box2 ping statistics ---
+9 packets transmitted, 9 packets received, 0% packet loss
+round-trip min/avg/max = 0.091/0.104/0.155 ms
+ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+111: eth0@if112: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue
+    link/ether 02:42:ac:14:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.2/16 brd 172.20.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+115: eth1@if116: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue
+    link/ether 02:42:ac:15:00:03 brd ff:ff:ff:ff:ff:ff
+    inet 172.21.0.3/16 brd 172.21.255.255 scope global eth1
+       valid_lft forever preferred_lft forever
+```
 
 - host네트워크는 직접 통신하니 bridge와 달리 docker0와 veth가 없나요?
+  - 네, 맞습니다.
 
 ---
 - EXPOSE에 설정된 포트와 -p옵션으로 지정한 포트가 다를경우 실제 포트 사용이 불가능한가요?
+  - 네, 맞습니다.
 
 - EXPOSE포트 설정을 build시에 하지 않을경우 -p에서만 지정하면 되나요? 아님, 둘 다 맞춰줘야 하나요?
-
+  - Dockerfile에 EXPOSE instruction이 없어도, 컨테이너가 리슨하는 포트를 -p로 맞춰주면 정상적으로 노출됩니다.
+  
 ### Kubernetes
