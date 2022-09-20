@@ -89,4 +89,22 @@ ubuntu@ip-10-0-1-205:~$ docker run -it busybox sh
   - 네, 이론적으로는 그렇습니다. 
   - [참고](https://docs.docker.com/engine/install/binaries/#prerequisites)
 
+
+---
+- Bind mount 시 host머신과 컨테이너에 동일한 파일이 있으면 mount가 실패하나요? 아니면 override가 되나요?
+
+- `docker exec`말고 -it로 run했을 때(foreground), container prompt나오는 화면으로 어떻게 들어가나요?
+
+- Volume 사용시 단점도 있나요?
+
+- docker0가 Gateway인가요? IP는 고정인가요?
+
+- host방식은 publish옵션으로 포워딩 설정한 것 말고, 컨테이너 내부 포트도 중복이 불가능한가요?
+
+- 가상 G/W로 외부접속하는건 bridge, none은 미사용, host는 직접 host 포트사용 맞나요?
+
+- 브릿지간 통신이 가능하게 할 수 있나요?
+
+- host네트워크는 직접 통신하니 bridge와 달리 docker0와 veth가 없나요?
+
 ### Kubernetes
