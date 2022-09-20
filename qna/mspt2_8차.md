@@ -6,13 +6,15 @@
 
 ### Docker
 
-- 회사에서 사용하는 VDI가 버츄얼 머신이고, sac같은것이 컨테이너일까요?
+- 회사에서 사용하는 VDI가 버츄얼 머신이고, sac(?)같은것이 컨테이너일까요?
   - 네, VDI가 버츄얼머신 형태입니다.
+  - [데스크탑 가상화란?](https://www.citrix.com/ko-kr/solutions/vdi-and-daas/what-is-desktop-virtualization.html) 참고하세요.
+  - "인기 있는 유형의 데스크탑 가상화는 가상 데스크탑 인프라(VDI)입니다. VDI는 호스트 기반 가상 머신(VM)을 사용하여 영구적 및 비영구적인 가상 데스크탑을 모든 종류의 연결된 기기에 제공하는 데스크탑 가상화 클라이언트-서버 모델의 변형입니다." - Citrix
 - 리눅스에 docker 설치 시 windows에서와 같이 가상 OS(Linux kernel)가 별도로 있는 상태에서 container가 올라가나요?
   - 리눅스에서는 가상OS를 별도로 생성하지는 않고, 커널을 직접 사용합니다.
 - 사내에서 개발환경으로 docker를 구성하려면 어떻게 해야하나요?
   - 1. WSL2나 Hyper-V, Virtualbox같은 가상 환경에 리눅스를 구성한 다음, [Install Docker Engine](https://docs.docker.com/engine/install/)의 방법을 적용하시면 됩니다.
-  - 2. 또는 Docker desktop for windows를 비용을 지불하고 사용하는 것도 방법입니다. 
+  - 2. 또는 Docker desktop for windows를 비용을 지불하고 사용하는 것도 방법입니다. [Pricing & Subscriptions](https://www.docker.com/pricing/) 참고.
 
 ---
 
@@ -20,7 +22,7 @@
   - [Pricing & Subscriptions](https://www.docker.com/pricing/) 을 참고하세요.
 - ls: cannot access '/var/lib/docker/....' 라고 에러메시지가 나옵니다.
   - /var/lib/docker 의 소유자가 root여서 그렇습니다.
-  - root로 해보시거나, sudo 를 붙여서 해보세요. (교재는 sudo를 붙여서 하고 있습니다.)
+  - root로 해보시거나, `sudo` 를 붙여서 해보세요. (교재는 sudo를 붙여서 하고 있습니다.)
 ```bash
 ubuntu@ip-10-0-1-205:~$ ls -al /var/lib/docker
 ls: cannot open directory '/var/lib/docker': Permission denied
@@ -47,8 +49,8 @@ drwx-----x  4 root root 4096 Sep 20 00:25 volumes
 - 레이어는 데몬에서 식별해서 관리한다고 보면 되나요? 저장소는 같으니...
   - 네, 맞습니다.
   - 다른 이미지도 동일 레이어를 가지고 있을 수 있는데, 그런것들으 모두 데몬에서 구분해서 관리합니다.
-- -it 옵션으로 하면 컨테이너 안으로 들어가는데(구체적으로는 컨테이너에 실행된 프로세스와 interactive하게 연결되는데), 거기서 나갈때 container가 종료되나요?
-  - 종료되기도 하고(exit), 아니기도 합니다. (ctrl+p,q)
+- `-it` 옵션으로 하면 컨테이너 안으로 들어가는데(구체적으로는 컨테이너에 실행된 프로세스와 interactive하게 연결되는데), 거기서 나갈 때 container가 종료되나요?
+  - 종료(stop)되기도 하고(exit), 아니기도 합니다. (ctrl+p,q)
   - 아래 box1은 exit로 나온 경우이고(container가 stop된 상태), box2는 ctrl+p,q로 나온 경우(container가 여전히 running상태)입니다.
 ```bash
 ubuntu@ip-10-0-1-205:~$ docker run -it --name box1 busybox sh
@@ -76,7 +78,6 @@ root
 
 - 교재 -it의 경우 /bin/bash를 실행한다고 되어있는데, /bin/bash가 없는 이미지의 경우, 컨테이너 실행만 되나요? 맞다면 이 경우는 -d와 같다고 보면 되나요?
   - 마지막 command(/bin/bash)를 실행할 수 없는 경우는 아래와 같이 에러를 발생시킵니다. (-d로 실행되지는 않습니다.)
-
 ```bash
 ubuntu@ip-10-0-1-205:~$ docker run -it busybox /bin/bash
 docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown.
@@ -89,9 +90,35 @@ ubuntu@ip-10-0-1-205:~$ docker run -it busybox sh
   - 네, 이론적으로는 그렇습니다. 
   - [참고](https://docs.docker.com/engine/install/binaries/#prerequisites)
 
-
 ---
+
 - Bind mount 시 host머신과 컨테이너에 동일한 파일이 있으면 mount가 실패하나요? 아니면 override가 되나요?
+  - override 되네요. 아래 참고하세요.
+  - Container의 /tmp/test.txt에는 'Test : Container'라는 문자열을 기록하고 Host의 /tmp/test.txt에는 'Test : Host'라고 기록한 후, /tmp를 마운트 하면 Host의 내용을 우선하게 됩니다.
+```bash
+ubuntu@ip-10-0-1-205:~/app$ cat Dockerfile2
+FROM node:10-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+RUN echo 'Test : Container' > /tmp/test.txt
+CMD ["node", "/app/src/index.js"]
+ubuntu@ip-10-0-1-205:~/app$ docker build -f Dockerfile2 -t todo-test .
+Sending build context to Docker daemon  6.475MB
+...
+생략
+...
+ ---> Running in b2a50a769e2a
+Successfully built 0bad600f4bd9
+Successfully tagged todo-test:latest
+ubuntu@ip-10-0-1-205:~/app$ cat /tmp/test.txt
+Test : Host
+ubuntu@ip-10-0-1-205:~/app$ docker run -d -v /tmp:/tmp --name my-todo todo-test
+188a41a7a25ce379e2e0100bed0d73f1712a9145fd82fee44104ace2c33e8eea
+ubuntu@ip-10-0-1-205:~/app$ docker exec -it my-todo cat /tmp/test.txt
+Test : Host
+```
+  - [Mount into a non-empty directory on the container](https://docs.docker.com/storage/bind-mounts/#mount-into-a-non-empty-directory-on-the-container) 도 참고하세요.
 
 - `docker exec`말고 -it로 run했을 때(foreground), container prompt나오는 화면으로 어떻게 들어가나요?
 
