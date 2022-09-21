@@ -254,10 +254,15 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - 네, 맞습니다.
 
 ---
+
 - EXPOSE에 설정된 포트와 -p옵션으로 지정한 포트가 다를경우 실제 포트 사용이 불가능한가요?
   - 네, 맞습니다.
 
 - EXPOSE포트 설정을 build시에 하지 않을경우 -p에서만 지정하면 되나요? 아님, 둘 다 맞춰줘야 하나요?
   - Dockerfile에 EXPOSE instruction이 없어도, 컨테이너가 리슨하는 포트를 -p로 맞춰주면 정상적으로 노출됩니다.
-  
+
+- 도커가 host의 커널을 공유한다고 했는데, base image로 alpine같은 리눅스를 지정하는 이유는 뭔가요?
+  - 커널외에 리눅스 배포판마다 달라지는 부분들이 있습니다. (예를들어 배포판 마다 달라지는 패키지 관리자나, 유틸리티 들)
+  - [Small, Simple, and Secure: Alpine Linux under the Microscope](https://youtu.be/sIG2P9k6EjA) 참고하세요.
+
 ### Kubernetes
