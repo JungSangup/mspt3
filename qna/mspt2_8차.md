@@ -294,3 +294,22 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - 네, 있습니다.
 
 - http check는 response code로만 되나요? method는 get만 지원하나요?
+
+---
+
+- YAML파일로 정의한 POD Spec.의 container version(e.g. nginx의 버젼)이 달라지면 nginx 버젼만 업데이트를 하나요? 아니면, 컨테이너를 삭제 후 다시 생성하나요?
+  - POD를 다시 생성하게 됩니다.
+
+- ReplicaSet에서 배포전략이 추가된게 Deployment인가요?
+  - Spec. 을 보면 말씀하신게 맞습니다.
+  - 하지만, 교재에 설명드린 것 과 같이 각자의 역할이 다르긴 합니다.
+
+- Deployment에는 node의 정의는 없나요?
+  - 일반적인 경우는 스케쥴링은 K8S에 맡깁니다.
+  - 하지만, 특별한 경우 Node를 지정할 수도 있습니다. (nodeSelector , affinity 를 사용하면 됩니다.)
+  - [노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/) 참고하세요.
+
+- Pod개수를 줄일 때 삭제되는 Pod의 기준이 있나요? (어떤것 부터?)
+
+- ReplicaSet과 Deployment가 거의 동일한 구조인 것 같은데, replicaset을 사용할 이유가 있을까요?
+  - 네, 맞습니다. 결국 Deployment만 만들면 나머지가 만들어지는 구조입니다.
