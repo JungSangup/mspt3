@@ -282,7 +282,7 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - 추가로 K8S에서는 Kublet, Kube-proxy같은 것들이 그 Node에 있습니다.
 
 - Container의 Reasion에서 CrashLoopBackOff와 Error의 차이는 뭔가요?
-  - 
+
 
 - Pod가 먼저 생성되고 Node로 스케쥴 되나요? , 
 
