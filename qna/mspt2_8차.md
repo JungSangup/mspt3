@@ -316,3 +316,26 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
 
 - ReplicaSet과 Deployment가 거의 동일한 구조인 것 같은데, replicaset을 사용할 이유가 있을까요?
   - 네, 맞습니다. 결국 Deployment만 만들면 나머지가 만들어지는 구조입니다.
+
+---
+
+- Deployment에 pod, replicaset이 모두 포함되어 있으니 일반적인 운영환경에서는 주로 deployment를 정의해서 사용하나요?
+  - 네, 맞습니다.
+  - 더 나아가서는 helm이라는 패키지관리자를 사용하고, 그 패키지관리자에서 deployment를 관리합니다. (마지막시간에 배웁니다.)
+
+- 하위개념 리소스(e.g. pod, replicaset)의 정의를 상위개념 리소스(deployment)의 정의에 포함시키지 않고, 다른 yaml파일의 내용을 참조할 수도 있나요?
+
+- deployment를 삭제하면 하위 리소스들(replicaset, pod)이 함께 삭제되나요?
+  - 네, 맞습니다. 함게 알아서 삭제됩니다. (scaling된 경우까지 알아서 다 삭제해줍니다.)
+
+- Docker의 Namespace가 Service와 유사한 의미인가요?
+  - 도커의 Namespace는 격리를 위해서 사용되는 개념입니다. (Process namespace, network namespace, mnt namespace...)
+  - K8S의 Service는 ReplicaSet으로 관리되는 복수개의 Pod들을 네트워크 상에서 연결하기 위해서(네트워킹) 사용되는 리소스 입니다.
+
+- Ingress는 Kubernetes의 ALB 개념인가요?
+  - [AWS Load Balancer Controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller#readme)
+
+- Jeus WAS를 사용하는 Pod의 경우, 소스는 Git에서 가져올테고 Jeus는 어디서 가져오나요?
+
+- POD의 경우는 OS 패치 및 관련 S/W 업그레이드를 어떻게 하나요?
+
