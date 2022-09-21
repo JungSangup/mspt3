@@ -266,3 +266,11 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - [Small, Simple, and Secure: Alpine Linux under the Microscope](https://youtu.be/sIG2P9k6EjA) 참고하세요.
 
 ### Kubernetes
+
+- log는 stdout이 보이는건가요?
+  - 네 맞습니다.
+  - [로깅 아키텍처](https://kubernetes.io/ko/docs/concepts/cluster-administration/logging/) 참조하세요.
+  - [kubectl logs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) 도 참고하시구요.
+
+- pod가 crash로 stop되었을때도 kubectl logs가 유효한가요? 아니라면 어떻게 디버깅 할 수 있나요?
+  - pod파트에서 좀 더 자세히 다룰텐데요, 일단 running상태일때는 logs를 볼 수 있고 아닌 경우는 다른쪽을 봐야합니다.
