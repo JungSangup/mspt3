@@ -343,3 +343,6 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
 
 ---
 
+- PVC를 업데이트(용량증설) 하면 pv를 다시 만드나요?
+  - [볼륨 확장 허용](https://kubernetes.io/ko/docs/concepts/storage/storage-classes/#%EB%B3%BC%EB%A5%A8-%ED%99%95%EC%9E%A5-%ED%97%88%EC%9A%A9) 을 하면 확장 가능합니다.
+  - [PV(PersistentVolume) 용량 증설(Scale Up) 하기](https://support.skdt.co.kr/ko/support/solutions/articles/42000063508-pv-persistentvolume-%EC%9A%A9%EB%9F%89-%EC%A6%9D%EC%84%A4-scale-up-%ED%95%98%EA%B8%B0) 도 참고하세요.
