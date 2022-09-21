@@ -340,3 +340,6 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
 - POD의 경우는 OS 패치 및 관련 S/W 업그레이드를 어떻게 하나요?
 
 - Docker 의 EXPOSE와 K8S의 Service간 연결점은 어디인가요?
+
+---
+
