@@ -274,3 +274,22 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
 
 - pod가 crash로 stop되었을때도 kubectl logs가 유효한가요? 아니라면 어떻게 디버깅 할 수 있나요?
   - pod파트에서 좀 더 자세히 다룰텐데요, 일단 running상태일때는 logs를 볼 수 있고 아닌 경우는 다른쪽을 봐야합니다.
+
+---
+
+- (Worker)node를 한 개의 Docker (host machine)으로 생각해도 되나요?
+  - 네, 맞습니다. Runtime을 다른걸 쓰긴 하지만 같은 개념으로 보시면 됩니다.
+  - 추가로 K8S에서는 Kublet, Kube-proxy같은 것들이 그 Node에 있습니다.
+
+- Container의 Reasion에서 CrashLoopBackOff와 Error의 차이는 뭔가요?
+  - 
+
+- Pod가 먼저 생성되고 Node로 스케쥴 되나요? , 
+
+
+- Try 카운트는 몇회까지 하나요? 제한할 수 있나요?  (Probe)
+
+- Docker는 빌드/런 하는 도구이고, Containerd, CRI-O는 Runtime만 제공하는 도구라면, Docker말고 다른 빌드 도구도 있나요?
+  - 네, 있습니다.
+
+- http check는 response code로만 되나요? method는 get만 지원하나요?
