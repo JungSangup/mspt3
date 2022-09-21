@@ -278,14 +278,15 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
 ---
 
 - (Worker)node를 한 개의 Docker (host machine)으로 생각해도 되나요?
-  - 네, 맞습니다. Runtime을 다른걸 쓰긴 하지만 같은 개념으로 보시면 됩니다.
+  - 네, 맞습니다. Runtime을 다른걸 쓰긴 하지만 같은 개념(컨테이너가 실행되는 머신)으로 보시면 됩니다.
   - 추가로 K8S에서는 Kublet, Kube-proxy같은 것들이 그 Node에 있습니다.
 
 - Container의 Reasion에서 CrashLoopBackOff와 Error의 차이는 뭔가요?
-
+  - ...
+  - [What is Kubernetes CrashLoopBackOff? And how to fix it](https://sysdig.com/blog/debug-kubernetes-crashloopbackoff/)
+  - [컨테이너 재시작 정책](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)
 
 - Pod가 먼저 생성되고 Node로 스케쥴 되나요? , 
-
 
 - Try 카운트는 몇회까지 하나요? 제한할 수 있나요?  (Probe)
 
