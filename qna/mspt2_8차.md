@@ -310,6 +310,9 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - [노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/) 참고하세요.
 
 - Pod개수를 줄일 때 삭제되는 Pod의 기준이 있나요? (어떤것 부터?)
+  - [파드 삭제 비용](https://kubernetes.io/ko/docs/concepts/workloads/controllers/replicaset/#%ED%8C%8C%EB%93%9C-%EC%82%AD%EC%A0%9C-%EB%B9%84%EC%9A%A9) 문서를 참조 바랍니다.
+  - 비용을 기준으로 삭제 우선순위 지정 가능합니다.
+  - 추가로 [Annotation](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/annotations/) 에 대해 아셔야 합니다.
 
 - ReplicaSet과 Deployment가 거의 동일한 구조인 것 같은데, replicaset을 사용할 이유가 있을까요?
   - 네, 맞습니다. 결국 Deployment만 만들면 나머지가 만들어지는 구조입니다.
