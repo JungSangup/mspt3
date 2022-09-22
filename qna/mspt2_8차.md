@@ -324,6 +324,8 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - 더 나아가서는 helm이라는 패키지관리자를 사용하고, 그 패키지관리자에서 deployment를 관리합니다. (마지막시간에 배웁니다.)
 
 - 하위개념 리소스(e.g. pod, replicaset)의 정의를 상위개념 리소스(deployment)의 정의에 포함시키지 않고, 다른 yaml파일의 내용을 참조할 수도 있나요?
+  - Deployment의 Template에 Pod spec.을 정의하면 되는데, 별도의 파일로 작성하고 참조하는건 안되는 것 같습니다.
+  - 혹시라도 방법을 찾으면 여기 업데이트 해 놓겠습니다.
 
 - deployment를 삭제하면 하위 리소스들(replicaset, pod)이 함께 삭제되나요?
   - 네, 맞습니다. 함게 알아서 삭제됩니다. (scaling된 경우까지 알아서 다 삭제해줍니다.)
@@ -336,11 +338,17 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
   - [AWS Load Balancer Controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller#readme)
 
 - Jeus WAS를 사용하는 Pod의 경우, 소스는 Git에서 가져올테고 Jeus는 어디서 가져오나요?
+  - Jeus base image를 Registry에서 가져와서, 소스(from Git)를 빌드하고 패키징하고 더해서 최종적으로 우리 시스템의 container image를 만듭니다.
+  - 만들어진 우리 시스템 image는 다시 Registry에 저장하고 배포에 사용하게 됩니다.
 
 - POD의 경우는 OS 패치 및 관련 S/W 업그레이드를 어떻게 하나요?
-
+  - Base image와 실행환경에 대한 활동을 동일하게 해야합니다.
+  - 예를들어 보안 패치가 있다면 실행환경과 Base image에 반영해줘야 합니다.
+  
 - Docker 의 EXPOSE와 K8S의 Service간 연결점은 어디인가요?
-
+  - Service object를 생성하면 TargetPort가 바로 컨테이너의 포트(EXPOSE에서 지정한 포트)가 됩니다.
+  - Service는 NodePort, Port, TargetPort 정보를 가지고 있습니다. (Type에 따라 달라지기는 합니다.)
+  
 ---
 
 - PVC를 업데이트(용량증설) 하면 pv를 다시 만드나요?
