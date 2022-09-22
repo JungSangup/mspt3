@@ -354,3 +354,22 @@ ubuntu@ip-10-0-1-205:~$ docker exec -it box1 ip addr
 - PVC를 업데이트(용량증설) 하면 pv를 다시 만드나요?
   - [볼륨 확장 허용](https://kubernetes.io/ko/docs/concepts/storage/storage-classes/#%EB%B3%BC%EB%A5%A8-%ED%99%95%EC%9E%A5-%ED%97%88%EC%9A%A9) 을 하면 확장 가능합니다.
   - [PV(PersistentVolume) 용량 증설(Scale Up) 하기](https://support.skdt.co.kr/ko/support/solutions/articles/42000063508-pv-persistentvolume-%EC%9A%A9%EB%9F%89-%EC%A6%9D%EC%84%A4-scale-up-%ED%95%98%EA%B8%B0) 도 참고하세요.
+
+
+
+---
+
+## 설문요약
+
+- 실습을 같이 해볼 수 있으면 좋겠다.
+  - 제한된 시간(이틀)에 많은 양을 하다보니, 수업 중 실습시간을 따로 드리기는 어려울 것 같습니다.
+  - 따로 해볼 수 있는 환경 (e.g. killercoda)을 계속 업데이트 하고, 정보도 공유하도록 하겠습니다.
+- 모든 질문에 대한 답변은 불필요한 것 같다. (수업시간 부족)
+  - 질문에 대한 답은 이곳(깃헙-Q&A)에서 모두 드리도록 하고, 수업 중에는 중요한 것들만 공유하도록 하겠습니다.
+- 수업시간 분배 (처음은 느리고, 후반부는 빠르고)
+  - 항상 염두에 두고 진행한다고 하는데, 역시 생각대로 잘 안되는 것 같습니다. ㅠㅠ
+  - 앞에 말씀드린 질문/답변 시간도 좀 줄이고, 전체 강의시간 배분을 잘 해서 문제없도록 개선하겠습니다. (다음 차수부터는 시간표-챕터별 시간-를 작성해서 진행하겠습니다.)
+- 정리를 해주면 좋겠다. (내용이 많아서 정리가 잘 안되고, 어떤게 중요한지 잘 모르겠다.)
+  - 말로하는 Summary말고, 전체 요약장표를 추가해 보겠습니다. (한 장 요약. - 가능할지 모르겠네요..)
+    - [Cloud Native landscape](https://landscape.cncf.io/) , [Cloud Native Trail Map](https://github.com/cncf/trailmap), [쿠버네티스 알아보기](https://www.samsungsds.com/kr/insights/220222_kubernetes1.html) 등등 참조.
+  - 각 챕터의 전반부에 학습목표도 추가하겠습니다.
