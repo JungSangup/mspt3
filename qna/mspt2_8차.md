@@ -67,8 +67,6 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 ```bash
 ubuntu@ip-10-0-1-205:~$ docker run -d --name my-nginx1 nginx
 65f03883d5cf20337c93e413e035df468bc0870e3f79bd90a80e473a9f7679a6
-ubuntu@ip-10-0-1-205:~$ docker exec -it my-nginx sh
-Error: No such container: my-nginx
 ubuntu@ip-10-0-1-205:~$ docker exec -it my-nginx1 sh
 # whoami
 root
