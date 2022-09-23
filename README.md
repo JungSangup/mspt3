@@ -50,7 +50,7 @@
 > WSL2기반의 Docker Desktop on Windows인 경우 Docker root dir.의 위치가 아래와 같습니다.
 > 탐색기에서 `\\wsl.localhost\docker-desktop-data\data\docker` 로 탐색  
 
-> [프로덕션 환경](https://kubernetes.io/ko/docs/setup/production-environment/)은 더 많은 내용을 고려해야 합니다.  
+> Kubernetes [프로덕션 환경](https://kubernetes.io/ko/docs/setup/production-environment/)은 더 많은 내용을 고려해야 합니다.  
 
 ---
 
