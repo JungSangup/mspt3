@@ -53,7 +53,10 @@ Not all available namespaces were implemented from the beginning. A full support
     - setns : reassociates the calling thread with the provided namespace file descriptor
 
 
-
+#### Mount(mnt) namespace
+2002년 처음 구현된 Namespace로, 이를 이용하여 프로세스 그룹별로 마운트포인트 세트를 격리(isolate)할 수 있음.  
+chroot 의 jail과 유사한 (하지만 더 안전한 방식으로) 환경을 제공함.  
+mnt namespace 추상화는 루트 권한 없이도 내부에서 루트 권한을 가진 가상 환경을 생성할 수 있음.
 
 ---
 
