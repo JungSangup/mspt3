@@ -518,19 +518,6 @@ value 들이 반영된 manifest를 확인해 보고자 한다면, `--dry-run` �
 
 ---
 
-#### helm uninstall
-
-설치된 chart (release)를 삭제하는 방법은 `helm uninstall 'release명'`을 사용하는 것입니다.
-
-```
-$ helm uninstall my-wordpress
-release "my-wordpress" uninstalled
-```
-
-helm install을 통해 설치된 모든 resource가 삭제되는 것을 알 수 있습니다.
-
-
-
 #### helm upgrade
 
 설치된 chart (release)를 업그레이드 하는 방법은 helm upgrade 를 사용하는 것입니다.
@@ -545,6 +532,31 @@ helm install을 통해 설치된 모든 resource가 삭제되는 것을 알 수 
 
 - --values (또는 -f) : 별도의 value 파일을 생성하고 해당 파일의 경로와 이름을 지정 (예, --values myval.yaml)
 - --set : command line 상에서 value를 지정 (예, --set image.tag=5.9.3-debian-10-r4)
+
+
+#### helm rollback
+
+릴리스가 계획대로 되지 않는다면, `helm rollback 'release명' '리비전 번호'`를 사용하여 이전 릴리스로 간단히 롤백할 수 있습니다.
+
+```bash
+$ helm rollback my-wordpress 1
+```
+위와 같이 하면 my-wordpress가 맨 첫번째 릴리스 버전으로 롤백됩니다.  
+특정 릴리스의 리비전 번호를 확인하기 위해서는 `helm history 'release명'`를 사용할 수 있습니다.
+> 리비전 번호는 1부터 시작해서 1씩 증가하여 부여됩니다.
+
+---
+
+#### helm uninstall
+
+설치된 chart (release)를 삭제하는 방법은 `helm uninstall 'release명'`을 사용하는 것입니다.
+
+```
+$ helm uninstall my-wordpress
+release "my-wordpress" uninstalled
+```
+
+helm install을 통해 설치된 모든 resource가 삭제되는 것을 알 수 있습니다.
 
 ---
 
