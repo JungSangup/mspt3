@@ -432,6 +432,8 @@ To access your WordPress site from outside the cluster follow the steps below:
   echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
 ```
 
+> 위의 방법 외에도 [더 많은 설치 방법들](https://helm.sh/ko/docs/intro/using_helm/#%EB%8D%94-%EB%A7%8E%EC%9D%80-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95%EB%93%A4) 이 있습니다.
+
 ---
 
 helm install을 통해 chart를 설치하면, Kubernetes Resource가 모두 생성될 때까지 기다리는 것이 아니라, 바로 Deployed 라는 결과가 출력됩니다.
