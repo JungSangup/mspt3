@@ -38,12 +38,14 @@ Helm을 통해 다음과 같은 일을 할 수 있습니다.
 
 ## Helm
 
-![h:380](img/helmchart.png)
+![h:350](img/helmchart.png)
 
 Helm은 다음과 같은 3가지 중요한 Concept을 가지고 있습니다.
 - **Chart** : Helm의 package이며, 이 package에는 Kubernetes Resource들을 담고 있음
 - **Repository** : Chart(Kubernetes Package) 저장소
 - **Release** : Kubernetes Cluster에서 구동되는 Chart의 Instance
+
+![](./img/hyperlink.png)[Three Big Concepts](https://helm.sh/docs/intro/using_helm/#three-big-concepts)
 
 ---
 
