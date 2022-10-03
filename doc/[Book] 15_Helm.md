@@ -646,10 +646,10 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
   - Helm Commands
     - helm search
     - helm install
-    - helm uninstall
     - helm upgrade
+    - helm roleback
+    - helm uninstall
     - helm create
     - helm lint
-    - helm template
     - helm package
 
