@@ -61,13 +61,53 @@ mnt namespace 추상화는 루트 권한 없이도 내부에서 루트 권한을
 
 ---
 
-## Container Runtimes
+#### UNIX Time-sharing System (uts) namespace
+The UTS namespace was introduced in Linux 2.6.19 (2006) and allows us to **unshare the domain- and hostname** from the current host system.
+
+#### Interprocess Communication (ipc) namespace
+mespaces came with Linux 2.6.19 (2006) too and isolate interprocess communication (IPC) resources.
+
+---
+
+#### Process ID (pid) namespace
+The PID namespace was introduced in Linux 2.6.24 (2008) and gives processes an **independent set of process identifiers (PIDs)**.
+
+![h:300](./img/pid_namespace.png)
 
 
 
 ---
 
-## Container Images
+#### Network (net) namespace
+Network namespaces were completed in Linux 2.6.29 (2009) and can be used to virtualize the network stack.
+
+![h:300](./img/network_namespace.png)
+
+
+#### User ID (user) namespace
+With Linux 3.5 (2012) the isolation of user and group IDs was finally possible via namespaces.
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## [Container Runtimes](https://medium.com/@saschagrunert/demystifying-containers-part-ii-container-runtimes-e363aa378f25)
+
+
+
+---
+
+## [Container Images](https://medium.com/@saschagrunert/demystifying-containers-part-iii-container-images-244865de6fef)
 
 
 ---
