@@ -27,7 +27,7 @@ footer: Samsung SDS
 ## [Kernel Space](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504)
 
 **Containers** are only isolated groups of processes running on a single host, which fulfill a set of “common” features.  
-**컨테이너(Container)**는 단일 호스트에서 실행되는 격리된 프로세스 그룹임.
+**컨테이너**는 단일 호스트에서 실행되는 격리된 프로세스 그룹임.
 
 
 ### chroot, pivot_root
