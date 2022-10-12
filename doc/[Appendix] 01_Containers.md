@@ -49,7 +49,7 @@ Not all available namespaces were implemented from the beginning. A full support
 - seven distinct namespaces (current) : *mnt, pid, net, ipc, uts, user and cgroup.*
 - two additional namespaces (not fully implemented yet) : *time and syslog.* 
 
-- Namespace APIs
+- Namespace APIs ( System calls )
     - clone : creates a new child process
     - unshare : disassociate parts of the execution context
     - setns : reassociates the calling thread with the provided namespace file descriptor
