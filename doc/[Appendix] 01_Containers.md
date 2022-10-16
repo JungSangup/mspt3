@@ -27,12 +27,13 @@ footer: Samsung SDS
 ## [Kernel Space](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504)
 
 **Containers** are only isolated groups of processes running on a single host, which fulfill a set of “common” features.  
-**컨테이너**는 단일 호스트에서 실행되는 격리된 프로세스 그룹임.
+**컨테이너**는 단일 호스트에서 실행되는 **격리**된 프로세스 그룹임.
 
 
 ### chroot, pivot_root
 파일시스템 root를 변경. (/ 를 다른 경로로 설정.)  
-이것만으로는 프로세스, 네트워크 격리를 할 수 없음.
+초기에 사용되던 chroot는 더 이상 컨테이너에서 사용되지 않고, pivot_root가 사용됨.  
+이것만으로는 프로세스, 네트워크 격리를 할 수 없음. ( 감옥 안에서 감옥 밖의 프로세스와 네트워크를 건드릴 수 있음. (* ￣︿￣) ) 
 
 ![h:300](./img/chroot.png)
 
@@ -102,6 +103,14 @@ With Linux 3.5 (2012) the isolation of user and group IDs was finally possible v
 ---
 
 ## [Container Runtimes](https://medium.com/@saschagrunert/demystifying-containers-part-ii-container-runtimes-e363aa378f25)
+
+
+**“How to actually run containers?”**  
+
+
+
+![h:300](https://miro.medium.com/max/720/1*OnB-Ah-FehjzQfhu5-BHmQ.png)
+
 
 
 
