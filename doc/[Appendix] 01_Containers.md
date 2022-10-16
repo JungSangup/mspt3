@@ -105,6 +105,14 @@ With Linux 3.5 (2012) the isolation of user and group IDs was finally possible v
 ## [Container Runtimes](https://medium.com/@saschagrunert/demystifying-containers-part-ii-container-runtimes-e363aa378f25)
 
 
+**“How to actually run containers?”**  
+
+
+
+![h:300](https://miro.medium.com/max/720/1*OnB-Ah-FehjzQfhu5-BHmQ.png)
+
+
+
 
 ---
 
