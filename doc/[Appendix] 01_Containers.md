@@ -111,7 +111,15 @@ With Linux 3.5 (2012) the isolation of user and group IDs was finally possible v
 
 ![h:300](https://miro.medium.com/max/720/1*OnB-Ah-FehjzQfhu5-BHmQ.png)
 
+---
 
+Linux Container(LXC) : cgroup, Namespaces  
+LMCTFY : "Let Me Contain That For You" -> Google's project (2007)  
+Docker : LXC , images
+
+Open Container Initiative (OCI)
+Container Runtime Interface (CRI)
+CRI-O
 
 
 ---
