@@ -112,7 +112,7 @@ spec:
 Volume은 아래와 같은 단계(Phase)를 가집니다. 해당 단계는 PersistentVolume(PV)이 생성되고,
 `kubectl get pv` 명령을 통해 조회할 수 있습니다.
 - **Available** – PV가 생성되고 PVC가 바인딩되기 전 단계
-- **Bound** – PV가 PVC에 바인된 단계
+- **Bound** – PV가 PVC에 바인딩된 단계
 - **Released** – PVC가 삭제된 단계 (아직 리소스를 반환하지는 않음)
 - **Failed** – 자동반환 실패
 
