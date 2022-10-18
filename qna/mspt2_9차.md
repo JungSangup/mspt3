@@ -31,7 +31,8 @@
 - 리눅스 명령 중 screen도 docker와 유사한 것으로 이해되는데, 일종의 리눅스 docker로 봐도 되나요?
   - ...
 - `docker ps` 명령으로 아무것도 안보이는데, `docker ps -al` 령으로는 보입니다. 어떤 차이가 있나요?
-  - ...
+  - running 중인것을 보는것과, 전체(running + exited)를 보는것의 차이입니다.
+  - `-a`옵션이 전체를 보는 옵션입니다.
 - `exit`를 했을 때 컨테이너가 종료되지 않도록 하거나 자동 재시작하도록 하는 방법이 있나요?
   - `exit`는 종료(stop), `ctrl+p,q`는 종료하지 않고 빠져나오기 입니다.
   - 아래 box1은 exit로 나온 경우이고(container가 stop된 상태), box2는 ctrl+p,q로 나온 경우(container가 여전히 running상태)입니다.
