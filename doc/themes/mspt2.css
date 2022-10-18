@@ -8,7 +8,9 @@
 
     font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium', 'Trebuchet MS';
     font-size: 18px;
+    /*
     color: black;
+    */
     background-image: url("./themes/hero-background.svg");
     background-size: cover;
 }
