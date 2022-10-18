@@ -17,3 +17,31 @@
   - apt로 설치하시는 방법은 교재로 보자면 docker engine을 설치하는 것입니다. (cli로 daemon과 통신하면서 실행하는 방식)
 
 ---
+
+- docker pull nginx 했을 때 registry는 어디에 있는건가요? 도커 설치 시 registry가 같이 설치되는건가요?
+  - default registry는 hub.docker.com을 이용합니다.
+  - registry는 같이 설치되지는 않고, 필요하면 설치해서 쓸 수도 있습니다.
+  - hub.docker.com이 아닌 다른 registry를 쓰려면, `docker login OOO` 명령어로 다른 registry에 로그인 한 후 pull/push명령어를 실행하면 됩니다.
+- SCP의 Container registry는 Private만 있는건가요?
+  - ...
+- Docker registry와 repository는 단순 용어차이인가요?
+  - registry는 저장소 그 자체이고, repository는 저장소 내에서 구분된 저장공간 입니다.
+- 사용자별로 명령어에 대한 권한을 차등적으로 줘서 어떤 명령어는 수행이 안되게 하는 기능이 있나요? (e.g. rm을 하지 못하게...)
+  - ...
+- 리눅스 명령 중 screen도 docker와 유사한 것으로 이해되는데, 일종의 리눅스 docker로 봐도 되나요?
+  - ...
+- `docker ps` 명령으로 아무것도 안보이는데, `docker ps -al` 령으로는 보입니다. 어떤 차이가 있나요?
+  - ...
+- `exit`를 했을 때 컨테이너가 종료되지 않도록 하거나 자동 재시작하도록 하는 방법이 있나요?
+  - `exit`는 종료(stop), `ctrl+p,q`는 종료하지 않고 빠져나오기 입니다.
+  - 아래 box1은 exit로 나온 경우이고(container가 stop된 상태), box2는 ctrl+p,q로 나온 경우(container가 여전히 running상태)입니다.
+```bash
+ubuntu@ip-10-0-1-205:~$ docker run -it --name box1 busybox sh
+/ # exit
+ubuntu@ip-10-0-1-205:~$ docker run -it --name box2 busybox sh
+/ # ubuntu@ip-10-0-1-205:~$
+ubuntu@ip-10-0-1-205:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      PORTS     NAMES
+99afe3cc6025   busybox   "sh"      8 seconds ago    Up 7 seconds                          box2
+508b37c96942   busybox   "sh"      28 seconds ago   Exited (0) 25 seconds ago             box1
+```
