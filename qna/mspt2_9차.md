@@ -46,3 +46,10 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 99afe3cc6025   busybox   "sh"      8 seconds ago    Up 7 seconds                          box2
 508b37c96942   busybox   "sh"      28 seconds ago   Exited (0) 25 seconds ago             box1
 ```
+
+- `docker stop`과 `docker rm`은 어떤 차이인가요?
+  - stop은 컨테이너를 중단한 것이고(삭제된것은 아님.) 다시 start할 수 있습니다.
+  - rm 은 컨테이너를 삭제한 것이고, 다시 만들려면 run 명령을 이용해야 합니다.
+
+---
+
