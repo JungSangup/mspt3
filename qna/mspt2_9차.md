@@ -53,3 +53,5 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 
 ---
 
+- Volume, Bind mount 사용 시 컨테이너에서 발생된 I/O가 ReadWrite Layer를 거치지 않나요?
+  - Storage driver를 거치지 않고, 마운트된 host machine의 디스크로 직접 I/O가 됩니다.
