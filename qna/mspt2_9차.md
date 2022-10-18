@@ -75,6 +75,20 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 
 - dockerfile에 CMD가 여러 개 있을 때 RUN 시점에 파라미터를 주면 어떤 CMD에 적용이 되나요?
   - 마지막 CMD에 적용이 됩니다.
+```bash
+ubuntu@ip-10-0-1-205:~/temp$ cat Dockerfile
+FROM centos
+ENTRYPOINT ["/bin/echo", "Hello docker"]
+CMD ["world1"]
+CMD ["world2"]
+CMD ["world3"]
+ubuntu@ip-10-0-1-205:~/temp$ docker run --rm my-ubuntu:v3
+Hello docker world3
+ubuntu@ip-10-0-1-205:~/temp$ docker run --rm my-ubuntu:v3 aaa
+Hello docker aaa
+ubuntu@ip-10-0-1-205:~/temp$ docker run --rm my-ubuntu:v3 aaa bbb
+Hello docker aaa bbb
+```
 - `COPY . .`을 하지 않으면 이미지가 container로 실행될 때 파일이 없나요? 기본으로 해줘야 하는건지 궁금합니다.
   - 네, 맞습니다. 컨테이너가 동작하는동안 필요한 파일은 dockerfile에서 COPY와 같은 instruction을 이용해서 복사해줘야 합니다.
   - 또는 실행한 후에 뭔가 파일을 컨테이너 내부로 복사하려면 `docker cp` 라는 명령을 쓸 수도 있습니다.
