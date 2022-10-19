@@ -105,6 +105,8 @@ Hello docker aaa bbb
 - Dockerfile_BP에서 leverage build cache는 기본 설정으로 캐시에서 layer를 찾아 재사용하는게 효율적이라는 건가요?
   - ...
 
+#### Docker summary
+![](img/docker_summary_9.png)
 
 ### Kubernetes
 
