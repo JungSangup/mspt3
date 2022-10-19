@@ -312,7 +312,7 @@ Memory도 CPU와 마찬가지로 Node의 메모리보다 더 큰 요청을 셋�
 
 #### Namespace settings
 
-클러스터는 Namespace로 구성될 수 있는데, 만약 그 중 한 Namespace가 과도한 요청이 있을 경우 전체 클러스터에 영향을 미칠 수 있습니다. 따라서 이러한 경우를 제한하기 위해서는 Namespace 레벨에서 ResourceQuotas와 LimitRanges 를 설정하는 것이 중요합니다.
+클러스터는 Namespace로 구성될 수 있는데, 만약 그 중 한 Namespace가 과도한 요청이 있을 경우 전체 클러스터에 영향을 미칠 수 있습니다. 따라서 이러한 경우를 제한하기 위해서는 **Namespace 레벨에서 ResourceQuotas와 LimitRanges 를 설정**하는 것이 중요합니다.
 
 [ResourceQuotas](https://kubernetes.io/ko/docs/concepts/policy/resource-quotas/)
 
