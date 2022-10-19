@@ -314,7 +314,7 @@ Memory도 CPU와 마찬가지로 Node의 메모리보다 더 큰 요청을 셋�
 
 클러스터는 Namespace로 구성될 수 있는데, 만약 그 중 한 Namespace가 과도한 요청이 있을 경우 전체 클러스터에 영향을 미칠 수 있습니다. 따라서 이러한 경우를 제한하기 위해서는 Namespace 레벨에서 ResourceQuotas와 LimitRanges 를 설정하는 것이 중요합니다.
 
-**ResourceQuotas**
+[ResourceQuotas](https://kubernetes.io/ko/docs/concepts/policy/resource-quotas/)
 
 Namespace를 생성한 후, ResourceQuota를 통해 Namespace의 CPU 및 메모리를 제한 할 수 있습니다.
 ```yaml
@@ -330,7 +330,7 @@ spec:
     limits.memory: 500Mib
 ```
 
-**LimitRange**
+[LimitRange](https://kubernetes.io/ko/docs/concepts/policy/limit-range/)
 
 ResourceQuotas는 Namespace 전체영역에 대한 리소스의 제한을 정의하는반면, LimitRange는 개별 컨테이너 단위의 리소스에 대한 제약입니다. 즉, 사용자들이 개별 컨테이너에 대한 리소스를 정의 할때 해당되는 범위를 제한하는 개념입니다. 이렇게 함으로써, 사용자들은 초소형 또는 초대형 컨테이너를 생성 할 수 없게 됩니다.
 ```yaml
