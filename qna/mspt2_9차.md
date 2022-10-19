@@ -115,5 +115,5 @@ Hello docker aaa bbb
 ---
 
 - 하나의 Cluster에서 수용 가능한 Node수는 어느정도 인가요?
-  - 1.25에서는 5,000개 까지 가능하다고 합니다.  （°o°；）
+  - Kubernetes 1.25에서는 5,000개 까지 가능하다고 합니다.  （°o°；）
   - [대형 클러스터에 대한 고려 사항](https://kubernetes.io/ko/docs/setup/best-practices/cluster-large/) 를 참고하세요.
