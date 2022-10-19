@@ -160,3 +160,7 @@ Hello docker aaa bbb
 
 - 무중단 배포 시 처리중인 Transaction은 실패하나요? 정상 처리하고 나서 pod가 종료되나요?
   - ... 
+
+---
+
+- 
