@@ -298,13 +298,13 @@ spec:
         cpu: "500m"
 ```
 
-####### cpu
+###### cpu
 
 CPU 요청과 관련하여 고려해야 할 사항 중 한가지는 Node의 CPU core수보다 큰 값을 입력하면 Pod가 스케쥴링 되지 않는다는 것입니다. 예로써 Kubernetes 클러스터는 dual core VM으로 구성되어 있는데 Pod에는 4개의 core를 입력했다면 Pod가 스케쥴링 되지 않는다는 것입니다.
 
 특별한 경우가 아니라면 CPU요청은 1이하로 하고 Replica에 의해 오토스케일링되는 것을 염두해서 Pod를 설계해야합니다. 이렇게 설정하는 것이 시스템을 보다 유연하고 신뢰성있게 구성할 수 있습니다.
 
-####### Memory
+###### Memory
 
 Memory도 CPU와 마찬가지로 Node의 메모리보다 더 큰 요청을 셋팅하게되면 Pod는 스케쥴링되지 않습니다. 또한 메모리는 CPU와 달리 Kubernetes에서 메모리 사용량을 조절할 수 없으므로 Container가 메모리 제한을 초과하게 되면 애플리케이션(Container)가 종료되는데, Pod가 Deployment, StatefulSet, DaemonSet 또는 다른 유형의 컨트롤러에 의해 관리되는 경우, 기존 Pod는 종료되고 새로운 Pod가 시작됩니다.
 
