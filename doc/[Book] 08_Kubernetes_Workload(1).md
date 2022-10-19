@@ -270,6 +270,68 @@ HTTP probe는 추가적으로 아래와 같은 필드를 더 설정할 수 있�
 
 ---
 
+#### Resource  할당
+
+Kubernetes에서 Pod는 스케쥴링할때 Container가 실제로 수행 할 수 있는 충분할 컴퓨팅 리소스를 갖는 것은 매우 중요합니다. 만약 어떤 애플리케이션이 수행되기 위한 리소스보다 적은 리소스로 Node에 할당되게 되면, 메모리나 CPU문제로 애플리케이션이 중단될 수 있기때문입니다. 또한 애플리케이션은 때때로 필요한 것보다 더 많은 리소스기 필요 할 수도 있습니다.
+
+##### Resource requests and limits
+
+Resource requests and limit은 Kubernetes가 CPU 및 메모리와 같은 리소스를 제어하는 매커니즘입니다.
+
+Container를 명세할때 아래와 같이 각각의 Container에서 필요한 CPU와 RAM을 CPU는 Milicore단위(1,000 Milicore = 1Core)로 Memory는 Mbyte단위로 리소스의 requests과 limits(요청과 제한)이라는 측면에서 정의할 수 있습니다. Container가 리소스를 Request하면 Kubernetes는 리소스를 제공할 수 있는 노드에서만 스케쥴링이 되고, Limit는 Container가 특정 리소스를 초과하지 않도록 제한합니다.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+spec:
+  containers:
+  - name: wp
+    image: wordpress
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+```
+
+####### cpu
+
+CPU 요청과 관련하여 고려해야 할 사항 중 한가지는 Node의 CPU core수보다 큰 값을 입력하면 Pod가 스케쥴링 되지 않는다는 것입니다. 예로써 Kubernetes 클러스터는 dual core VM으로 구성되어 있는데 Pod에는 4개의 core를 입력했다면 Pod가 스케쥴링 되지 않는다는 것입니다.
+
+특별한 경우가 아니라면 CPU요청은 1이하로 하고 Replica에 의해 오토스케일링되는 것을 염두해서 Pod를 설계해야합니다. 이렇게 설정하는 것이 시스템을 보다 유연하고 신뢰성있게 구성할 수 있습니다.
+
+####### Memory
+
+Memory도 CPU와 마찬가지로 Node의 메모리보다 더 큰 요청을 셋팅하게되면 Pod는 스케쥴링되지 않습니다. 또한 메모리는 CPU와 달리 Kubernetes에서 메모리 사용량을 조절할 수 없으므로 Container가 메모리 제한을 초과하게 되면 애플리케이션(Container)가 종료되는데, Pod가 Deployment, StatefulSet, DaemonSet 또는 다른 유형의 컨트롤러에 의해 관리되는 경우, 기존 Pod는 종료되고 새로운 Pod가 시작됩니다.
+
+###### Namespace settings
+
+클러스터는 Namespace로 구성될 수 있는데, 만약 그 중 한 Namespace가 과도한 요청이 있을 경우 전체 클러스터에 영향을 미칠 수 있습니다. 따라서 이러한 경우를 제한하기 위해서는 Namespace 레벨에서 ResourceQuotas와 LimitRanges 를 설정하는 것이 중요합니다.
+
+**ResourceQuotas**
+
+Namespace를 생성한 후, ResourceQuota를 통해 Namespace의 CPU 및 메모리를 제한 할 수 있습니다.
+
+![](./img/gcp-resourcequota3qo9.max-300x300.PNG)
+
+
+
+**LimitRange**
+
+ResourceQuotas는 Namespace 전체영역에 대한 리소스의 제한을 정의하는반면, LimitRange는 개별 컨테이너 단위의 리소스에 대한 제약입니다. 즉, 사용자들이 개별 컨테이너에 대한 리소스를 정의 할때 해당되는 범위를 제한하는 개념입니다. 이렇게 함으로써, 사용자들은 초소형 또는 초대형 컨테이너를 생성 할 수 없게 됩니다.
+
+![](./img/gcp-limit-range228w.max-400x400.PNG)
+
+
+
+
+
+---
+
 ## Summary
 
 - Workload
