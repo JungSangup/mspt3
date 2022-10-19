@@ -100,8 +100,8 @@ Hello docker aaa bbb
   - 변경이 있다는 것을 새로운 tag가 만들어졌다는 것으로 본다면, 그 새로운 tag로 컨테이너를 다시 실행해야 됩니다.
   - 그런 과정들을 CI/CD파이프라인에 반영해서 하게 됩니다.
 - Bridge 네트워크는 L2역할만 하나요? L4 역할은 불가능한가요?
-  - ...
-
+  - L2만 한다고 합니다. (저도 잘 모르던 분야인데, 이번에 알았습니다. m_ _m )
+  - [4. Docker 네트워크 (리눅스 용)](https://doitnow-man.tistory.com/m/183) 
 
 
 ### Kubernetes
