@@ -1,6 +1,6 @@
 
 
-# Docker & Kubernetes 노트 (MSP T2 8차)   (●'◡'●)
+# Docker & Kubernetes 노트 (MSP T2 9차)   (●'◡'●)
 ## Q&A
 
 ### Docker
@@ -102,6 +102,8 @@ Hello docker aaa bbb
 - Bridge 네트워크는 L2역할만 하나요? L4 역할은 불가능한가요?
   - L2만 한다고 합니다. (저도 잘 모르던 분야인데, 이번에 알았습니다. m_ _m )
   - [4. Docker 네트워크 (리눅스 용)](https://doitnow-man.tistory.com/m/183) 
+- Dockerfile_BP에서 leverage build cache는 기본 설정으로 캐시에서 layer를 찾아 재사용하는게 효율적이라는 건가요?
+  - ...
 
 
 ### Kubernetes
@@ -109,3 +111,9 @@ Hello docker aaa bbb
 - K8S Object가 볼륨+컨테이너+N/W를 묶은 하나의 Object가 되는건지, 아니면 각각 개별 Object가 되는건지 궁금해요.
   - 각각이 Object로 만들어 집니다.
   - 그래서 하나의 Application이 완전한 구성을 가지려면 여러 Object들을 이용해야 하고, 그런 것들을 편리하게 패키지로 관리하기 위해서 helm(15장)을 사용합니다.
+
+---
+
+- 하나의 Cluster에서 수용 가능한 Node수는 어느정도 인가요?
+  - 1.25에서는 5,000개 까지 가능하다고 합니다.  （°o°；）
+  - [대형 클러스터에 대한 고려 사항](https://kubernetes.io/ko/docs/setup/best-practices/cluster-large/) 를 참고하세요.
