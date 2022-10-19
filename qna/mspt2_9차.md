@@ -142,4 +142,13 @@ Hello docker aaa bbb
 - NodePort타입의 서비스는 외부에서 접근할 때는 node_ip:node_port로, 내부에서 접근할 때는 service_id(또는, Name):service_port를 사용하면 되나요?
   - 네, 맞습니다.
 
+---
+
+- kubectl version의 결과에서 server와 client 차이는 뭔가요?
+  - ...
+
+- 실습환경에서 `k`는 원래 내장된 약어 인가요? 아니면 alias 를 지정한건가요?
+  - alias입니다.
+  - 추가로 [리눅스에서 bash 자동 완성 사용하기](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)도 참고하세요.
+
 - 
