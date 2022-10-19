@@ -119,3 +119,27 @@ Hello docker aaa bbb
 - 하나의 Cluster에서 수용 가능한 Node수는 어느정도 인가요?
   - Kubernetes 1.25에서는 5,000개 까지 가능하다고 합니다.  （°o°；）
   - [대형 클러스터에 대한 고려 사항](https://kubernetes.io/ko/docs/setup/best-practices/cluster-large/) 를 참고하세요.
+
+---
+
+-  K8S의 Service가 Docker의 Bridge와 동일한 기능이라고 보면 되나요?
+  -  엄밀히 말하면 다르지만, 네트워킹을 위한 요소인 것은 동일합니다.
+  -  Bridge는 L2 스위치의 역할을 하지만, Service는 LB(여러개의 Pod에 대한 분배)의 역할을 하는 구성요소 입니다.
+
+- Deployment로 생성한 Pod도 Service로 매핑해서 사용 가능한가요?
+  - 네, Labels and Selector 개념을 이용해서 매핑합니다.
+  - 누가 만든 Pod이건, Selector로 지정한 Label을 가진 Pod들은 모두 대상으로 합니다.
+
+- Service 리소스가 죽는 경우도 있을까요?
+  - ...
+
+- HTTP/HTTPS 노출 시 Ingress, Nodeport, Loadbalancer 를 모두 사용할 수 있을 것 같은데요, 구조적인 차이 외에 성능적인 차이도 있을까요?
+  - Ingress는 결국 Ingress controller (e.g. Nginx)를 사용하게 되고, LB는 CSP의 LB 상품을 사용하게 될텐데, 둘 간의 성능차이는 있을 수 있습니다.
+
+- Deployment -> ReplicaSet에 의해 Pod들은 삭제 시 다시 생성이 되는데, Node내 컨테이너 런타임이나 Kubelet등 시스템의 구성요소들은 죽어버리면 감지가 되거나 자동 복구가 되나요?
+  - ...
+
+- NodePort타입의 서비스는 외부에서 접근할 때는 node_ip:node_port로, 내부에서 접근할 때는 service_id(또는, Name):service_port를 사용하면 되나요?
+  - 네, 맞습니다.
+
+- 
