@@ -315,17 +315,38 @@ Memory도 CPU와 마찬가지로 Node의 메모리보다 더 큰 요청을 셋�
 **ResourceQuotas**
 
 Namespace를 생성한 후, ResourceQuota를 통해 Namespace의 CPU 및 메모리를 제한 할 수 있습니다.
-
-![](./img/gcp-resourcequota3qo9.max-300x300.PNG)
-
-
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: demo
+spec:
+  hard:
+    requests.cpu: 500m
+    requests.memory: 100Mib
+    limits.cpu:700m
+    limits.memory: 500Mib
+```
 
 **LimitRange**
 
 ResourceQuotas는 Namespace 전체영역에 대한 리소스의 제한을 정의하는반면, LimitRange는 개별 컨테이너 단위의 리소스에 대한 제약입니다. 즉, 사용자들이 개별 컨테이너에 대한 리소스를 정의 할때 해당되는 범위를 제한하는 개념입니다. 이렇게 함으로써, 사용자들은 초소형 또는 초대형 컨테이너를 생성 할 수 없게 됩니다.
-
-![](./img/gcp-limit-range228w.max-400x400.PNG)
-
+```yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-resource-constraint
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 500m
+    defaultRequest: # this section defines default requests
+      cpu: 500m
+    max: # max and min define the limit range
+      cpu: "1"
+    min:
+      cpu: 100m
+```
 
 
 
