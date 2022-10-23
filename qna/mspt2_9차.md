@@ -145,7 +145,7 @@ Hello docker aaa bbb
 ---
 
 - kubectl version의 결과에서 server와 client 차이는 뭔가요?
-  - ...
+  - Server는 K8S API Server의 버젼을 나타내고, Client는 CLI툴인 kubectl의 버젼을 나타냅니다.
 
 - 실습환경에서 `k`는 원래 내장된 약어 인가요? 아니면 alias 를 지정한건가요?
   - alias입니다.
@@ -156,7 +156,8 @@ Hello docker aaa bbb
 ---
 
 - 무중단 배포는 사용자 http세션을 lb에서 신규 pod로 넘겨서 유지를 해주나요? 아니면 세션은 중단되고, 신규 세션이 신규 pod에서 생성되어야 하는건가요? (혹은 기존 pod는 보유한 사용자 세션의 request/response처리가 다 끝나면 죽을 수 있는 것으로 보면 되나요?)
-  - ... 
+  - pod간 전환이 일어나야하는 경우 기존의 Transaction처리를 보장하기 위해서 Graceful shutdown을 하게됩니다. (SIGTERM신호를 먼저 보내고, 이후에 SIGKILL)
+  - [파드의 종료](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) 부분 참고하세요.
 
 - 무중단 배포 시 처리중인 Transaction은 실패하나요? 정상 처리하고 나서 pod가 종료되나요?
   - ... 
