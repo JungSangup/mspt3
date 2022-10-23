@@ -23,13 +23,14 @@
   - registry는 같이 설치되지는 않고, 필요하면 설치해서 쓸 수도 있습니다.
   - hub.docker.com이 아닌 다른 registry를 쓰려면, `docker login OOO` 명령어로 다른 registry에 로그인 한 후 pull/push명령어를 실행하면 됩니다.
 - SCP의 Container registry는 Private만 있는건가요?
-  - ...
+  - Registry는 Private registry이고, 그 안에서 Repository를 Public/Private으로 설정해서 사용 가능합니다.
 - Docker registry와 repository는 단순 용어차이인가요?
   - registry는 저장소 그 자체이고, repository는 저장소 내에서 구분된 저장공간 입니다.
 - 사용자별로 명령어에 대한 권한을 차등적으로 줘서 어떤 명령어는 수행이 안되게 하는 기능이 있나요? (e.g. rm을 하지 못하게...)
-  - ...
+  - Docker의 명령어는 권한관리가 되지는 않는 것 같습니다.
+  - K8S 명령어는 권한관리를 할 수 있습니다.
 - 리눅스 명령 중 screen도 docker와 유사한 것으로 이해되는데, 일종의 리눅스 docker로 봐도 되나요?
-  - ...
+  - screen은 가상의 터미널을 다중화해주는 도구네요. Docker는 그 보다는 프로세스의 실행 자체를 가상화 기술을 이용하여 격리하는 기술입니다.
 - `docker ps` 명령으로 아무것도 안보이는데, `docker ps -al` 령으로는 보입니다. 어떤 차이가 있나요?
   - running 중인것을 보는것과, 전체(running + exited)를 보는것의 차이입니다.
   - `-a`옵션이 전체를 보는 옵션입니다.
@@ -59,7 +60,8 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 ---
 
 - overlay network도 설명 부탁드립니다.
-  - ...
+  - overlay network는 여러 호스트머신에 걸쳐서 구성되는 네트워크 입니다.
+  - 자세한 내용은 [Use overlay networks](https://docs.docker.com/network/overlay/)을 참고하세요.
 
 - 브릿지의 포트번호는 표기가 안되나요?
   - 브릿지는 특별히 포트를 가진 개체는 아니라 표시가 되지는 않습니다.
@@ -92,7 +94,6 @@ Hello docker aaa bbb
 - `COPY . .`을 하지 않으면 이미지가 container로 실행될 때 파일이 없나요? 기본으로 해줘야 하는건지 궁금합니다.
   - 네, 맞습니다. 컨테이너가 동작하는동안 필요한 파일은 dockerfile에서 COPY와 같은 instruction을 이용해서 복사해줘야 합니다.
   - 또는 실행한 후에 뭔가 파일을 컨테이너 내부로 복사하려면 `docker cp` 라는 명령을 쓸 수도 있습니다.
-- 
 
 ---
 
@@ -103,7 +104,7 @@ Hello docker aaa bbb
   - L2만 한다고 합니다. (저도 잘 모르던 분야인데, 이번에 알았습니다. m_ _m )
   - [4. Docker 네트워크 (리눅스 용)](https://doitnow-man.tistory.com/m/183) 
 - Dockerfile_BP에서 leverage build cache는 기본 설정으로 캐시에서 layer를 찾아 재사용하는게 효율적이라는 건가요?
-  - ...
+  - 네, 맞습니다. 캐시를 재사용 하는 경우 빌드 시간이나 스토리지 사용에 있어 효율적인 구성이 가능합니다.
 
 #### Docker summary
 ![](img/docker_summary_9.png)
@@ -131,14 +132,14 @@ Hello docker aaa bbb
   - 누가 만든 Pod이건, Selector로 지정한 Label을 가진 Pod들은 모두 대상으로 합니다.
 
 - Service 리소스가 죽는 경우도 있을까요?
-  - ...
+  - 가능성은 있다고 봐야할 것 같습니다.
 
 - HTTP/HTTPS 노출 시 Ingress, Nodeport, Loadbalancer 를 모두 사용할 수 있을 것 같은데요, 구조적인 차이 외에 성능적인 차이도 있을까요?
   - Ingress는 결국 Ingress controller (e.g. Nginx)를 사용하게 되고, LB는 CSP의 LB 상품을 사용하게 될텐데, 둘 간의 성능차이는 있을 수 있습니다.
 
 - Deployment -> ReplicaSet에 의해 Pod들은 삭제 시 다시 생성이 되는데, Node내 컨테이너 런타임이나 Kubelet등 시스템의 구성요소들은 죽어버리면 감지가 되거나 자동 복구가 되나요?
   - ...
-
+  
 - NodePort타입의 서비스는 외부에서 접근할 때는 node_ip:node_port로, 내부에서 접근할 때는 service_id(또는, Name):service_port를 사용하면 되나요?
   - 네, 맞습니다.
 
@@ -160,8 +161,6 @@ Hello docker aaa bbb
   - [파드의 종료](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) 부분 참고하세요.
 
 - 무중단 배포 시 처리중인 Transaction은 실패하나요? 정상 처리하고 나서 pod가 종료되나요?
-  - ... 
+  - 위 답변내용 참고하세요. 
 
----
 
-- 
