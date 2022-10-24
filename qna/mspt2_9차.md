@@ -154,8 +154,6 @@ Hello docker aaa bbb
   - alias입니다.
   - 추가로 [리눅스에서 bash 자동 완성 사용하기](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)도 참고하세요.
 
-- 
-
 ---
 
 - 무중단 배포는 사용자 http세션을 lb에서 신규 pod로 넘겨서 유지를 해주나요? 아니면 세션은 중단되고, 신규 세션이 신규 pod에서 생성되어야 하는건가요? (혹은 기존 pod는 보유한 사용자 세션의 request/response처리가 다 끝나면 죽을 수 있는 것으로 보면 되나요?)
