@@ -139,7 +139,7 @@ Hello docker aaa bbb
 
 - Deployment -> ReplicaSet에 의해 Pod들은 삭제 시 다시 생성이 되는데, Node내 컨테이너 런타임이나 Kubelet등 시스템의 구성요소들은 죽어버리면 감지가 되거나 자동 복구가 되나요?
   - [쿠버네티스 클러스터 운영자를 위한 모니터링](https://www.samsungsds.com/kr/insights/kubernetes_monitoring.html) -> 이 글이 도움이 될 것 같습니다.
-  - [노드 컨트롤러](https://kubernetes.io/ko/docs/concepts/architecture/nodes/#%EB%85%B8%EB%93%9C-%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC) 도 참고하시구요.
+  - [노드 컨트롤러](https://kubernetes.io/ko/docs/concepts/architecture/nodes/#%EB%85%B8%EB%93%9C-%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC) 와 [그레이스풀(Graceful) 노드 셧다운(shutdown)](https://kubernetes.io/ko/docs/concepts/architecture/nodes/#graceful-node-shutdown)도 참고하시구요.
   
   
 - NodePort타입의 서비스는 외부에서 접근할 때는 node_ip:node_port로, 내부에서 접근할 때는 service_id(또는, Name):service_port를 사용하면 되나요?
