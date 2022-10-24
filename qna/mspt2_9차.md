@@ -138,7 +138,8 @@ Hello docker aaa bbb
   - Ingress는 결국 Ingress controller (e.g. Nginx)를 사용하게 되고, LB는 CSP의 LB 상품을 사용하게 될텐데, 둘 간의 성능차이는 있을 수 있습니다.
 
 - Deployment -> ReplicaSet에 의해 Pod들은 삭제 시 다시 생성이 되는데, Node내 컨테이너 런타임이나 Kubelet등 시스템의 구성요소들은 죽어버리면 감지가 되거나 자동 복구가 되나요?
-  - ...
+  - [쿠버네티스 클러스터 운영자를 위한 모니터링](https://www.samsungsds.com/kr/insights/kubernetes_monitoring.html) -> 이 글이 도움이 될 것 같습니다.
+  
   
 - NodePort타입의 서비스는 외부에서 접근할 때는 node_ip:node_port로, 내부에서 접근할 때는 service_id(또는, Name):service_port를 사용하면 되나요?
   - 네, 맞습니다.
