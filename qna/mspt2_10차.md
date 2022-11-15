@@ -13,7 +13,7 @@
   - 아니되옵니다. ( docker desktop 환경인 경우, kubernetes 구동에 사용되는 것들입니다. )
 
 - /var/lib 아래 docker-desktop이 보이는데 이건 뭔가요?
-  - 교재에 말씀드린 `\\wsl.localhost\docker-desktop-data\data\docker` 또는 `` 가 docker root 입니다.
+  - 교재에 말씀드린 `\\wsl.localhost\docker-desktop-data\data\docker` 또는 `\\wsl$\docker-desktop-data\data\docker` 가 docker root 입니다.
   - [Docker 이미지 스토리지 폴더 찾기 문제](https://learn.microsoft.com/ko-kr/windows/wsl/tutorials/wsl-containers#trouble-finding-docker-image-storage-folder) 도 참고하세요.
 
 - run 상태의 이미지는 삭제가 안되나요?
