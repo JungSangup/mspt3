@@ -15,9 +15,9 @@
     - merged (디렉토리) : lower layer(의 컨텐츠)와 자신의 레이어(의 컨텐츠)가 병합된 컨텐츠가 존재함. 
     - work (디렉토리) : storage driver에 의해 사용되는 디렉토
    - 컨테이너가 생성되면 같은 이름의 디렉토리가 두 개 생성되고, 그 중 하나는 `-init`이 뒤에 붙어있음.
-   - 실제로는 init이 그 하위의 레이어들을 lower에 담고있고, init이 아닌 디렉토리의 link는 init까지를 lower로 담고있음. (아래 예시 참조.)
-   -  
+   - init이 그 하위의 레이어들을 lower에 담고있고, init이 아닌 디렉토리의 link는 init까지를 lower로 담고있음. (아래 예시 참조.) -> init보다 init이 없는 것이 더 상위.
   - [How the overlay2 driver works](https://docs.docker.com/storage/storagedriver/overlayfs-driver/#how-the-overlay2-driver-works)도 참고하세요.  
+  - [Docker image layer 정보 확인](https://ikcoo.tistory.com/396) 에도 설명이 잘 되어있네요.
 ```bash
 ubuntu $ tree -L 2
 .
@@ -78,11 +78,14 @@ ubuntu $ tree -L 2
     `-- R3UKY4B6QBUYZOW2NU76WMU3QW -> ../e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154/diff
 
 33 directories, 22 files
+
 ubuntu $ cat ./e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154-init/lower 
 l/BIATFAJNMCEW5EZT4V4YZI6V3P:l/CEDMQDL3V5ZU3TU5JCJWDZLK4A:l/PG22LLBRRZDUSR5REQDX7B34O2:l/GWFDJRLMH7UJYSX4DGQEE5RXWZ:l/OJRYLRWZC7HCV3FH6JZYFKSAAR:l/22VBECB4VVVAPE3KULZX6UYBCMubuntu $ 
+
 ubuntu $ cat ./e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154/lower 
 l/5R2VMDDUASJCZGLXNBCX3VKSH4:l/BIATFAJNMCEW5EZT4V4YZI6V3P:l/CEDMQDL3V5ZU3TU5JCJWDZLK4A:l/PG22LLBRRZDUSR5REQDX7B34O2:l/GWFDJRLMH7UJYSX4DGQEE5RXWZ:l/OJRYLRWZC7HCV3FH6JZYFKSAAR:l/22VBECB4VVVAPE3KULZX6UYBCMubuntu $ 
 ```
+> `-init`이 안붙은 디렉토리의 lower가 link를 하나 더(`-init` 디렉토리까지 포함.) 가지고 있음.
 
 - docker images 해보면 k8s.gcr.id~ 로 시작하는 이미지들이 보입니다.이것들 rmi 해도 되나요?
   - 아니되옵니다. ( docker desktop 환경인 경우, kubernetes 구동에 사용되는 것들입니다. )
