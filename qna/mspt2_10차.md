@@ -134,8 +134,8 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - LB는 쿠버네티스에서 더 자세히 배울겁니다.
 
 - 컨테이너간 통신을 하려면 IP를 알아야 할 것 같은데 직접 할당 가능한가요?
-  - IP보다는 네임이나 Alias를 사용하는 것이 일반적입니다.
-  - docker run 명령어에 `--ip` 라는 옵션을 쓸 수도 있습니다. (e.g. `docker run --ip 172.30.100.104` )
+  - IP보다는 Name이나 Alias를 사용하는 것이 일반적입니다.
+  - docker run 명령어에 `--ip` 라는 옵션을 쓸 수는 있습니다. (e.g. `docker run --ip 172.30.100.104` )
 
 - CIDR에서 마지막 16은 뭔가요?
   - 앞에서 부터 16 비트라는 의미입니다.
@@ -154,14 +154,15 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - [Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground) 의 Foreground 부분 참고하세요~
 
 - dockerfile도 선언형으로 생성할 수 있나요? (이미지도 선언형으로 생성할 수 있나요?)
-  - ...
+  - 없는 듯 합니다. (도커 자체만으로는...)
+  - 다른 방법으로 선언형 구성을 지원하는 다른 툴을 이용해서 컨테이너 이미지를 만드는 방법은 있는 것 같습니다.
 
 ---
 
 ### Kubernetes
 
 - K8s에서 pod가 도커에서 컨테이너의 의미인가요?
-  - 엄밀하게는 다르긴 하지만, 거의 같은 의미로 쓰이고 있습니다.
+  - 엄밀하게는 다르긴 하지만, 거의 같은 의미로 쓰이고 있습니다. ( 하지만, 우리는 이 과정을 듣고나면 `다르다`고 자신있게 말할 수 있습니다. ...(*￣０￣)ノ    )
   - 내일 Workload에서 자세히 다룰 예정입니다.
 
 - 
