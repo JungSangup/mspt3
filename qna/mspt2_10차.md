@@ -88,7 +88,7 @@ l/5R2VMDDUASJCZGLXNBCX3VKSH4:l/BIATFAJNMCEW5EZT4V4YZI6V3P:l/CEDMQDL3V5ZU3TU5JCJW
 > `-init`이 안붙은 디렉토리의 lower가 link를 하나 더(`-init` 디렉토리까지 포함.) 가지고 있음.
 
 - docker images 해보면 k8s.gcr.id~ 로 시작하는 이미지들이 보입니다.이것들 rmi 해도 되나요?
-  - 아니되옵니다. ( docker desktop 환경인 경우, kubernetes 구동에 사용되는 것들입니다. )
+  - 아니되옵니다. Σ(っ °Д °;)っ ( docker desktop 환경인 경우, kubernetes 구동에 사용되는 것들입니다. )
 
 - /var/lib 아래 docker-desktop이 보이는데 이건 뭔가요?
   - 교재에 말씀드린 `\\wsl.localhost\docker-desktop-data\data\docker` 또는 `\\wsl$\docker-desktop-data\data\docker` 가 docker root 입니다.
