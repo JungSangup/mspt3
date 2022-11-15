@@ -1,4 +1,4 @@
-# Docker & Kubernetes 노트 (MSP T2 10차)   (oﾟvﾟ)ノ
+# Docker & Kubernetes 노트 (MSP T2 10차)  (✿◡‿◡)
 ## Q&A
 
 ### Docker
