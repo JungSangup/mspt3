@@ -62,4 +62,5 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - 앞에서 부터 16 비트라는 의미입니다.
   - [CIDR](https://ko.wikipedia.org/wiki/CIDR) 참고하세요.
 
-- 
+- docker run -p 3000:3000의 의미를 다시 설명해주세요.
+  - ``
