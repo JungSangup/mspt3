@@ -7,7 +7,7 @@
   - 빌드하는 시점/환경에 따라 다를 수 있습니다.
   - 뒤에 배우겠지만, 레이어에 해당하는 것이 호스트 머신에 있을 때와 없을 때 차이가 있을 수 있습니다.
 
--  container layer ( R/W layer ) 디렉토리에서 -init 이 붙는건 뭔가요?
+- container layer ( R/W layer ) 디렉토리에서 -init 이 붙는건 뭔가요?
   - layer 디렉토리에는 파일/디렉토리가 있습니다.  (최 하위 레이어는 link와 diff만 있음.)
     - link (파일) : overlay2/l 디렉토리에 존재하는 링크 정보
     - diff (디렉토리) : 그 레이어의 contents (파일들) 가 존재함.
