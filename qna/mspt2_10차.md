@@ -8,8 +8,81 @@
   - 뒤에 배우겠지만, 레이어에 해당하는 것이 호스트 머신에 있을 때와 없을 때 차이가 있을 수 있습니다.
 
 -  container layer ( R/W layer ) 디렉토리에서 -init 이 붙는건 뭔가요?
-  - ...
+  - layer 디렉토리에는 파일/디렉토리가 있습니다.  (최 하위 레이어는 link와 diff만 있음.)
+    - link (파일) : overlay2/l 디렉토리에 존재하는 링크 정보
+    - diff (디렉토리) : 그 레이어의 contents (파일들) 가 존재함.
+    - lower (파일) : lower layer에 대한 링크정보
+    - merged (디렉토리) : lower layer(의 컨텐츠)와 자신의 레이어(의 컨텐츠)가 병합된 컨텐츠가 존재함. 
+    - work (디렉토리) : storage driver에 의해 사용되는 디렉토
+   - 컨테이너가 생성되면 같은 이름의 디렉토리가 두 개 생성되고, 그 중 하나는 `-init`이 뒤에 붙어있음.
+   - 실제로는 init이 그 하위의 레이어들을 lower에 담고있고, init이 아닌 디렉토리의 link는 init까지를 lower로 담고있음. (아래 예시 참조.)
+   -  
   - [How the overlay2 driver works](https://docs.docker.com/storage/storagedriver/overlayfs-driver/#how-the-overlay2-driver-works)도 참고하세요.  
+```bash
+ubuntu $ tree -L 2
+.
+|-- 19c812ab930a19683baf95ea2d12c403ef21aba75f5581e0004801d952de2fcf
+|   |-- committed
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   `-- work
+|-- 3f30e4eb9605634a84e913c3d3204b624d32c8e5bb3d4f930079f20fb28d3df5
+|   |-- committed
+|   |-- diff
+|   `-- link
+|-- 67e24567f32ee7e5614688f8db47b8b01dc35411fcdccac1f0da6ca18ddd0ef3
+|   |-- committed
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   `-- work
+|-- 95d81d5e704106af63d3e55fa0e5e35e21f84f97b2a328677d23cc63c2289448
+|   |-- committed
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   `-- work
+|-- c605c2d746f17ac17476e1cb88719cba0c9f29d8e2e79dcf0d4beb586f4b4cda
+|   |-- committed
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   `-- work
+|-- e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   |-- merged
+|   `-- work
+|-- e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154-init
+|   |-- committed
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   `-- work
+|-- ec45a49fa3c5ad838aa073510debc690dae3c425252eb558414ece53c67fa244
+|   |-- committed
+|   |-- diff
+|   |-- link
+|   |-- lower
+|   `-- work
+`-- l
+    |-- 22VBECB4VVVAPE3KULZX6UYBCM -> ../3f30e4eb9605634a84e913c3d3204b624d32c8e5bb3d4f930079f20fb28d3df5/diff
+    |-- 5R2VMDDUASJCZGLXNBCX3VKSH4 -> ../e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154-init/diff
+    |-- BIATFAJNMCEW5EZT4V4YZI6V3P -> ../19c812ab930a19683baf95ea2d12c403ef21aba75f5581e0004801d952de2fcf/diff
+    |-- CEDMQDL3V5ZU3TU5JCJWDZLK4A -> ../ec45a49fa3c5ad838aa073510debc690dae3c425252eb558414ece53c67fa244/diff
+    |-- GWFDJRLMH7UJYSX4DGQEE5RXWZ -> ../67e24567f32ee7e5614688f8db47b8b01dc35411fcdccac1f0da6ca18ddd0ef3/diff
+    |-- OJRYLRWZC7HCV3FH6JZYFKSAAR -> ../c605c2d746f17ac17476e1cb88719cba0c9f29d8e2e79dcf0d4beb586f4b4cda/diff
+    |-- PG22LLBRRZDUSR5REQDX7B34O2 -> ../95d81d5e704106af63d3e55fa0e5e35e21f84f97b2a328677d23cc63c2289448/diff
+    `-- R3UKY4B6QBUYZOW2NU76WMU3QW -> ../e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154/diff
+
+33 directories, 22 files
+ubuntu $ cat ./e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154-init/lower 
+l/BIATFAJNMCEW5EZT4V4YZI6V3P:l/CEDMQDL3V5ZU3TU5JCJWDZLK4A:l/PG22LLBRRZDUSR5REQDX7B34O2:l/GWFDJRLMH7UJYSX4DGQEE5RXWZ:l/OJRYLRWZC7HCV3FH6JZYFKSAAR:l/22VBECB4VVVAPE3KULZX6UYBCMubuntu $ 
+ubuntu $ cat ./e95f12761991634699e80b56e9510162dc7efacaba6ae5f461d12d29295fe154/lower 
+l/5R2VMDDUASJCZGLXNBCX3VKSH4:l/BIATFAJNMCEW5EZT4V4YZI6V3P:l/CEDMQDL3V5ZU3TU5JCJWDZLK4A:l/PG22LLBRRZDUSR5REQDX7B34O2:l/GWFDJRLMH7UJYSX4DGQEE5RXWZ:l/OJRYLRWZC7HCV3FH6JZYFKSAAR:l/22VBECB4VVVAPE3KULZX6UYBCMubuntu $ 
+```
 
 - docker images 해보면 k8s.gcr.id~ 로 시작하는 이미지들이 보입니다.이것들 rmi 해도 되나요?
   - 아니되옵니다. ( docker desktop 환경인 경우, kubernetes 구동에 사용되는 것들입니다. )
