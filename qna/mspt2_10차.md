@@ -70,4 +70,6 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - docker compose는 여러개의 컨테이너를 구성할 때 사용되는 것입니다.
   - 예를들어 todo app과 mySql을 만들때는 각각의 dockerfile을 사용하고, 실행할 때 docker compose로 한 번에 실행할 수 있습니다.
 
-- 
+- docker run 옵션에서 -d(detached)나 -i(interactive)말고 둘 다 없이 하는 경우도 실제 쓰이나요?
+  - `-d`를 생략하면 기본적으로는 foreground 모드 입니다.
+  - [Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground) 의 Foreground 부분 참고하세요~
