@@ -47,5 +47,18 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - R/W layer는 Storage driver를 통해서 I/O를 하기 때문에 성능 차이가 나게 됩니다.
   - [About storage drivers](https://docs.docker.com/storage/storagedriver/)와 [Use volumes](https://docs.docker.com/storage/volumes/) 참고하세요.
 
-- 
 
+---
+
+- Docker의 Bridge가 로드밸런싱 역할을 해주는건가요?
+  - 그렇지는 않습니다. 네트워크 
+
+- 컨테이너간 통신을 하려면 IP를 알아야 할 것 같은데 직접 할당 가능한가요?
+  - IP보다는 네임이나 Alias를 사용하는 것이 일반적입니다.
+  - docker run 명령어에 `--ip` 라는 옵션을 쓸 수도 있습니다. (e.g. `docker run --ip 172.30.100.104` )
+
+- CIDR에서 마지막 16은 뭔가요?
+  - 앞에서 부터 16 비트라는 의미입니다.
+  - [CIDR](https://ko.wikipedia.org/wiki/CIDR) 참고하세요.
+
+- 
