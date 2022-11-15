@@ -8,6 +8,8 @@
   - 뒤에 배우겠지만, 레이어에 해당하는 것이 호스트 머신에 있을 때와 없을 때 차이가 있을 수 있습니다.
 
 -  container layer ( R/W layer ) 디렉토리에서 -init 이 붙는건 뭔가요?
+  - ...
+  - [How the overlay2 driver works](https://docs.docker.com/storage/storagedriver/overlayfs-driver/#how-the-overlay2-driver-works)도 참고하세요.  
 
 - docker images 해보면 k8s.gcr.id~ 로 시작하는 이미지들이 보입니다.이것들 rmi 해도 되나요?
   - 아니되옵니다. ( docker desktop 환경인 경우, kubernetes 구동에 사용되는 것들입니다. )
@@ -46,6 +48,7 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - 성능차이는 Storage driver를 거치느냐, 아니냐의 차이여서 volume과 bind mount와는 차이가 없습니다. (둘 다 host machine의 I/O를 사용)
   - R/W layer는 Storage driver를 통해서 I/O를 하기 때문에 성능 차이가 나게 됩니다.
   - [About storage drivers](https://docs.docker.com/storage/storagedriver/)와 [Use volumes](https://docs.docker.com/storage/volumes/) 참고하세요.
+  - [Performance best practices](https://docs.docker.com/storage/storagedriver/overlayfs-driver/#performance-best-practices) 도 참고하세요.
 
 
 ---
