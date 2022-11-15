@@ -51,7 +51,8 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
 ---
 
 - Docker의 Bridge가 로드밸런싱 역할을 해주는건가요?
-  - 그렇지는 않습니다. 네트워크 
+  - 그렇지는 않습니다. 네트워크 구간에서 서브 네트워크를 가지는 G/W역할을 합니다.
+  - LB는 쿠버네티스에서 더 자세히 배울겁니다.
 
 - 컨테이너간 통신을 하려면 IP를 알아야 할 것 같은데 직접 할당 가능한가요?
   - IP보다는 네임이나 Alias를 사용하는 것이 일반적입니다.
