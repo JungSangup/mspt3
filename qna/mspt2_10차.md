@@ -63,4 +63,11 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - [CIDR](https://ko.wikipedia.org/wiki/CIDR) 참고하세요.
 
 - docker run -p 3000:3000의 의미를 다시 설명해주세요.
-  - ``
+  - 앞은 host machine의 포트, 뒤는 컨테이너의 포트입니다. 둘을 연결하여 publish 한다는 의미 입니다.
+
+- dockerfile과 docker-compose는 어떻게 다른건가요?
+  - dockerfile은 하나의 이미지를 만들기위한 명령어들의 집합이고,
+  - docker compose는 여러개의 컨테이너를 구성할 때 사용되는 것입니다.
+  - 예를들어 todo app과 mySql을 만들때는 각각의 dockerfile을 사용하고, 실행할 때 docker compose로 한 번에 실행할 수 있습니다.
+
+- 
