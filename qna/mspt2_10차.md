@@ -73,3 +73,16 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
 - docker run 옵션에서 -d(detached)나 -i(interactive)말고 둘 다 없이 하는 경우도 실제 쓰이나요?
   - `-d`를 생략하면 기본적으로는 foreground 모드 입니다.
   - [Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground) 의 Foreground 부분 참고하세요~
+
+- dockerfile도 선언형으로 생성할 수 있나요? (이미지도 선언형으로 생성할 수 있나요?)
+  - ...
+
+---
+
+### Kubernetes
+
+- K8s에서 pod가 도커에서 컨테이너의 의미인가요?
+  - 엄밀하게는 다르긴 하지만, 거의 같은 의미로 쓰이고 있습니다.
+  - 내일 Workload에서 자세히 다룰 예정입니다.
+
+- 
