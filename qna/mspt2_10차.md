@@ -237,3 +237,17 @@ spec:
 - deployment를 이용한 업데이트 시 pod들이 삭제되고 새로 생성되는데요, 이럴경우 추적성이 좀 떨어질 것 같습니다. 기존 pod를 업데이트할 수는 없나요?
   - 컨테이너의 개념은 새로 생성하는것이 기본입니다.
   - 수업시간에 자세히 설명드릴게요.
+
+- pod의 개수를 조정할 때 (scale in/out) 수행되고 있는 트랜잭션의 정상적인 종료는 보장하나요?
+  - 네, 그런 부분이 고려되어 있습니다.
+  - 기존의 Transaction처리를 보장하기 위해서 Graceful shutdown을 하게됩니다. (SIGTERM신호를 먼저 보내고, 이후에 SIGKILL)
+  - [파드의 종료](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) 부분 참고하세요.
+
+- http request로도 readiness 체크 가능한가요?
+  - 네, 가능합니다. tcp, http 다 가능합니다. (liveness probe와 동일)
+
+- pod가 생성될 때 readiness probe가 liveness probe로 바뀌는건가요?
+  - 아니오, 두 가지를 다 설정하게 되어있습니다.
+  - [Define a TCP liveness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-tcp-liveness-probe)를 보시면 두 가지를 다 설정한 샘플이 있습니다.
+
+- 
