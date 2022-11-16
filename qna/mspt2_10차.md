@@ -249,5 +249,6 @@ spec:
 - pod가 생성될 때 readiness probe가 liveness probe로 바뀌는건가요?
   - 아니오, 두 가지를 다 설정하게 되어있습니다.
   - [Define a TCP liveness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-tcp-liveness-probe)를 보시면 두 가지를 다 설정한 샘플이 있습니다.
+  - readiness probe는 시작단계에만 관여하고, 그 이후에는 liveness probe가 체크를 합니다.
 
 - 
