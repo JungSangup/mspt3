@@ -246,6 +246,10 @@ spec:
 - http request로도 readiness 체크 가능한가요?
   - 네, 가능합니다. tcp, http 다 가능합니다. (liveness probe와 동일)
 
+- 예제에서 deployment에서 replicas를 5로 설정하면 지속적으로 5개가 생성되나요?
+  - k8s는 그렇게 하려고 노력합니다.
+  - 하지만, 자원이 부족하여 pod를 생성할 수 없는 경우에는 원하는 대로 안만들어지기도 합니다. (자원에 여유가 있다면 원하는 spec대로 생성하는 것을 보장합니다.)
+
 - pod가 생성될 때 readiness probe가 liveness probe로 바뀌는건가요?
   - 아니오, 두 가지를 다 설정하게 되어있습니다.
   - [Define a TCP liveness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-tcp-liveness-probe)를 보시면 두 가지를 다 설정한 샘플이 있습니다.
