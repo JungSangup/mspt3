@@ -195,3 +195,27 @@ spec:
 - `k`는 alias인가요?
   - 네, 맞습니다.
   - kubectl 설치 후 간편한 사용(alias, auto-completion)을 위한 환경설정은 [리눅스에서 bash 자동 완성 사용하기](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)를 참고하세요.
+
+
+- Readiness probe 는 fail 시 어떻게 동작하나요?
+  - ...
+
+- Readiness Probe와 Liveness Probe의 차이는 노드와 서비스의 모니터링 차이인가요?
+  - ...
+
+- 명령형으로 생성한 오브젝트를 추후 선언형으로 적용할 수 있나요?
+  - ...
+
+- `kubectl delete -f ~`로 하면 명령형 오브젝트랑 같은 거 아닌가요?
+  - 정확하게 말씀하셨네요. 맞습니다.
+  - 생성/수정은 선언형 오브젝트 구성(`kubectl apply -f ~`)로 하고, 삭제는 명령형 오브젝트 구성 (`kubectl delete -f ~`)으로 하는 것입니다.
+  - 삭제도 apply 명령으로 할 수는 있지만, 권장하지는 않습니다. [오브젝트 삭제 방법](https://kubernetes.io/ko/docs/tasks/manage-kubernetes-objects/declarative-config/#%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EC%82%AD%EC%A0%9C-%EB%B0%A9%EB%B2%95) 참고하세요.
+
+- 샘플에 app과 name들이 모두 동일해서 헷갈리네요.
+  - ...
+
+- pod를 굳이 replicaset, deployment를 사용해서 만드는 이유가 있나요?
+  - ...
+
+- deployment를 이용한 업데이트 시 pod들이 삭제되고 새로 생성되는데요, 이럴경우 추적성이 좀 떨어질 것 같습니다. 기존 pod를 업데이트할 수는 없나요?
+  - ...
