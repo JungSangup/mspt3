@@ -157,6 +157,21 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - 없는 듯 합니다. (도커 자체만으로는...)
   - 다른 방법으로 선언형 구성을 지원하는 다른 툴을 이용해서 컨테이너 이미지를 만드는 방법은 있는 것 같습니다.
 
+
+- `exit`를 했을 때 컨테이너가 종료되지 않도록 하거나 자동 재시작하도록 하는 방법이 있나요?
+  - `exit`는 종료(stop), `ctrl+p,q`는 종료하지 않고 빠져나오기 입니다.
+  - 아래 box1은 exit로 나온 경우이고(container가 stop된 상태), box2는 ctrl+p,q로 나온 경우(container가 여전히 running상태)입니다.
+```bash
+ubuntu@ip-10-0-1-205:~$ docker run -it --name box1 busybox sh
+/ # exit
+ubuntu@ip-10-0-1-205:~$ docker run -it --name box2 busybox sh
+/ # ubuntu@ip-10-0-1-205:~$
+ubuntu@ip-10-0-1-205:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      PORTS     NAMES
+99afe3cc6025   busybox   "sh"      8 seconds ago    Up 7 seconds                          box2
+508b37c96942   busybox   "sh"      28 seconds ago   Exited (0) 25 seconds ago             box1
+```
+
 ---
 
 ### Kubernetes
