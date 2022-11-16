@@ -172,6 +172,9 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 508b37c96942   busybox   "sh"      28 seconds ago   Exited (0) 25 seconds ago             box1
 ```
 
+#### Docker summary
+![](img/docker_summary_10.png)
+
 ---
 
 ### Kubernetes
