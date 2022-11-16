@@ -258,4 +258,45 @@ spec:
   - [Define a TCP liveness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-tcp-liveness-probe)를 보시면 두 가지를 다 설정한 샘플이 있습니다.
   - readiness probe는 시작단계에만 관여하고, 그 이후에는 liveness probe가 체크를 합니다.
 
-- 
+- k8s는 자체 로드밸런서 기능은 없는건가요?
+  - Service object가 앞에서 들어오는 traffic의 LB역할을 수행합니다.
+  - 그리고, LoadBalancer타입의 서비스는 클라우드 공급자의 LB를 사용하구요.
+
+- Loadbalancer타입의 service는 1:1로 묶이는 건가요? 일반적으로 LB는 그룹으로 묶는데... LB아래 여러개 서비스를 묶어서 사용하기도 하나요?
+  - ...
+
+- Loadbalancer타입의 서비스는 nodeport나 clusterip타입의 서비스와 연동해서 사용하나요?
+  - clusterid < nodeport < loadbalancer 순으로 구조를 가지고 있습니다.
+  - loadbalancer타입의 service는 nodeport타입과 clusterip타입의 특징을 모두 가지고 있고, 추가로 외부 lb로 연결되는 개념입니다.
+  - 마찬가지로 nodeport타입은 clusterip타입의 특징을 모두 가지면서 추가로 nodeport를 가지고 있습니다.
+
+- 사용자의 접속점이 cluster ip는 proxy ip/port, nodeport는 vm ip/port, loadbalancer는 lb의 ip/port가 되나요?
+  - 네, 맞습니다.
+
+- selector에서 label 여러개를 지정할 때는 어떻게 하나요?
+  - 뒤에 예제가 있으니 그 때 설명 드리겠습니다.
+
+- 단일 네임스페이스에서 svc명은 유일해야 하나요?
+  - 네, 맞습니다.
+
+- System(설명할 때 System A, System B라고 한...)이 그림에서 Service인가요?
+  - ...
+
+- ingress 가 clusterip타입 그림에서 앞에 있는 proxy인가요?
+  - 네, 맞습니다.
+
+- 서비스 유형(e.g. 웹서비스)에 따른 구성 사례를 보여주시면 도움이 될 것 같아요.
+  - ...
+
+
+- Selector를 사용하는 목적이 클러스터 내에서 특정 pod로 서비스하도록 지정하기 위한건가요?
+  - 그것 말고도 다양한 k8s object에 대한 선택을 할 때 모두 사용됩니다.
+  - 예를들어 pod를 특정 node에 실행시키고 싶을 때(특별한 성능을 가진 node가 따로 있을 때), 그 노드를 지정해서 pod를 실행시킬 수 있습니다. 이 때도 노드에는 label, pod에는 selector를 사용합니다.
+
+- 웹서비스, LB(AWS) <-> Service(LB) <-> POD(앱/WAS) <-> Service(ClusterIP) <-> Pod(DB) 이런식으로 되나요?
+  - 네, 맞습니다. 2-Tier구조인 경우 위와같은 경로로 서비스됩니다.
+  - 또는 Ingress를 앞에 구성하는 것도 가능합니다.
+
+
+
+
