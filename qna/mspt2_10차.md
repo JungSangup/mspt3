@@ -165,4 +165,33 @@ Error response from daemon: conflict: unable to remove repository reference "ngi
   - 엄밀하게는 다르긴 하지만, 거의 같은 의미로 쓰이고 있습니다. ( 하지만, 우리는 이 과정을 듣고나면 `다르다`고 자신있게 말할 수 있습니다. ...(*￣０￣)ノ    )
   - 내일 Workload에서 자세히 다룰 예정입니다.
 
-- 
+- kubectl get pods 하면 어떤 노드의 pod인지 어떤 선언의 의미인가요?
+  - `--output wide` 옵션을 사용하면 어떤 노드에 실행되고 있는지도 알 수 있습니다.
+  - 더 자세한 정보는 `kubectl describe pods OOO --namespace XXX`와 같은 명령어를 사용하시면 됩니다.
+
+- `kubectl get` 이나 `kubectl describe` 명령어에서 뒤에 `pod` `pods` 둘 다 가능한가요?
+  - 네. 단/복수형 다 됩니다. (문서나 help에는 복수로 나와있기는 합니다.)
+
+- yaml 파일에서 키 앞에 -(dash)가 있는게 있고, 없는게 있는데 무슨 차이인가요?
+  - parent가 복수형인 경우 (e.g. containers:) 그 하위의 정보는 시작 라인 앞에 - 가 붙어있습니다.
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: multipod
+spec:
+ containers:      
+ - name: nginx-container	# 첫번째 컨테이너
+   image: nginx:1.14
+   ports:
+   - containerPort: 80
+ - name: centos-container	# 두번째 컨테이너
+   image: centos:7
+   command:
+   - sleep
+   - "10000"  
+```
+
+- `k`는 alias인가요?
+  - 네, 맞습니다.
+  - kubectl 설치 후 간편한 사용(alias, auto-completion)을 위한 환경설정은 [리눅스에서 bash 자동 완성 사용하기](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)를 참고하세요.
