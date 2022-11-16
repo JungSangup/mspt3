@@ -213,10 +213,11 @@ spec:
 
 
 - Readiness probe 는 fail 시 어떻게 동작하나요?
-  - ...
+  - Readiness probe는 Service 의 엔드포인트에 Pod를 포함시킬지를 판단하는 것입니다. Fail일 경우(아직 준비가 덜 된 경우)는 Service에서 해당 Pod로의 네트워킹을 하지 않습니다.
+  - Service에 대해서는 뒤에 더 자세히 배우게 됩니다.
 
 - Readiness Probe와 Liveness Probe의 차이는 노드와 서비스의 모니터링 차이인가요?
-  - ...
+  - 둘 다 Pod의 상태를 체크하는 것인데요, Readiness는 사용자에게 연결할지를(service의 LB 대상으로 할지, endpoint로 할지) 판단하는 것이고, Liveness는 Running중인 pod의 상태를 체크해서 문제가 생기면 재시작을 해주는 것입니다.
 
 - 명령형으로 생성한 오브젝트를 추후 선언형으로 적용할 수 있나요?
   - ...
@@ -230,7 +231,9 @@ spec:
   - ...
 
 - pod를 굳이 replicaset, deployment를 사용해서 만드는 이유가 있나요?
-  - ...
+  - 뒤에서 배우겠지만, scale이나 update 등을 위해서 상위 오브젝트인 deployment를 활용하는 것이 좋습니다.
+  - pod를 직접 만들고 관리할 수도 있지만, scale이나 update등의 작업이 필요한 경우 개별적인 핸들링이 필요합니다. 또한, history관리도 개별적으로 해야하구요.
 
 - deployment를 이용한 업데이트 시 pod들이 삭제되고 새로 생성되는데요, 이럴경우 추적성이 좀 떨어질 것 같습니다. 기존 pod를 업데이트할 수는 없나요?
-  - ...
+  - 컨테이너의 개념은 새로 생성하는것이 기본입니다.
+  - 수업시간에 자세히 설명드릴게요.
