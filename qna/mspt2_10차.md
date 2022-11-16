@@ -316,5 +316,6 @@ spec:
   - get은 목록을 보는 명령어이고, describe는 그 중 하나의 상세내용을 보는 명령어 입니다.
   - pod의 경우 목록을 볼 때는 get, 그 중 하나의 pod의 상세내용(예를들어 phase, condition ) 을 보려면 describe 를 사용하면 됩니다.
 
-- 
+- `-include`는 뭔가요?
+  - 
 
