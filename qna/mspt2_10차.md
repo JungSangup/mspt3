@@ -345,7 +345,8 @@ ubuntu@ip-10-0-10-127:~$ export SERVICE_IP=$(kubectl get svc --namespace default
 ubuntu@ip-10-0-10-127:~$ env | grep SERVICE_IP
 SERVICE_IP=af1eda6f97127404e8c2ebb485c561cc-1719673912.us-east-1.elb.amazonaws.com~
 ```
-> `--include` 대신 `--template` 을 사용.  (수업 중 보여드린 TODO의 LoadBalancer service 부분을 사용함.)
+> `--include` 대신 `--template` 을 사용.  (수업 중 보여드린 TODO의 LoadBalancer service 부분을 사용함.)  
+
 아래와 같은 정보를 찾고 사용하기 위해서 명령어를 사용한 것입니다.
 ```bash
 ubuntu@ip-10-0-10-127:~$ kubectl get svc --namespace default todo-loadbalancer-service --output json
