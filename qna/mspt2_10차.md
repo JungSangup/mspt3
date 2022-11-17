@@ -338,3 +338,11 @@ NAME: my-wordpress
    echo "WordPress Admin URL: http://$SERVICE_IP/admin"
 ```
 > 위에서 `--include "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}"` 부분
+
+위의 부분은 아래와 같이 처리하는 것이 맞음.
+```bash
+ubuntu@ip-10-0-10-127:~$ export SERVICE_IP=$(kubectl get svc --namespace default todo-loadbalancer-service --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")~
+ubuntu@ip-10-0-10-127:~$ env | grep SERVICE_IP
+SERVICE_IP=af1eda6f97127404e8c2ebb485c561cc-1719673912.us-east-1.elb.amazonaws.com~
+```
+> `--include` 대신 `--template` 을 사용.
