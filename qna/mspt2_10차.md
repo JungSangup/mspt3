@@ -280,13 +280,15 @@ spec:
   - 네, 맞습니다.
 
 - System(설명할 때 System A, System B라고 한...)이 그림에서 Service인가요?
-  - ...
+  - 수업시간에 얘기한 System 은 K8s의 오브젝트들(Service, Deployment, etc)을 이용해서 서비스를 하는 하나의 완전한 시스템을 말한 것입니다.
+  - 예를들어, 쇼핑몰이라는 System이 있을 경우, 워크로드는 Deployment-ReplicaSet-Pod로 구성을 하고, 네트워킹을 위해서 Service 오브젝트를 사용하고.. 등등 입니다.
 
 - ingress 가 clusterip타입 그림에서 앞에 있는 proxy인가요?
   - 네, 맞습니다.
 
 - 서비스 유형(e.g. 웹서비스)에 따른 구성 사례를 보여주시면 도움이 될 것 같아요.
-  - ...
+  - 가장 일반적인 유형은 수업시간에 말씀 드렸습니다. ( Ingress - ClusterIP타입 Service - Deployment )
+  - 또는, CSP에서 제공하는 LB를 이용하는 경우도 있습니다. (이 사례는 뒤에 과정에서 다루고 있습니다.)
 
 
 - Selector를 사용하는 목적이 클러스터 내에서 특정 pod로 서비스하도록 지정하기 위한건가요?
