@@ -223,7 +223,49 @@ spec:
   - 둘 다 Pod의 상태를 체크하는 것인데요, Readiness는 사용자에게 연결할지를(service의 LB 대상으로 할지, endpoint로 할지) 판단하는 것이고, Liveness는 Running중인 pod의 상태를 체크해서 문제가 생기면 재시작을 해주는 것입니다.
 
 - 명령형으로 생성한 오브젝트를 추후 선언형으로 적용할 수 있나요?
-  - ...
+  - 안되는 것 같네요.  -_-;   아래 예제 참고하세요.  ( `kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply.` )
+```bash
+ubuntu@ip-10-0-10-127:~/temp$ cat nginx-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx
+spec:
+  containers:
+  - image: nginx:1.19.3
+    name: my-nginx
+    ports:
+    - containerPort: 80
+ubuntu@ip-10-0-10-127:~/temp$ kubectl run my-nginx --image=nginx:1.18.0
+pod/my-nginx created
+ubuntu@ip-10-0-10-127:~/temp$ kubectl apply -f nginx-pod.yaml
+Warning: resource pods/my-nginx is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+The Pod "my-nginx" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`, `spec.initContainers[*].image`, `spec.activeDeadlineSeconds`, `spec.tolerations` (only additions to existing tolerations) or `spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
+  core.PodSpec{
+  	Volumes:        {{Name: "kube-api-access-99gff", VolumeSource: {Projected: &{Sources: {{ServiceAccountToken: &{ExpirationSeconds: 3607, Path: "token"}}, {ConfigMap: &{LocalObjectReference: {Name: "kube-root-ca.crt"}, Items: {{Key: "ca.crt", Path: "ca.crt"}}}}, {DownwardAPI: &{Items: {{Path: "namespace", FieldRef: &{APIVersion: "v1", FieldPath: "metadata.namespace"}}}}}}, DefaultMode: &420}}}},
+  	InitContainers: nil,
+  	Containers: []core.Container{
+  		{
+  			... // 3 identical fields
+  			Args:       nil,
+  			WorkingDir: "",
+- 			Ports:      []core.ContainerPort{{ContainerPort: 80, Protocol: "TCP"}},
++ 			Ports:      nil,
+  			EnvFrom:    nil,
+  			Env:        nil,
+  			... // 14 identical fields
+  		},
+  	},
+  	EphemeralContainers: nil,
+  	RestartPolicy:       "Always",
+  	... // 26 identical fields
+  }
+
+ubuntu@ip-10-0-10-127:~/temp$ kubectl describe po my-nginx | grep -i image
+    Image:          nginx:1.18.0
+    Image ID:       docker-pullable://nginx@sha256:e90ac5331fe095cea01b121a3627174b2e33e06e83720e9a934c7b8ccc9c55a0
+  Normal  Pulled     67s   kubelet            Container image "nginx:1.18.0" already present on machine
+```
 
 - `kubectl delete -f ~`로 하면 명령형 오브젝트랑 같은 거 아닌가요?
   - 정확하게 말씀하셨네요. 맞습니다.
@@ -231,7 +273,7 @@ spec:
   - 삭제도 apply 명령으로 할 수는 있지만, 권장하지는 않습니다. [오브젝트 삭제 방법](https://kubernetes.io/ko/docs/tasks/manage-kubernetes-objects/declarative-config/#%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EC%82%AD%EC%A0%9C-%EB%B0%A9%EB%B2%95) 참고하세요.
 
 - 샘플에 app과 name들이 모두 동일해서 헷갈리네요.
-  - ...
+  - 이후에 교재 업데이트 시 고려하겠습니다.
 
 - pod를 굳이 replicaset, deployment를 사용해서 만드는 이유가 있나요?
   - 뒤에서 배우겠지만, scale이나 update 등을 위해서 상위 오브젝트인 deployment를 활용하는 것이 좋습니다.
@@ -265,7 +307,7 @@ spec:
 - Loadbalancer타입의 service는 1:1로 묶이는 건가요? 일반적으로 LB는 그룹으로 묶는데... LB아래 여러개 서비스를 묶어서 사용하기도 하나요?
   - LB를 생성하면 각 노드들을 그룹으로 해서 사용하게 됩니다.
   - 수업시간에 보여드린 lb방식 서비스를 생성했을 때, aws에 생성된 classic load balancer 입니다. (아래 그림 참조.)
-  - 
+  - 하단에 있는 두 개의 Instance가 바로 두 개의 Node 입니다.
 ![](img/aws_clb.jpg)
 
 
