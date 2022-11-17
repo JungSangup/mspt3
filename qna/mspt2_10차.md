@@ -345,4 +345,61 @@ ubuntu@ip-10-0-10-127:~$ export SERVICE_IP=$(kubectl get svc --namespace default
 ubuntu@ip-10-0-10-127:~$ env | grep SERVICE_IP
 SERVICE_IP=af1eda6f97127404e8c2ebb485c561cc-1719673912.us-east-1.elb.amazonaws.com~
 ```
-> `--include` 대신 `--template` 을 사용.
+> `--include` 대신 `--template` 을 사용.  (수업 중 보여드린 TODO의 LoadBalancer service 부분을 사용함.)
+아래와 같은 정보를 찾고 사용하기 위해서 명령어를 사용한 것입니다.
+```bash
+ubuntu@ip-10-0-10-127:~$ kubectl get svc --namespace default todo-loadbalancer-service --output json
+{
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"todo-loadbalancer-service\",\"namespace\":\"default\"},\"spec\":{\"ports\":[{\"nodePort\":30001,\"port\":3000,\"protocol\":\"TCP\",\"targetPort\":3000}],\"selector\":{\"app\":\"todo-app\"},\"type\":\"LoadBalancer\"}}\n"
+        },
+        "creationTimestamp": "2022-11-16T06:24:41Z",
+        "finalizers": [
+            "service.kubernetes.io/load-balancer-cleanup"
+        ],
+        "name": "todo-loadbalancer-service",
+        "namespace": "default",
+        "resourceVersion": "541407",
+        "uid": "f1eda6f9-7127-404e-8c2e-bb485c561cc3"
+    },
+    "spec": {
+        "allocateLoadBalancerNodePorts": true,
+        "clusterIP": "172.20.73.17",
+        "clusterIPs": [
+            "172.20.73.17"
+        ],
+        "externalTrafficPolicy": "Cluster",
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+            "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+            {
+                "nodePort": 30001,
+                "port": 3000,
+                "protocol": "TCP",
+                "targetPort": 3000
+            }
+        ],
+        "selector": {
+            "app": "todo-app"
+        },
+        "sessionAffinity": "None",
+        "type": "LoadBalancer"
+    },
+    "status": {
+        "loadBalancer": {
+            "ingress": [
+                {
+                    "hostname": "af1eda6f97127404e8c2ebb485c561cc-1719673912.us-east-1.elb.amazonaws.com"
+                }
+            ]
+        }
+    }
+}
+```
+> json 형식으로 출력한 후 `.status.loadBalancer.ingress`를 찾아 환경변수(SERVICE_IP)로 등록한 것임.
