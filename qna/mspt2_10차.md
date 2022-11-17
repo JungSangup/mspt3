@@ -263,7 +263,11 @@ spec:
   - 그리고, LoadBalancer타입의 서비스는 클라우드 공급자의 LB를 사용하구요.
 
 - Loadbalancer타입의 service는 1:1로 묶이는 건가요? 일반적으로 LB는 그룹으로 묶는데... LB아래 여러개 서비스를 묶어서 사용하기도 하나요?
-  - ...
+  - LB를 생성하면 각 노드들을 그룹으로 해서 사용하게 됩니다.
+  - 수업시간에 보여드린 lb방식 서비스를 생성했을 때, aws에 생성된 classic load balancer 입니다. (아래 그림 참조.)
+  - 
+![](img/aws_clb.jpg)
+
 
 - Loadbalancer타입의 서비스는 nodeport나 clusterip타입의 서비스와 연동해서 사용하나요?
   - clusterid < nodeport < loadbalancer 순으로 구조를 가지고 있습니다.
