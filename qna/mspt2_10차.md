@@ -316,6 +316,25 @@ spec:
   - get은 목록을 보는 명령어이고, describe는 그 중 하나의 상세내용을 보는 명령어 입니다.
   - pod의 경우 목록을 볼 때는 get, 그 중 하나의 pod의 상세내용(예를들어 phase, condition ) 을 보려면 describe 를 사용하면 됩니다.
 
-- `-include`는 뭔가요?
-  - 
+- `--include`는 뭔가요?
+  - `helm install` 후 로그의 내용을 질문하신 것 같습니다.
+  - `kubectl get services OOO`의 결과(json)에서 `.status.loadBalancer.ingress`을 찾아서 환경변수로 저장하고 사용하는 안내인데요, 이 안내가 잘못 된 것 같습니다.
+  - `--include` 가 아닌 `--template`이 맞습니다. ( -> 이 부분은 더 확인해보고 추가정보가 있으면 더 보충설명 해 놓겠습니다.)
+  - 아래 예시 참고하세요.
 
+```bash
+ubuntu@ip-10-0-1-84:~$ helm install my-wordpress bitnami/wordpress
+NAME: my-wordpress
+
+... 생략 ...
+
+1. Get the WordPress URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-wordpress'
+
+   export SERVICE_IP=$(kubectl get svc --namespace default my-wordpress --include "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+   echo "WordPress URL: http://$SERVICE_IP/"
+   echo "WordPress Admin URL: http://$SERVICE_IP/admin"
+```
+> 위에서 `--include "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}"` 부분
