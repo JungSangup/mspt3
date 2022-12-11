@@ -12,6 +12,9 @@
     color: black;
     */
     background-image: url("./themes/hero-background.svg");
+    /*
+    background-image: url("./themes/snowflake.png") ;
+    */
     background-size: cover;
 }
 
