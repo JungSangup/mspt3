@@ -6,8 +6,7 @@
 | ./doc | 이론/실습 교재 (markdown) |
 | ./doc/themes | 교재(md)의 slides 형식을 위한 theme (css적용) |
 | ./doc/img | 교재에 사용된 이미지 |
-| ./doc/pdf | 교재의 slides 형식 출력본(pdf) - 글꼴색:회색 |
-| ./doc/pdf-font-black | 교재의 slides 형식 출력본(pdf) - 글꼴색:검정 |
+| ./doc/pdf | 교재의 slides 형식 출력본(pdf) |
 | ./hands_on_files | 실습교재에 사용되는 파일들 |
 | ./qna | 각 차수별 Note와 질문/답변 |
 
