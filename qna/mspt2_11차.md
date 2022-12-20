@@ -45,6 +45,8 @@ Error response from daemon: bridge driver doesn't support multiple subnets
   - `--subnet` 옵션으로 지정해서 생성할 수도 있습니다.
   - `docker network create --driver=bridge --subnet=192.168.0.0/16 br0` 이런 식으로 가능합니다.
 
+
+![](./img/cicd_11.png)
 ---
 
 ### Kubernetes
