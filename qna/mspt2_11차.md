@@ -9,6 +9,11 @@
   - [Windows and Containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/) 참고하세요.
 
 
+- docker commit 명령어로 새롭게 생성된 이미지를 실행하면(컨테이너를 만들면), 그 때도 새로운 컨테이너 이미지가 만들어지는 건가요?
+  - 네, 맞습니다.
+  - 예를들어 최초 이미지가 5개의 레이어를 가지고 있고, 그 이미지를 실행한 뒤(이 때 하나의 R/W 레이어가 만들어짐.) `docker commit`명령어를 이용해 이미지를 만들면 6개의 R/O 레이어를 가진 이미지가 됩니다.
+  - 그 다음 새롭게 만들어진 이미지를 실행하면, 이번에는 6개의 R/O 레이어에 1개의 새로운 R/W 레이어가 더 만들어지게 됩니다.
+
 ---
 
 ### Kubernetes
