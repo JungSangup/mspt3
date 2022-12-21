@@ -50,10 +50,12 @@ Error response from daemon: bridge driver doesn't support multiple subnets
   - R/O 레이어 (Image layer)는 그대로 남아있습니다.
   - R/O 레이어는 Image를 삭제할 때 삭제됩니다.
 
-- CI/CD
+- CI/CD  
+
 ![](img/cicd_11.png)
 
-- Docker summary
+- Docker summary  
+
 ![](img/docker_summary_11.png)
 
 ---
