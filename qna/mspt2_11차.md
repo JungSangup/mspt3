@@ -102,5 +102,5 @@ Error response from daemon: bridge driver doesn't support multiple subnets
 
 - 만약 특정 pod에서 장시간 수행되는 job이 있는데 update/deploy를 하게되면, 기존 pod는 어떻게 종료되나요? (강제종료? 아니면, 끝날때를 기다리고 종료?)
   - 설정할 수 있습니다.
-  - 기본적으로는 수행중이던 것을 마치고 종료하게 됩니다.
+  - 기본적으로는 수행중이던 것을 마치고 종료하게 됩니다. ( Graceful shutdown : SIGTERM신호를 먼저 보내고, 이후에 SIGKILL )
   - [파드의 종료](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) 부분도 참고하세요.
