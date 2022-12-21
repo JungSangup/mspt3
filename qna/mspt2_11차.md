@@ -62,5 +62,9 @@ Error response from daemon: bridge driver doesn't support multiple subnets
 
 ### Kubernetes
 
-- ...
-- 
+- deployment 업데이트 시 `kubectl set image..`명령으로 하면, deployment yaml의 spec.은 변경이 안되고 현재 Deployment object정보만 변경되는건가요? 만약 나중에 다시 yaml파일로 적용하면, 구 버젼으로 돌아가게 되나요?
+  - 네, 맞습니다. `kubectl set image...`나 `kubectl edit ...`같은 명령은 현재 Object를 직접 변경하는 것입니다. (yaml파일을 수정해서 적용하는 것이 아닌)
+  - 그래서, 버젼관리/history관리 등을 위해서 yaml파일을 수정하고 반영하는 것이 실무에서는 더 많이 사용되는 방법입니다.
+  - 명령형 커맨드는 간단히 테스트해보거나 할 때만 사용된다고 보시면 됩니다.
+
+
