@@ -99,3 +99,8 @@ Error response from daemon: bridge driver doesn't support multiple subnets
 - 교재에서 Deployment와 template(Pod spec.)에 둘 다 label이 있는데, svc는 어떤걸 select하나요?
   - Pod의 Label을 선택합니다. 
   - Deployment의 label은 그냥 같이 설정되어있긴 하지만, svc는 그게 아닌 pod의 label을 보고 선택하게 됩니다.
+
+- 만약 특정 pod에서 장시간 수행되는 job이 있는데 update/deploy를 하게되면, 기존 pod는 어떻게 종료되나요? (강제종료? 아니면, 끝날때를 기다리고 종료?)
+  - 설정할 수 있습니다.
+  - 기본적으로는 수행중이던 것을 마치고 종료하게 됩니다.
+  - [파드의 종료](https://kubernetes.io/ko/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) 부분도 참고하세요.
