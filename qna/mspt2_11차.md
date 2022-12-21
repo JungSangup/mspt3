@@ -67,4 +67,9 @@ Error response from daemon: bridge driver doesn't support multiple subnets
   - 그래서, 버젼관리/history관리 등을 위해서 yaml파일을 수정하고 반영하는 것이 실무에서는 더 많이 사용되는 방법입니다.
   - 명령형 커맨드는 간단히 테스트해보거나 할 때만 사용된다고 보시면 됩니다.
 
+- spec. update해서 pod가 새로 생성되면 age가 새로 세팅되는건가요?
+  - 네, 맞습니다.
+  - deployment spec.이 변경되면(e.g. tag 변경) 새로운 replicaset이 만들어지고, 기존의 replicaset이 관리하던 pod는 삭제되면서 새로운 replicaset에 의해서 새로운 pod들이 생성됩니다. 새로 생성되었으니 그 생성시점으로 age가 표시됩니다.
 
+- Max surge 는 의도한 pod수 (Desired)에 대한 건가요?
+  - 그것과는 다릅니다. desired는 운영 시점에 필요한 pod의 개수이고, max surge는 업데이트 되는 동안에 최대한 
