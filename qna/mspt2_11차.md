@@ -45,8 +45,16 @@ Error response from daemon: bridge driver doesn't support multiple subnets
   - `--subnet` 옵션으로 지정해서 생성할 수도 있습니다.
   - `docker network create --driver=bridge --subnet=192.168.0.0/16 br0` 이런 식으로 가능합니다.
 
+- 컨테이너가 중지되면 container layer가 컨테이너와 함께 제거되는데, 그 때 R/O 레이어와 R/W 레이어 둘 다 사라진다는 건가요?
+  - 아니오, R/W 레이어(Container layer)만 사라집니다.
+  - R/O 레이어 (Image layer)는 그대로 남아있습니다.
+  - R/O 레이어는 Image를 삭제할 때 삭제됩니다.
+
 - CI/CD
 ![](img/cicd_11.png)
+
+- Docker summary
+![](img/docker_summary_11.png)
 
 ---
 
