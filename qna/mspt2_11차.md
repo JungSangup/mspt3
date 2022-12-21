@@ -79,3 +79,23 @@ Error response from daemon: bridge driver doesn't support multiple subnets
   - 네, 맞습니다. 하나의 Deployment 에는 하나의 replicaset spec.이 정의된다고 보면 됩니다.
   - 실제로 만들어지는 replicaset은 여러개 이지만, 이건 업데이트 시 구 버젼은 desired숫자를 줄이고(그래서 실제로 pod는 삭제되고) 신 버젼은 desired숫자를 높여서(그래서 실제로 새로운 버젼의 pod가 생성되는) 관리하는 방식입니다.
   - Current state의 deployment와 replicaset은 1:1 이라고 보시면 됩니다.
+
+- 같은 Node안에 있는 pod들 간에도 service를 통해야 되는건가요?
+  - 그렇지는 않습니다. 클러스터 내부에서는 각 Pod의 Cluster ip로도 접근 가능합니다.
+  - 하지만, 그 cluster ip는 유동적이기 때문에 테스트나 간단한 확인같은 경우만 cluster ip를 사용하면 되고, 그 외의 경우는 service를 구성해서 하는것이 좋습니다.
+
+- service라는 오브젝트는 node단위나 cluster단위 어느정도에 위치하고 있는건가요?
+  - 표현을 하자면 클러스터 단위로 관리되는 오브젝트 입니다. (특정 노드가 지정되지는 않는)
+  - Pod도 편의상 Node에 생성되는 것처럼 표현하지만, 사실은 클러스터 단위에서 관리되는 오브젝트이고, 실제 실행되는 컨테이너는 Node에서 실행되는 것입니다.
+
+- 서비스도 로드밸런서 기능이 있는데, 왜 별도의 로드밸런서를 구성하나요?
+  - LB타입의 서비스를 구성하면, 외부 LB는 노드간 LB역할을 하게됩니다. (e.g. AWS에 LB를 구성하면 그 LB의 타겟 그룹은 클러스터의 노드들이 됩니다.)
+
+- 클러스터 내/외부에서 사용하는 서비스가 여러개가 되면 그게 혼용되어 사용될 수 있는건가요?
+  - 여러가지 중 한 가지를 선택해서 사용합니다.
+  - 교재는 비교를 위해서 여러개를 그려놓은 것입니다.
+  - 예를들어 NodePort타입의 서비스를 생성하면, ClusterIP타입의 서비스의 특징을 가지고 있으면서 NodePort의 특징을 추가로 더 가지는 형태입니다.
+
+- 교재에서 Deployment와 template(Pod spec.)에 둘 다 label이 있는데, svc는 어떤걸 select하나요?
+  - Pod의 Label을 선택합니다. 
+  - Deployment의 label은 그냥 같이 설정되어있긴 하지만, svc는 그게 아닌 pod의 label을 보고 선택하게 됩니다.
