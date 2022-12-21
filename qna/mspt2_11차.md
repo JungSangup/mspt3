@@ -72,4 +72,10 @@ Error response from daemon: bridge driver doesn't support multiple subnets
   - deployment spec.이 변경되면(e.g. tag 변경) 새로운 replicaset이 만들어지고, 기존의 replicaset이 관리하던 pod는 삭제되면서 새로운 replicaset에 의해서 새로운 pod들이 생성됩니다. 새로 생성되었으니 그 생성시점으로 age가 표시됩니다.
 
 - Max surge 는 의도한 pod수 (Desired)에 대한 건가요?
-  - 그것과는 다릅니다. desired는 운영 시점에 필요한 pod의 개수이고, max surge는 업데이트 되는 동안에 최대한 
+  - 그것과는 다릅니다. desired는 운영 시점에 필요한 pod의 개수이고, max surge는 업데이트 되는 동안에 최대한 추가로 생성될 수 있는 범위입니다.
+  - rolling update 업데이트 되는 동안에는 Desired 숫자만큼의 pod를 유지하지는 않고, +/- 허용치를 Max surge와 Max unavailable로 정의하는 것입니다.
+
+- Deployment에 여러개 replicaset을 정의할 수 있나요? 하나인 것 같은데...
+  - 네, 맞습니다. 하나의 Deployment 에는 하나의 replicaset spec.이 정의된다고 보면 됩니다.
+  - 실제로 만들어지는 replicaset은 여러개 이지만, 이건 업데이트 시 구 버젼은 desired숫자를 줄이고(그래서 실제로 pod는 삭제되고) 신 버젼은 desired숫자를 높여서(그래서 실제로 새로운 버젼의 pod가 생성되는) 관리하는 방식입니다.
+  - Current state의 deployment와 replicaset은 1:1 이라고 보시면 됩니다.
