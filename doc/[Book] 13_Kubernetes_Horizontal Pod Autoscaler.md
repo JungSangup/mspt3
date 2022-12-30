@@ -21,7 +21,7 @@ footer: Samsung SDS
 
 ## Horizontal Pod Autoscaler
 
-**HorizontalPodAutoscaler**는 워크로드 리소스(e.g. Deployment 또는 StatefulSet)를 자동으로 업데이트하며, 워크로드의 크기를 수요에 맞게 자동으로 스케일링하는 것을 목표로 합니다.
+**HorizontalPodAutoscaler**는 워크로드 리소스(e.g. Deployment 또는 StatefulSet)를 자동으로 업데이트하며, 워크로드의 크기(파드의 개수)를 수요에 맞게 자동으로 스케일링하는 것을 목표로 합니다.
 
 **수평 스케일링**은 부하 증가에 대해 Pod의 수를 증가시기는 것을 말합니다. 이는 **수직 스케일링**(해당 워크로드를 위해 이미 실행 중인 파드에 더 많은 자원(예: 메모리 또는 CPU)를 할당하는 것)과는 다릅니다.
 
