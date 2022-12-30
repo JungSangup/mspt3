@@ -81,7 +81,7 @@ spec:
 | Service type | | Description |
 | :--- | :---: | :--- |
 | ClusterIP<br>(Default type) | ![h:220](img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.)|
-| NodePort | ![h:220](img/k8s_service_nodeport.png) | 고정 포트 (NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 <NodeIP>:<NodePort>로 접근가능) |
+| NodePort | ![h:220](img/k8s_service_nodeport.png) | 고정 포트 (NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
 
 ---
 
