@@ -34,90 +34,162 @@ Helm을 통해 다음과 같은 일을 할 수 있습니다.
 - Chart들을 Kubernetes Cluster에 설치/제거 할 수 있습니다.
 - Helm을 통해 설치된 Chart들에 대한 Release Cycle을 관리할 수 있습니다.
 
+<br><br><br><br><br>
+
+![](./img/hyperlink.png)[Helm](https://helm.sh/ko/)
+
 ---
 
 ## Helm
 
-![h:350](img/helmchart.png)
+![h:380](img/helmchart.png)
 
-Helm은 다음과 같은 3가지 중요한 Concept을 가지고 있습니다.
+Helm은 다음과 같은 3가지 중요한 개념([Three Big Concepts](https://helm.sh/ko/docs/intro/using_helm/#%EC%A3%BC%EC%9A%94-%EA%B0%9C%EB%85%90-3%EA%B0%80%EC%A7%80))을 가지고 있습니다.
 - **Chart** : Helm의 package이며, 이 package에는 Kubernetes Resource들을 담고 있음
 - **Repository** : Chart(Kubernetes Package) 저장소
 - **Release** : Kubernetes Cluster에서 구동되는 Chart의 Instance
 
-![](./img/hyperlink.png)[Three Big Concepts](https://helm.sh/docs/intro/using_helm/#three-big-concepts)
-
 ---
 
-### Charts
+### [Charts](https://helm.sh/ko/docs/topics/charts/)
 
-Chart는 디렉토리 내부에 파일들로 구성됩니다. 디렉토리 이름이 Chart의 이름이 됩니다.
+Chart는 Helm에서 사용되는 **패키징 포멧**이며, **쿠버네티스 리소스**를 정의하는 파일들의 집합입니다.
+Chart는 디렉토리 내부에 파일들로 구성되며, 디렉토리 이름이 Chart의 이름이 됩니다.
 예를들어, WordPress라는 Chart는 `wordpress/` 디렉토리에 저장이 됩니다.
 
 디렉토리 내에는 아래와 같은 구조로 파일들이 존재 합니다.
-
 ```
 wordpress/
-  Chart.yaml          # A YAML file containing information about the chart
-  LICENSE             # OPTIONAL: A plain text file containing the license for the chart
-  README.md           # OPTIONAL: A human-readable README file
-  values.yaml         # The default configuration values for this chart
-  values.schema.json  # OPTIONAL: A JSON Schema for imposing a structure on the values.yaml file
-  charts/             # A directory containing any charts upon which this chart depends.
-  crds/               # Custom Resource Definitions
-  templates/          # A directory of templates that, when combined with values,
-                      # will generate valid Kubernetes manifest files.
-  templates/NOTES.txt # OPTIONAL: A plain text file containing short usage notes
+  Chart.yaml          # 차트에 대한 정보를 가진 YAML 파일
+  LICENSE             # 옵션: 차트의 라이센스 정보를 가진 텍스트 파일
+  README.md           # 옵션: README 파일
+  values.yaml         # 차트에 대한 기본 환경설정 값들
+  values.schema.json  # 옵션: values.yaml 파일의 구조를 제약하는 JSON 파일
+  charts/             # 이 차트에 종속된 차트들을 포함하는 디렉터리
+  crds/               # 커스텀 자원에 대한 정의
+  templates/          # values와 결합될 때, 유효한 쿠버네티스 manifest 파일들이 생성될 템플릿들의 디렉터리
+  templates/NOTES.txt # 옵션: 간단한 사용법을 포함하는 텍스트 파일
 ```
-
-Helm은 `charts/` 와 `templates/` 디렉토리와, 지정된 파일명을 사용하도록 하고 있습니다.
+> 위 예제의 파일과 디렉토리는 Helm에서 사용되는 예약어 입니다.
+> - 파일 : Chart.yaml, LICENSE, README.md, values.yaml, values.schema.json
+> - 디렉토리 : charts/ , crds/ , templates/
 
 ---
 
-#### Chart.yaml 파일
+#### [Chart.yaml 파일](https://helm.sh/ko/docs/topics/charts/#chartyaml-%ED%8C%8C%EC%9D%BC)
 
-Chart.yaml 파일은 Chart에 필수적인 파일입니다. 다음과 같은 Field를 포함하고 있습니다.
+Chart.yaml 파일은 Chart에 필수적인 파일이며 다음과 같은 Field를(메타 데이터) 포함하고 있습니다.
 
 ```yaml
-apiVersion: The chart API version (required)
-name: The name of the chart (required)
-version: A SemVer 2 version (required)
-kubeVersion: A SemVer range of compatible Kubernetes versions (optional)
-description: A single-sentence description of this project (optional)
-type: The type of the chart (optional)
+apiVersion: 차트 API 버전 (필수)
+name: 차트명 (필수)
+version: SemVer 2 버전 (필수)
+kubeVersion: 호환되는 쿠버네티스 버전의 SemVer 범위 (선택)
+description: 이 프로젝트에 대한 간략한 설명 (선택)
+type: 차트 타입 (선택)
 keywords:
-  - A list of keywords about this project (optional)
-home: The URL of this projects home page (optional)
+  - 이 프로젝트에 대한 키워드 리스트 (선택)
+home: 프로젝트 홈페이지의 URL (선택)
 sources:
-  - A list of URLs to source code for this project (optional)
-dependencies: # A list of the chart requirements (optional)
-  - name: The name of the chart (nginx)
-    version: The version of the chart ("1.2.3")
-    repository: (optional) The repository URL ("https://example.com/charts") or alias ("@repo-name")
-    condition: (optional) A yaml path that resolves to a boolean, used for enabling/disabling charts (e.g. subchart1.enabled )
-    tags: # (optional)
-      - Tags can be used to group charts for enabling/disabling together
-    import-values: # (optional)
-      - ImportValues holds the mapping of source values to parent key to be imported. Each item can be a string or pair of child/parent sublist items.
-    alias: (optional) Alias to be used for the chart. Useful when you have to add the same chart multiple times
+  - 이 프로젝트의 소스코드 URL 리스트 (선택)
+dependencies: # 차트 필요조건들의 리스트 (optional)
+  - name: 차트명 (nginx)
+    version: 차트의 버전 ("1.2.3")
+    repository: 저장소 URL ("https://example.com/charts") 또는 ("@repo-name")
+    condition: (선택) 차트들의 활성/비활성을 결정하는 boolean 값을 만드는 yaml 경로 (예시: subchart1.enabled)
+    tags: # (선택)
+      - 활성화 / 비활성을 함께하기 위해 차트들을 그룹화 할 수 있는 태그들
+    enabled: (선택) 차트가 로드될수 있는지 결정하는 boolean
+    import-values: # (선택)
+      - ImportValues 는 가져올 상위 키에 대한 소스 값의 맵핑을 보유한다. 각 항목은 문자열이거나 하위 / 상위 하위 목록 항목 쌍일 수 있다.
+    alias: (선택) 차트에 대한 별명으로 사용된다. 같은 차트를 여러번 추가해야할때 유용하다.
 ```
 
 ---
 
 앞장에서 계속
 ```yaml
-maintainers: # (optional)
-  - name: The maintainers name (required for each maintainer)
-    email: The maintainers email (optional for each maintainer)
-    url: A URL for the maintainer (optional for each maintainer)
-icon: A URL to an SVG or PNG image to be used as an icon (optional).
-appVersion: The version of the app that this contains (optional). Needn't be SemVer. Quotes recommended.
-deprecated: Whether this chart is deprecated (optional, boolean)
+maintainers: # (선택)
+  - name: maintainer들의 이름 (각 maintainer마다 필수)
+    email: maintainer들의 email (각 maintainer마다 선택)
+    url: maintainer에 대한 URL (각 maintainer마다 선택)
+icon: 아이콘으로 사용될 SVG나 PNG 이미지 URL (선택)
+appVersion: 이 앱의 버전 (선택). SemVer인 필요는 없다.
+deprecated: 차트의 deprecated 여부 (선택, boolean)
 annotations:
-  example: A list of annotations keyed by name (optional).
+  example: 키로 매핑된 주석들의 리스트 (선택).
 ```
-> Helm 3를 사용하는 경우 `apiVersion` 은 `v2`를 이어야 합니다. (Helm 2는 `v1`)
-> `name`은 Chart의 이름이며, `version`은 Chart의 version을 의미합니다.
+
+- [version](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8%EC%99%80-%EB%B2%84%EC%A0%80%EB%8B%9D) : 모든 Chart는 버젼 번호를 정하게 되어있는데, 이때  [SemVer 2](https://semver.org/spec/v2.0.0.html) 표준을 따릅니다. ( e.g. wordpress-15.2.22)  
+- [apiVersion](https://helm.sh/ko/docs/topics/charts/#apiversion-%ED%95%84%EB%93%9C) : Helm 3를 사용하는 경우 `apiVersion` 은 `v2`여야 합니다. (Helm 2는 `v1`)  
+- [type](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8-%ED%83%80%EC%9E%85) : Chart의 타입을 정의하며, application(기본형)과 library(유틸리티/함수 제공) 두 가지 타입이 있다.  
+
+<br><br>
+
+#### [LICENSE, README and NOTES](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8-%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4-readme-%EC%99%80-notes) 파일
+라이센스 내용이나 설명, 사용법, 구성 등을 담고있는 텍스트 파일
+> README는 Markdown(.md) 포멧을 사용
+
+---
+
+#### [Chart Dependencies](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8-%EC%9D%98%EC%A1%B4%EC%84%B1)
+
+Helm은 차트간에 **의존성**을 가진 구조를 가질 수 있습니다.  
+이 의존성은 Chart.yaml 파일에 dependencies 필드를 사용하거나, charts/ 디렉토리를 통해 관리할 수 있습니다.
+
+<br>
+
+##### Chart.yaml 파일의 dependencies 필드 (예제)
+```
+dependencies:
+  - name: apache
+    version: 1.2.3
+    repository: https://example.com/charts
+  - name: mysql
+    version: 3.2.1
+    repository: https://another.example.com/charts
+```
+> Chart.yaml의 dependencies 필드에 리스트 형태로 정의
+
+<br>
+
+##### charts/ 디렉토리 (예제)
+```
+charts/
+  apache-1.2.3.tgz
+  mysql-3.2.1.tgz
+```
+> 아카이브 형태의 차트(.tgz)를 charts/ 디렉토리에 저장
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 
 #### Template 파일
 
