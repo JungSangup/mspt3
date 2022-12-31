@@ -2,31 +2,40 @@
  * @theme mspt2
 */
 
+/*
+
+Base theme : gaia
+사용폰트 : 나눔스퀘어 네오
+폰트색상 : #27343a
+
+*/
+
+
 @import 'gaia';
 
 :root {
 
-    font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium', 'Trebuchet MS';
+    /* font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium'; */
+    font-family: 'NanumSquareNeo-bRg', '나눔스퀘어 네오 Regular';
     font-size: 18px;
-    /*
-    color: black;
-    */
+    color: #27343a;
     background-image: url("./themes/hero-background.svg");
-    /*
-    background-image: url("./themes/snowflake.png") ;
-    */
     background-size: cover;
 }
 
 header {
-    font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium', 'Trebuchet MS';
+    /* font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium'; */
+    font-family: 'NanumSquareNeo-dEb', '나눔스퀘어 네오 ExtraBold';
     font-size: 20px;
+    color: #27343a;
 }
 
 
 footer {
-    font-family: 'NanumSquare';
+    /* font-family: 'GmarketSansTTFMedium', 'G마켓 산스 TTF Medium'; */
+    font-family: 'NanumSquareNeo-cBd', '나눔스퀘어 네오 Bold';
     font-size: 16px;
+    color: #27343a;
 }
 
 
@@ -57,9 +66,7 @@ blockquote {
     margin: 0.5em 5px;
     padding: 0.5em 5px 0.1em 10px;
     font-size: 16px;
-    /*
-    quotes: "\201C""\201D""\2018""\2019";
-    */
+    /* quotes: "\201C""\201D""\2018""\2019"; */
 }
 
 blockquote::before, blockquote::after {
