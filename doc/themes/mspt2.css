@@ -72,3 +72,9 @@ blockquote {
 blockquote::before, blockquote::after {
     content: none;
 }
+
+
+code {
+    padding-left: 5px;
+    padding-right: 5px;
+}

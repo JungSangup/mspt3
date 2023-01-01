@@ -58,7 +58,7 @@ Chart는 디렉토리 내부에 파일들로 구성되며, 디렉토리 이름�
 예를들어, WordPress라는 Chart는 `wordpress/` 디렉토리에 저장이 됩니다.
 
 디렉토리 내에는 아래와 같은 구조로 파일들이 존재 합니다.
-```
+```bash
 wordpress/
   Chart.yaml          # 차트에 대한 정보를 가진 YAML 파일
   LICENSE             # 옵션: 차트의 라이센스 정보를 가진 텍스트 파일
@@ -140,7 +140,7 @@ Helm은 차트간에 **의존성**을 가진 구조를 가질 수 있습니다.
 <br>
 
 ##### Chart.yaml 파일의 dependencies 필드 (예제)
-```
+```yaml
 dependencies:
   - name: apache
     version: 1.2.3
@@ -154,7 +154,7 @@ dependencies:
 <br>
 
 ##### charts/ 디렉토리 (예제)
-```
+```yaml
 charts/
   apache-1.2.3.tgz
   mysql-3.2.1.tgz
