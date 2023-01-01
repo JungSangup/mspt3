@@ -27,7 +27,7 @@ footer: Samsung SDS
 
 ## Cloud Native
 
-![h:220](./img/cloud_native_1.png) ![h:220](./img/cloud_native_2.png) ![h:220](./img/cloud_native_3.png)
+![h:270](./img/cloud_native_1.png) ![h:270](./img/cloud_native_2.png) ![h:270](./img/cloud_native_3.png)
 
 #### [ Cloud Native 의 정의 ]
 > **클라우드 네이티브** 기술은 조직이 퍼블릭, 프라이빗, 그리고 하이브리드 클라우드와 같은
