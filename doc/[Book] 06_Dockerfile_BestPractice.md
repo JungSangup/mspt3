@@ -157,7 +157,7 @@ COPY --from=builder /tmp/go/hello /hello
 
 ### Decouple applications
 
-![h:250](img/decouple-applications.PNG)
+![h:250](img/decouple-applications.png)
 
 하나의 컨테이너에는 하나의 애플리케이션만 탑재하는 것이 좋습니다.
 여러 개의 애플리케이션이 있는 경우보다 쉽고 간단하게 Scale In/Out이 가능하고, 컨테이너 재사용이 용이하기 때문입니다.  
