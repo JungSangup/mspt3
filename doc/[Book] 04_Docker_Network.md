@@ -43,7 +43,7 @@ Docker의 네트워킹 서브시스템은 드라이버를 사용합니다. (plug
 아래는 대표적인 Docker의 네트워크 드라이버들 입니다.
 
 - [bridge](https://docs.docker.com/network/bridge/) : Default 네트워크 드라이버인 bridge network는 일반적으로 **컨테이너들 간에 통신**이 필요한 경우 사용됩니다.
-- [host](https://docs.docker.com/network/host/) : 컨테이너와 Host 머신간의 네트워크 격리를 제거하고 **호스트의 네트워킹을 직접 사용**합니다.
+- [host](https://docs.docker.com/network/host/) : 컨테이너와 Host 머신간의 네트워크 격리를 제거하고 **호스트의 네트워크를 직접 사용**합니다.
 - [overlay](https://docs.docker.com/network/overlay/) : 오버레이 네트워크는 **여러 Docker 데몬을 함께 연결**하고 Swarm 서비스가 서로 통신할 수 있도록 합니다. 또한 오버레이 네트워크를 사용하여 Swarm 서비스와 독립 실행형 컨테이너 간 또는 **서로 다른 Docker 데몬**에 있는 두 개의 독립 실행형 컨테이너 간의 통신을 용이하게 할 수 있습니다.
 - [none](https://docs.docker.com/network/none/) : 이 컨테이너의 경우 **모든 네트워킹을 비활성화**합니다. 일반적으로 사용자 지정 네트워크 드라이버와 함께 사용됩니다.
 - 기타 : [ipvlan](https://docs.docker.com/network/ipvlan/) , [macvlan](https://docs.docker.com/network/macvlan/)
