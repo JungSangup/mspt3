@@ -78,7 +78,7 @@ wordpress/
 
 #### [Chart.yaml 파일](https://helm.sh/ko/docs/topics/charts/#chartyaml-%ED%8C%8C%EC%9D%BC)
 
-Chart.yaml 파일은 Chart에 필수적인 파일이며 다음과 같은 Field를(메타 데이터) 포함하고 있습니다.
+Chart.yaml 파일은 Chart에 필수적인 파일이며 다음과 같은 Field를 포함하고 있습니다.
 
 ```yaml
 apiVersion: 차트 API 버전 (필수)
