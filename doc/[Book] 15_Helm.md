@@ -181,9 +181,9 @@ charts/
 
 
 
+![w:1100](img/helm-template.png)
 
-
-
+> 우선순위 : --set > --values > values.yaml
 
 
 
