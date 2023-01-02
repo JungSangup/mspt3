@@ -30,10 +30,9 @@ footer: Samsung SDS
 이번 장에서는 Docker의 네트워킹에 대해 알아보겠습니다.
 
 Docker가 강력한 이유 중 하나는 컨테이너들을 함께 연결하거나, Docker가 아닌 워크로드에 연결할 수 있기 때문입니다.
-아래는 Docker가 설치되면 기본적으로 생성되는 Network의 종류입니다.
-- `bridge` , `none` , `host`
+아래는 Docker가 설치되면 기본적으로 생성되는 Network의 종류입니다. (`bridge` , `host` , `none`)
 
-![h:350](img/docker-networing1.png)
+![h:400](img/docker-network1.png)
 
 ---
 
