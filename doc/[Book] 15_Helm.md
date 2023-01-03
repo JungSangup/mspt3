@@ -120,9 +120,9 @@ annotations:
   example: 키로 매핑된 주석들의 리스트 (선택).
 ```
 
-- [version](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8%EC%99%80-%EB%B2%84%EC%A0%80%EB%8B%9D) : 모든 Chart는 버젼 번호를 정하게 되어있는데, 이때  [SemVer 2](https://semver.org/spec/v2.0.0.html) 표준을 따릅니다. ( e.g. wordpress-15.2.22)  
-- [apiVersion](https://helm.sh/ko/docs/topics/charts/#apiversion-%ED%95%84%EB%93%9C) : Helm 3를 사용하는 경우 `apiVersion` 은 `v2`여야 합니다. (Helm 2는 `v1`)  
-- [type](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8-%ED%83%80%EC%9E%85) : Chart의 타입을 정의하며, application(기본형)과 library(유틸리티/함수 제공) 두 가지 타입이 있다.  
+- **version** : 모든 Chart는 버젼 번호를 정하게 되어있는데, 이때  [SemVer 2](https://semver.org/spec/v2.0.0.html) 표준을 따릅니다. ( e.g. wordpress-15.2.22)  
+- **apiVersion** : Helm 3를 사용하는 경우 `apiVersion` 은 `v2`여야 합니다. (Helm 2는 `v1`)  
+- **type** : Chart의 타입을 정의하며, application(기본형)과 library(유틸리티/함수 제공) 두 가지 타입이 있다.  
 
 <br><br>
 
@@ -163,179 +163,69 @@ charts/
 
 ---
 
+#### [Templates and Values](https://helm.sh/ko/docs/topics/charts/#%ED%85%9C%ED%94%8C%EB%A6%BF%EA%B3%BC-%EA%B0%92)
 
+Helm Chart의 **Template**들은 [Go template language](https://pkg.go.dev/text/template)로 작성되어 있으며, 다양한 template funtion들을 사용할 수 있습니다.
+모든 Template 파일들은 Chart의 `templates/` 디렉토리에 저장되고, Helm이 Chart를 rendering할 때 해당 디렉토리 내의 모든 파일들이 template engine으로 전달됩니다.  
 
+Template들을 위한 **값**(**Values**)은 아래의 방법으로 제공됩니다.
+- **Chart 개발자**가 `values.yaml`파일을 chart내에 포함시켜 제공. (default 값 포함)
+- **Chart 사용자**가 [helm install](https://helm.sh/ko/docs/helm/helm_install/)시 별도의 파일(e.g. `myValues.yaml`)이나 옵션(e.g. `--set`)으로 값을 제공.  
+> 위와 같은 경우 값의 우선순위는 명령어 옵션, 별도의 파일, 기본 values.yaml파일 순으로 적용됩니다.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-![w:1100](img/helm-template.png)
-
-> 우선순위 : --set > --values > values.yaml
-
-
-
-
+![w:1000 center](img/helm-template.png)
 
 ---
 
-#### Template 파일
-
-Helm Chart의 Template들은 Go template language로 작성되어 있으며, 다양한 template funtion들을 사용할 수 있습니다.
-
-모든 Template 파일들은 Chart의 `template/` 디렉토리에 저장되고, Helm이 Chart를 Rendering할 때, 해당 디렉토리 내의 모든 파일들이 template engine으로 전달됩니다.
-
-Template이 사용하는 Value들은 두가지 방법으로 제공될 수 있습니다.
-
-- Chart 개발자가 `values.yaml`파일을 chart 내에 포함시켜 제공, 이 파일은 default value를 포함하고 있습니다.
-- Chart 사용자가 별도의 `yaml`파일을 사용, `helm install` 명령을 통해 사용합니다.
-
-만약 사용자가 custom value를 사용하는 경우, 이 value는 chart 내에 있는 `values.yaml`의 value를 override 합니다.
-
----
-
-template의 예는 아래와 같습니다.
-
+template 파일의 예는 아래와 같습니다.
 ```yaml
-{%raw%}apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "sample.fullname" . }}
+  name: {{ include "mychart.fullname" . }}
   labels:
-    {{- include "sample.labels" . | nindent 4 }}
+    {{- include "mychart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "sample.selectorLabels" . | nindent 6 }}
+      {{- include "mychart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "sample.selectorLabels" . | nindent 8 }}
-```
-
----
-
-앞장에서 계속
-```yaml
+        {{- include "mychart.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "sample.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
 ```
 
 ---
-
-앞장에서 계속
-```yaml
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}{%endraw%}
-```
-
----
-
-#### values.yaml 파일
-
-template 파일에서 보았듯이, template에 필요한 value 들은 **values.yaml** 파일에서 제공될 수 있습니다.
-Chart에 포함되어 있는 values.yaml 파일의 value 들은 Chart를 설치하는데 기본값으로 사용됩니다.
 
 values.yaml 파일의 예는 다음과 같습니다.
-
 ```yaml
-# Default values for sample.
+# Default values for mychart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
 image:
   repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-```
-
----
-
-앞장에서 계속
-```yaml
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -353,58 +243,9 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+
+... 생략 ...
 ```
-
----
-
-앞장에서 계속
-```yaml
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-```
-
----
-
-기본값이 아닌 별도로 지정하고 싶은 value들이 있다면, 별도의 yaml 파일을 작성하여 Chart를 설치할 때 사용할 수 있습니다.
-예를 들어, 아래와 같이 myval.yaml 파일을 작성하여 Chart를 설치할 때 사용하면,
-```yaml
-replicaCount: 2
-service:
-  type: NodePort
-  port: 80
-```
-
-실제로 Chart 가 설치될때, replica는 1개가 아닌 2개로, service는 ClusterIP Type이 아닌 NodePort Type으로 생성이 됩니다.
-
-values.yaml 로 정의된 value들은 template 에서는 `.Values` object를 통해 접근 할 수 있습니다.
-상기 예에서 service type은 `.Values.service.type`으로 접근 할 수 있습니다.
-
-Chart에 포함되는 values.yaml 파일의 이름은 변경할 수 없으며, helm 명령과 함께 지정할 수 있는 별도의 yaml 파일명은 어떤 것이든 가능합니다.
 
 ---
 
@@ -414,16 +255,41 @@ helm은 helm cli를 통해 사용 가능하며, 만약 설치되어 있지 않�
 
 [Releases · helm/helm · GitHub](https://github.com/helm/helm/releases)
 
-사용하는 OS에 맞는 압축된 binary를 다운받아서 적절한 위치에 압축해제 후 사용하시면 됩니다.
+사용하는 OS에 맞는 압축된 파일을 다운받아서 적절한 위치에 압축해제 후 사용하시면 됩니다.
 
+설치 방법은 다음과 같습니다.
 
+```bash
+$ tar -zxvf helm-v3.0.0-linux-amd64.tar.gz
+$ mv linux-amd64/helm /usr/local/bin/helm
+```
+> 압축해제 후 실행파일(helm)을 path가 지정된 디렉토리로 이동
 
-#### helm search
+기본적인 helm commands의 사용법은 [Helm](https://helm.sh/ko/docs/helm/helm/)을 참고하거나, 다음과 같이 명령어의 helm 를 참고합니다.
 
-chart를 검색하기 위한 command 이며, 두가지 소스 유형을 검색할 수 있습니다.
+```bash
+$ helm --help
+helm help
+The Kubernetes package manager
 
-- `helm search hub`는 여러 저장소들에 있는 helm chart를 포괄하는 [Artifact Hub](https://artifacthub.io/)에서 검색합니다.
-- `helm search repo`는 `helm repo add`를 사용하여 로컬 helm client에 추가된 저장소에서 검색합니다.
+Common actions for Helm:
+
+- helm search:    search for charts
+- helm pull:      download a chart to your local directory to view
+- helm install:   upload the chart to Kubernetes
+- helm list:      list releases of charts
+
+... 생략 ...
+```
+
+---
+
+#### [helm search](https://helm.sh/ko/docs/helm/helm_search/)
+
+chart를 검색하기 위한 command 이며, 다음과 같은 방법으로 검색할 수 있습니다.
+
+- `helm search hub` : public helm chart를 [Artifact Hub](https://artifacthub.io/)에서 검색
+- `helm search repo` : `helm repo add`를 사용하여 로컬 helm client에 추가된 저장소에서 검색
 
 ```
 $ helm search hub wordpress
@@ -435,10 +301,7 @@ https://artifacthub.io/packages/helm/riftbit/wo...      12.1.16         5.8.1   
 https://artifacthub.io/packages/helm/sikalabs/w...      0.2.0                                   Simple Wordpress
 ```
 
----
-
-helm search repo는 사전에 추가된 repository로 부터 검색을 하여, repository 추가는 아래와 같이 합니다.
-
+helm search repo는 사전에 추가된 repository로 부터 검색을 하며, repository 추가는 아래와 같이 합니다.
 (아래 예는, Open Source S/W 들을 쉽게 구성하고 설치할 수 있도록 해주는 VMWare의 Bitnami Repository를 사용하는 예입니다.)
 
 ```
@@ -457,9 +320,11 @@ search 통해 설치하고자 하는 package를 찾았다면, helm install을 �
 
 ---
 
-#### helm install
+#### [helm install](https://helm.sh/ko/docs/helm/helm_install/)
 
-chart를 설치하는 방법은 helm install을 사용하는 것이고, 사용 방법은 `helm install 'release명' 'chart명'` 을 통해 chart가 설치됩니다.
+chart를 설치하는 방법은 helm install을 사용하는 것이고, 사용 방법은 다음과 같습니다.
+
+`helm install 'release명' 'chart명'`
 
 ```bash
 $ helm install my-wordpress bitnami/wordpress
@@ -503,14 +368,12 @@ To access your WordPress site from outside the cluster follow the steps below:
   echo Username: user
   echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
 ```
-
+> 위 예제는 **bitnami repository**의 **wordpress** 차트를 이용하여 **my-wordpress**라는 이름으로 설치한 경우임.
 > 위의 방법 외에도 [더 많은 설치 방법들](https://helm.sh/ko/docs/intro/using_helm/#%EB%8D%94-%EB%A7%8E%EC%9D%80-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95%EB%93%A4) 이 있습니다.
 
 ---
 
-helm install을 통해 chart를 설치하면, Kubernetes Resource가 모두 생성될 때까지 기다리는 것이 아니라, 바로 Deployed 라는 결과가 출력됩니다.
-
-`kubectl get all` 명령을 통해 생성된 Resource 들을 확인해 보면 다음과 같습니다.
+helm install을 통해 chart를 설치 후 `kubectl get all` 명령을 통해 생성된 Resource 들을 확인해 보면 다음과 같습니다.
 
 ```
 $ kubectl get all
@@ -532,33 +395,32 @@ replicaset.apps/my-wordpress-ff8559cd   1         1         0       5m36s
 NAME                                    READY   AGE
 statefulset.apps/my-wordpress-mariadb   0/1     5m36s
 ```
-
-my-wordpress 라는 이름으로, **service**, **deployment**, **statefulset** 등이 생성된 것을 확인할 수 있습니다.
+> **my-wordpress** 라는 이름으로, **service**, **deployment**, **statefulset** 등이 생성된 것을 확인할 수 있습니다.
+> **helm release**생성 후 **k8s 리소스**들이 생성되기 까지는 어느정도 시간이 소요됩니다.
 
 ---
 
-#### chart customizing
+#### [chart customizing](https://helm.sh/ko/docs/intro/using_helm/#%EC%84%A4%EC%B9%98-%EC%A0%84-%EC%B0%A8%ED%8A%B8-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A7%95)
 
-chart를 customizing 하는 방법은, 크게 value 만 수정하는 방법과, chart 자체를 customizing 하는 방법이 있습니다.
+chart를 customizing 하는 방법은 **value**만 수정하는 방법과 **chart** 자체를 수정하는 방법이 있습니다.
+
+<br><br>
 
 ##### value 변경
 
-앞에서는 별도의 value를 지정하지 않고 설치를 하였기 때문에, chart 내에 포함되어 있는 values.yaml 파일의 내용이 사용되었습니다.
-
-chart에 포함된 values.yaml 파일의 내용을 보는 방법은, `helm show values "chart명"`입니다.
+앞에서는 별도의 value를 지정하지 않고 설치를 하였기 때문에 chart에 포함되어 있는 values.yaml 파일의 내용이 사용되었습니다.
+> chart에 포함된 **values.yaml**파일의 내용을 보는 방법은, `helm show values 'chart명'`입니다.
 
 default value 들을 확인한 뒤에 특정 value를 변경하여 배포하고자 한다면, 다음과 같은 두가지 방법을 사용할 수 있습니다.
-
-- --values (또는 -f) : 별도의 value 파일을 생성하고 해당 파일의 경로와 이름을 지정 (예, --values myval.yaml)
-- --set : command line 상에서 value를 지정 (예, --set wordpressUsername=user,memcached.enabled=false)
+- **--values (또는 -f)** 옵션 : 별도의 value 파일을 생성하고 해당 파일의 경로와 이름을 지정 (예, --values myval.yaml)
+- **--set** 옵션 : command line 상에서 value를 지정 (예, --set wordpressUsername=user,memcached.enabled=false)
 
 ---
 
 ##### chart 변경
 
-chart를 수정하여 설치하려면, repository로 부터 chart를 다운받아서 수정을 하고 수정된 chart를 가지고 helm 설치를 할 수 있습니다.
-
-chart를 다운받기 위해서는 pull 명령을 사용하며 --untar 옵션을 사용하면 chart를 다운받은 후 압축도 풀어줍니다.
+chart를 수정하여 설치하려면 repository로 부터 chart를 다운받아서 수정하고, 수정된 chart를 이용하여 helm 설치를 할 수 있습니다.
+chart를 다운받기 위해서는 pull 명령을 사용하며 --untar 옵션을 사용하면 chart를 다운받은 후 압축해제까지 한 번에 할 수 있습니다.
 
 ```
 $ helm pull --untar bitnami/wordpress
@@ -584,55 +446,52 @@ drwxr-xr-x 2 hojoon hojoon  4096 Apr 12 13:12 templates
 $ helm install my-wordpress .
 ```
 
-chart가 있는 디렉토리를 지정하고 (위의 예는 현재 디렉토리), install 명령을 사용하면 됩니다.
-
-value 들이 반영된 manifest를 확인해 보고자 한다면, `--dry-run` 옵션을 통해 install 해 보면됩니다.
+chart가 있는 디렉토리를 지정하고( 위의 예는 현재 디렉토리인 . ), install 명령을 사용하면 됩니다.
+value 들이 반영된 manifest를 확인해 보고자 한다면, `--dry-run` 옵션을 사용할 수도 있습니다.
 
 ---
 
-#### helm upgrade
+#### [helm upgrade](https://helm.sh/ko/docs/helm/helm_upgrade/)
 
-설치된 chart (release)를 업그레이드 하는 방법은 helm upgrade 를 사용하는 것입니다.
+설치된 chart(release)를 업그레이드 하는 방법은 `helm upgrade` 명령어를 사용하는 것입니다.
 
-변경이 있는 resource 들에 대하여, Deployment 같은 경우는, deployment strategies 에 따라, rolling upgrade 혹은 recreate 되며, 다른 Resource 들은 patch 됩니다.
+변경사항이 있는 resource들에 대하여 Deployment 같은 경우는 deployment strategies 에 따라 rolling upgrade 혹은 recreate 되며 다른 Resource 들은 patch 됩니다.
 
-일반적으로 Docker image가 변경되었을때, 주로 upgrade를 하며, 일부 설정이 변경되는 경우에도 upgrade를 수행하게 됩니다.
+일반적으로 Docker image가 변경되었을때 주로 upgrade를 하며, 일부 설정이 변경되는 경우에도 upgrade를 수행할 수 있습니다.
 
 ##### value 변경
-
 특정 value로 업그레이드 하고자 한다면, 다음과 같은 두가지 방법을 사용할 수 있습니다. (install 시와 동일)
-
 - --values (또는 -f) : 별도의 value 파일을 생성하고 해당 파일의 경로와 이름을 지정 (예, --values myval.yaml)
 - --set : command line 상에서 value를 지정 (예, --set image.tag=5.9.3-debian-10-r4)
 
 
-#### helm rollback
+#### [helm rollback](https://helm.sh/ko/docs/helm/helm_rollback/)
 
-릴리스가 계획대로 되지 않는다면, `helm rollback 'release명' '리비전 번호'`를 사용하여 이전 릴리스로 간단히 롤백할 수 있습니다.
+릴리스가 계획대로 되지 않는다면 `helm rollback 'release명' '리비전 번호'`를 사용하여 이전 릴리스로 간단히 롤백할 수도 있습니다.
 
 ```bash
 $ helm rollback my-wordpress 1
 ```
-위와 같이 하면 my-wordpress가 맨 첫번째 릴리스 버전으로 롤백됩니다.  
-특정 릴리스의 리비전 번호를 확인하기 위해서는 `helm history 'release명'`를 사용할 수 있습니다.
+> 위와 같이 하면 my-wordpress가 맨 첫번째 릴리스 버전으로 롤백됩니다.  
+> 특정 릴리스의 리비전 번호를 확인하기 위해서는 `helm history 'release명'`를 사용할 수 있습니다.
 > 리비전 번호는 1부터 시작해서 1씩 증가하여 부여됩니다.
 
 ---
 
-#### helm uninstall
+#### [helm uninstall](https://helm.sh/ko/docs/helm/helm_uninstall/)
 
-설치된 chart (release)를 삭제하는 방법은 `helm uninstall 'release명'`을 사용하는 것입니다.
+설치된 chart(release)를 삭제하는 방법은 `helm uninstall 'release명'`을 사용하는 것입니다.
 
 ```
 $ helm uninstall my-wordpress
 release "my-wordpress" uninstalled
 ```
 
-helm install을 통해 설치된 모든 resource가 삭제되는 것을 알 수 있습니다.
+helm install을 통해 설치된 모든 k8s resource가 삭제되는 것을 볼 수 있습니다.
 
 ---
 
-#### helm create
+#### [helm create](https://helm.sh/ko/docs/helm/helm_create/)
 
 나만의 helm chart를 만들고자 한다면, `helm create 'chart명'`명령을 통해 새로운 chart를 생성할 수 있습니다.
 
@@ -663,7 +522,7 @@ mychart/
 
 ---
 
-#### helm lint
+#### [helm lint](https://helm.sh/ko/docs/helm/helm_lint/)
 
 작성된 chart를 오류가 있는지 검증하려면, `helm lint 'chart명'` 명령을 사용하면 됩니다.
 
@@ -676,7 +535,6 @@ $ helm lint mychart
 ```
 
 만약 오류가 있다면 아래와 같이 오류에 대한 정보를 표시해 줍니다.
-(아래는 deployment.yaml 에서 deployment name을 지우고 lint를 한 결과입니다.)
 ```
 $ helm lint mychart
 ==> Linting mychart
@@ -688,10 +546,11 @@ $ helm lint mychart
 
 1 chart(s) linted, 0 chart(s) failed
 ```
+> 위 예제는 **deployment.yaml**에서 **deployment name**을 지우고 lint를 한 결과입니다.
 
 ---
 
-#### helm package
+#### [helm package](https://helm.sh/ko/docs/helm/helm_package/)
 
 chart 디렉토리를 아카이브(압축) 합니다.
 
@@ -701,8 +560,9 @@ chart 디렉토리를 아카이브(압축) 합니다.
 $ helm package ./mychart
 Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
 ```
+> 위와 같이 압축된 파일은 **chart repository**에 등록할 때 사용됩니다.
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ![](./img/handson.png) **Hands-on :** 15_Helm
 
