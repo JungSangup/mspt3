@@ -76,26 +76,25 @@ spec:
 ---
 
 ## Service 의 특징
-
 ##### Service의 종류 (Type)
+
 | Service type | | Description |
 | :--- | :---: | :--- |
-| ClusterIP<br>(Default type) | ![h:220](img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.)|
-| NodePort | ![h:220](img/k8s_service_nodeport.png) | 고정 포트 (NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
+| ClusterIP<br>(Default type) | ![h:230](img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.)|
 
 ---
 
 ## Service 의 특징
-
 ##### Service의 종류 (Type)
+
 | Service type | | Description |
 | :--- | :---: | :--- |
-| LoadBalancer | ![h:220](img/k8s_service_loadbalancer.png) | 클라우드 공급자의 로드 밸런서를 사용하여 서비스를 외부에 노출시킴. |
+| NodePort | ![h:230](img/k8s_service_nodeport.png) | 고정 포트 (NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
+| LoadBalancer | ![h:230](img/k8s_service_loadbalancer.png) | 클라우드 공급자의 로드 밸런서를 사용하여 서비스를 외부에 노출시킴. |
 
 ---
 
 ## Service 의 특징
-
 ##### Service의 종류 (Type)
 위의 타입별 특징을 한 장의 그림으로 표현하면 다음과 같습니다.
 ![h:450](img/k8s_service_loadbalancer2.PNG)
