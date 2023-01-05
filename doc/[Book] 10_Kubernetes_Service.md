@@ -89,7 +89,7 @@ spec:
 
 | Service type | | Description |
 | :--- | :---: | :--- |
-| NodePort | ![h:230](img/k8s_service_nodeport.png) | 고정 포트 (NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
+| NodePort | ![h:230](img/k8s_service_nodeport.png) | 고정 포트(NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
 | LoadBalancer | ![h:230](img/k8s_service_loadbalancer.png) | 클라우드 공급자의 로드 밸런서를 사용하여 서비스를 외부에 노출시킴. |
 
 ---
