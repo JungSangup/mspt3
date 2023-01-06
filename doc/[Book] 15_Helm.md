@@ -171,7 +171,7 @@ Helm Chart의 **Template**들은 [Go template language](https://pkg.go.dev/text/
 Template들을 위한 **값**(**Values**)은 아래의 방법으로 제공됩니다.
 - **Chart 개발자**가 `values.yaml`파일을 chart내에 포함시켜 제공. (default 값 포함)
 - **Chart 사용자**가 [helm install](https://helm.sh/ko/docs/helm/helm_install/)시 별도의 파일(e.g. `myValues.yaml`)이나 옵션(e.g. `--set`)으로 값을 제공.  
-> 위와 같은 경우 값의 우선순위는 명령어 옵션, 별도의 파일, 기본 values.yaml파일 순으로 적용됩니다.
+> 위와 같은 경우 값의 우선순위는 **명령어 옵션**, **별도의 파일**, 기본 **values.yaml파일** 순으로 적용됩니다.
 
 ![w:1000 center](img/helm-template.png)
 
