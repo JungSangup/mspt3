@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-deployment
+  name: todo-app-deployment
   labels:
     app: todo-app
 spec:
@@ -15,7 +15,6 @@ spec:
     metadata:
       labels:
         app: todo-app
-      name: todo-app
     spec:
       containers:
       - image: rogallo/101-todo-app:1.0.0
