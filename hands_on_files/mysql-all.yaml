@@ -1,0 +1,78 @@
+##################################################
+#                                                #
+#           ToDo Application 실습용 MySQL        #
+#                                                #
+# PVC:        MySQL Data                         #
+# Secret:     MYSQL_ROOT_PASSWORD(secret)        #
+# ConfigMap:  MYSQL_DATABASE(todos),LANG(C.UTF-8)#
+# Deployment: MySQL 5.7                          #
+#                                                #
+#                                                #
+#                                                #
+##################################################
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+data:
+  password: c2VjcmV0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  database: "todos"
+  lang: "C.UTF-8"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: database
+        - name: LANG
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: lang
+        ports:
+        - containerPort: 3306
