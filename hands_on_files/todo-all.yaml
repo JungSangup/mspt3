@@ -1,0 +1,88 @@
+##################################################
+#                                                #
+#           ToDo Application 실습용              #
+#                                                #
+# PVC:        MySQL Data                         #
+# Secret:     MYSQL_ROOT_PASSWORD(secret)        #
+# ConfigMap:  MYSQL_DATABASE(todos),LANG(C.UTF-8)#
+# Deployment: MySQL 5.7                          #
+#                                                #
+#                                                #
+#                                                #
+##################################################
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: todo-secret
+type: Opaque
+data:
+  mysql-user: cm9vdA==
+  mysql-password: c2VjcmV0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-config
+data:
+  mysql-host: "todo-mysql-svc.default.svc.cluster.local"
+  mysql-db: "todos"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-deployment
+  labels:
+    app: todo-app
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+      - name: todo-app
+        image: rogallo/101-todo-app:1.0.0
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: mysql-host
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: mysql-db
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: todo-secret
+              key: mysql-user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-secret
+              key: mysql-password
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app-svc
+spec:
+  type: NodePort
+  selector:
+    app: todo-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30007

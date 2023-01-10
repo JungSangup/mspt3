@@ -6,7 +6,7 @@
 # Secret:     MYSQL_ROOT_PASSWORD(secret)        #
 # ConfigMap:  MYSQL_DATABASE(todos),LANG(C.UTF-8)#
 # Deployment: MySQL 5.7                          #
-#                                                #
+# Service:    MySQL ClusterIP                    #
 #                                                #
 #                                                #
 ##################################################
@@ -42,21 +42,21 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-mysql
+  name: todo-mysql-deployment
   labels:
     app: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app: todo-mysql
   template:
     metadata:
       labels:
-        app: mysql
+        app: todo-mysql
     spec:
       containers:
-      - name: mysql
+      - name: todo-mysql-pod
         image: mysql:5.7
         env:
         - name: MYSQL_ROOT_PASSWORD
@@ -76,3 +76,24 @@ spec:
               key: lang
         ports:
         - containerPort: 3306
+        args: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: mysql-storage
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-mysql-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
