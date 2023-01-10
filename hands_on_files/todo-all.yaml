@@ -79,3 +79,22 @@ spec:
       port: 3000
       targetPort: 3000
       nodePort: 30007
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: todo-app.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-app-svc
+                port:
+                  number: 3000
