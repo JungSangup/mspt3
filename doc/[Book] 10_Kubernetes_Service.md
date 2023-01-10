@@ -81,7 +81,8 @@ spec:
 | Service type | | Description |
 | :--- | :---: | :--- |
 | ClusterIP<br>(Default type) | ![h:230](img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.)|
-
+> ClusterIP는 클러스터 **내부에서만 접근 가능**한 IP가 주어지기 때문에 외부에서 접근하기 위해서는 추가적인 방법을 적용해야 합니다.
+> `kubectl proxy`명령을 이용하여 proxy server를 구성하거나, 뒤에 배울 ingress 리소스를 이용하여 외부에서 접속할 수 있습니다.
 ---
 
 ## Service 의 특징

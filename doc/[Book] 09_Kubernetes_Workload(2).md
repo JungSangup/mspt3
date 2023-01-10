@@ -91,7 +91,8 @@ spec:
 **Deployment**는 **Pod**를 생성하기 위한 상위 개념의 **Workload resource**이며, 아래 그림과 같이 **ReplicaSet**과 **Pod**에 대한 선언적 업데이트를 제공합니다.
 일반적으로 **Pod**는 개별 생성하지 않고 이 **Deployment**와 (**Deployment**에 의해 관리되는) **ReplicaSet**을 이용하여 생성하고 관리합니다.
 
-![h:400](img/k8s_deployment.png)
+![h:380](img/k8s_deployment.png)
+> 위 그림은 Pod의 image를 v1 > v2 > v3로 변경한 경우를 나타내고 있습니다.
 
 ---
 
