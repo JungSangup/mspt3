@@ -1,13 +1,6 @@
 ##################################################
 #                                                #
-#           ToDo Application 실습용 MySQL        #
-#                                                #
-# PVC:        MySQL Data                         #
-# Secret:     MYSQL_ROOT_PASSWORD(secret)        #
-# ConfigMap:  MYSQL_DATABASE(todos),LANG(C.UTF-8)#
-# Deployment: MySQL 5.7                          #
-# Service:    MySQL ClusterIP                    #
-#                                                #
+#            ToDo Application - MySQL            #
 #                                                #
 ##################################################
 
