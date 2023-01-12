@@ -29,7 +29,7 @@ footer: Samsung SDS
 
 컨테이너를 실행한 후 컨테이너 내부에서 생성된 모든 파일은 **Writable container layer**에 저장됩니다.
 이전에 본 내용을 다시 떠올려 보겠습니다.
-Writable container layer는 아래 그림에서 **Thin R/W layer** (**Container layer**)라고 표시된 부분입니다.
+**Writable container layer**는 아래 그림에서 **Thin R/W layer** (**Container layer**)라고 표시된 부분입니다.
 
 ![h:400](./img/container-layers.jpeg)
 
@@ -37,11 +37,11 @@ Writable container layer는 아래 그림에서 **Thin R/W layer** (**Container 
 
 ## Storage overview
 
-하지만 이러한 매커니즘은 실제 시스템 운영환경에서는 문제가 될 수 있습니다.
-아래와 같은 사항들이 발생할 수 있는 문제점들입니다.
+이런 데이터 저장방법은 다음과 같은 문제점들을 가지고 있습니다.
 - 컨테이너가 중지되면 Container layer의 데이터는 컨테이너와 함께 **제거**되고, 유지되지 않습니다.
-- 다른 프로세스 또는 애플리케이션에서 컨테이너 안의 데이터를 사용하기 위해 컨테이너 밖으로 데이터를 가져오는 것은 번거롭거나 어려운 작업이 될 수 있습니다.
-- 컨테이너의 Writable layer에 데이터를 기록하기 위해서는 파일스시템을 관리 할 [Storage driver](https://docs.docker.com/storage/storagedriver/)가 필요합니다. Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공하기때문에 이러한 추가적인 추상화로 인해 Host 파일시스템에 직접 데이터를 기록하는 것과 비교해보면 **성능**측면에서 약점으로 작용합니다.
+- 다른 프로세스 또는 애플리케이션에서 컨테이너의 데이터에 접근하기가 쉽지 않습니다.
+- 컨테이너의 Writable layer에 데이터를 기록하기 위해서는 파일스시템을 관리할 [Storage driver](https://docs.docker.com/storage/storagedriver/)가 필요합니다.  
+Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공하기때문에, 이러한 추가적인 추상화로 인해 Host 파일시스템에 직접 데이터를 기록하는 것과 비교해보면 **성능**면에서 약점으로 작용합니다.
 
 위에서 나열한 문제들을 해결하기 위해서, Docker는 컨테이너가 중지되더라도 데이터를 유지하기 위한 방법으로 **Host 머신에 파일을 저장**하는 방법을 제공합니다.
 
