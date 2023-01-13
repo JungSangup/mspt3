@@ -85,7 +85,7 @@ kind: Ingress
 metadata:
   name: todo-app-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - host: todo-app.info
