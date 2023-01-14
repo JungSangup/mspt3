@@ -64,7 +64,7 @@ Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공
 | Type of mount | Use cases |
 | :---: | :--- |
 | [Volumes](https://docs.docker.com/storage/volumes/) | - 컨테이너간 데이터 공유<br>- 데이터의 원격저장 (e.g. remote Host, Cloud provider)<br>- 고성능 I/O |
-| [Bind mounts](https://docs.docker.com/storage/bind-mounts/) | - Host 머신의 config.정보의 공유(e.g. /etc/resolve.conf)<br>- Host 머신의 Source code나 Build artifact 공유 |
+| [Bind mounts](https://docs.docker.com/storage/bind-mounts/) | - Host 머신의 config.정보 공유(e.g. /etc/resolve.conf)<br>- Host 머신의 Source code나 Build artifact 공유 |
 | [tmpfs mounts](https://docs.docker.com/storage/tmpfs/) | - 민감정보(e.g. [secrets](https://docs.docker.com/engine/swarm/secrets/))를 컨테이너 lifecycle동안 저장<br>- 영구저장이 필요없는 대용량 데이터의 처리 시 컨테이너의 성능보장 |
 
 
@@ -232,8 +232,8 @@ Are you sure you want to continue? [y/N] y
 | [docker volume create](https://docs.docker.com/engine/reference/commandline/volume_create/) | Create a volume |
 | [docker volume inspect](https://docs.docker.com/engine/reference/commandline/volume_inspect/) | Display detailed information on one or more volumes |
 | [docker volume ls](https://docs.docker.com/engine/reference/commandline/volume_ls/) | List volumes |
-| [docker volume prune](https://docs.docker.com/engine/reference/commandline/volume_prune/) | Remove all unused local volumes |
 | [docker volume rm](https://docs.docker.com/engine/reference/commandline/volume_rm/) | Remove one or more volumes |
+| [docker volume prune](https://docs.docker.com/engine/reference/commandline/volume_prune/) | Remove all unused local volumes |
 
 ---
 

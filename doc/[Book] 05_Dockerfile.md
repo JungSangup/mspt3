@@ -44,7 +44,7 @@ Docker에서 이미지를 생성하는 방법은 다음과 같은 방법들이 �
 
 ## Dockerfile
 
-이중 가장 일반적이고 CI/CD로 활용되어지는 방법은 **Dockerfile**로 빌드해 이미지를 생성하는 방법입니다.
+이중 가장 일반적이고 CI/CD에서 사용되는 방법은 **Dockerfile**로 빌드해 이미지를 생성하는 방법입니다.
 
 여기서 **Dockerfile**은 이미지를 생성하기 위해 필요한 **명령어**(**Instuction**)들을 순차적으로 나열한 Text문서입니다.
 그리고, 이 **Dockerfile**을 이용해서 이미지를 빌드할 때는 [build context](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#understand-build-context)를 참조하게 됩니다.
@@ -85,9 +85,9 @@ Dockerfile의 형식은 아래와 같습니다.
 INSTRUCTION arguments
 ```
 > e.g.) `RUN echo 'Hello docker'`
+> 위의 경우 INSTRUCTION은 `RUN`이고, 나머지는 arguments에 해당합니다.
 
-**INSTRUCTION**은 대소문자를 가리지는 않지만,
-일반적으로는 arguments와 구분하기 위해서 모두 **대문자**로 표시합니다.
+**INSTRUCTION**은 대소문자를 가리지는 않지만, 일반적으로는 arguments와 구분하기 위해서 모두 **대문자**로 표시합니다.
 
 이제 이 **INSTRUCTION**으로 사용되는 것들을 하나씩 자세히 알아보겠습니다.
 
@@ -169,7 +169,7 @@ LABEL "com.example.vendor"="Samsung SDS"
 LABEL multi.label1="value1" multi.label2="value2" other="value3"
 LABEL multi.label1="value1" \
       multi.label2="value2" \
-      other="value3"
+      other="value3_modified"
       
 # Container에서 실행할 명령
 CMD ["/bin/echo", "hello docker"]
@@ -179,7 +179,8 @@ CMD ["/bin/echo", "hello docker"]
 
 이렇게 추가된 Label은 `docker inspect` 명령어로 이미지나 컨테이너의 내용을 확인 할 수 있습니다.
 
-다만 한 가지 주의할 것은 Base 이미지에 포함된 Label 값이 **상속**된다는 점이고, 만약 같은 Label값이 존재한다면 가장 최근에 적용된 Label값이 우선합니다.
+그리고, Base 이미지에 포함된 Label 값은 **상속**됩니다. 
+만약 상속관계에 있는 이미지간에 같은 Label값이 존재한다면, 가장 최근에 적용된 Label이 우선 적용됩니다.
 
 앞의 Dockerfile로 만들어진 이미지나 컨테이너의 Label을 확인해보면 아래와 같습니다.
 
@@ -200,7 +201,7 @@ CMD ["/bin/echo", "hello docker"]
  일반적으로 패키지를 설치할 때 자주 사용됩니다.
 
 #### Syntax
-**shell form** : command 로 입력받은 명령어는 쉘에서 수행되며 디폴트로 리눅스에서는 `/bin/sh -c` 이 윈도우에서는 `cmd /S /C` 가 사용됩니다.
+**shell form** : command 로 입력받은 명령어는 쉘에서 수행되며 리눅스에서는 `/bin/sh -c` 이 윈도우에서는 `cmd /S /C` 가 사용됩니다.
 ```dockerfile
 RUN <command>
 ```
@@ -228,9 +229,9 @@ RUN apt-get update && apt-get install -y \
 
  `CMD` Instruction은 Docker Container가 **시작**될때 실행 할 커맨드를 지정하는 지시자이며 아래와 같은 특징과 기능을 제공합니다.
 
-- CMD의 주용도는 컨테이너를 실행할 때 사용할 **default 명령어를 설정**하는 것입니다.`docker run` 실행 시 실행할 커맨드를 주지 않으면 CMD로 지정한 default 명령이 실행됩니다. 
+- CMD의 주용도는 컨테이너를 실행할 때 사용할 **default 명령어를 설정**하는 것입니다.`docker run` 실행 시 실행할 커맨드를 별도로 지정하지 않으면, CMD로 지정한 default 명령이 실행됩니다. 
 - `ENTRYPOINT`의 파라미터를 설정할 수도 있습니다. 
-- `RUN` Instruction과 기능은 비슷하지만 차이점은 `CMD`는 image를 빌드할때 실행되는 것이 아니라 container가 시작될때 실행됩니다. 주로 docker image로 빌드된 application을 실행할때 사용됩니다.
+- `RUN` instruction은 image를 빌드하는 시점에 실행되는 것이고, `CMD` instruction은 container가 시작될때 실행됩니다. 
 
 #### Syntax
 
@@ -271,7 +272,8 @@ CMD ["/usr/bin/wc","--help"]
 CMD ["catalina.sh","run"]
 ```
 
-위와같이 컨테이너가 시작될 때 실행할 명령어를 지정합니다.
+위와같이 컨테이너가 시작될 때 실행할 명령어를 지정합니다.  
+
 맨 아래는 우리가 익숙한 [Tomcat](https://hub.docker.com/_/tomcat)의 [Dockerfile](https://github.com/docker-library/tomcat/blob/989632e026e7554a580ed1452d1ee4460c78e3be/10.0/jdk17/temurin-jammy/Dockerfile)의 마지막 라인 입니다.
 
 ---
@@ -319,8 +321,6 @@ Hello docker place
 ```
 인자를 주지않고 실행한 첫 번째 컨테이너는 `ENTRYPOINT`의 명령어와 인자, 그리고 `CMD`의 인자를 모두 그대로 사용하여 실행합니다.
 인자를 주고 실행한 두 번째 컨테이너는 `CMD`의 내용을 명령줄의 내용으로 치환하여 실행합니다. (world -> place로 변경)
-
-
 
 ---
 
