@@ -63,17 +63,17 @@ footer: Samsung SDS
 
 ![h:300 center](./img/containers-vs-vm.png)
 
-**컨테이너**는 **코드**와 모든 **종속성**을 함께 **패키징**하는 앱 계층의 추상화입니다.
-여러 컨테이너가 동일 시스템에서 실행될 수 있고, OS 커널을 공유하며, 각각은 격리된  
-프로세스로 실행됩니다.
+여러개의 **컨테이너**가 동일 시스템에서 실행될 수 있고, OS 커널을 공유하며, 각각은 격리된 프로세스로 실행됩니다.
 
-**가상머신-VM**은 하드웨어 추상화 입니다. 하이퍼바이저를 이용하여 단일 시스템에서  
-여러 VM을 실행할 수 있습니다. 각 VM에는 OS, 애플리케이션, 필요한 바이너리 및  
-라이브러리가 모두 포함됩니다.
+**가상머신-VM**은 하드웨어 추상화 입니다.
+하이퍼바이저를 이용하여 단일 시스템에서 여러개의 VM을 실행할 수 있습니다.
+각 VM에는 OS, 애플리케이션, 필요한 바이너리 및 라이브러리가 모두 포함됩니다.
 
 ---
 
 ## Container vs Virtual machine
+
+컨테이너와 가상머신을 비교하자면 다음과 같습니다.
 
 | | Container | Virtal Machine |
 | :--- | :----: | :----: |
@@ -94,9 +94,9 @@ footer: Samsung SDS
 ---
 
 ## Linux Container (LXC)
-**Container는  Linux 커널의 여러 기능을 활용하여 Container라는 격리된 공간 안에서 프로세스가 동작하는 기술입니다.**
+**Container는 Linux 커널의 여러 기능을 활용하여 격리된 공간 안에서 프로세스가 동작하도록 하는 기술입니다.**
 
-가상머신(VM)과 동일한 효과를 보이지만, 기존의 가상머신(VM)은 호스트의 하드웨어와 OS전체를 가상화하여 무겁고 느리지만, 컨테이너는 호스트 OS(리눅스) 커널을 공유하며 프로세스의 격리/가상화를 통하여 가상머신에 비해 빠른 실행속도를 보입니다.
+가상머신(VM)과 같이 격리된 실행환경을 제공하지만, 컨테이너는 호스트 OS의 커널을 공유하고 프로세스의 격리환경을 제공하여 가상머신에 비해 빠른 실행속도를 보입니다.
 
 Docker는 이러한 컨테이너를 위한 플랫폼(또는 런타임)입니다. 
 
@@ -128,7 +128,7 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 
 ## Docker
 
-"**Docker**는 애플리케이션을 **개발**하고, **전달/배포**하고, **실행**하기 위한 **오픈 플랫폼**이다."
+"**Docker**는 애플리케이션을 **컨테이너** 형태로 **개발**하고, **전달/배포**하고, **실행**하기 위한 **오픈 플랫폼**입니다."
 
 **Docker**는 **컨테이너**라고 하는 느슨하게 격리된(loosely isolated) 환경에서 애플리케이션을 패키징하고 실행할 수 있는 기능을 제공합니다. 격리 및 보안을 통해 주어진 호스트에서 **많은 컨테이너를 동시에 실행**할 수 있습니다. 컨테이너는 **가볍고** 애플리케이션을 실행하는 데 필요한 **모든 것을 포함**하므로, 현재 호스트에 설치된 것에 의존할 필요가 없습니다. 컨테이너는 **쉽게 공유**될 수 있으며 공유하는 모든 사람이 동일한 방식으로 작동하는 **동일한 컨테이너**를 갖게 됩니다.
 
@@ -139,7 +139,6 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 <br><br>
 
 ![](./img/handson.png) **Hands-on :** 01_Docker_Intro
-
 
 ---
 
@@ -205,7 +204,7 @@ Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, �
 <br>
 
 ### The Docker daemon
-Docker daemon(`dockerd`)은 Docker Object(Container, Network, Volume 등)에 대한 Docker API 요청을 요청받아 처리하는 서비스입니다.  
+Docker daemon(`dockerd`)은 Docker API 요청을 받아 Docker Object(Container, Network, Volume 등)를 관리(생성/수정/삭제)합니다.
 
 <br>
 
@@ -217,10 +216,8 @@ Docker client(`docker`)는 Docker 유저와 상호 작용하는 주요 사용자
 ### Docker registries
 A Docker **registry**는 Docker image들을 저장하는 저장공간입니다.  
 (마치 소스코드를 Github에 저장하듯이)  
-`docker pull` 이나 `docker run`과 같은 명령어를 사용하면 필요한 컨테이너 이미지를  
-레지스트리에서 다운로드(`pull`)하게 됩니다.  
-Docker registry는 Docker Hub(Default registry)와 같은 Public 레지스트리와  
-팀이나 기업내에서 자체 구축할 수 있는 Private 레지스트리로 구분될 수 있습니다.
+`docker pull` 이나 `docker run`과 같은 명령어를 사용하면 필요한 컨테이너 이미지를 registry에서 다운로드(`pull`)하게 됩니다.  
+Docker registry는 Docker Hub(Default registry)와 같은 Public registry와 팀이나 기업내에서 자체 구축할 수 있는 Private registry로 구분될 수 있습니다.
 
 ---
 
@@ -230,21 +227,19 @@ Docker를 사용하면 image, container, network, volume 과 같은 다양한 Do
 ### Images
 **Image**는 Docker 컨테이너 생성방법(instructions)이 포함된 읽기전용 템플릿입니다.  
 주로 다른 Image를 기반(Base)으로 해서 추가적인 변경사항을 반영하여 만들어집니다.  
-- `e.g., My(new) image = Base image(Ubuntu) + Apache web server + config.`
+- 예) `My(new) image = Base image(Ubuntu) + Apache web server + config.`
 
 Image는 Dockerfile을 이용하여 만들어진 이미지 또는 Registry에 게시(publish)된 이미지를 사용할 수 있습니다. 그리고, Image는 Layer라는 개념을 적용하여 자원을 효율적으로 사용합니다.
 
 <br>
 
 ### Containers
-**Container**는 **Image**를 실행하여 생성 된 **인스턴스**이며, Docker API
-또는 CLI를 사용하여 생성/시작/중지/이동/삭제할 수 있습니다.  
+**Container**는 **Image**를 실행하여 생성 된 **인스턴스**이며, Docker API 또는 CLI를 사용하여 생성/시작/중지/이동/삭제할 수 있습니다.  
 기본적으로 컨테이너는 다른 컨테이너 및 호스트 시스템과 비교적 잘 **격리**되어 있습니다.  
 Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.  
-그리고, Container가 제거될 때는 **별도의 저장공간**(**Persistent storage**)에  
-따로 저장하지 않은 변경사항은 모두 사라지게 됩니다.
+그리고, Container가 제거될 때는 **별도의 저장공간**(**Persistent storage**)에 따로 저장하지 않은 변경사항은 모두 사라지게 됩니다.
 
-<br>
+<br><br>
 
 ![](./img/hyperlink.png)[Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
 
@@ -271,9 +266,9 @@ CMD python /app/app.py
 ---
 
 ## Container and layers
-**Container**와 **Image**의 주요 차이점은 **쓰기 가능**한 최상위 레이어(**Thin R/W layer**)입니다. 새 데이터를 추가하거나 기존 데이터를 수정하는 컨테이너에 대한 모든 쓰기는 이 layer에 저장됩니다. 컨테이너가 삭제되면 쓰기 가능한 레이어도 삭제됩니다. 기본 이미지는 변경되지 않은 상태로 유지됩니다.
+파일시스템 측면에서 **Container**와 **Image**의 주요 차이점은 **쓰기 가능**한 최상위 레이어(**Thin R/W layer**)입니다. 새 데이터를 추가하거나 기존 데이터를 수정하는 컨테이너에 대한 모든 쓰기는 이 layer에 저장됩니다. 컨테이너가 삭제되면 쓰기 가능한 레이어도 삭제됩니다. 기본 이미지는 변경되지 않은 상태로 유지됩니다.
 
-각 컨테이너에는 쓰기 가능한 자체 **컨테이너 레이어**가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
+각 컨테이너에는 쓰기 가능한 자체 **컨테이너 레이어**가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에, 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
 그리고, 이렇게 공유되는 layer구조로 인해 자원을 효율적으로 사용할 수 있습니다. (저장공간, Provisioning)
 
 ![h:300](./img/sharing-layers.jpeg) 
