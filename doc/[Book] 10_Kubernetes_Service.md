@@ -82,7 +82,7 @@ spec:
 | :--- | :---: | :--- |
 | ClusterIP<br>(Default type) | ![h:230](img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.)|
 > ClusterIP는 클러스터 **내부에서만 접근 가능**한 IP가 주어지기 때문에 외부에서 접근하기 위해서는 추가적인 방법을 적용해야 합니다.
-> `kubectl proxy`명령을 이용하여 proxy server를 구성하거나, 뒤에 배울 ingress 리소스를 이용하여 외부에서 접속할 수 있습니다.
+> [kubectl proxy](https://kubernetes.io/ko/docs/tasks/access-application-cluster/access-cluster/#kubectl-proxy-%EC%82%AC%EC%9A%A9)명령을 이용하여 localhost와 api서버간에 proxy를 구성하거나, 뒤에 배울 ingress 리소스를 이용하여 외부에서 접속할 수 있습니다.
 ---
 
 ## Service 의 특징
@@ -98,7 +98,8 @@ spec:
 ## Service 의 특징
 ##### Service의 종류 (Type)
 위의 타입별 특징을 한 장의 그림으로 표현하면 다음과 같습니다.
-![h:450](img/k8s_service_loadbalancer2.PNG)
+<br>
+![h:430](img/k8s_service.PNG)
 
 ---
 
@@ -108,8 +109,9 @@ spec:
 Service가 연결할 Target Pods를 지정하기 위해 Label과 Selector를 사용합니다.
 Service의 `.spec.selector`에 지정된 Label 규칙에 해당하는 Pod를 Target으로 연결합니다.
 
-![h:300](img/k8s_service2.svg)
+<br>
 
+![h:350](img/k8s_service2.svg)
 > Label은 Object 생성시점 또는 생성 이후에도 추가할 수 있습니다.
 
 ---
