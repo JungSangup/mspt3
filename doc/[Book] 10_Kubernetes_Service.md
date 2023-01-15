@@ -99,7 +99,7 @@ spec:
 ##### Service의 종류 (Type)
 위의 타입별 특징을 한 장의 그림으로 표현하면 다음과 같습니다.
 <br>
-![h:430](img/k8s_service.PNG)
+![h:430](img/k8s_service.png)
 
 ---
 
