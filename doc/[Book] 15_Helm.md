@@ -322,9 +322,15 @@ search 통해 설치하고자 하는 package를 찾았다면, helm install을 �
 
 #### [helm install](https://helm.sh/ko/docs/helm/helm_install/)
 
-chart를 설치하는 방법은 helm install을 사용하는 것이고, 사용 방법은 다음과 같습니다.
+chart를 설치하는 방법은 `helm install` 명령어를 사용하는 것이고, 사용 방법은 다음과 같습니다.
 
 `helm install 'release명' 'chart명'`
+
+이 때 Chart는 다음과 같이 여러가지 방법으로 지정할 수 있습니다.
+- 차트 저장소 (helm install my-foo repo/foo)
+- 로컬 차트 압축파일 (helm install my-foo foo-0.1.1.tgz)
+- 압축해제된 차트 디렉토리 (helm install my-foo path/to/foo)
+- 완전한 URL (helm install my-foo https://example.com/charts/foo-1.2.3.tgz)
 
 ```bash
 $ helm install my-wordpress bitnami/wordpress
@@ -340,18 +346,18 @@ CHART VERSION: 13.1.15
 APP VERSION: 5.9.3
 
 ** Please be patient while the chart is being deployed **
-
-Your WordPress site can be accessed through the following DNS name from within your cluster:
-
-    my-wordpress.default.svc.cluster.local (port 80)
-
-To access your WordPress site from outside the cluster follow the steps below:
 ```
 
 ---
 
 앞장에서 계속
 ```bash
+Your WordPress site can be accessed through the following DNS name from within your cluster:
+
+    my-wordpress.default.svc.cluster.local (port 80)
+
+To access your WordPress site from outside the cluster follow the steps below:
+
 1. Get the WordPress URL by running these commands:
 
   NOTE: It may take a few minutes for the LoadBalancer IP to be available.
@@ -368,8 +374,7 @@ To access your WordPress site from outside the cluster follow the steps below:
   echo Username: user
   echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
 ```
-> 위 예제는 **bitnami repository**의 **wordpress** 차트를 이용하여 **my-wordpress**라는 이름으로 설치한 경우임.
-> 위의 방법 외에도 [더 많은 설치 방법들](https://helm.sh/ko/docs/intro/using_helm/#%EB%8D%94-%EB%A7%8E%EC%9D%80-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95%EB%93%A4) 이 있습니다.
+> 위 예제는 **bitnami repository**의 **wordpress** 차트를 이용하여 **my-wordpress**라는 이름으로 설치한 경우입니다.
 
 ---
 
