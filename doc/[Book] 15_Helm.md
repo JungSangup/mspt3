@@ -45,6 +45,7 @@ Helm을 통해 다음과 같은 일을 할 수 있습니다.
 ![h:380](img/helmchart.png)
 
 Helm은 다음과 같은 3가지 중요한 개념([Three Big Concepts](https://helm.sh/ko/docs/intro/using_helm/#%EC%A3%BC%EC%9A%94-%EA%B0%9C%EB%85%90-3%EA%B0%80%EC%A7%80))을 가지고 있습니다.
+
 - **Chart** : Helm의 package이며, 이 package에는 Kubernetes Resource들을 담고 있음
 - **Repository** : Chart(Kubernetes Package) 저장소
 - **Release** : Kubernetes Cluster에서 구동되는 Chart의 Instance
@@ -58,6 +59,7 @@ Chart는 디렉토리 내부에 파일들로 구성되며, 디렉토리 이름�
 예를들어, WordPress라는 Chart는 `wordpress/` 디렉토리에 저장이 됩니다.
 
 디렉토리 내에는 아래와 같은 구조로 파일들이 존재 합니다.
+
 ```bash
 wordpress/
   Chart.yaml          # 차트에 대한 정보를 가진 YAML 파일
@@ -70,7 +72,9 @@ wordpress/
   templates/          # values와 결합될 때, 유효한 쿠버네티스 manifest 파일들이 생성될 템플릿들의 디렉터리
   templates/NOTES.txt # 옵션: 간단한 사용법을 포함하는 텍스트 파일
 ```
+
 > 위 예제의 파일과 디렉토리는 Helm에서 사용되는 예약어 입니다.
+> 
 > - 파일 : Chart.yaml, LICENSE, README.md, values.yaml, values.schema.json
 > - 디렉토리 : charts/ , crds/ , templates/
 
@@ -108,6 +112,7 @@ dependencies: # 차트 필요조건들의 리스트 (optional)
 ---
 
 앞장에서 계속
+
 ```yaml
 maintainers: # (선택)
   - name: maintainer들의 이름 (각 maintainer마다 필수)
@@ -127,7 +132,9 @@ annotations:
 <br><br>
 
 #### [LICENSE, README and NOTES](https://helm.sh/ko/docs/topics/charts/#%EC%B0%A8%ED%8A%B8-%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4-readme-%EC%99%80-notes) 파일
+
 라이센스 내용이나 설명, 사용법, 구성 등을 담고있는 텍스트 파일
+
 > README는 Markdown(.md) 포멧을 사용
 
 ---
@@ -140,6 +147,7 @@ Helm은 차트간에 **의존성**을 가진 구조를 가질 수 있습니다.
 <br>
 
 ##### Chart.yaml 파일의 dependencies 필드 (예제)
+
 ```yaml
 dependencies:
   - name: apache
@@ -149,16 +157,19 @@ dependencies:
     version: 3.2.1
     repository: https://another.example.com/charts
 ```
+
 > Chart.yaml의 dependencies 필드에 리스트 형태로 정의
 
 <br>
 
 ##### charts/ 디렉토리 (예제)
+
 ```yaml
 charts/
   apache-1.2.3.tgz
   mysql-3.2.1.tgz
 ```
+
 > 아카이브 형태의 차트(.tgz)를 charts/ 디렉토리에 저장
 
 ---
@@ -169,15 +180,18 @@ Helm Chart의 **Template**들은 [Go template language](https://pkg.go.dev/text/
 모든 Template 파일들은 Chart의 `templates/` 디렉토리에 저장되고, Helm이 Chart를 rendering할 때 해당 디렉토리 내의 모든 파일들이 template engine으로 전달됩니다.  
 
 Template들을 위한 **값**(**Values**)은 아래의 방법으로 제공됩니다.
+
 - **Chart 개발자**가 `values.yaml`파일을 chart내에 포함시켜 제공. (default 값 포함)
 - **Chart 사용자**가 [helm install](https://helm.sh/ko/docs/helm/helm_install/)시 별도의 파일(e.g. `myValues.yaml`)이나 옵션(e.g. `--set`)으로 값을 제공.  
-> 위와 같은 경우 값의 우선순위는 **명령어 옵션**, **별도의 파일**, 기본 **values.yaml파일** 순으로 적용됩니다.
+  
+  > 위와 같은 경우 값의 우선순위는 **명령어 옵션**, **별도의 파일**, 기본 **values.yaml파일** 순으로 적용됩니다.
 
 ![w:1000 center](img/helm-template.png)
 
 ---
 
 template 파일의 예는 아래와 같습니다.
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -214,6 +228,7 @@ spec:
 ---
 
 values.yaml 파일의 예는 다음과 같습니다.
+
 ```yaml
 # Default values for mychart.
 # This is a YAML-formatted file.
@@ -263,6 +278,7 @@ helm은 helm cli를 통해 사용 가능하며, 만약 설치되어 있지 않�
 $ tar -zxvf helm-v3.0.0-linux-amd64.tar.gz
 $ mv linux-amd64/helm /usr/local/bin/helm
 ```
+
 > 압축해제 후 실행파일(helm)을 path가 지정된 디렉토리로 이동
 
 기본적인 helm commands의 사용법은 [Helm](https://helm.sh/ko/docs/helm/helm/)을 참고하거나, 다음과 같이 명령어의 helm 를 참고합니다.
@@ -327,6 +343,7 @@ chart를 설치하는 방법은 `helm install` 명령어를 사용하는 것이�
 `helm install 'release명' 'chart명'`
 
 이 때 Chart는 다음과 같이 여러가지 방법으로 지정할 수 있습니다.
+
 - 차트 저장소 (helm install my-foo repo/foo)
 - 로컬 차트 압축파일 (helm install my-foo foo-0.1.1.tgz)
 - 압축해제된 차트 디렉토리 (helm install my-foo path/to/foo)
@@ -351,6 +368,7 @@ APP VERSION: 5.9.3
 ---
 
 앞장에서 계속
+
 ```bash
 Your WordPress site can be accessed through the following DNS name from within your cluster:
 
@@ -374,6 +392,7 @@ To access your WordPress site from outside the cluster follow the steps below:
   echo Username: user
   echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
 ```
+
 > 위 예제는 **bitnami repository**의 **wordpress** 차트를 이용하여 **my-wordpress**라는 이름으로 설치한 경우입니다.
 
 ---
@@ -400,6 +419,7 @@ replicaset.apps/my-wordpress-ff8559cd   1         1         0       5m36s
 NAME                                    READY   AGE
 statefulset.apps/my-wordpress-mariadb   0/1     5m36s
 ```
+
 > **my-wordpress** 라는 이름으로, **service**, **deployment**, **statefulset** 등이 생성된 것을 확인할 수 있습니다.
 > **helm release**생성 후 **k8s 리소스**들이 생성되기 까지는 어느정도 시간이 소요됩니다.
 
@@ -414,9 +434,11 @@ chart를 customizing 하는 방법은 **value**만 수정하는 방법과 **char
 ##### value 변경
 
 앞에서는 별도의 value를 지정하지 않고 설치를 하였기 때문에 chart에 포함되어 있는 values.yaml 파일의 내용이 사용되었습니다.
+
 > chart에 포함된 **values.yaml**파일의 내용을 보는 방법은, `helm show values 'chart명'`입니다.
 
 default value 들을 확인한 뒤에 특정 value를 변경하여 배포하고자 한다면, 다음과 같은 두가지 방법을 사용할 수 있습니다.
+
 - **--values (또는 -f)** 옵션 : 별도의 value 파일을 생성하고 해당 파일의 경로와 이름을 지정 (예, --values myval.yaml)
 - **--set** 옵션 : command line 상에서 value를 지정 (예, --set wordpressUsername=user,memcached.enabled=false)
 
@@ -465,10 +487,11 @@ value 들이 반영된 manifest를 확인해 보고자 한다면, `--dry-run` �
 일반적으로 Docker image가 변경되었을때 주로 upgrade를 하며, 일부 설정이 변경되는 경우에도 upgrade를 수행할 수 있습니다.
 
 ##### value 변경
+
 특정 value로 업그레이드 하고자 한다면, 다음과 같은 두가지 방법을 사용할 수 있습니다. (install 시와 동일)
+
 - --values (또는 -f) : 별도의 value 파일을 생성하고 해당 파일의 경로와 이름을 지정 (예, --values myval.yaml)
 - --set : command line 상에서 value를 지정 (예, --set image.tag=5.9.3-debian-10-r4)
-
 
 #### [helm rollback](https://helm.sh/ko/docs/helm/helm_rollback/)
 
@@ -477,6 +500,7 @@ value 들이 반영된 manifest를 확인해 보고자 한다면, `--dry-run` �
 ```bash
 $ helm rollback my-wordpress 1
 ```
+
 > 위와 같이 하면 my-wordpress가 맨 첫번째 릴리스 버전으로 롤백됩니다.  
 > 특정 릴리스의 리비전 번호를 확인하기 위해서는 `helm history 'release명'`를 사용할 수 있습니다.
 > 리비전 번호는 1부터 시작해서 1씩 증가하여 부여됩니다.
@@ -540,6 +564,7 @@ $ helm lint mychart
 ```
 
 만약 오류가 있다면 아래와 같이 오류에 대한 정보를 표시해 줍니다.
+
 ```
 $ helm lint mychart
 ==> Linting mychart
@@ -551,6 +576,7 @@ $ helm lint mychart
 
 1 chart(s) linted, 0 chart(s) failed
 ```
+
 > 위 예제는 **deployment.yaml**에서 **deployment name**을 지우고 lint를 한 결과입니다.
 
 ---
@@ -565,6 +591,7 @@ chart 디렉토리를 아카이브(압축) 합니다.
 $ helm package ./mychart
 Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
 ```
+
 > 위와 같이 압축된 파일은 **chart repository**에 등록할 때 사용됩니다.
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -589,4 +616,3 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
     - helm create
     - helm lint
     - helm package
-

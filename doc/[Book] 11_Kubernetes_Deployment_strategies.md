@@ -74,7 +74,9 @@ Events:
   Normal  ScalingReplicaSet  20s   deployment-controller  Scaled down replica set nginx-deployment-5777d8dcc8 to 0
   Normal  ScalingReplicaSet  19s   deployment-controller  Scaled up replica set nginx-deployment-6866dc769c to 3
 ```
+
 Events의 내용은 아래와 같습니다.
+
 1. 최초 생성 : Scaled up replica set nginx-deployment-5777d8dcc8 to 3
 2. 업데이트 단계 1 : Scaled down replica set nginx-deployment-5777d8dcc8 to 0 (구 버젼 삭제)
 3. 업데이트 단계 2 : Scaled up replica set nginx-deployment-6866dc769c to 3 (신 버젼 생성)
@@ -93,6 +95,7 @@ spec:
       maxSurge: 1
       maxUnavailable: 0
 ```
+
 ![h:200](img/grafana-ramped.png)
 
 ---
@@ -127,6 +130,7 @@ Events:
   Normal  ScalingReplicaSet  9s    deployment-controller  Scaled up replica set nginx-deployment-796c89d97c to 3
   Normal  ScalingReplicaSet  8s    deployment-controller  Scaled down replica set nginx-deployment-6866dc769c to 0
 ```
+
 1. 최초 생성 : Scaled up replica set nginx-deployment-6866dc769c to 3
 2. 업데이트 단계 1 : Scaled up replica set nginx-deployment-796c89d97c to 1 (신 버젼 Pod 수 +1)
 3. 업데이트 단계 2 : Scaled down replica set nginx-deployment-6866dc769c to 2 (구 버젼 Pod 수 -1)
@@ -167,6 +171,7 @@ spec:
     app: my-app
     version: v1.0.0
 ```
+
 > 앞의 그림에서 LB역할을 하는 **Service object**를 생성하고, `.spec.selector`를 변경하여 특정 Label을 가진 Pod로 Route를 변경할 수 있습니다.
 > 예를들어 위와 같은 상태에서는 version=v1.0.0인 Pod로 경로를 설정하지만, 이 값을 변경하면(e.g. v1.0.0 -> v2.0.0) 변경된 Label을 가진 Pod로 경로를 변경할 수 있습니다.
 
@@ -196,6 +201,7 @@ spec:
      ...
      image: gb-frontend:v3
 ```
+
 > `track: stable` label을 가진 stable 버젼
 
 ```yaml
@@ -209,6 +215,7 @@ spec:
      ...
      image: gb-frontend:v4
 ```
+
 > `track: canary` label을 가진 canary 버젼 (새로운 버젼)
 
 ---
@@ -238,4 +245,3 @@ spec:
   - RollingUpdate
   - Blue/Green deployments
   - Canary deployments
-

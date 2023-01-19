@@ -18,16 +18,16 @@ footer: Samsung SDS
 
 - **Dockerfile**
 - **Instructions**
-    - **FROM**
-    - **LABEL**
-    - **RUN**
-    - **CMD , ENTRYPOINT**
-    - **EXPOSE**
-    - **ENV**
-    - **COPY , ADD**
-    - **USER**
-    - **WORKDIR**
-    - **VOLUME**
+  - **FROM**
+  - **LABEL**
+  - **RUN**
+  - **CMD , ENTRYPOINT**
+  - **EXPOSE**
+  - **ENV**
+  - **COPY , ADD**
+  - **USER**
+  - **WORKDIR**
+  - **VOLUME**
 
 ---
 
@@ -36,6 +36,7 @@ footer: Samsung SDS
 ![h:380](img/docker-stages.png)
 
 Docker에서 이미지를 생성하는 방법은 다음과 같은 방법들이 있습니다.
+
 - Dockerfile로 Build하기
 - Container로부터 Commit하기
 - Image로부터 Tag하기
@@ -56,9 +57,11 @@ Build context는 `docker build`명령을 실행할 때 사용되는 파일들이
 ### 사용법 (docker build)
 
 일반적인 사용법은 다음과 같습니다.
+
 ```bash
 $ Usage:  docker build [OPTIONS] PATH | URL | -
 ```
+
 > e.g.) `$docker build -t my-image:v1.0.0 .`
 
 그리고, 자주 사용되는 Option들은 아래와 같은 것들이 있습니다.
@@ -74,16 +77,18 @@ $ Usage:  docker build [OPTIONS] PATH | URL | -
 `docker build` 명령은 **Docker daemon**에 의해 실행됩니다. (CLI가 아님.)
 빌드 프로세스에서 가장 먼저 하는 일은 전체 **Context**를 (재귀적으로) **Docker daemon**으로 보내는 것입니다.
 그렇기 때문에, Build context에는 이미지 빌드에 필요한 파일들만 유지하는 것이 좋습니다.
+
 > Context는 PATH 또는 URL(git repository location)을 이용하여 지정함.
 
-
-
 ## Instructions
+
 Dockerfile의 형식은 아래와 같습니다.
+
 ```bash
 # Comment
 INSTRUCTION arguments
 ```
+
 > e.g.) `RUN echo 'Hello docker'`
 > 위의 경우 INSTRUCTION은 `RUN`이고, 나머지는 arguments에 해당합니다.
 
@@ -98,26 +103,32 @@ INSTRUCTION arguments
 ### [FROM](https://docs.docker.com/engine/reference/builder/#from)
 
 Base image를 지정하는 Instruction으로, 지정된 Image를 [Docker Hub](https://hub.docker.com/)와 같은 Registry에서 Pull합니다. Base image를 지정할때는 `ubuntu:18.04` 처럼 Image명과 Tag까지 지정해주는것이 좋습니다.
+
 > Tag가 생략되면 **latest** tag 를 사용하게 됩니다.
 
 #### Syntax
+
 ```dockerfile
 FROM <image> [AS <name>]
 ```
+
 ```dockerfile
 FROM <image>[:<tag>] [AS <name>]
 ```
+
 ```dockerfile
 FROM <image>[@<digest>] [AS <name>]
 ```
 
 #### Example
+
 ```dockerfile
 FROM ubuntu:18.04
 
 # Container에서 실행할 명령
 CMD ["/bin/echo", "hello docker"]
 ```
+
 `Dockerfile`을 위와같이 작성한 다음 아래 명령어를 실행합니다.
 
 ---
@@ -137,6 +148,7 @@ Successfully tagged my-ubuntu:v1
 ubuntu@ip-10-0-1-14:~/app/temp$ docker run my-ubuntu:v1
 hello docker
 ```
+
 Dockerfile에 작성한 대로 `ubuntu:18.04`를 Base image로 사용하여 my-ubuntu:v1 이미지를 만듭니다.
 
 `FROM`은 일반적으로 Dockerfile에서 가장 먼저(앞에) 사용되는 Instruction 입니다.
@@ -157,11 +169,13 @@ CMD  /code/run-app
 `LABEL` 은 key-value 쌍으로 작성하며 space를 포함시키기 위해서는 따옴표(`""`)를, 이어쓰기를 위해서는 백슬래쉬(`\`)를 사용하면 됩니다. 
 
 #### Syntax
+
 ```dockerfile
 LABEL <key>=<value> <key>=<value> <key>=<value> ...
 ```
 
 #### Example
+
 ```dockerfile
 FROM ubuntu:18.04
 
@@ -170,7 +184,7 @@ LABEL multi.label1="value1" multi.label2="value2" other="value3"
 LABEL multi.label1="value1" \
       multi.label2="value2" \
       other="value3_modified"
-      
+
 # Container에서 실행할 명령
 CMD ["/bin/echo", "hello docker"]
 ```
@@ -201,18 +215,23 @@ CMD ["/bin/echo", "hello docker"]
  일반적으로 패키지를 설치할 때 자주 사용됩니다.
 
 #### Syntax
+
 **shell form** : command 로 입력받은 명령어는 쉘에서 수행되며 리눅스에서는 `/bin/sh -c` 이 윈도우에서는 `cmd /S /C` 가 사용됩니다.
+
 ```dockerfile
 RUN <command>
 ```
 
 **exec form** : 
+
 ```dockerfile
 RUN ["executable", "param1", "param2"]
 ```
+
 > exec form은 JSON array로 파싱되므로, double-quotes(“) 를 이용해야 함.
 
 #### Example
+
 ```dockerfile
 RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
 RUN ["/bin/bash", "-c", "echo hello"]
@@ -236,10 +255,14 @@ RUN apt-get update && apt-get install -y \
 #### Syntax
 
 `CMD` instruction은 아래와 같이 3가지 포맷을 지원합니다.
+
 - `CMD ["executable","param1","param2"]` (*exec* form, this is the preferred form)
+
 - `CMD ["param1","param2"]` (as *default parameters to ENTRYPOINT*)
+
 - `CMD command param1 param2` (*shell* form)
-> exec form은 JSON array로 파싱되므로, double-quotes(“) 를 이용해야 함.
+  
+  > exec form은 JSON array로 파싱되므로, double-quotes(“) 를 이용해야 함.
 
 ---
 
@@ -302,6 +325,7 @@ ENTRYPOINT ["/bin/echo", "Hello world"]
 ---
 
 #### ENTRYPOINT & CMD Instruction 예제
+
 ENTRYPOINT와 CMD의 차이를 알 수 있는 예제입니다.
 
 ```dockerfile
@@ -309,7 +333,9 @@ FROM centos
 ENTRYPOINT ["/bin/echo", "Hello docker"]
 CMD ["world"]
 ```
+
 위와같은 Dockerfile을 작성한 후 아래와 같이 이미지를 빌드하고 실행합니다.
+
 ```bash
 $ docker build -t my-ubuntu:v3 .
 
@@ -319,6 +345,7 @@ Hello docker world
 $ docker run my-ubuntu:v3 place
 Hello docker place
 ```
+
 인자를 주지않고 실행한 첫 번째 컨테이너는 `ENTRYPOINT`의 명령어와 인자, 그리고 `CMD`의 인자를 모두 그대로 사용하여 실행합니다.
 인자를 주고 실행한 두 번째 컨테이너는 `CMD`의 내용을 명령줄의 내용으로 치환하여 실행합니다. (world -> place로 변경)
 
@@ -330,6 +357,7 @@ Hello docker place
 
 주의해야할 점은 EXPOSE 명령어 자체가 실제로 포트를 열지는 않는다는 점입니다. EXPOSE 명령은 이미지를 만드는 사람과 이미지를 사용하는 사람이 포트 및 프로토콜 규약을 명시해놓은 문서와 같은 역할을 하는 것입니다.
 실제로 Container의 포트는 다음과 같은 방법으로 publish 됩니다.
+
 - `--publish`(또는 `-p`) flag로 컨테이너의 port와 Host 머신의 port를 지정하여 오픈
 - `--publish-all`(또는 `-P`) flag로 `EXPOSE`로 지정된 모든 포트를 오픈
 
@@ -365,17 +393,21 @@ $ docker run -d --name my-nginx -p 8080:80 nginx
 
 ```dockerfile
 ENV <key> <value>
-````
+```
+
 ```dockerfile
 ENV <key>=<value> ...
 ```
+
 > 두 가지 다 사용가능하나, 아래 방법을 사용하는 것을 권장함.
 
 #### Example
+
 ```dockerfile
 ENV MY_NAME="Tom Cruise" MY_FIGHTER_JET=F14\ Tomcat \
     MY_BIKE=Kawasaki
 ```
+
 > 값에 공백을 넣으려면 double-quotes(`“`)로 감싸거나 backslashes(`\`)를 사용함.
 
 ```dockerfile
@@ -397,9 +429,11 @@ COPY \$FOO /quux # COPY $FOO /quux
 ```dockerfile
 COPY [--chown=<user>:<group>] <src>... <dest>
 ```
+
 ```dockerfile
 COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
 ```
+
 > 경로에 공백이 포함된 경우 아래 방법을 사용.
 
 #### Example
@@ -422,6 +456,7 @@ COPY --chown=10:11 files* /somedir/
 ### [ADD](https://docs.docker.com/engine/reference/builder/#add)
 
 `ADD`는 Syntax 및 기능면에서 `COPY`와 유사하나 URL을 지정해 파일을 복사 할 수 있고, <src> 부분이 local tar archive인 경우 자동으로 압축해제되어 복사됩니다. (remote URL인 경우는 안됨.)
+
 > Tar archive format : identity, gzip, bzip2, xz
 
 #### Syntax
@@ -429,9 +464,11 @@ COPY --chown=10:11 files* /somedir/
 ```dockerfile
 ADD [--chown=<user>:<group>] <src>... <dest>
 ```
+
 ```dockerfile
 ADD [--chown=<user>:<group>] ["<src>",... "<dest>"]
 ```
+
 > 경로에 공백이 포함된 경우 아래 방법을 사용.
 
 #### Example
@@ -460,6 +497,7 @@ USER 명령어는 이러한 Container안에서 명령을 실행 할 유저명(�
 ```dockerfile
 USER <user>[:<group>]
 ```
+
 ```dockerfile
 USER <UID>[:<GID>]
 ```
@@ -482,6 +520,7 @@ USER postgres
 `WORKDIR`로 지정한 디렉토리가 없는 경우에는 자동으로 생성되며, `WORKDIR`을 지정하지 않는경우에는 `\`가 작업 디렉토리로 사용됩니다.
 
 #### Syntax
+
 ```dockerfile
 WORKDIR /path/to/workdir
 ```
@@ -533,6 +572,7 @@ $ docker build -t volumetest:v1 .
 $ docker volume create my-volume
 $ docker run -it --name volumetest --mount source=my-volume,target=/myvol volumetest:v1 /bin/bash
 ```
+
 > `docker volume create`명령으로 먼저 Volume을 생성한 후, `docker run`명령어에서 `--mount`나 `-v` flag를 이용하여 마운트 위치를 지정합니다.
 
 ---
@@ -543,14 +583,13 @@ $ docker run -it --name volumetest --mount source=my-volume,target=/myvol volume
 - docker build
 - Build context
 - Instructions
-    - FROM
-    - LABEL
-    - RUN
-    - CMD , ENTRYPOINT
-    - EXPOSE
-    - ENV
-    - COPY , ADD
-    - USER
-    - WORKDIR
-    - VOLUME
-
+  - FROM
+  - LABEL
+  - RUN
+  - CMD , ENTRYPOINT
+  - EXPOSE
+  - ENV
+  - COPY , ADD
+  - USER
+  - WORKDIR
+  - VOLUME

@@ -17,10 +17,10 @@ footer: Samsung SDS
 <br>
 
 - **Network drivers**
-    - **bridge**
-    - **host**
-    - **overlay**
-    - **none**
+  - **bridge**
+  - **host**
+  - **overlay**
+  - **none**
 - **bridge network (in detail)**
 
 ---
@@ -37,6 +37,7 @@ Docker의 장점 중 하나는 컨테이너들을 함께 연결하거나, 컨테
 ---
 
 ## Network drivers
+
 앞에서 본 네트워크에 대해 좀 더 자세히 알아보겠습니다.
 
 Docker의 네트워킹 서브시스템은 드라이버를 사용합니다. (pluggable)
@@ -54,17 +55,18 @@ Docker의 네트워킹 서브시스템은 드라이버를 사용합니다. (plug
 
 ---
 
-## Bridge network
+### Bridge network
 
 Docker에서는 동일한 bridge network에 연결된 컨테이너들이 통신할 수 있도록 하면서, 해당 bridge network에 연결되지 않은 컨테이너들과는 격리된 환경을 제공하는 **소프트웨어 브리지**를 사용합니다.
 Docker를 시작하면 **기본 bridge network**가 자동으로 생성되고, 컨테이너 실행 시 network를 명시적으로 지정하지 않으면 기본 bridge network에 연결됩니다.
 
 ![](img/docker-network-bridge1.png)
+
 > 기본 Bridge network (**Docker0**) 와 연결된 컨테이너
 
 ---
 
-## Bridge network
+### Bridge network
 
 다음은 기본 bridge network의 상세 내용입니다.
 Nginx 컨테이너를 하나 **기본 bridge network**에 연결하여 실행한 다음 확인해 보겠습니다.
@@ -83,11 +85,12 @@ Digest: sha256:10f14ffa93f8dedf1057897b745e5ac72ac5655c299dade0aa434c71557697ea
 Status: Downloaded newer image for nginx:latest
 80f6c40a51a19ede9a3daebf0cb14034f3dba832177ad71ff52290aaebe50598
 ```
+
 > `--network` flag를 사용하지 않고, 기본 Bridge network에 연결하여 실행.
 
 ---
 
-## Bridge network
+### Bridge network
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker network inspect bridge
@@ -117,11 +120,12 @@ ubuntu@ip-10-0-1-14:~$ docker network inspect bridge
         },
         "ConfigOnly": false,
 ```
+
 > `"Driver": "bridge"` , `"Subnet": "172.17.0.0/16"` , `"Gateway": "172.17.0.1"`
 
 ---
 
-## Bridge network
+### Bridge network
 
 ```bash
         "Containers": {
@@ -145,13 +149,14 @@ ubuntu@ip-10-0-1-14:~$ docker network inspect bridge
     }
 ]
 ```
+
 > **my-nginx**의 `"IPv4Address": "172.17.0.2/16"` , `"com.docker.network.bridge.name": "docker0"`
 
 "Subnet": "172.17.0.0/16", "Gateway": "172.17.0.1" 로 구성된 `docker0` bridge network가 기본적으로 사용되며, Nginx 컨테이너는 `172.17.0.2` 아이피를 할당받아 이 bridge network에 연결된 걸 확인할 수 있습니다.
 
 ---
 
-## Bridge network
+### Bridge network
 
 Nginx 컨테이너를 살펴보면 아래와 같습니다.
 
@@ -179,11 +184,12 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
     }
 ]
 ```
+
 > 컨테이너의 **80**번 포트가 bridge network를 통해서 Host 머신의 **8080**번 포트로 연결된걸 알 수 있습니다.
 
 ---
 
-## Bridge network
+### Bridge network
 
 기본 bridge network이 아닌, 필요에 의해서 새로운 bridge network를 만들어서 사용할 수도 있습니다.
 예를들어 Host 머신 내에서 **정해진 컨테이너들만 격리된 네트워크 구성**이 필요하다면, 별도의 bridge network를 생성하고 컨테이너 생성 시 이 network를 사용하도록 지정하면 됩니다.
@@ -192,6 +198,7 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
 `my_bridge`를 지정하여 컨테이너를 실행하면, 그 네트워크를 사용한 컨테이너들만 격리된 환경을 구성할 수 있습니다.
 
 ![h:250](img/docker-network-bridge2.png)
+
 > 명령어 : `docker network create -d bridge my_bridge`
 
 <br>
@@ -203,11 +210,10 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
 ## Summary
 
 - Network drivers
-    - bridge
-    - host
-    - overlay
-    - none
+  - bridge
+  - host
+  - overlay
+  - none
 - bridge network (in detail)
-    - Subnet, Gateway
-    - 기본 bridge network, 사용자 생성 bridge network
-
+  - Subnet, Gateway
+  - 기본 bridge network, 사용자 생성 bridge network

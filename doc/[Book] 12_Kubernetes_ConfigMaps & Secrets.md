@@ -28,6 +28,7 @@ footer: Samsung SDS
 > **ConfigMap**은 많은 양의 데이터를 보유하도록 설계되지 않았습니다. **ConfigMap**에 저장된 데이터는 1MiB를 초과할 수 없습니다. 이 제한보다 큰 설정을 저장해야 하는 경우, Volume을 마운트하는 것을 고려하거나 별도의 데이터베이스 또는 파일 서비스를 사용할 수 있습니다.
 
 **ConfigMap**은 다른 Kubernetes object들과 달리 `.spec`대신 `data`와 `binaryData`를 가지고 있습니다.
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -47,11 +48,13 @@ data:
     color.bad=yellow
     allow.textmode=true 
 ```
+
 ---
 
 ## ConfigMap
 
 위와같이 생성된 Configmap을 사용할 때는 다음과 같이 할 수 있습니다.
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -76,6 +79,7 @@ spec:
               key: ui_properties_file_name
       ...
 ```
+
 > 환경변수(`PLAYER_INITIAL_LIVES`, `UI_PROPERTIES_FILE_NAME`)의 값으로 Configmap에 정의된 값(`3`,`user-interface.properties`)을 사용함.
 
 ---
@@ -83,6 +87,7 @@ spec:
 ## ConfigMap
 
 앞의 파일에서 이어진 파일입니다.
+
 ```yaml
       ...
       volumeMounts:
@@ -102,6 +107,7 @@ spec:
         - key: "user-interface.properties"
           path: "user-interface.properties"
 ```
+
 > Volume을 정의하고 mountPath(/config)에 두 개의 파일(`game.properties`,`user-interface.properties`)을 마운트
 
 ---
@@ -126,6 +132,7 @@ data:
   USER_NAME: YWRtaW4=
   PASSWORD: MWYyZDFlMmU2N2Rm
 ```
+
 > `USER_NAME` 과 `PASSWORD`를 가진 secret
 
 ---
@@ -147,6 +154,7 @@ spec:
           name: mysecret
   restartPolicy: Never
 ```
+
 > 환경변수로 앞에서 생성된 Secret의 정보를 사용
 
 <br><br><br><br><br><br><br>
@@ -159,4 +167,3 @@ spec:
 
 - ConfigMap
 - Secret
-

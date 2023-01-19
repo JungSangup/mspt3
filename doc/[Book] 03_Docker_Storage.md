@@ -38,15 +38,16 @@ footer: Samsung SDS
 ## Storage overview
 
 이런 데이터 저장방법은 다음과 같은 문제점들을 가지고 있습니다.
+
 - 컨테이너가 중지되면 Container layer의 데이터는 컨테이너와 함께 **제거**되고, 유지되지 않습니다.
 - 다른 프로세스 또는 애플리케이션에서 컨테이너의 데이터에 접근하기가 쉽지 않습니다. 
 - 컨테이너의 Writable layer에 데이터를 기록하기 위해서는 파일스시템을 관리할 [Storage driver](https://docs.docker.com/storage/storagedriver/)가 필요합니다.  
-Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공하기때문에, 이러한 추가적인 추상화로 인해 Host 파일시스템에 직접 데이터를 기록하는 것과 비교해보면 **성능**면에서 약점으로 작용합니다.
+  Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공하기때문에, 이러한 추가적인 추상화로 인해 Host 파일시스템에 직접 데이터를 기록하는 것과 비교해보면 **성능**면에서 약점으로 작용합니다.
 
 위에서 나열한 문제들을 해결하기 위해서, Docker는 **Host 머신에 파일을 저장**하는 방법을 제공합니다.
 
-|  |  |
-| --- | :--- |
+|                                   |                                                                  |
+| --------------------------------- |:---------------------------------------------------------------- |
 | ![h:210](img/types-of-mounts.png) | **- Volume**<br>**- Bind mount**<br>**- tmpfs mount (On Linux)** |
 
 ---
@@ -61,19 +62,17 @@ Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공
 - **Bind mounts** : Host 머신의 파일시스템 어디에나 파일을 저장할 수 있는 방법입니다. Docker외의 다른 프로세스에서 데이터의 접근과 수정이 가능합니다.
 - **tmpfs mounts** : Host의 메모리에 데이터를 저장하는 방법입니다. (파일시스템에는 저장되지 않음.)
 
-| Type of mount | Use cases |
-| :---: | :--- |
-| [Volumes](https://docs.docker.com/storage/volumes/) | - 컨테이너간 데이터 공유<br>- 데이터의 원격저장 (e.g. remote Host, Cloud provider)<br>- 고성능 I/O |
-| [Bind mounts](https://docs.docker.com/storage/bind-mounts/) | - Host 머신의 config.정보 공유(e.g. /etc/resolve.conf)<br>- Host 머신의 Source code나 Build artifact 공유 |
-| [tmpfs mounts](https://docs.docker.com/storage/tmpfs/) | - 민감정보(e.g. [secrets](https://docs.docker.com/engine/swarm/secrets/))를 컨테이너 lifecycle동안 저장<br>- 영구저장이 필요없는 대용량 데이터의 처리 시 컨테이너의 성능보장 |
-
-
+| Type of mount                                               | Use cases                                                                                                                           |
+|:-----------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------- |
+| [Volumes](https://docs.docker.com/storage/volumes/)         | - 컨테이너간 데이터 공유<br>- 데이터의 원격저장 (e.g. remote Host, Cloud provider)<br>- 고성능 I/O                                                       |
+| [Bind mounts](https://docs.docker.com/storage/bind-mounts/) | - Host 머신의 config.정보 공유(e.g. /etc/resolve.conf)<br>- Host 머신의 Source code나 Build artifact 공유                                        |
+| [tmpfs mounts](https://docs.docker.com/storage/tmpfs/)      | - 민감정보(e.g. [secrets](https://docs.docker.com/engine/swarm/secrets/))를 컨테이너 lifecycle동안 저장<br>- 영구저장이 필요없는 대용량 데이터의 처리 시 컨테이너의 성능보장 |
 
 ![](img/hyperlink.png)[Manage data in Docker](https://docs.docker.com/storage/)
 
 ---
 
-## Volumes
+### Volumes
 
 ![](img/types-of-mounts-volume.png)
 
@@ -105,10 +104,11 @@ ubuntu@ip-10-0-1-14:~$ docker volume inspect my-volume
     }
 ]
 ubuntu@ip-10-0-1-14:~$ sudo ls /var/lib/docker/volumes/
-metadata.db	my-volume
+metadata.db    my-volume
 ```
+
 > `/var/lib/docker/volumes/`은 root:root ownership을 가지고 있으므로
-적절한 조회 명령을 사용해야 함. (e.g. `sudo ls /var/lib/docker/volumes/`)
+> 적절한 조회 명령을 사용해야 함. (e.g. `sudo ls /var/lib/docker/volumes/`)
 
 ---
 
@@ -135,16 +135,18 @@ exit
 ubuntu@ip-10-0-1-14:~$ sudo ls /var/lib/docker/volumes/my-volume/_data
 hellovolume
 ```
+
 > 위의 예제는 my-volume이라는 Volume이 ubuntu 컨테이너의 /volumedata 에 마운트되어 사용되는 예제입니다.
 
 > `--mount source=my-volume,target=/volumedata`는 `--volume my-volume:/volumedata`과 같이 사용할 수도 있습니다.
-둘의 차이는 [Choose the -v or --mount flag](https://docs.docker.com/storage/volumes/#choose-the--v-or---mount-flag)를 참고하세요.
+> 둘의 차이는 [Choose the -v or --mount flag](https://docs.docker.com/storage/volumes/#choose-the--v-or---mount-flag)를 참고하세요.
 
 ---
 
-## Volumes
+### Volumes
 
 Container 정보를 살펴보면 기본설정으로 Volume의 읽기쓰기모드가 RW(읽기쓰기) 인 것을 알 수 있습니다.
+
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker inspect myubuntu
 [
@@ -170,13 +172,15 @@ ubuntu@ip-10-0-1-14:~$ docker inspect myubuntu
     }
 ]
 ```
+
 > `"RW": true,` -> RW(읽기쓰기) 모드
 
 ---
 
-## Volumes
+### Volumes
 
 `--mount` 또는 `--volume` 옵션에 `readonly` 옵션을 추가해서 읽기쓰기 모드를 변경 할 수도 있습니다.
+
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run -it --name myubuntu_ro --volume my-volume:/volumedata:ro ubuntu
 root@9a16f5ab69b1:/# touch /volumedata/test
@@ -204,13 +208,15 @@ ubuntu@ip-10-0-1-14:~$ docker inspect myubuntu_ro
     }
 ]
 ```
+
 > `"RW": false,` -> Readonly 모드
 
 ---
 
-## Volumes
+### Volumes
 
 Volume은 동시에 여러 컨테이너에 마운트 할 수 있으며, 자동으로 제거되지 않습니다. 제거하기 위해서는 `docker volume rm`,  `docker volume prune`  명령어로 제거 할 수 있습니다.
+
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker volume rm my-volume
 my-volume
@@ -227,17 +233,18 @@ Are you sure you want to continue? [y/N] y
 <br>
 
 #### volume 관련 명령어
-| Command | Description |
-| --- | --- |
-| [docker volume create](https://docs.docker.com/engine/reference/commandline/volume_create/) | Create a volume |
+
+| Command                                                                                       | Description                                         |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| [docker volume create](https://docs.docker.com/engine/reference/commandline/volume_create/)   | Create a volume                                     |
 | [docker volume inspect](https://docs.docker.com/engine/reference/commandline/volume_inspect/) | Display detailed information on one or more volumes |
-| [docker volume ls](https://docs.docker.com/engine/reference/commandline/volume_ls/) | List volumes |
-| [docker volume rm](https://docs.docker.com/engine/reference/commandline/volume_rm/) | Remove one or more volumes |
-| [docker volume prune](https://docs.docker.com/engine/reference/commandline/volume_prune/) | Remove all unused local volumes |
+| [docker volume ls](https://docs.docker.com/engine/reference/commandline/volume_ls/)           | List volumes                                        |
+| [docker volume rm](https://docs.docker.com/engine/reference/commandline/volume_rm/)           | Remove one or more volumes                          |
+| [docker volume prune](https://docs.docker.com/engine/reference/commandline/volume_prune/)     | Remove all unused local volumes                     |
 
 ---
 
-## Bind mount
+### Bind mount
 
 **Bind mount**는 Volume에 비해 기능이 제한되어 있습니다.
 Bind mount를 사용하면 Host 머신의 특정 파일이나 디렉토리가 컨테이너에 마운트되고, Host 머신의 마운트 경로는 절대경로로 참조됩니다.
@@ -246,9 +253,10 @@ Bind mount를 사용하면 Host 머신의 특정 파일이나 디렉토리가 �
 
 ---
 
-## Bind mount
+### Bind mount
 
 bind mount를 사용해서 컨테이너를 실행해보겠습니다.
+
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run -it -v /volume/bindmount:/data/bindmount ubuntu
 root@53bd95362964:/# cd /data/bindmount
@@ -260,13 +268,14 @@ exit
 ubuntu@ip-10-0-1-14:~$ ls /volume/bindmount/
 testfile
 ```
+
 > `-v /volume/bindmount:/data/bindmount`는 `--mount type=bind,source=/volume/bindmount,target=/data/bindmount`과 같이 사용할 수도 있습니다.
-`-v`는 Host 머신에 디텍토리가 존재하지 않는경우 자동으로 생성해줍니다. 반면 `--mount`는 오류만 생성합니다.(디렉토리가 있어야 합니다.)
-둘의 차이는 [Choose the -v or --mount flag](https://docs.docker.com/storage/bind-mounts/#choose-the--v-or---mount-flag)를 참고하세요.
+> `-v`는 Host 머신에 디텍토리가 존재하지 않는경우 자동으로 생성해줍니다. 반면 `--mount`는 오류만 생성합니다.(디렉토리가 있어야 합니다.)
+> 둘의 차이는 [Choose the -v or --mount flag](https://docs.docker.com/storage/bind-mounts/#choose-the--v-or---mount-flag)를 참고하세요.
 
 ---
 
-## Bind mount
+### Bind mount
 
 Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문에, 가능하다면 Volume을 사용하는 것이 권장됩니다.
 
@@ -291,4 +300,3 @@ Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문�
     - 사용 예시 : `--mount type=volume,source=my-volume,target=/volumedata,readonly`
   - `--volume` (`-v`) flag를 사용하는 방법
     - 사용 예시 : `--volume my-volume:/volumedata:ro`
-

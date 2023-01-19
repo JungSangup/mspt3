@@ -32,6 +32,7 @@ footer: Samsung SDS
 ## Horizontal Pod Autoscaler
 
 Horizontal Pod Autoscaler controller는 아래와 같이 원하는(desired) 기준 값과 측정된(current) 값의 비율로 그 값을 계산합니다.
+
 ```
 desiredReplicas = ceil[currentReplicas * ( currentMetricValue / desiredMetricValue )]
 ```
@@ -45,12 +46,12 @@ desiredReplicas = ceil[currentReplicas * ( currentMetricValue / desiredMetricVal
 
 ![](img/hyperlink.png)[Horizontal Pod Autoscaling - 알고리즘 세부정보](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/#%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%84%B8%EB%B6%80-%EC%A0%95%EB%B3%B4)
 
-
 ---
 
 ## Horizontal Pod Autoscaler
 
 **HorizontalPodAutoscaler**는 다음과 같이 정의합니다.
+
 ```yaml
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
@@ -72,14 +73,17 @@ spec:
         type: Utilization
         averageUtilization: 50
 ```
+
 > Pod의 평균 CPU 사용율(50%)을 기준으로 1(minReplicas) 부터 10(maxReplicas)까지 Replicas의 수를 증/감 시킴.
 
 위와같이 정의한 HorizontalPodAutoscaler는 조회 명령어에서는 다음과 같이 표시됩니다.
+
 ```bash
 root@master:/# kubectl get hpa -o wide
 NAME        REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 myphp-hpa   Deployment/myphp   0%/50%    1         10        1          5m48s
 ```
+
 ---
 
 ## Kubernetes Metrics Server
@@ -91,11 +95,13 @@ HorizontalPodAutoscaler를 사용하려면 먼저 [Kubernetes Metrics Server](ht
 위의 링크에 자세히 설명된 내용을 참조합니다.
 
 설치는 다음과 같이 진행하면 됩니다.
+
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
 설치 후에는 다음과 같이 각 Node의 정보를 확인할 수 있습니다.
+
 ```bash
 $ kubectl top node
 NAME     CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
@@ -114,4 +120,3 @@ node2    42m          2%     2141Mi          55%
 
 - Horizontal Pod Autoscaler
 - Kubernetes Metrics Server
-
