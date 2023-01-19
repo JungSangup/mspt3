@@ -32,7 +32,7 @@ footer: Samsung SDS
 Docker의 장점 중 하나는 컨테이너들을 함께 연결하거나, 컨테이너가 아닌 또 다른 워크로드와 연계하여 운영할 수 있다는 것입니다.  
 아래는 Docker가 설치되면 기본적으로 생성되는 Network의 종류입니다. (`bridge` , `host` , `none`)
 
-![h:430](img/docker-network1.png)
+![h:430](img/docker_network1.png)
 
 ---
 
@@ -60,7 +60,7 @@ Docker의 네트워킹 서브시스템은 드라이버를 사용합니다. (plug
 Docker에서는 동일한 bridge network에 연결된 컨테이너들이 통신할 수 있도록 하면서, 해당 bridge network에 연결되지 않은 컨테이너들과는 격리된 환경을 제공하는 **소프트웨어 브리지**를 사용합니다.
 Docker를 시작하면 **기본 bridge network**가 자동으로 생성되고, 컨테이너 실행 시 network를 명시적으로 지정하지 않으면 기본 bridge network에 연결됩니다.
 
-![](img/docker-network-bridge1.png)
+![](img/docker_network_bridge1.png)
 
 > 기본 Bridge network (**Docker0**) 와 연결된 컨테이너
 
@@ -197,7 +197,7 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
 아래 그림은 새로운 bridge network가 생성됐을 때의 그림입니다.
 `my_bridge`를 지정하여 컨테이너를 실행하면, 그 네트워크를 사용한 컨테이너들만 격리된 환경을 구성할 수 있습니다.
 
-![h:250](img/docker-network-bridge2.png)
+![h:250](img/docker_network_bridge2.png)
 
 > 명령어 : `docker network create -d bridge my_bridge`
 

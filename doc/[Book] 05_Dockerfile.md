@@ -33,7 +33,7 @@ footer: Samsung SDS
 
 ## Dockerfile
 
-![h:380](img/docker-stages.png)
+![h:380](img/docker_stages.png)
 
 Docker에서 이미지를 생성하는 방법은 다음과 같은 방법들이 있습니다.
 
