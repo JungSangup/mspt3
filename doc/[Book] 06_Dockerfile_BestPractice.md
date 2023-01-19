@@ -104,9 +104,9 @@ Docker에서는 이러한 상황을 방지하기 위한 방법으로 [.dockerign
 temp?
 **/*.go
 ```
-> `*/temp*` : root 디렉토리의 서브디렉토리들 중 temp로 시작되는 서브디렉토리 하위의 파일 및 temp로 시작되는 파일들을 제외
-> `*/*/temp*` : root디렉토리의 두 레벨 아래의 서브디렉토리들 중 temp로 시작되는 서브디렉토리 하위의 파일 및 temp로 시작되는 파일들을 제외
-> `temp?` : root 디렉토리 중 명칭의 길이가 4이고 temp로 시작하는 디렉토리나 파일들을 제외
+> `*/temp*` : root 디렉토리의 서브디렉토리들 중 temp로 시작되는 서브디렉토리 하위의 파일 및 temp로 시작되는 파일들을 제외 (e.g. /somedir/temporary.txt , /somedir/temp)
+> `*/*/temp*` : root 두 레벨 아래 모든 서브디렉토리 하위의 파일과 디렉토리 중 temp로 시작되는 모든 것 제외 (e.g. /somedir/subdir/temporary.txt)
+> `temp?` : root 디렉토리 중 명칭의 길이가 5이고 temp로 시작하는 디렉토리나 파일들을 제외 (e.g. /tempa , /tempb)
 > `**/*.go` : Build context의 모든 디렉토리에서 `.go`로 끝나는 모든 파일을 제외
 - Go의 [filepath.Match](https://pkg.go.dev/path/filepath#Match) 규칙 참조.
 
@@ -241,10 +241,10 @@ git 해시값은 git rev-parse-short명령으로 알수 있습니다.
 기본적으로 Docker 컨테이너 내의 프로세스는 호스트 머신에 액세스할 수 없지만, 컨테이너는 호스트 머신의 커널을 공유하므로 컨테이너 격리는 Hypervisor의 가상 머신만큼 안전한 격리를 제공하지는 않습니다. 
 따라서 해커 등의 공격자가 컨테이너 밖으로 나갈 수 있는 취약점을 발견한다면, 컨테이너 내에서 프로세스가 루트로 실행 중인 경우 공격자는 호스트 머신에 대한 루트 액세스 권한을 얻을 수도 있습니다.
 
-![h:210](img/bp-operating-containers-root.svg)
+![h:200](img/bp-operating-containers-root.svg)
 
 이 가능성을 피하기 위한 권장사항은 컨테이너 내에서 루트로 프로세스를 실행하지 않는 것입니다.
-Dockerfile에서 User를 생성하고 최소한의 권한을 부여하고 `USER` 지시자로 Container를 실행해야 합니다.
+Dockerfile에서 User를 생성하여 필요한 최소한의 권한을 부여하고, `USER` 지시자를 사용하여 필요한 처리(RUN, CMD, ENTRYPOINT)들을 해야합니다.
 - 유저 및 유저그룹 생성
 - 최소한의 권한부여
 - USER 지시자로 실행 USER 변경

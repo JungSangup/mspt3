@@ -421,7 +421,7 @@ COPY --chown=10:11 files* /somedir/
 
 ### [ADD](https://docs.docker.com/engine/reference/builder/#add)
 
-`ADD`는 Syntax 및 기능면에서 `COPY`와 유사하나, URL을 지정해 파일을 복사 할 수 있고 압축파일(tar)을 을 자동으로 풀어서 복사한다는 점에서 차이가 있습니다.
+`ADD`는 Syntax 및 기능면에서 `COPY`와 유사하나 URL을 지정해 파일을 복사 할 수 있고, <src> 부분이 local tar archive인 경우 자동으로 압축해제되어 복사됩니다. (remote URL인 경우는 안됨.)
 > Tar archive format : identity, gzip, bzip2, xz
 
 #### Syntax
