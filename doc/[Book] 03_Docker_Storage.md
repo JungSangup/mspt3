@@ -31,7 +31,7 @@ footer: Samsung SDS
 이전에 본 내용을 다시 떠올려 보겠습니다.
 **Writable container layer**는 아래 그림에서 **Thin R/W layer** (**Container layer**)라고 표시된 부분입니다.
 
-![h:400](img/container-layers.jpeg)
+![h:400](img/docker_container_layers.jpeg)
 
 ---
 
@@ -48,7 +48,7 @@ footer: Samsung SDS
 
 |                                   |                                                                  |
 | --------------------------------- |:---------------------------------------------------------------- |
-| ![h:210](img/types-of-mounts.png) | **- Volume**<br>**- Bind mount**<br>**- tmpfs mount (On Linux)** |
+| ![h:210](img/docker_types_of_mounts.png) | **- Volume**<br>**- Bind mount**<br>**- tmpfs mount (On Linux)** |
 
 ---
 
@@ -74,7 +74,7 @@ footer: Samsung SDS
 
 ### Volumes
 
-![](img/types-of-mounts-volume.png)
+![](img/docker_types_of_mounts_volume.png)
 
 Docker에 의해 만들어지고 관리되는 **Volume**은  `docker volume create` 명령어로 명시적으로 생성할 수 있습니다.
 
@@ -249,7 +249,7 @@ Are you sure you want to continue? [y/N] y
 **Bind mount**는 Volume에 비해 기능이 제한되어 있습니다.
 Bind mount를 사용하면 Host 머신의 특정 파일이나 디렉토리가 컨테이너에 마운트되고, Host 머신의 마운트 경로는 절대경로로 참조됩니다.
 
-![](img/types-of-mounts-bind.png)
+![](img/docker_types_of_mounts_bind.png)
 
 ---
 
