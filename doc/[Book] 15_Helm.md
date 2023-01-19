@@ -36,7 +36,7 @@ Helm을 통해 다음과 같은 일을 할 수 있습니다.
 
 <br><br><br><br><br>
 
-![](./img/hyperlink.png)[Helm](https://helm.sh/ko/)
+![](img/hyperlink.png)[Helm](https://helm.sh/ko/)
 
 ---
 
@@ -569,7 +569,7 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-![](./img/handson.png) **Hands-on :** 15_Helm
+![](img/handson.png) **Hands-on :** 15_Helm
 
 ---
 

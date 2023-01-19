@@ -27,7 +27,7 @@ footer: Samsung SDS
 
 ## Cloud Native
 
-![h:270](./img/cloud_native_1.png) ![h:270](./img/cloud_native_2.png) ![h:270](./img/cloud_native_3.png)
+![h:270](img/cloud_native_1.png) ![h:270](img/cloud_native_2.png) ![h:270](img/cloud_native_3.png)
 
 #### [ Cloud Native 의 정의 ]
 > **클라우드 네이티브** 기술은 조직이 퍼블릭, 프라이빗, 그리고 하이브리드 클라우드와 같은
@@ -43,7 +43,7 @@ footer: Samsung SDS
 
 ## Cloud Native
 
-![w:1000 left](./img/cloud_native_4.png)
+![w:1000 left](img/cloud_native_4.png)
 
 ---
 
@@ -55,13 +55,13 @@ footer: Samsung SDS
 
 <br>
 
-![h:350 center](./img/container.png)
+![h:350 center](img/container.png)
 
 ---
 
 ## Container vs Virtual machine
 
-![h:300 center](./img/containers-vs-vm.png)
+![h:300 center](img/containers-vs-vm.png)
 
 여러개의 **컨테이너**가 동일 시스템에서 실행될 수 있고, OS 커널을 공유하며, 각각은 격리된 프로세스로 실행됩니다.
 
@@ -89,7 +89,7 @@ footer: Samsung SDS
 
 <br><br><br><br><br><br>
 
-![](./img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/) ![](./img/hyperlink.png)[Windows container](https://docs.microsoft.com/ko-kr/virtualization/windowscontainers/about/)  
+![](img/hyperlink.png)[What is a container?](https://www.docker.com/resources/what-container/) ![](img/hyperlink.png)[Windows container](https://docs.microsoft.com/ko-kr/virtualization/windowscontainers/about/)  
 
 ---
 
@@ -102,7 +102,7 @@ Docker는 이러한 컨테이너를 위한 플랫폼(또는 런타임)입니다.
 
 <br>
 
-![h:350 center](./img/linuxContainer.jpg)
+![h:350 center](img/linuxContainer.jpg)
 
 ---
 ## Linux Container (LXC)
@@ -134,11 +134,11 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 
 **Docker**는 컨테이너의 수명 주기를 관리하기 위한 **도구**와 **플랫폼**을 제공합니다.
 
-[![Build](./img/moby_build_s.png)](https://www.docker.com/)[![Share](./img/moby_share_s.png)](https://www.docker.com/)[![Run](./img/moby_run_s.png)](https://www.docker.com/)
+[![Build](img/moby_build_s.png)](https://www.docker.com/)[![Share](img/moby_share_s.png)](https://www.docker.com/)[![Run](img/moby_run_s.png)](https://www.docker.com/)
 
 <br><br>
 
-![](./img/handson.png) **Hands-on :** 01_Docker_Intro
+![](img/handson.png) **Hands-on :** 01_Docker_Intro
 
 ---
 
@@ -154,9 +154,9 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 
 | Platform | x86_64 / amd64 | arm64 (Apple Silicon) |
 | :--- | :---: | :---: |
-| Docker Desktop for Linux | ![](./img/green-check.svg) | |
-| Docker Desktop for Mac (macOS) | ![](./img/green-check.svg) | ![](./img/green-check.svg) |
-| Docker Desktop for Windows | ![](./img/green-check.svg) | |
+| Docker Desktop for Linux | ![](img/green-check.svg) | |
+| Docker Desktop for Mac (macOS) | ![](img/green-check.svg) | ![](img/green-check.svg) |
+| Docker Desktop for Windows | ![](img/green-check.svg) | |
 
 - `Mac, Windows의 경우 Linux가 실행될 VM이 필요함.`
 
@@ -172,18 +172,18 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 ### SERVER
 | Platform | x86_64 / amd64 | arm64 / aarch64 | arm (32-bit) | s390x |
 | :--- | :---: | :---: | :---: | :---: |
-| CentOS | ![](./img/green-check.svg) | ![](./img/green-check.svg) | | |
-| Debian | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) | |
-| Fedora | ![](./img/green-check.svg) | ![](./img/green-check.svg) | | |
-| Raspbian | | | ![](./img/green-check.svg) | |
-| RHEL |  |  |  | ![](./img/green-check.svg) |
-| SLES |  |  |  | ![](./img/green-check.svg) |
-| Ubuntu | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) |
-| Binaries | ![](./img/green-check.svg) | ![](./img/green-check.svg) | ![](./img/green-check.svg) | |
+| CentOS | ![](img/green-check.svg) | ![](img/green-check.svg) | | |
+| Debian | ![](img/green-check.svg) | ![](img/green-check.svg) | ![](img/green-check.svg) | |
+| Fedora | ![](img/green-check.svg) | ![](img/green-check.svg) | | |
+| Raspbian | | | ![](img/green-check.svg) | |
+| RHEL |  |  |  | ![](img/green-check.svg) |
+| SLES |  |  |  | ![](img/green-check.svg) |
+| Ubuntu | ![](img/green-check.svg) | ![](img/green-check.svg) | ![](img/green-check.svg) | ![](img/green-check.svg) |
+| Binaries | ![](img/green-check.svg) | ![](img/green-check.svg) | ![](img/green-check.svg) | |
 
 <br>
 
-![](./img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
+![](img/hyperlink.png)[Install Docker Engine](https://docs.docker.com/engine/install/)
 
 ---
 
@@ -195,7 +195,7 @@ Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, �
 
 <br>
 
-![](./img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
+![](img/hyperlink.png)[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
 ---
 
@@ -241,7 +241,7 @@ Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.
 
 <br><br>
 
-![](./img/hyperlink.png)[Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
+![](img/hyperlink.png)[Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
 
 ---
 
@@ -259,9 +259,9 @@ CMD python /app/app.py
 ```
 |  |  |
 | --- | :---: |
-| ![h:250](./img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` |
+| ![h:250](img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` |
 
-![](./img/hyperlink.png)[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
+![](img/hyperlink.png)[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
 
 ---
 
@@ -271,9 +271,9 @@ CMD python /app/app.py
 각 컨테이너에는 쓰기 가능한 자체 **컨테이너 레이어**가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에, 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
 그리고, 이렇게 공유되는 layer구조로 인해 자원을 효율적으로 사용할 수 있습니다. (저장공간, Provisioning)
 
-![h:300](./img/sharing-layers.jpeg) 
+![h:300](img/sharing-layers.jpeg) 
 
-![](./img/handson.png) **Hands-on :** 02_Docker_Layers
+![](img/handson.png) **Hands-on :** 02_Docker_Layers
 
 ---
 

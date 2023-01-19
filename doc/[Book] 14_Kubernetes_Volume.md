@@ -168,7 +168,7 @@ spec:
 
 <br><br><br><br><br>
 
-![](./img/handson.png) **Hands-on :** 14_Kubernetes_Volume
+![](img/handson.png) **Hands-on :** 14_Kubernetes_Volume
 
 ---
 

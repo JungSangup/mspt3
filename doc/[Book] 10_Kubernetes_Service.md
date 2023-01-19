@@ -193,7 +193,7 @@ Service로 라우팅하는 rule이 정의되어 있으며, Ingress Controller에
 > HTTP/HTTPS 외의 서비스를 노출하려면 Ingress가 아닌 다른 방법을 적용해야 합니다. (e.g. NodePort) 
 
 
-![](./img/handson.png) **Hands-on :** 10_Kubernetes_Service
+![](img/handson.png) **Hands-on :** 10_Kubernetes_Service
 
 ---
 

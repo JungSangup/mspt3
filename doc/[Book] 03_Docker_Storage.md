@@ -31,7 +31,7 @@ footer: Samsung SDS
 이전에 본 내용을 다시 떠올려 보겠습니다.
 **Writable container layer**는 아래 그림에서 **Thin R/W layer** (**Container layer**)라고 표시된 부분입니다.
 
-![h:400](./img/container-layers.jpeg)
+![h:400](img/container-layers.jpeg)
 
 ---
 
@@ -69,7 +69,7 @@ Storage driver는 리눅스의 커널을 이용해서 union filesystem을 제공
 
 
 
-![](./img/hyperlink.png)[Manage data in Docker](https://docs.docker.com/storage/)
+![](img/hyperlink.png)[Manage data in Docker](https://docs.docker.com/storage/)
 
 ---
 
@@ -276,7 +276,7 @@ Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문�
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-![](./img/handson.png) **Hands-on :** 04_Docker_Volumes
+![](img/handson.png) **Hands-on :** 04_Docker_Volumes
 
 ---
 

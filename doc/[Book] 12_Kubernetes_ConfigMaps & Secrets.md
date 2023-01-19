@@ -151,7 +151,7 @@ spec:
 
 <br><br><br><br><br><br><br>
 
-![](./img/handson.png) **Hands-on :** 12_Kubernetes_ConfigMaps & Secrets
+![](img/handson.png) **Hands-on :** 12_Kubernetes_ConfigMaps & Secrets
 
 ---
 

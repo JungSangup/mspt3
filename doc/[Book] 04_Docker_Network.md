@@ -50,7 +50,7 @@ Docker의 네트워킹 서브시스템은 드라이버를 사용합니다. (plug
 
 <br><br><br><br><br><br>
 
-![](./img/hyperlink.png)[Networking overview](https://docs.docker.com/network/)
+![](img/hyperlink.png)[Networking overview](https://docs.docker.com/network/)
 
 ---
 
@@ -196,7 +196,7 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
 
 <br>
 
-![](./img/handson.png) **Hands-on :** 05_Docker_Network
+![](img/handson.png) **Hands-on :** 05_Docker_Network
 
 ---
 

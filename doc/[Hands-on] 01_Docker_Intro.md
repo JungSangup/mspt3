@@ -14,7 +14,7 @@ footer: Samsung SDS
 그냥 일단 무작정 따라해보세요.  
 자세한건 천천히 알아볼게요.  
 
-![h:300](./img/todo-list-sample1.png)
+![h:300](img/todo-list-sample1.png)
 
 이번 과정에서 사용할 샘플 애플리케이션인 **ToDo List Manager** 입니다.  
 할 일 목록(Item)을 등록하고 관리할 수 있는 간단한 애플리케이션입니다.
@@ -140,7 +140,7 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS    
 
 ---
 ​
-![h:350](./img/todo-list-sample3.png)
+![h:350](img/todo-list-sample3.png)
 
 여러분의 ToDo List Manager 애플리케이션이 잘 동작하나요?
 오늘 할 일을 한 번 추가해 보세요.

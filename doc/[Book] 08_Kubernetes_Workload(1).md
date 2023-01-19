@@ -363,7 +363,7 @@ spec:
 > max : limit으로 지정할 수 있는 최대 크기
 > min : limit으로 지정할 수 있는 최소 크기
 
-![](./img/handson.png) **Hands-on :** 08_Kubernetes_Workload(1)
+![](img/handson.png) **Hands-on :** 08_Kubernetes_Workload(1)
 
 ---
 

@@ -132,7 +132,7 @@ a2c03d99dc1808287614353a48cf0b95b21bc648bb757454a25fbff7e88058e3
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
 - Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
 
-![h:250](./img/todo-list-sample3.png)
+![h:250](img/todo-list-sample3.png)
 
 그리고, 컨테이너를 멈추고 삭제합니다.
 ```bash
@@ -160,5 +160,5 @@ bc7ab606fe61d12ec50ec8580963f0c169c4b6da428a3e67ecc384653cd1d161
 
 어떤가요? 오늘 할 일 목록이 그대로 남아있나요? **정국이와 저녁식사**도 **장보기**도 잊지않고 할 수 있게 되었습니다.
 
-![h:250](./img/todo-list-sample3.png)
+![h:250](img/todo-list-sample3.png)
 이제, 좀 제대로 된 애플리케이션이 된 것 같네요.... (ง˙∇˙)ว

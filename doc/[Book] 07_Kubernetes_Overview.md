@@ -54,7 +54,7 @@ footer: Samsung SDS
 
 <br><br><br><br>
 
-![](./img/hyperlink.png)[What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+![](img/hyperlink.png)[What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 
 
 ---
@@ -283,7 +283,7 @@ spec:
 
 <br><br>
 
-![](./img/hyperlink.png)[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
+![](img/hyperlink.png)[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
 
 ---
 
@@ -313,7 +313,7 @@ spec:
 
 <br>
 
-![](./img/handson.png) **Hands-on :** 07_Kubernetes_Overview
+![](img/handson.png) **Hands-on :** 07_Kubernetes_Overview
 
 ---
 

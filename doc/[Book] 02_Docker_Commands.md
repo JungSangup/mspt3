@@ -50,7 +50,7 @@ $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 
 <br><br><br><br><br>
 
-![](./img/hyperlink.png)[Docker run reference](https://docs.docker.com/engine/reference/run/)
+![](img/hyperlink.png)[Docker run reference](https://docs.docker.com/engine/reference/run/)
 
 ---
 
@@ -81,7 +81,7 @@ Options:
 
 <br>
 
-![](./img/hyperlink.png)[Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground)
+![](img/hyperlink.png)[Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground)
 
 ---
 
@@ -275,7 +275,7 @@ $ docker cp ./some_file my-ubuntu:/work # some_file을 my-ubuntu 컨테이너의
 ```
 
 <br><br><br><br><br><br><br><br>
-![](./img/handson.png) **Hands-on :** 03_Docker_Commands
+![](img/handson.png) **Hands-on :** 03_Docker_Commands
 
 ---
 

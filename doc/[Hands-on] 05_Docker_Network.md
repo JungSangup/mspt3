@@ -159,7 +159,7 @@ mysql 과 잘 연결됐다는 로그가 보이시나요?
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
 - Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
 
-![h:200](./img/todo-list-sample3.png)
+![h:200](img/todo-list-sample3.png)
 
 ---
 

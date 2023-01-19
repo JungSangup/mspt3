@@ -35,7 +35,7 @@ footer: Samsung SDS
 초기에 사용되던 chroot는 더 이상 컨테이너에서 사용되지 않고, pivot_root가 사용됨.  
 이것만으로는 프로세스, 네트워크 격리를 할 수 없음. ( 감옥 안에서 감옥 밖의 프로세스와 네트워크를 건드릴 수 있음. (* ￣︿￣) ) 
 
-![h:300](./img/chroot.png)
+![h:300](img/chroot.png)
 
 > `jail` : chroot를 이용하여 해커활동 모니터링에 사용되어 Jail이라는 용어를 사용함. (1991)  
 
@@ -73,7 +73,7 @@ mespaces came with Linux 2.6.19 (2006) too and isolate interprocess communicatio
 #### Process ID (pid) namespace
 The PID namespace was introduced in Linux 2.6.24 (2008) and gives processes an **independent set of process identifiers (PIDs)**.
 
-![h:300](./img/pid_namespace.png)
+![h:300](img/pid_namespace.png)
 
 
 
@@ -82,7 +82,7 @@ The PID namespace was introduced in Linux 2.6.24 (2008) and gives processes an *
 #### Network (net) namespace
 Network namespaces were completed in Linux 2.6.29 (2009) and can be used to virtualize the network stack.
 
-![h:300](./img/network_namespace.png)
+![h:300](img/network_namespace.png)
 
 
 #### User ID (user) namespace

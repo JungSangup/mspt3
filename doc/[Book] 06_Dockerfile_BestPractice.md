@@ -33,8 +33,8 @@ Container 기반의 환경에서는 컨테이너 이미지를 빌드하는 과�
 
 <br>
 
-![](./img/hyperlink.png)[Best practices for writing Dockerfiles(Docker)](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-![](./img/hyperlink.png)[Best practices for building containers](https://cloud.google.com/solutions/best-practices-for-building-containers#package_a_single_application_per_container)
+![](img/hyperlink.png)[Best practices for writing Dockerfiles(Docker)](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+![](img/hyperlink.png)[Best practices for building containers](https://cloud.google.com/solutions/best-practices-for-building-containers#package_a_single_application_per_container)
 
 ---
 
@@ -249,7 +249,7 @@ Dockerfile에서 User를 생성하여 필요한 최소한의 권한을 부여하
 - 최소한의 권한부여
 - USER 지시자로 실행 USER 변경
 
-![](./img/handson.png) **Hands-on :** 06_Dockerfile
+![](img/handson.png) **Hands-on :** 06_Dockerfile
 
 ---
 
