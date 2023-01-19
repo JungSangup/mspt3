@@ -27,7 +27,7 @@ footer: Samsung SDS
 
 ## Cloud Native
 
-![h:270](img/cloud_native_1.png) ![h:270](img/cloud_native_2.png) ![h:270](img/cloud_native_3.png)
+![h:270](img/docker_cloudnative1.png) ![h:270](img/docker_cloudnative2.png) ![h:270](img/docker_cloudnative3.png)
 
 #### [ Cloud Native 의 정의 ]
 
@@ -44,7 +44,7 @@ footer: Samsung SDS
 
 ## Cloud Native
 
-![w:1000 left](img/cloud_native_4.png)
+![w:1000 left](img/docker_cloudnative4.png)
 
 ---
 
@@ -56,13 +56,13 @@ footer: Samsung SDS
 
 <br>
 
-![h:350 center](img/container.png)
+![h:350 center](img/docker_container1.png)
 
 ---
 
 ### Container vs Virtual machine
 
-![h:300 center](img/containers-vs-vm.png)
+![h:300 center](img/docker_containers_vs_vm.png)
 
 여러개의 **컨테이너**가 동일 시스템에서 실행될 수 있고, OS 커널을 공유하며, 각각은 격리된 프로세스로 실행됩니다.
 
@@ -103,7 +103,7 @@ Docker는 이러한 컨테이너를 위한 플랫폼(또는 런타임)입니다.
 
 <br>
 
-![h:350 center](img/linuxContainer.jpg)
+![h:350 center](img/docker_linuxContainer.jpg)
 
 ---
 
@@ -141,7 +141,7 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 
 **Docker**는 컨테이너의 수명 주기를 관리하기 위한 **도구**와 **플랫폼**을 제공합니다.
 
-[![Build](img/moby_build_s.png)](https://www.docker.com/)[![Share](img/moby_share_s.png)](https://www.docker.com/)[![Run](img/moby_run_s.png)](https://www.docker.com/)
+[![Build](img/docker_moby_build_s.png)](https://www.docker.com/)[![Share](img/docker_moby_share_s.png)](https://www.docker.com/)[![Run](img/docker_moby_run_s.png)](https://www.docker.com/)
 
 <br><br>
 
@@ -154,7 +154,7 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 **Docker daemon**은 컨테이너를 **빌드/실행**하는 작업을 수행하고, **Docker client**는 이 Docker daemon과 통신합니다. (REST API를 사용)  
 Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, 원격지에서 사용될 수도 있습니다.
 
-![h:380 center](img/docker-architecture.svg)
+![h:380 center](img/docker_architecture.svg)
 
 <br>
 
@@ -231,7 +231,7 @@ CMD python /app/app.py
 
 |                                     |                                                               |
 | ----------------------------------- |:-------------------------------------------------------------:|
-| ![h:250](img/container-layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` |
+| ![h:250](img/docker_container_layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` |
 
 ![](img/hyperlink.png)[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
 
@@ -244,7 +244,7 @@ CMD python /app/app.py
 각 컨테이너에는 쓰기 가능한 자체 **컨테이너 레이어**가 있고 모든 변경 사항이 이 컨테이너 레이어에 저장되기 때문에, 여러 컨테이너가 동일한 기본 이미지에 대한 액세스를 공유하면서도 고유한 데이터 상태를 가질 수 있습니다.
 그리고, 이렇게 공유되는 layer구조로 인해 자원을 효율적으로 사용할 수 있습니다. (저장공간, Provisioning)
 
-![h:300](img/sharing-layers.jpeg) 
+![h:300](img/docker_sharing_layers.jpeg) 
 
 ![](img/handson.png) **Hands-on :** 02_Docker_Layers
 
