@@ -18,6 +18,7 @@ footer: Samsung SDS
 
 - **VPC 만들기**
 - **VM Instance 만들기**
+- **VM Instance 접속하기**
 - **Docker 설치하기**
 
 ---
@@ -158,26 +159,54 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
 ![h:400](img/aws_ec2_12.png)
 정상적으로 EC2 Instance가 생성되면 화면과 같이 표시됩니다.
+> SSH 접속을 위해 필요한 **Public IPv4 address** 또는 **Public IPv4 DNS** 정보를 기록해둡니다.
 
 ---
 
+## VM Instance 접속하기
 생성된 VM Instance의 접속은 다음의 방법 중 하나를 사용하면 됩니다.
-- Terminal 프로그램 (e.g. PowerShell, cmder, iTerm, etc.)
-- MobaXterm
-- Putty
+- **[접속방법1]** Terminal 프로그램 (e.g. PowerShell, cmder, iTerm, etc.)
+- **[접속방법2]** MobaXterm
 
-(접속방법1) Terminal 프로그램
+위의 두 가지 방법 모두 다음을 먼저 준비해야 합니다.
+- VM Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
+- Key pair (**mspt3.pem** 파일)
+
+**[접속방법1]** Terminal 프로그램
+기본적인 터미널 프로그램을 사용한 접속방법 입니다.
+
+![h:200](img/terminal1.png)
+접속하려는 EC2 Instance를 선택하고, `Connect`버튼을 클릭합니다.
 
 ---
 
-(접속방법2) MobaXterm
-![h:400](img/mobaxterm1.png)
+![h:350](img/terminal2.png)
+위 그림과 같이 **Connect to instance** 화면에서 **SSH client** 탭을 클릭하고, 아래 표시되는 절차에 따라 접속을 진행합니다.
+
+---
+
+![h:450](img/terminal4.png)
+정상적으로 접속되면 위와같은 화면이 표시됩니다.
+
+---
+
+**[접속방법2]**  MobaXterm
+![h:450](img/mobaxterm1.png)
 MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
+---
+
+![h:450](img/mobaxterm2.png)
+접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.
+- **Remote host** : EC2 Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
+- **Specify username** : ubuntu
+- **Use private key** : mspt3.pem
 
 ---
 
-(접속방법3) Putty
+![h:500](img/mobaxterm3.png)
+접속되면 위와같은 화면이 표시됩니다.
+다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
 ---
 
