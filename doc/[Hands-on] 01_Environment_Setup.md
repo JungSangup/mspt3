@@ -331,7 +331,7 @@ ubuntu@ip-10-0-2-33:~$ newgrp docker
 한 번 테스트 해보세요.
 
 ```bash
-ubuntu@ip-10-0-2-33:~$ docker run hello-world
+ubuntu@ip-10-0-2-33:~$ docker run --rm hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 2db29710123e: Pull complete
@@ -359,4 +359,4 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
-> **명령어** : `docker run hello-world`
+> **명령어** : `docker run --rm hello-world`
