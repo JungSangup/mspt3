@@ -229,7 +229,7 @@ gnupg set to manually installed.
 ```
 > **명령어** : `sudo apt-get install -y ca-certificates curl gnupg lsb-release`
 
-Docker 공식 GPG key를 추가합니다.
+Docker GPG key를 추가합니다.
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo mkdir -p /etc/apt/keyrings
 ubuntu@ip-10-0-2-33:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -247,7 +247,7 @@ ubuntu@ip-10-0-2-33:~$ echo \
 ```
 > **명령어** : `echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
 
-다시 package index를 업데이트 합니다.
+다시 Package index를 업데이트 합니다.
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get update
 Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
@@ -310,12 +310,13 @@ ubuntu@ip-10-0-2-33:~$ ls -al /usr/bin/docker
 
 root가 아닌 계정(우리 실습환경의 user는 `ubuntu` 입니다.)을 이용하여 Docker CLI를 사용하기 위해서 다음과 같이 진행합니다.
 
+먼저 `docker`그룹을 추가합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo groupadd docker
-groupadd: group 'docker' already exists
 ```
 > **명령어** : `sudo groupadd docker`
-> 이미 docker 그룹이 있을수도 있습니다.
+> 이미 docker 그룹이 있을수도 있습니다. (groupadd: group 'docker' already exists)
 
 다음은 사용중인 User(`ubuntu`)를 docker 그룹에 추가하고, 적용(logout/in)합니다.
 ```bash
