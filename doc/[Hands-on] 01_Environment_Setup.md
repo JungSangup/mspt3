@@ -318,7 +318,7 @@ ubuntu@ip-10-0-2-33:~$ sudo groupadd docker
 > **명령어** : `sudo groupadd docker`
 > 이미 docker 그룹이 있을수도 있습니다. (groupadd: group 'docker' already exists)
 
-다음은 사용중인 User(`ubuntu`)를 docker 그룹에 추가하고, 적용(logout/in)합니다.
+다음은 사용 중인 User(`ubuntu`)를 docker 그룹에 추가하고, 적용(docker 그룹으로 로그인)합니다.
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo usermod -aG docker $USER
 ubuntu@ip-10-0-2-33:~$ newgrp docker
