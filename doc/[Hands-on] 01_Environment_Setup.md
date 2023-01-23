@@ -161,7 +161,23 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
 ---
 
-생성된 VM Instance의 접속은 ...
+생성된 VM Instance의 접속은 다음의 방법 중 하나를 사용하면 됩니다.
+- Terminal 프로그램 (e.g. PowerShell, cmder, iTerm, etc.)
+- MobaXterm
+- Putty
+
+(접속방법1) Terminal 프로그램
+
+---
+
+(접속방법2) MobaXterm
+![h:400](img/mobaxterm1.png)
+MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
+
+
+---
+
+(접속방법3) Putty
 
 ---
 
