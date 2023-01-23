@@ -180,8 +180,17 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
 ---
 
-![h:350](img/terminal2.png)
+![h:450](img/terminal2.png)
 위 그림과 같이 **Connect to instance** 화면에서 **SSH client** 탭을 클릭하고, 아래 표시되는 절차에 따라 접속을 진행합니다.
+> 윈도우즈 환경에서는 3번 절차 (chomod 400 mspt3.pem)를 진행할 수 없습니다. 다음장의 내용을 참고하세요.
+
+---
+
+(윈도우즈 환경인 경우 3번 절차 처리방법)
+
+![h:300](img/terminal3.png)
+윈도우 환경인 경우 3번 절차(chmod 400 mspt3.pem) 대신, 위 그림과 같이 mspt3.pem파일이 있는 디렉토리의 보안설정을 변경합니다.
+로그인한 사용자만 읽기 가능하도록 권한을 축소적용.
 
 ---
 
