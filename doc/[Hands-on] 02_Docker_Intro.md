@@ -4,11 +4,11 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 01. Docker intro
+header: Docker & Kubernetes - [Hands-on] 02. Docker intro
 footer: Samsung SDS
 ---
 
-## [Hands-on] 01. Docker intro
+## [Hands-on] 02. Docker intro
 
 첫 번째 실습입니다.  
 그냥 일단 무작정 따라해보세요.  

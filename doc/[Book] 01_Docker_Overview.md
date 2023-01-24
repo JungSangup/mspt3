@@ -145,7 +145,7 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 
 <br><br>
 
-![](img/handson.png) **Hands-on :** 01_Docker_Intro
+![](img/handson.png) **Hands-on :** 02_Docker_Intro
 
 ---
 
@@ -245,8 +245,6 @@ CMD python /app/app.py
 그리고, 이렇게 공유되는 layer구조로 인해 자원을 효율적으로 사용할 수 있습니다. (저장공간, Provisioning)
 
 ![h:300](img/docker_sharing_layers.jpeg) 
-
-![](img/handson.png) **Hands-on :** 02_Docker_Layers
 
 ---
 
