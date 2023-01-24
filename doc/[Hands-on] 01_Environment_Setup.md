@@ -185,7 +185,7 @@ SSH 접속을 위해서는 다음을 먼저 확인해야 합니다.
 기본적인 터미널 프로그램을 사용한 접속방법 입니다.
 
 OS마다 제공되는 기본 툴을 사용해도 되고, 별도로 설치해서 사용해도 됩니다.
-윈도우즈라면 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ko-kr&gl=kr&rtc=1)를 사용하면 여러가지 기능을 사용할 수 있어 편리합니다. (선택사항)
+윈도우즈인 경우 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ko-kr&gl=kr&rtc=1)를 사용하면 여러가지 기능을 사용할 수 있어 편리합니다. (선택사항)
 
 AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 ![h:300](img/terminal1.png)
