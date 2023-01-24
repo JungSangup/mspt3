@@ -164,18 +164,31 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 ---
 
 ## VM Instance 접속하기
-생성된 VM Instance의 접속은 다음의 방법 중 하나를 사용하면 됩니다.
+생성된 VM Instance의 접속(SSH)은 다음의 방법 중 하나를 사용하면 됩니다.
 - **[접속방법1]** Terminal 프로그램 (e.g. PowerShell, cmder, iTerm, etc.)
 - **[접속방법2]** MobaXterm
 
-위의 두 가지 방법 모두 다음을 먼저 준비해야 합니다.
+SSH 접속을 위해서는 다음을 먼저 확인해야 합니다.
 - VM Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
 - Key pair (**mspt3.pem** 파일)
+- SSH 접속을 위한 Inbound traffic (Port:22) 이 허용되어 있는지 확인 (앞에서 이미 진행함.)
+
+준비가 됐으면 **[접속방법1]** 또는 **[접속방법2]** 중 하나를 선택하고 해당부분으로 이동하세요.
+
+<br><br><br><br><br><br><br>
+
+> 다양한 접속방법에 대한 자세한 설명은 AWS 문서인 [Linux 인스턴스에 연결합니다](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/AccessingInstances.html)를 참고하세요.
+
+---
 
 **[접속방법1]** Terminal 프로그램
 기본적인 터미널 프로그램을 사용한 접속방법 입니다.
 
-![h:200](img/terminal1.png)
+OS마다 제공되는 기본 툴을 사용해도 되고, 별도로 설치해서 사용해도 됩니다.
+윈도우즈라면 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ko-kr&gl=kr&rtc=1)를 사용하면 여러가지 기능을 사용할 수 있어 편리합니다. (선택사항)
+
+AWS Console에서 EC2 > Instances 화면으로 이동합니다.
+![h:300](img/terminal1.png)
 접속하려는 EC2 Instance를 선택하고, `Connect`버튼을 클릭합니다.
 
 ---
@@ -188,10 +201,13 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
 (윈도우즈 환경인 경우 3번 절차 처리방법)
 
+
+
 ![h:300](img/terminal3.png)
 윈도우 환경인 경우 3번 절차(chmod 400 mspt3.pem) 대신, 위 그림과 같이 mspt3.pem파일이 있는 디렉토리의 보안설정을 변경합니다.
 로그인한 사용자만 읽기 가능하도록 권한을 축소적용.
 
+> [오류: 보호되지 않는 프라이빗 키 파일](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key) 참조.
 ---
 
 ![h:450](img/terminal4.png)
