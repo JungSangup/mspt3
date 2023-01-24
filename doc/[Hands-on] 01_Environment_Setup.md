@@ -200,22 +200,35 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 ---
 
 (윈도우즈 환경인 경우 3번 절차 처리방법)
+터미널 프로그램(e.g. PowerShell)에서 다음과 같이 실행합니다.
+```shell
+> icacls.exe mspt3.pem /reset
+처리된 파일: mspt3.pem
+1 파일을 처리했으며 0 파일은 처리하지 못했습니다.
+> icacls.exe mspt3.pem /GRANT:R "$($env:USERNAME):(R)"
+처리된 파일: mspt3.pem
+1 파일을 처리했으며 0 파일은 처리하지 못했습니다.
+> icacls.exe mspt3.pem /inheritance:r
+처리된 파일: mspt3.pem
+1 파일을 처리했으며 0 파일은 처리하지 못했습니다.
+```
+> **명령어** : `icacls.exe mspt3.pem /reset`
+> **명령어** : `icacls.exe mspt3.pem /GRANT:R "$($env:USERNAME):(R)"`
+> **명령어** : `icacls.exe mspt3.pem /inheritance:r`
 
+![h:200](img/terminal3.png) 그림과 같이 mspt3.pem 파일의 권한을 변경하는 것입니다.
 
-
-![h:300](img/terminal3.png)
-윈도우 환경인 경우 3번 절차(chmod 400 mspt3.pem) 대신, 위 그림과 같이 mspt3.pem파일이 있는 디렉토리의 보안설정을 변경합니다.
-로그인한 사용자만 읽기 가능하도록 권한을 축소적용.
-
-> [오류: 보호되지 않는 프라이빗 키 파일](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key) 참조.
+> 자세한 내용은은 [오류: 보호되지 않는 프라이빗 키 파일](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key)의 내용을 참고하세요.
 ---
 
-![h:450](img/terminal4.png)
-정상적으로 접속되면 위와같은 화면이 표시됩니다.
+![h:500](img/terminal4.png)
+필요한 모든 절차를 거치고 정상적으로 접속되면 위와같은 화면이 표시됩니다.
 
 ---
 
 **[접속방법2]**  MobaXterm
+MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
+
 ![h:450](img/mobaxterm1.png)
 MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
