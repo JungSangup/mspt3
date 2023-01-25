@@ -115,6 +115,9 @@ CLI인 `kubectl`도 이 API를 이용합니다.
 앞으로 다루겠지만, 일반적으로 [YAML(YAML Ain't Markup Language)](https://yaml.org/)
 형식의 파일로 Object를 정의하고, API를 통해 Kubernetes에 처리를 요청합니다.
 
+<br><br>
+
+> [쿠버네티스 오브젝트 이해하기](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/kubernetes-objects/) 참조.
 --- 
 
 ## Object Spec and Status
