@@ -26,7 +26,7 @@ footer: Samsung SDS
 
 ## Minikube 설치하기
 Kubernetes 실습을 위해서 **K8s cluster**를 구성합니다.
-K8s cluster는 다양한 방법으로 구성할 수 있지만, 우리 실습과정은 **단일노드 cluster**인 [Minikube](https://minikube.sigs.k8s.io/)를 이용합니다.
+K8s cluster는 다양한 방법으로 구성할 수 있지만, 우리 실습과정은 **단일노드 cluster**인 [Minikube](https://minikube.sigs.k8s.io/){:target="_blank"}를 이용합니다.
 
 먼저 기존에 Docker 실습에서 사용하던 Instance로 로그인합니다.
 우리가 앞에서 사용한 VM Instance는 Minikube의 [설치조건](https://minikube.sigs.k8s.io/docs/start/#what-youll-need)을 만족하도록 구성되어 있습니다.
