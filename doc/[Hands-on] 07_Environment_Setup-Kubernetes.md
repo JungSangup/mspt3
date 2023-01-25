@@ -219,4 +219,42 @@ Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCom
 
 ---
 
-## Helm 설치하기
+## Helm 설치하기 ( [헬름 설치하기](https://helm.sh/ko/docs/intro/install/) )
+
+Kubernetes 패키지 매니저인 Helm을 설치합니다.
+
+```bash
+ubuntu@ip-10-0-2-33:~$ wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+--2023-01-25 14:37:05--  https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+Resolving get.helm.sh (get.helm.sh)... 152.195.19.97, 2606:2800:11f:1cb7:261b:1f9c:2074:3c
+Connecting to get.helm.sh (get.helm.sh)|152.195.19.97|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15023353 (14M) [application/x-tar]
+Saving to: ‘helm-v3.11.0-linux-amd64.tar.gz’
+
+helm-v3.11.0-linux-amd64.tar.gz         100%[===============================================================================>]  14.33M  --.-KB/s    in 0.1s
+
+2023-01-25 14:37:06 (130 MB/s) - ‘helm-v3.11.0-linux-amd64.tar.gz’ saved [15023353/15023353]
+
+ubuntu@ip-10-0-2-33:~$ tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
+linux-amd64/
+linux-amd64/helm
+linux-amd64/LICENSE
+linux-amd64/README.md
+ubuntu@ip-10-0-2-33:~$ sudo mv linux-amd64/helm /usr/local/bin/helm
+```
+> **명령어** : `wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz`
+> **명령어** : `tar -zxvf helm-v3.11.0-linux-amd64.tar.gz`
+> **명령어** : `sudo mv linux-amd64/helm /usr/local/bin/helm`
+
+---
+
+설치 후 아래와 같이 확인합니다.
+```bash
+ubuntu@ip-10-0-2-33:~$ helm version
+version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
+```
+> **명령어** : `helm version`
+
+---
+
