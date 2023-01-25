@@ -44,5 +44,7 @@ Visual Studio Code 에서 File > Open Folder 실행 후 본 Repository 최상위
 - Docker network : iptables nat 내용 추가
 - 각 Hands-on 도입부에 그림설명 추가
 - K8s 순서 변경 ( overview > workload(1) > workload(2) > Service > Volume > Confitmap/Secret > Deployment strategy > 
-
+- K8s 실습내용 변경
+  - Service, volume, Configmap/Secret 은 todo app을 이용
+  - Helm도 todo chart로 
 
