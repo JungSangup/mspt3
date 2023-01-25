@@ -37,3 +37,11 @@ Visual Studio Code 에서 File > Open Folder 실행 후 본 Repository 최상위
 편집을 마친 Markdown 문서의 출력은 아래 그림과 같이 진행.  (Marp 아이콘 > Export Slide Deck...)
 
 ![](img/marp_export.gif)
+
+---
+
+교재작성 노트
+- Docker network : iptables nat 내용 추가
+
+
+
