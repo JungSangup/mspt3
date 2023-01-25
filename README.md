@@ -34,3 +34,13 @@
 | 15  | [[Book] 15_Helm.md](./doc/%5BBook%5D%2015_Helm.md)                                                                     |
 
 
+MSP T3 강의계획
+- 1일차
+  - 이론 : Docker overview ~ network
+  - 실습 : Docker 설치 ~ network
+- 2일차
+  - 이론 : Dockerfile ~ K8s workload(2)
+  - 실습 : Dockerfile ~ K8s workload(2)
+- 3일차
+  - 이론 : K8s service ~ Helm
+  - 실습 : K8s service ~ Helm
