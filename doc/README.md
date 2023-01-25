@@ -40,8 +40,9 @@ Visual Studio Code 에서 File > Open Folder 실행 후 본 Repository 최상위
 
 ---
 
-교재작성 노트
+### 교재작성 노트
 - Docker network : iptables nat 내용 추가
-
+- 각 Hands-on 도입부에 그림설명 추가
+- K8s 순서 변경 ( overview > workload(1) > workload(2) > Service > Volume > Confitmap/Secret > Deployment strategy > 
 
 
