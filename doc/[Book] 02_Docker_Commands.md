@@ -78,7 +78,7 @@ Options:
 컨테이너 실행은 다음 두 가지 유형이 있습니다.
 | Detached (-d) | Foreground (-it)|
 | :--- | :--- |
-| 백그라운드에서 실행되는 모드 | 프로세스의 standard I/O, standard error에 console 로 연결 |
+| -백그라운드에서 실행되는 모드 | -프로세스의 standard I/O, standard error에 console 로 연결 |
 
 이 두 가지의 차이를 알아보겠습니다.
 

@@ -107,12 +107,12 @@ docker.io/library/ubuntu:18.04
 
 받아온 이미지를 확인해볼까요?
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker images
+ubuntu@ip-10-0-1-14:~$ docker images ubuntu
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 ubuntu       latest    27941809078c   2 weeks ago   77.8MB
 ubuntu       18.04     ad080923604a   2 weeks ago   63.1MB
 ```
-> **명령어** : `docker images`
+> **명령어** : `docker images ubuntu`
 
 **tag**를 명시하지 않은 경우는 default tag인 `latest`를 받아오네요.
 
@@ -124,8 +124,9 @@ ubuntu@ip-10-0-1-14:~$ docker run --interactive --tty ubuntu /bin/bash
 root@060b1a36d1e5:/#
 ```
 > **명령어** : `docker run --interactive --tty ubuntu /bin/bash`
+> **명령어** : `docker run -it ubuntu /bin/bash`
 
-- `--interactive --tty` 로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
+- `--interactive --tty (-it)`  로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
 
 ---
 
@@ -157,6 +158,7 @@ ubuntu@ip-10-0-1-14:~$
 ```
 > **명령어** : `exit`
 
+* 참고 : `exit`는 컨테이너를 stop합니다. **stop**하지 않고 detach만 하기 위해서는 `ctrl-p` + `ctrl-q` 를 이용하면 됩니다.
 ---
 
 이번에는 `ubuntu:18.04`를 실행해봅시다.
@@ -192,7 +194,7 @@ UBUNTU_CODENAME=bionic
 
 [https://hub.docker.com/_/ubuntu](https://hub.docker.com/_/ubuntu) 를 보시면, 어떤 tag가 latest인지 알 수 있습니다.
 
-![h:350](img/docker_hub2.png)
+![h:300](img/docker_hub2.png)
 
 
 이제 `exit` 명령어로 컨테이너에서 나와주세요.
@@ -202,6 +204,8 @@ exit
 ubuntu@ip-10-0-1-14:~$
 ```
 > **명령어** : `exit`
+
+
 
 ---
 
@@ -271,10 +275,11 @@ f87853d90ac2   nginx          "/docker-entrypoint.…"   13 minutes ago   Exited
 이제 도커 레지스트리에 대해 알아보고, 우리가 만든 애플리케이션을 등록해 보겠습니다.
 
 먼저 [https://hub.docker.com/](https://hub.docker.com/) 에서 Repository를 하나 생성합니다.
-로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다.   
-이름은 `101-todo-app` 으로 할게요.
 
-![h:400](img/create_repository1.png)
+로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다. (**가입**이 필요합니다.)
+이름은 **101-todo-app** 으로 할게요.
+
+![h:350](img/create_repository1.png)
 
 이제 여러분의 Docker repository가 생겼습니다.  
 
