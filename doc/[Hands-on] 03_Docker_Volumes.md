@@ -4,11 +4,11 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 04. Docker volumes
+header: Docker & Kubernetes - [Hands-on] 03. Docker volumes
 footer: Samsung SDS
 ---
 
-## [Hands-on] 04. Docker volumes
+## [Hands-on] 03. Docker volumes
 
 앞서 우리는 도커가 사용하는 레이어 파일시스템에 대해 알아보았습니다.
 

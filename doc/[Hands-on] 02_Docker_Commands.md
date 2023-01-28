@@ -4,11 +4,11 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 03. Docker commands
+header: Docker & Kubernetes - [Hands-on] 02. Docker commands
 footer: Samsung SDS
 ---
 
-## [Hands-on] 03. Docker commands
+## [Hands-on] 02. Docker commands
 
 자주 사용되는 도커 명령어를 알아보겠습니다.
 

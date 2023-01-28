@@ -4,11 +4,11 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 06. Dockerfile
+header: Docker & Kubernetes - [Hands-on] 05. Dockerfile
 footer: Samsung SDS
 ---
 
-## [Hands-on] 06. Dockerfile
+## [Hands-on] 05. Dockerfile
 
 이번 실습은 Dockerfile을 이용하여 이미지를 생성하는 방법을 알아보겠습니다.
 어떻게 하면 좀 더 효율적인 이미지를 만들 수 있는지도 알아볼게요.
