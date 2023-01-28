@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 07. Environment setup - Kubernetes
+header: Docker & Kubernetes - [Hands-on] 06. Environment setup - Kubernetes
 footer: Samsung SDS
 ---
 
