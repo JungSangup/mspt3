@@ -8,64 +8,49 @@ header: Docker & Kubernetes - [Hands-on] 02. Docker commands
 footer: Samsung SDS
 ---
 
-## [Hands-on] 02. Docker commands
+![bg left:40%](img/hands_on.png)
 
-자주 사용되는 도커 명령어를 알아보겠습니다.
+<br>
 
-​먼저 이미지를 모두 정리하고 시작할게요.
+# Contents
 
-```bash
-ubuntu@ip-10-0-1-14:~$ docker rmi --force $(docker images --all --quiet)
-Untagged: nginx:latest
-Untagged: nginx@sha256:10f14ffa93f8dedf1057897b745e5ac72ac5655c299dade0aa434c71557697ea
-Deleted: sha256:55f4b40fe486a5b734b46bb7bf28f52fa31426bf23be068c8e7b19e58d9b8deb
-Deleted: sha256:5f58fed9b4d8e6c09cdc42eed6de6df7a7e35b40d92c98f30f8ecad4960fb7a0
-Deleted: sha256:8bb72c1d014292ebf1ae348a77624c536e766757356c6dbb0de75122a94b445d
-Deleted: sha256:cc9ac0adbded956d924bcf6c26ffbc93ea070019be1437d204b530a033ff4b16
-Deleted: sha256:30f210588f35917f0edb5a2465db7ad60e4ef3b6ac74fe155474e14e6f0995c5
-Deleted: sha256:5ecd5431cf49a2a11115844de1e7b23b9535be8789add9ab50973867db5f7d36
-Deleted: sha256:08249ce7456a1c0613eafe868aed936a284ed9f1d6144f7d2d08c514974a2af9
-Untagged: busybox:latest
-Untagged: busybox@sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83
-Deleted: sha256:62aedd01bd8520c43d06b09f7a0f67ba9720bdc04631a8242c65ea995f3ecac8
-Deleted: sha256:7ad00cd55506625f2afad262de6002c8cef20d214b353e51d1025e40e8646e18
-```
-> **명령어** : `docker rmi --force $(docker images --all --quiet)`
+<br>
 
-- `--force(-f)` 옵션은 강제로 삭제를 하는 옵션이니 주의해서 사용해야 합니다.
+- **이미지 검색하기**
+- **이미지 다운로드(Pull)하기**
+- **컨테이너 실행하기**
+- **이미지 업로드(Push)하기**
+
 
 ---
 
-도커이미지를 검색하는 명령어는 `docker search`입니다.
+## 이미지 검색하기
+
+자주 사용되는 도커 명령어를 알아보겠습니다.
+
+도커 이미지를 검색하는 명령어는 `docker search`입니다.
 도커허브에서 Ubuntu 이미지를 찾아볼까요?  
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker search ubuntu
 NAME                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-ubuntu                           Ubuntu is a Debian-based Linux operating sys…   14486     [OK]
-websphere-liberty                WebSphere Liberty multi-architecture images …   286       [OK]
+ubuntu                           Ubuntu is a Debian-based Linux operating sys…   15508     [OK]
+websphere-liberty                WebSphere Liberty multi-architecture images …   291       [OK]
 ubuntu-upstart                   DEPRECATED, as is Upstart (find other proces…   112       [OK]
-neurodebian                      NeuroDebian provides neuroscience research s…   91        [OK]
-open-liberty                     Open Liberty multi-architecture images based…   53        [OK]
-ubuntu/nginx                     Nginx, a high-performance reverse proxy & we…   52
-ubuntu-debootstrap               DEPRECATED; use "ubuntu" instead                46        [OK]
-ubuntu/apache2                   Apache, a secure & extensible open-source HT…   36
-ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   34
-kasmweb/ubuntu-bionic-desktop    Ubuntu productivity desktop for Kasm Workspa…   29
-ubuntu/prometheus                Prometheus is a systems and service monitori…   27
-ubuntu/squid                     Squid is a caching proxy for the Web. Long-t…   25
-ubuntu/bind9                     BIND 9 is a very flexible, full-featured DNS…   21
-ubuntu/postgres                  PostgreSQL is an open source object-relation…   17
-ubuntu/redis                     Redis, an open source key-value store. Long-…   10
-ubuntu/grafana                   Grafana, a feature rich metrics dashboard & …   6
-ubuntu/prometheus-alertmanager   Alertmanager handles client alerts from Prom…   6
-ubuntu/kafka                     Apache Kafka, a distributed event streaming …   6
-ubuntu/memcached                 Memcached, in-memory keyvalue store for smal…   5
-ubuntu/telegraf                  Telegraf collects, processes, aggregates & w…   4
-ubuntu/zookeeper                 ZooKeeper maintains configuration informatio…   4
-ubuntu/cortex                    Cortex provides storage for Prometheus. Long…   3
-ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …   2
-bitnami/ubuntu-base-buildpack    Ubuntu base compilation image                   2                    [OK]
-ubuntu/loki                      Grafana Loki, a log aggregation system like …   0
+neurodebian                      NeuroDebian provides neuroscience research s…   98        [OK]
+ubuntu/nginx                     Nginx, a high-performance reverse proxy & we…   75
+open-liberty                     Open Liberty multi-architecture images based…   56        [OK]
+ubuntu/apache2                   Apache, a secure & extensible open-source HT…   53
+ubuntu-debootstrap               DEPRECATED; use "ubuntu" instead                50        [OK]
+ubuntu/squid                     Squid is a caching proxy for the Web. Long-t…   49
+ubuntu/bind9                     BIND 9 is a very flexible, full-featured DNS…   44
+ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   41
+ubuntu/prometheus                Prometheus is a systems and service monitori…   35
+ubuntu/postgres                  PostgreSQL is an open source object-relation…   23
+ubuntu/kafka                     Apache Kafka, a distributed event streaming …   21
+ubuntu/redis                     Redis, an open source key-value store. Long-…   16
+ubuntu/prometheus-alertmanager   Alertmanager handles client alerts from Prom…   8
+ubuntu/dotnet-deps               Chiselled Ubuntu for self-contained .NET & A…   6
+...생략...
 ```
 > **명령어** : `docker search ubuntu`
 
@@ -79,6 +64,8 @@ ubuntu/loki                      Grafana Loki, a log aggregation system like …
 
 ---
 
+## 이미지 다운로드(Pull)하기
+
 이제 ubuntu 이미지를 다운로드(pull) 해 보겠습니다.
 
 ```bash
@@ -91,6 +78,8 @@ Status: Downloaded newer image for ubuntu:latest
 docker.io/library/ubuntu:latest
 ```
 > **명령어** : `docker pull ubuntu`
+
+<br>
 
 tag를 특정해서(18.04) 다운로드도 해보구요.
 ```bash
@@ -116,7 +105,9 @@ ubuntu       18.04     ad080923604a   2 weeks ago   63.1MB
 
 **tag**를 명시하지 않은 경우는 default tag인 `latest`를 받아오네요.
 
-<br><br>
+---
+
+## 컨테이너 실행하기
 
 이제 실행(run)을 해보겠습니다.
 ```bash
@@ -124,19 +115,17 @@ ubuntu@ip-10-0-1-14:~$ docker run --interactive --tty ubuntu /bin/bash
 root@060b1a36d1e5:/#
 ```
 > **명령어** : `docker run --interactive --tty ubuntu /bin/bash`
-> **명령어** : `docker run -it ubuntu /bin/bash`
+> `--interactive --tty` 는 `-it`로 줄여서 쓸 수도 있습니다.
 
 - `--interactive --tty (-it)`  로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
 
----
-
-실행된 ubuntu의 정보를 확인 해볼까요?
+실행된 ubuntu의 OS 정보를 확인 해볼까요?
 ```bash
 root@060b1a36d1e5:/# cat /etc/os-release
-PRETTY_NAME="Ubuntu 22.04 LTS"
+PRETTY_NAME="Ubuntu 22.04.1 LTS"
 NAME="Ubuntu"
 VERSION_ID="22.04"
-VERSION="22.04 LTS (Jammy Jellyfish)"
+VERSION="22.04.1 LTS (Jammy Jellyfish)"
 VERSION_CODENAME=jammy
 ID=ubuntu
 ID_LIKE=debian
@@ -148,6 +137,8 @@ UBUNTU_CODENAME=jammy
 ```
 > **명령어** : `cat /etc/os-release`
 
+---
+
 **Ubuntu 22.04 LTS**로 실행된 것을 확인할 수 있습니다. (실행한 시기에 따라 달라질 수 있습니다.)
 
 이제 `exit` 명령어로 컨테이너를 빠져나오겠습니다.
@@ -158,7 +149,7 @@ ubuntu@ip-10-0-1-14:~$
 ```
 > **명령어** : `exit`
 
-* 참고 : `exit`는 컨테이너를 stop합니다. **stop**하지 않고 detach만 하기 위해서는 `ctrl-p` + `ctrl-q` 를 이용하면 됩니다.
+* 참고 : `exit`는 컨테이너를 **stop**합니다. **stop**하지 않고 detach만 하기 위해서는 `ctrl-p` + `ctrl-q` 를 이용하면 됩니다.
 ---
 
 이번에는 `ubuntu:18.04`를 실행해봅시다.
@@ -188,6 +179,8 @@ UBUNTU_CODENAME=bionic
 ```
 > **명령어** : `cat /etc/os-release`
 
+<br>
+
 둘의 차이를 찾으셨나요?   ಠ_ಠ   (힌트 : VERSION)
 
 ---
@@ -196,6 +189,7 @@ UBUNTU_CODENAME=bionic
 
 ![h:300](img/docker_hub2.png)
 
+<br>
 
 이제 `exit` 명령어로 컨테이너에서 나와주세요.
 ```bash
@@ -209,7 +203,7 @@ ubuntu@ip-10-0-1-14:~$
 
 ---
 
-이번엔 다른 방법(`--detach`)으로 실행해 보겠습니다.
+이번엔 다른 방법(`--detach`)으로 실행해 보겠습니다. (다른 이미지를 사용합니다.)
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run --detach --name my-nginx --publish 8080:80 nginx
 Unable to find image 'nginx:latest' locally
@@ -243,10 +237,10 @@ ubuntu는 Exited 상태이고, nginx는 Running 상태 입니다.
 ---
 
 nginx가 정말 Running 상태인지 8080번 포트로 접속해서 확인도 해보세요.
-- AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:8080/)
+- AWS EC2인 경우 인스턴스의 **Public IPv4 address**로 접속하면 됩니다. (e.g. http://IP:8080/)
 - Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
 
-![h:400](img/nginx1.png)
+![h:400](img/docker_nginx1.png)
 
 ---
 
@@ -256,6 +250,8 @@ ubuntu@ip-10-0-1-14:~$ docker stop $(docker ps --filter "name=my-nginx" --quiet)
 f87853d90ac2
 ```
 > **명령어** : `docker stop $(docker ps --filter "name=my-nginx" --quiet)`
+
+<br>
 
 `docker ps --all`로 상태도 확인해보시고, 8080번 포트로 접속이 되는지 확인도 해보세요.
 ```bash
@@ -272,14 +268,15 @@ f87853d90ac2   nginx          "/docker-entrypoint.…"   13 minutes ago   Exited
 
 ---
 
+## 이미지 업로드(Push) 하기
+
 이제 도커 레지스트리에 대해 알아보고, 우리가 만든 애플리케이션을 등록해 보겠습니다.
 
 먼저 [https://hub.docker.com/](https://hub.docker.com/) 에서 Repository를 하나 생성합니다.
-
 로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다. (**가입**이 필요합니다.)
-이름은 **101-todo-app** 으로 할게요.
+이름은 **todo-app** 으로 하고, Visibility는 **Private**으로 합니다.
 
-![h:350](img/create_repository1.png)
+![h:350](img/docker_create_repository1.png)
 
 이제 여러분의 Docker repository가 생겼습니다.  
 
@@ -301,12 +298,17 @@ Resolving deltas: 100% (2/2), done.
 ```
 > **명령어** : `git clone https://github.com/JungSangup/todo_list_manager.git app`
 
-그리고, 소스코드가 있는 경로로 이동해서
+그리고, 소스코드가 있는 경로로 이동합니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ cd app
-ubuntu@ip-10-0-1-14:~/app$
+ubuntu@ip-10-0-1-14:~/app$ 
 ```
 > **명령어** : `cd app`
+
+---
+
+
+
 
 ---
 
@@ -370,7 +372,7 @@ docker-101   latest    096cfe46290d   26 seconds ago   172MB
 
 여러분의 Repository 를 보면 push 명령어가 표시되어 있습니다. (e.g. `docker push rogallo/101-todo-app:tagname`)
 
-![h:400](img/create_repository2.png)
+![h:400](img/docker_create_repository2.png)
 
 그대로 실행하면 안될거예요.
 아직은 우리의 Host 머신에 우리 repository를 위한 이미지가 없기 때문입니다.
@@ -431,7 +433,7 @@ a6524c5b12a6: Mounted from library/node
 
 [https://hub.docker.com/](https://hub.docker.com/) 에 방금 push한 이미지가 잘 올라가 있나요?
 
-![h:350](img/create_repository3.png)
+![h:350](img/docker_create_repository3.png)
 
 축하합니다.  (๑˃̵ᴗ˂̵)و
 
