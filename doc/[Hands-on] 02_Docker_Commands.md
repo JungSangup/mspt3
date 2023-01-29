@@ -232,7 +232,7 @@ f87853d90ac2   nginx          "/docker-entrypoint.…"   About a minute ago   Up
 060b1a36d1e5   ubuntu         "/bin/bash"              25 minutes ago       Exited (0) 25 minutes ago                                           determined_mahavira
 ```
 이전에 실행했던 ubuntu와 nginx가 보일거예요.  
-ubuntu는 Exited 상태이고, nginx는 Running 상태 입니다.
+ubuntu는 **Exited** 상태이고, nginx는 **Running** 상태 입니다.
 
 ---
 
@@ -262,7 +262,7 @@ f87853d90ac2   nginx          "/docker-entrypoint.…"   13 minutes ago   Exited
 060b1a36d1e5   ubuntu         "/bin/bash"              37 minutes ago   Exited (0) 37 minutes ago                 determined_mahavira
 ```
 > **명령어** : `docker ps --all`
-- `Exited` 상태인 컨테이너는 `--all` 옵션을 적용해야 조회가 됩니다.
+- `Exited` 상태인 컨테이너는 `--all (-a)` 옵션을 적용해야 조회가 됩니다.
 
  `docker start` 와 `docker restart` 는 직접 명령어를 만들어서 한번 해보세요.
 
@@ -272,52 +272,29 @@ f87853d90ac2   nginx          "/docker-entrypoint.…"   13 minutes ago   Exited
 
 이제 도커 레지스트리에 대해 알아보고, 우리가 만든 애플리케이션을 등록해 보겠습니다.
 
-먼저 [https://hub.docker.com/](https://hub.docker.com/) 에서 Repository를 하나 생성합니다.
-로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다. (**가입**이 필요합니다.)
-이름은 **todo-app** 으로 하고, Visibility는 **Private**으로 합니다.
-
-![h:350](img/docker_create_repository2.png)
-
-이제 여러분의 Docker repository가 생겼습니다.  
+먼저 [https://hub.docker.com/](https://hub.docker.com/) 에 가입(Register)을 합니다.
+![h:350](img/docker_create_repository1.png)
+`Register`를 클릭하고, Docker account를 하나 만듭니다. (이미 있으면 있는 Account를 사용해도 됩니다.)
 
 ---
 
+이제 실습을 위해서 **Repository**를 하나 생성합니다.
+로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다.
+이름은 **todo-app** 으로 하고, Visibility는 **Private**으로 합니다.
 
+![h:350](img/docker_create_repository2.png)
+> 무료 계정인 경우 Private repository는 하나만 만들 수 있습니다.
+> 이미 사용중인 Private repository가 있으면, Public으로 만들어도 됩니다.
 
+---
 
+이제 여러분의 Docker repository가 하나 생겼습니다.
+앞으로 이 곳에 여러분의 컨테이너 이미지를 저장하고 사용하면 됩니다.
 
+![h:450](img/docker_create_repository3.png)
+> `[USER-NAME]/[REPOSITORY-NAME]` 이 여러분의 Repository 입니다. (e.g. `rogallo/todo-app`)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 샘플 애플리케이션 이미지를 만들어 볼까요?
 먼저 소스코드를 Github에서 clone 합니다.
@@ -340,102 +317,103 @@ ubuntu@ip-10-0-1-14:~/app$
 ```
 > **명령어** : `cd app`
 
----
-
-
-
-
-
----
-
-`Dockerfile`을 이용해서 이미지를 만듭니다. (`docker build` 명령어을 이용합니다.)
+샘플 소스코드에는 두 개의 Tag가 있습니다.
 ```bash
-ubuntu@ip-10-0-1-14:~/app$ docker build --tag docker-101 .
-Sending build context to Docker daemon  6.474MB
+ubuntu@ip-10-0-1-14:~$ git tag
+v1.0.0
+v2.0.0
+```
+> **명령어** : `git tag`
+
+---
+
+먼저 v1.0.0 이미지를 만듭니다. (`docker build` 명령어을 이용합니다.)
+v1.0.0 tag로 checkout을 하구요,
+```bash
+ubuntu@ip-10-0-1-14:~$ git checkout v1.0.0
+HEAD is now at c7a54f7 .
+```
+> **명령어** : `git checkout v1.0.0`
+
+이제 Dockerfile을 이용해서 빌드를 합니다.
+```bash
+ubuntu@ip-10-0-1-14:~/app$ docker build -t rogallo/todo-app:1.0.0 .
+Sending build context to Docker daemon  6.488MB
 Step 1/5 : FROM node:10-alpine
 10-alpine: Pulling from library/node
-ddad3d7c1e96: Pull complete
-de915e575d22: Pull complete
-7150aa69525b: Pull complete
-d7aa47be044e: Pull complete
+ddad3d7c1e96: Already exists
+de915e575d22: Already exists
+7150aa69525b: Already exists
+d7aa47be044e: Already exists
 Digest: sha256:dc98dac24efd4254f75976c40bce46944697a110d06ce7fa47e7268470cf2e28
 Status: Downloaded newer image for node:10-alpine
  ---> aa67ba258e18
 Step 2/5 : WORKDIR /app
- ---> Running in ba1fc555a405
-Removing intermediate container ba1fc555a405
- ---> e264c24f5921
+ ---> Running in aa555177ae12
+Removing intermediate container aa555177ae12
+ ---> 4b535d14ddc1
 Step 3/5 : COPY . .
- ---> 035ecc324928
+ ---> 6794fc99530e
 Step 4/5 : RUN yarn install --production
- ---> Running in e404f12cb8f4
+ ---> Running in 0c148b3bb386
 yarn install v1.22.5
 [1/4] Resolving packages...
 [2/4] Fetching packages...
+```
+
+---
+
+```bash
 info fsevents@1.2.9: The platform "linux" is incompatible with this module.
 info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
-Done in 10.35s.
+Done in 8.56s.
+Removing intermediate container 0c148b3bb386
+ ---> 77980b3ee3d7
+Step 5/5 : CMD ["node", "/app/src/index.js"]
+ ---> Running in 96d732e03656
+Removing intermediate container 96d732e03656
+ ---> bed2b2f466e4
+Successfully built bed2b2f466e4
+Successfully tagged rogallo/todo-app:1.0.0
 ```
+> **명령어** : `docker build --tag [USER-NAME]/todo-app:1.0.0 .`
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
 ---
 
+이제 v2.0.0 이미지를 만듭니다.
+v2.0.0 tag로 checkout을 하구요,
 ```bash
-Removing intermediate container e404f12cb8f4
- ---> 463b7f0fb593
-Step 5/5 : CMD ["node", "/app/src/index.js"]
- ---> Running in 74b0d190ca4a
-Removing intermediate container 74b0d190ca4a
- ---> 096cfe46290d
-Successfully built 096cfe46290d
-Successfully tagged docker-101:latest
+ubuntu@ip-10-0-1-14:~$ git checkout v2.0.0
+Previous HEAD position was c7a54f7 .
+HEAD is now at d1c1aaf Update index.html
 ```
-> **명령어** : `docker build --tag docker-101 .`
+> **명령어** : `git checkout v2.0.0`
 
-그리고, 마지막으로 만들어진 이미지를 확인합니다.
-잘 만들어져 있나요?
+Dockerfile을 이용해서 빌드를 합니다.
 ```bash
-ubuntu@ip-10-0-1-14:~/app$ docker images docker-101
-REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
-docker-101   latest    096cfe46290d   26 seconds ago   172MB
+ubuntu@ip-10-0-1-14:~/app$ docker build -t rogallo/todo-app:2.0.0 .
+Sending build context to Docker daemon  6.489MB
+...생략...
 ```
-> **명령어** : `docker images docker-101`
+> **명령어** : `docker build --tag [USER-NAME]/todo-app:2.0.0 .`
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
+
+그리고, 만들어진 이미지를 확인합니다.
+```bash
+ubuntu@ip-10-0-1-14:~/app$ docker images rogallo/todo-app
+REPOSITORY         TAG       IMAGE ID       CREATED          SIZE
+rogallo/todo-app   2.0.0     51829023f79f   45 seconds ago   172MB
+rogallo/todo-app   1.0.0     bed2b2f466e4   14 minutes ago   172MB
+```
+> **명령어** : `docker images rogallo/todo-app`
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
 ---
 
 이제 우리가 만든 이미지를 우리의 Docker hub repository에 업로드(push)해 보겠습니다.
-
-여러분의 Repository 를 보면 push 명령어가 표시되어 있습니다. (e.g. `docker push rogallo/101-todo-app:tagname`)
-
-![h:400](img/docker_create_repository2.png)
-
-그대로 실행하면 안될거예요.
-아직은 우리의 Host 머신에 우리 repository를 위한 이미지가 없기 때문입니다.
-
----
-
-아래 명령어로 필요한 이미지를 만들어 줍니다.
-현재 있는 이미지를 이용해서 도커 허브에 올리기 위한 새로운 이미지를 만들어 줍니다. (REPOSITORY와 TAG 정보를 변경해서)
-```bash
-ubuntu@ip-10-0-1-14:~/app$ docker tag docker-101 rogallo/101-todo-app:1.0.0
-```
-> **명령어** : `docker tag docker-101 [USER-NAME]/101-todo-app:1.0.0`
-> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
-
-이제 다시 로컬 registry의 image를 조회해보면,  
-```bash
-ubuntu@ip-10-0-1-14:~/app$ docker images
-REPOSITORY             TAG         IMAGE ID       CREATED          SIZE
-docker-101             latest      096cfe46290d   59 minutes ago   172MB
-rogallo/101-todo-app   1.0.0       096cfe46290d   59 minutes ago   172MB
-```
-> **명령어** : `docker images`
-
-이제 준비가 됐습니다.
-
----
-
 먼저 로그인을 하구요,
 ```bash
 ubuntu@ip-10-0-1-14:~/app$ docker login -u rogallo
@@ -449,31 +427,48 @@ Login Succeeded
 > **명령어** : `docker login -u [USER-NAME]`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
-아래 명령어로 docker hub의 우리 repository에 업로드(`push`) 해볼까요?
+아래 명령어로 docker hub의 우리 repository에 업로드(push) 해볼까요?
 ```bash
-ubuntu@ip-10-0-1-14:~/app$ docker push rogallo/101-todo-app:1.0.0
-The push refers to repository [docker.io/rogallo/101-todo-app]
-1b433114c90c: Pushed
-53f2ecccc84e: Pushed
-8b231c66a1d7: Pushed
-edff9ff691d5: Mounted from library/node
-cbe4b9146f86: Mounted from library/node
-a6524c5b12a6: Mounted from library/node
-9a5d14f9f550: Mounted from library/node
-1.0.0: digest: sha256:18e19953a27c5575840214c7a8d0a3acbcd78bf695d7c8884f4c401939de8913 size: 1787
+ubuntu@ip-10-0-1-14:~/app$ docker push rogallo/todo-app:1.0.0
+The push refers to repository [docker.io/rogallo/todo-app]
+fa33f1a79c07: Pushed
+4fa6ccb17690: Pushed
+7f5055c91ad5: Pushed
+edff9ff691d5: Mounted from rogallo/101-todo-app
+cbe4b9146f86: Mounted from rogallo/101-todo-app
+a6524c5b12a6: Mounted from rogallo/101-todo-app
+9a5d14f9f550: Mounted from rogallo/101-todo-app
+1.0.0: digest: sha256:146bff86564f7937dad94f018a5e801ad6cf7e0fc03be810e02ead6376fa3b05 size: 1787
 ```
-> **명령어** : `docker push [USER-NAME]/101-todo-app:1.0.0`
+> **명령어** : `docker push [USER-NAME]/todo-app:1.0.0`
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
+
+---
+
+똑 같은 방법으로 두 번재 이미지도 push합니다.
+```bash
+ubuntu@ip-10-0-1-14:~/app$ docker push rogallo/todo-app:2.0.0
+The push refers to repository [docker.io/rogallo/todo-app]
+6dbd0bd5a818: Pushed
+8c45740b3656: Pushed
+7f5055c91ad5: Layer already exists
+edff9ff691d5: Layer already exists
+cbe4b9146f86: Layer already exists
+a6524c5b12a6: Layer already exists
+9a5d14f9f550: Layer already exists
+2.0.0: digest: sha256:ceec117ba04d60ac07cbfd601bd282e07de436683a9a4cdae81ff641e0351119 size: 1787
+```
+> **명령어** : `docker push [USER-NAME]/todo-app:2.0.0`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
 ---
 
 [https://hub.docker.com/](https://hub.docker.com/) 에 방금 push한 이미지가 잘 올라가 있나요?
 
-![h:350](img/docker_create_repository3.png)
+![h:350](img/docker_create_repository4.png)
 
 축하합니다.  (๑˃̵ᴗ˂̵)و
 
-이제 여러분이 만든 도커 이미지를 저장할 수 있는 공간이 생겼습니다.  
-언제 어디서든 방금 올려두신 이미지를 이용해서 여러분의 샘플 애플리케이션을 실행해보실 수 있게 됐습니다.  
+이제 여러분들의 저장공간도 생겼고, 언제 어디서든 방금 올려두신 이미지를 이용해서 여러분의 샘플 애플리케이션을 실행해보실 수 있게 됐습니다.  
 
 이번 실습은 여기까지 입니다.
