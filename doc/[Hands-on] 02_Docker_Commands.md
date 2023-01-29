@@ -276,15 +276,50 @@ f87853d90ac2   nginx          "/docker-entrypoint.…"   13 minutes ago   Exited
 로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다. (**가입**이 필요합니다.)
 이름은 **todo-app** 으로 하고, Visibility는 **Private**으로 합니다.
 
-![h:350](img/docker_create_repository1.png)
+![h:350](img/docker_create_repository2.png)
 
 이제 여러분의 Docker repository가 생겼습니다.  
 
 ---
 
-샘플 애플리케이션 이미지를 다시 만들어 볼까요?
-첫 번째 실습(Docker intro)을 떠올려보세요.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+샘플 애플리케이션 이미지를 만들어 볼까요?
 먼저 소스코드를 Github에서 clone 합니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ git clone https://github.com/JungSangup/todo_list_manager.git app
@@ -306,6 +341,7 @@ ubuntu@ip-10-0-1-14:~/app$
 > **명령어** : `cd app`
 
 ---
+
 
 
 
