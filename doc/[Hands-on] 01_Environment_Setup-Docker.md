@@ -145,6 +145,7 @@ Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 
 | **Security group name**           | mspt3-sg              |
 | **Description**                   | sg for mspt3          |
 | **Inbound security groups rules** | ssh (TCP,22) , My IP  |
+
 > Security group은 우선 꼭 필요한 ssh (TCP,22) 만 My IP로 설정합니다. (이후에 추가로 설정합니다.)
 
 ---
@@ -159,16 +160,46 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
 ![h:400](img/aws_ec2_12.png)
 정상적으로 EC2 Instance가 생성되면 화면과 같이 표시됩니다.
+
 > SSH 접속을 위해 필요한 **Public IPv4 address** 또는 **Public IPv4 DNS** 정보를 기록해둡니다.
 
 ---
 
+과정중에는 SSH를 이용한 Instance 접속 외에도, 실행되는 애플리케이션 접속도 필요합니다.
+애플리케이션 접속을 위해서 추가적인 Security group 설정을 진행합니다.
+
+![h:400](img/aws_ec2_13.png)
+위와같이 EC2 Instance의 **Security** 탭에서 해당 **Security group**으로 이동합니다. (Security group명 옆의 아이콘 클릭)
+
+---
+
+![h:400](img/aws_ec2_14.png)
+Serurity group화면의 Inbound rules 탭에서 `Edit inbound rules` 버튼을 클릭합니다.
+
+---
+
+![h:350](img/aws_ec2_15.png)
+`Add rule` 버튼을 누르면 규칙을 추가할 수 있습니다. 아래 규칙을 추가해주세요.
+
+| **Type**   | **Port range** | Source |
+| ---------- | -------------- | ------ |
+| Custom TCP | 80             | My IP  |
+| Custom TCP | 443            | My IP  |
+| Custom TCP | 8080           | My IP  |
+| Custom TCP | 3000           | My IP  |
+| Custom TCP | 30000-32767    | My IP  |
+
+---
+
 ## VM Instance 접속하기
+
 생성된 VM Instance의 접속(SSH)은 다음의 방법 중 하나를 사용하면 됩니다.
+
 - **[접속방법1]** Terminal 프로그램 (e.g. PowerShell, cmder, iTerm, etc.)
 - **[접속방법2]** MobaXterm
 
 SSH 접속을 위해서는 다음을 먼저 확인해야 합니다.
+
 - VM Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
 - Key pair (**mspt3.pem** 파일)
 - SSH 접속을 위한 Inbound traffic (Port:22) 이 허용되어 있는지 확인 (앞에서 이미 진행함.)
@@ -195,12 +226,14 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 
 ![h:450](img/terminal2.png)
 위 그림과 같이 **Connect to instance** 화면에서 **SSH client** 탭을 클릭하고, 아래 표시되는 절차에 따라 접속을 진행합니다.
+
 > 윈도우즈 환경에서는 3번 절차 (chomod 400 mspt3.pem)를 진행할 수 없습니다. 다음장의 내용을 참고하세요.
 
 ---
 
 (윈도우즈 환경인 경우 3번 절차 처리방법)
 터미널 프로그램(e.g. PowerShell)에서 다음과 같이 실행합니다.
+
 ```shell
 > icacls.exe mspt3.pem /reset
 처리된 파일: mspt3.pem
@@ -212,6 +245,7 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 처리된 파일: mspt3.pem
 1 파일을 처리했으며 0 파일은 처리하지 못했습니다.
 ```
+
 > **명령어** : `icacls.exe mspt3.pem /reset`
 > **명령어** : `icacls.exe mspt3.pem /GRANT:R "$($env:USERNAME):(R)"`
 > **명령어** : `icacls.exe mspt3.pem /inheritance:r`
@@ -219,6 +253,7 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 ![h:200](img/terminal3.png) 그림과 같이 mspt3.pem 파일의 권한을 변경하는 것입니다.
 
 > 자세한 내용은은 [오류: 보호되지 않는 프라이빗 키 파일](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key)의 내용을 참고하세요.
+
 ---
 
 ![h:500](img/terminal4.png)
@@ -236,6 +271,7 @@ MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
 ![h:450](img/mobaxterm2.png)
 접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.
+
 - **Remote host** : EC2 Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
 - **Specify username** : ubuntu
 - **Use private key** : mspt3.pem
@@ -252,6 +288,7 @@ MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
 실습을 위해서 Docker 설치를 진행합니다.
 설치하는 방법은 아래 두 가지 방법이 있습니다.
+
 - [Docker Desktop](https://docs.docker.com/desktop/) : One-click-install application for your Mac, Linux, or Windows
 - [Docker Engine](https://docs.docker.com/engine/) : Open source containerization platform
 
@@ -261,8 +298,10 @@ MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 > 우리가 만든 환경은 이 조건에 맞는 **Ubuntu 22.04(LTS)** 64bit 버젼 입니다.
 
 ### [Uninstall old versions](https://docs.docker.com/engine/install/ubuntu/#uninstall-old-versions)
+
 기존에 설치된 버젼이 있거나 다시 설치를 진행하려고 하는 경우 먼저 기존버젼 삭제를 진행합니다.
 처음 설치를 하는 경우라면, 생략하고 다음 단계를 진행합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get remove docker docker-engine docker.io containerd runc
 Reading package lists... Done
@@ -270,14 +309,17 @@ Building dependency tree... Done
 Reading state information... Done
 E: Unable to locate package docker-engine
 ```
+
 > **명령어** : `sudo apt-get remove docker docker-engine docker.io containerd runc`
 
 ---
 
 ### [Install using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+
 Ubuntu의 [Advanced Packaging Tool (APT)](https://ubuntu.com/server/docs/package-management)를 이용해서 설치를 진행합니다.
 
 먼저 package index를 업데이트 합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get update
 Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
@@ -290,11 +332,13 @@ Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd6
 Fetched 2507 kB in 1s (3302 kB/s)
 Reading package lists... Done
 ```
+
 > **명령어** : `sudo apt-get update`
 
 ---
 
 다음은, HTTPS를 이용하기 위해서 몇 가지 패키지를 설치합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get install -y ca-certificates curl gnupg lsb-release
 Reading package lists... Done
@@ -310,27 +354,33 @@ gnupg is already the newest version (2.2.27-3ubuntu2.1).
 gnupg set to manually installed.
 0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
 ```
+
 > **명령어** : `sudo apt-get install -y ca-certificates curl gnupg lsb-release`
 
 Docker GPG key를 추가합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo mkdir -p /etc/apt/keyrings
 ubuntu@ip-10-0-2-33:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
+
 > **명령어** : `sudo mkdir -p /etc/apt/keyrings`
 > **명령어** : `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
 
 ---
 
 Docker 설치를 위서 APT Repository를 설정합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
+
 > **명령어** : `echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
 
 다시 Package index를 업데이트 합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get update
 Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
@@ -342,6 +392,7 @@ Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [11.9
 Fetched 385 kB in 1s (652 kB/s)
 Reading package lists... Done
 ```
+
 > **명령어** : `sudo apt-get update`
 
 ---
@@ -376,6 +427,7 @@ Fetched 113 MB in 1s (81.5 MB/s)
 
 ... 생략 ...
 ```
+
 > **명령어** : `sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin`
 
 ---
@@ -383,6 +435,7 @@ Fetched 113 MB in 1s (81.5 MB/s)
 설치 후 다음 설정을 진행합니다. ([Docker Engine post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/))
 
 Docker daemon은 root 유저로 동작하고, Docker CLI(/usr/bin/docker)는 root 그룹/계정 권한을 가지고 있습니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ ps -ef | grep -i dockerd
 root        9282       1  0 07:09 ?        00:00:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
@@ -398,14 +451,17 @@ root가 아닌 계정(우리 실습환경의 user는 `ubuntu` 입니다.)을 이
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo groupadd docker
 ```
+
 > **명령어** : `sudo groupadd docker`
 > 이미 docker 그룹이 있을수도 있습니다. (groupadd: group 'docker' already exists)
 
 다음은 사용 중인 User(`ubuntu`)를 docker 그룹에 추가하고, 적용(docker 그룹으로 로그인)합니다.
+
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo usermod -aG docker $USER
 ubuntu@ip-10-0-2-33:~$ newgrp docker
 ```
+
 > **명령어** : `sudo usermod -aG docker $USER`
 > **명령어** : `newgrp docker`
 
@@ -443,4 +499,5 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
+
 > **명령어** : `docker run --rm hello-world`
