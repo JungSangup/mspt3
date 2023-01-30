@@ -1,6 +1,5 @@
 {{/*
 Expand the name of the chart.
-   -> todo-app.name 은 .Values.nameOverride 가 있으면 그 값을, 없으면 default 값인 .Chart.Name
 */}}
 {{- define "todo-app.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
