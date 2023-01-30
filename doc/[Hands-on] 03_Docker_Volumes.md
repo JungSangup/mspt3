@@ -8,7 +8,21 @@ header: Docker & Kubernetes - [Hands-on] 03. Docker volumes
 footer: Samsung SDS
 ---
 
-## [Hands-on] 03. Docker volumes
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Container layer(R/W layer)**
+- **Volume을 이용하여 Todo app. 실행하기**
+
+
+---
+
+## Container layer(R/W layer)
 
 앞서 우리는 도커가 사용하는 레이어 파일시스템에 대해 알아보았습니다.
 
@@ -57,9 +71,11 @@ boot  etc  lib	 lib64	media	opt  root  sbin  sys  usr
 
 ---
 
+## Volume을 이용하여 Todo app. 실행하기
+
 이제 도커 볼륨(Volume)을 이용해서 데이터를 유지하는 방법을 알아보겠습니다.
 
-우리 샘플 애플리케이션(Todo List Manager)는 SQLite database를 사용하고 있습니다.
+우리 샘플 애플리케이션(Todo List Manager)은 SQLite database를 사용하고 있습니다.
 데이터는 `/etc/todos/todo.db` 에 파일로 저장이 되고 있구요.
 
 이제 도커 볼륨을 이용해서 데이터가 저장되는 위치를 host 머신의 경로로 바꿔보겠습니다.
@@ -104,24 +120,22 @@ Mountpoint가 바로 실제 데이터가 저장되는 Host 머신의 위치입�
 
 이제 방금 생성한 볼륨을 우리 애플리케이션의 데이터 저장경로로 마운트해서 실행해 보겠습니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager rogallo/101-todo-app:1.0.0
-Unable to find image 'rogallo/101-todo-app:1.0.0' locally
-1.0.0: Pulling from rogallo/101-todo-app
-ddad3d7c1e96: Pull complete
-de915e575d22: Pull complete
-7150aa69525b: Pull complete
-d7aa47be044e: Pull complete
-ac899a26a529: Pull complete
-6aa912a6e5d1: Pull complete
-1b3f4279bcb1: Pull complete
-Digest: sha256:18e19953a27c5575840214c7a8d0a3acbcd78bf695d7c8884f4c401939de8913
-Status: Downloaded newer image for rogallo/101-todo-app:1.0.0
-a2c03d99dc1808287614353a48cf0b95b21bc648bb757454a25fbff7e88058e3
+ubuntu@ip-10-0-1-14:~$ docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager rogallo/todo-app:1.0.0
+Unable to find image 'rogallo/todo-app:1.0.0' locally
+1.0.0: Pulling from rogallo/todo-app
+ddad3d7c1e96: Already exists
+de915e575d22: Already exists
+7150aa69525b: Already exists
+d7aa47be044e: Already exists
+e998ae3a37ac: Pull complete
+2b5756c5faea: Pull complete
+622ae33e24a6: Pull complete
+Digest: sha256:146bff86564f7937dad94f018a5e801ad6cf7e0fc03be810e02ead6376fa3b05
+Status: Downloaded newer image for rogallo/todo-app:1.0.0
+116cbd4d4c201e480ef4f935976ea541ab7d1f83a0b42c801f84b06c7b69cd33
 ```
-> **명령어** : `docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/101-todo-app:1.0.0`
+> **명령어** : `docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/todo-app:1.0.0`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
-
-여러분은 여러분의 이미지를 도커허브에서 받아와서 실행해보세요.
 
 `--volume todo-db:/etc/todos`에서 콜론(:)을 구분자로 사용해서 첫 번째로는 volume의 이름을,
 두 번째로는 마운트할 컨테이너의 경로를 적어줍니다.
@@ -130,7 +144,7 @@ a2c03d99dc1808287614353a48cf0b95b21bc648bb757454a25fbff7e88058e3
 
 이제 실행된 애플리케이션에 접속하고 오늘 할 일을 몇 개 적어볼까요?
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
-- Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
+- Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
 
 ![h:250](img/todo-list-sample3.png)
 
@@ -150,10 +164,10 @@ my-todo-manager
 
 이제 다시한번 같은 명령어로 우리 애플리케이션을 실행해 볼까요?
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager rogallo/101-todo-app:1.0.0
-bc7ab606fe61d12ec50ec8580963f0c169c4b6da428a3e67ecc384653cd1d161
+ubuntu@ip-10-0-1-14:~$ docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager rogallo/todo-app:1.0.0
+6ace1a017e3478fec5352ebc7fff13c566f299bbd2a95406dd735fac340e4af6
 ```
-> **명령어** : `docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/101-todo-app:1.0.0`
+> **명령어** : `docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/todo-app:1.0.0`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
 그리고 다시 우리 애플리케이션으로 접속해보세요. (e.g. http://IP:3000/)
