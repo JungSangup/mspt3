@@ -37,22 +37,22 @@ spec:
           - name: MYSQL_HOST
             valueFrom:
               configMapKeyRef:
-                name: todo-config
+                name: {{ include "todo-app.fullname" . }}-config
                 key: mysql-host
           - name: MYSQL_DB
             valueFrom:
               configMapKeyRef:
-                name: todo-config
+                name: {{ include "todo-app.fullname" . }}-config
                 key: mysql-db
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                name: todo-secret
+                name: {{ include "todo-app.fullname" . }}-secret
                 key: mysql-user
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: todo-secret
+                name: {{ include "todo-app.fullname" . }}-secret
                 key: mysql-password
           ports:
             - name: http
