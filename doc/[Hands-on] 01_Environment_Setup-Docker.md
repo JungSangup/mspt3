@@ -20,6 +20,7 @@ footer: Samsung SDS
 - **VM Instance 만들기**
 - **VM Instance 접속하기**
 - **Docker 설치하기**
+- **Git clone하기 (실습파일 다운로드)**
 
 ---
 
@@ -501,3 +502,22 @@ For more examples and ideas, visit:
 ```
 
 > **명령어** : `docker run --rm hello-world`
+
+---
+
+## Git clone하기 (실습파일 다운로드)
+이후 진행되는 실습과정들에 사용되는 파일들을 다운로드 하겠습니다.
+
+```bash
+ubuntu@ip-10-0-2-33:~$ git clone https://github.com/JungSangup/mspt3.git
+Cloning into 'mspt3'...
+remote: Enumerating objects: 2715, done.
+remote: Counting objects: 100% (362/362), done.
+remote: Compressing objects: 100% (212/212), done.
+remote: Total 2715 (delta 150), reused 360 (delta 148), pack-reused 2353
+Receiving objects: 100% (2715/2715), 285.64 MiB | 40.88 MiB/s, done.
+Resolving deltas: 100% (1530/1530), done.
+```
+> **명령어** : `git clone https://github.com/JungSangup/mspt3.git`
+
+**hands_on_files** 디렉토리 아래에 실습에 필요한 파일들이 있습니다.
