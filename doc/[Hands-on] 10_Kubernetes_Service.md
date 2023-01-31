@@ -8,7 +8,21 @@ header: Docker & Kubernetes - [Hands-on] 10. Kubernetes Service
 footer: Samsung SDS
 ---
 
-## [Hands-on] 10. Kubernetes Service
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Service를 이용해서 Pod에 연결하기**
+  - **ClusterIP타입 Service 이용해보기**
+- **Ingress를 이용해서 Pod에 연결하기**
+
+---
+
+## Service를 이용해서 Pod에 연결하기
 
 이번 실습에서는 **Service**를 이용하는 방법을 알아보겠습니다.
 먼저 **Deployment**를 이용해서 Pod를 몇 개 생성해 보겠습니다.
@@ -53,7 +67,8 @@ NAME                                READY   STATUS    RESTARTS   AGE   IP       
 nginx-deployment-56cb9cc9db-bh4q6   1/1     Running   0          53s   172.17.0.4   minikube   <none>           <none>
 nginx-deployment-56cb9cc9db-hgp6h   1/1     Running   0          53s   172.17.0.3   minikube   <none>           <none>
 ```
-> **명령어** : `kubectl apply -f nginx-deployment.yaml` , `kubectl get pods -o wide`
+> **명령어** : `kubectl apply -f nginx-deployment.yaml`
+> **명령어** : `kubectl get pods -o wide`
 
 <br><br>
 
@@ -239,20 +254,11 @@ kubernetes                ClusterIP   10.96.0.1       <none>        443/TCP     
 nginx-clusterip-service   ClusterIP   10.107.31.242   <none>        80/TCP         20m
 nginx-nodeport-service    NodePort    10.104.230.63   <none>        80:30007/TCP   60s
 ```
-> **명령어** : `kubectl apply -f nginx-nodeport-service.yaml` , `kubectl get services`
+> **명령어** : `kubectl apply -f nginx-nodeport-service.yaml`
+> **명령어** : `kubectl get services`
 
 
 **ClusterIP**와 **NodePort** 유형의 Service간 차이가 보이시나요? (힌트 : PORT(S))
-
-**NodePort**는 아래와 같은 방법으로 접근 가능합니다.
-
-먼저 Node의 IP를 알아야합니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl get nodes -o wide
-NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
-minikube   Ready    control-plane   41h   v1.24.1   192.168.49.2   <none>        Ubuntu 20.04.4 LTS   5.15.0-1013-aws   docker://20.10.17
-```
-> **명령어** : `kubectl get nodes -o wide`
 
 ---
 
@@ -279,6 +285,6 @@ working. Further configuration is required.</p>
 ...생략...
 ```
 > **명령어** : `curl http://[NODE_IP]:30007`
-> [NODE_IP] 는 Node의 IP
+> [NODE_IP] 는 Node의 IP (EC2 Instance인 경우 **Public IPv4 address**)
 
-같은 클러스터 내에 있는 다른 Node의 IP,Port로도 해보세요. 될까요?   ＿φ(°-°=)
+

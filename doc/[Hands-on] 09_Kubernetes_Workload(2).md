@@ -8,7 +8,20 @@ header: Docker & Kubernetes - [Hands-on] 09. Kubernetes Workload(2)
 footer: Samsung SDS
 ---
 
-## [Hands-on] 09. Kubernetes Workload(2) - ReplicaSet, Deployment
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **ReplicaSet을 이용해 Pod 관리하기**
+- **Deployment를 이용해 Pod 관리하기**
+
+---
+
+## ReplicaSet
 
 이제 Pod를 관리하는 다른 방법을 알아보겠습니다.
 
@@ -126,8 +139,9 @@ replicaset.apps "nginx-replicaset" deleted
 
 ---
 
-좀 더 나가서, 이번엔 **Deployment** 입니다.
-먼저 YAML파일을 만들어보겠습니다.
+## Deployment
+
+좀 더 나가서, 이번엔 **Deployment** 입니다. 먼저 YAML파일을 만들어보겠습니다.
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -156,9 +170,6 @@ spec:
         - containerPort: 80
 ```
 > 파일명은 nginx-deployment.yaml로 합니다.
-
-어디서 많이 본 형식인데... 하시면 맞습니다.
-ReplicaSet과 유사해요. (거의 동일)
 
 ---
 
@@ -226,7 +237,7 @@ nginx-deployment-596ff98864-8sqsn   1/1     Running   0          11s    app=my-n
 ---
 
 이번엔 scale in/out 방법을 알아보겠습니다. (replicas를 조정)
-명령형 커맨드 방식으로는 이렇게 할 수 있습니다.
+**명령형 커맨드** 방식으로는 이렇게 할 수 있습니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl scale deployment nginx-deployment --replicas=5
 deployment.apps/nginx-deployment scaled
@@ -260,7 +271,8 @@ replicaset.apps/nginx-deployment-596ff98864   5         5         5       8m50s
 
 `kubectl edit deployment nginx-deployment` 명령어로 생성된 리소스를 수정할 수도 있습니다.
 마치 vi editor를 이용하여 YAML파일을 수정하는 것과 동일합니다.
-한 번 해보세요.
+한 번 해보세요. (vi가 익숙하지 않은 경우, 이 실습은 생략해도 됩니다.)
+> **명령어** : `kubectl edit deployment nginx-deployment`
 
 `replicas`를 2로 바꾸고 저장후 빠져나옵니다. (`:wq`)
 
@@ -284,8 +296,8 @@ replicaset.apps/nginx-deployment-596ff98864   2         2         2       16m
 
 ---
 
-그리고, 마지막으로 선언형 방법을 적용하려면 처음 사용된 yaml파일을 수정해주시면 됩니다.
-vi editor를 이용하여 `.spec.replicas`부분을 수정하면 됩니다. (4로 변경)
+그리고, 마지막으로 **선언형 방법**을 적용하려면 처음 사용된 yaml파일을 수정해주시면 됩니다.
+editor를 이용하여 `.spec.replicas`부분을 수정하면 됩니다. (4로 변경)
 
 그리고, 마법의 주문 `kubectl apply`를 하는거죠.
 ```bash
