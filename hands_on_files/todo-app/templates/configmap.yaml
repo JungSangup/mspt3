@@ -4,4 +4,4 @@ metadata:
   name: {{ include "todo-app.fullname" . }}-config
 data:
   mysql-host: {{ .Release.Name }}-mysql.default.svc.cluster.local
-  mysql-db: todos
+  mysql-db: {{ .Values.configmap.mysqlDb | quote }}

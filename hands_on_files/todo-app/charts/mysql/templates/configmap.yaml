@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysql-config
 data:
-  database: "todos"
-  lang: "C.UTF-8"
+  database: {{ .Values.configmap.database | quote }}
+  lang: {{ .Values.configmap.lang | quote }}

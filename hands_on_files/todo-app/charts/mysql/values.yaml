@@ -75,6 +75,10 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+configmap:
+  database: todos
+  lang: C.UTF-8
+
 nodeSelector: {}
 
 tolerations: []
