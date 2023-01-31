@@ -1,0 +1,11 @@
+# Build stage
+FROM openjdk:8 as build-stage
+COPY HelloDocker.java /hello/
+WORKDIR /hello
+RUN javac HelloDocker.java
+
+# Production stage
+FROM openjdk:8-jre as production-stage
+COPY --from=build-stage /hello/HelloDocker.class /hello/HelloDocker.class
+WORKDIR /hello
+CMD ["java","HelloDocker"]
