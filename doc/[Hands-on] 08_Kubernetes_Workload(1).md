@@ -8,7 +8,23 @@ header: Docker & Kubernetes - [Hands-on] 08. Kubernetes Workload(1)
 footer: Samsung SDS
 ---
 
-## [Hands-on] 08. Kubernetes Workload(1) - Pod
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Pod 관리하기**
+  - **명령형 커맨드**
+  - **명령형 오브젝트 구성**
+  - **선엄형 오브젝트 구성**
+  - **Container probe 알아보기**
+
+---
+
+## Pod 관리하기
 
 이번에는 Pod를 관리하는 명령어들을 알아보겠습니다.
 

@@ -63,7 +63,7 @@ ubuntu@ip-10-0-2-33:~$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 ---
 
-minikube를 시작하기 전에 먼저 한 가지 패키지()를 설치합니다.
+minikube를 시작하기 전에 먼저 한 가지 패키지(conntrack)를 설치합니다.
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get update
 ...생략...
@@ -255,6 +255,3 @@ ubuntu@ip-10-0-2-33:~$ helm version
 version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
 ```
 > **명령어** : `helm version`
-
----
-

@@ -8,7 +8,19 @@ header: Docker & Kubernetes - [Hands-on] 07. Kubernetes Overview
 footer: Samsung SDS
 ---
 
-## [Hands-on] 07. Kubernetes Overview
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **kubectl 기본 명령어 사용**
+
+---
+
+## kubectl 기본 명령어 사용
 
 기본적인 쿠버네티스 명령어들에 대해 알아보겠습니다.
 제일먼저 도움말을 볼까요?
@@ -72,7 +84,7 @@ minikube   Ready    control-plane,master   4d23h   v1.23.3
 
 ---
 
-`--output wide`옵션(또는, `-o wide`)을 주면 더 많은 정보를 보여줍니다.
+`--output wide`옵션(또는, `-o wide`)을 사용하면 더 많은 정보를 보여줍니다.
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl get nodes --output wide
@@ -134,7 +146,7 @@ kubernetes-dashboard   Active   4d23h
 
 ---
 
-이번에는 Pod목록을 조회하는데, --all-namespaces옵션을 추가해볼까요?
+이번에는 Pod목록을 조회하는데, `--all-namespaces`옵션을 추가해볼까요?
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl get pods --all-namespaces --output wide
 NAMESPACE              NAME                                        READY   STATUS    RESTARTS       AGE     IP             NODE       NOMINATED NODE   READINESS GATES
@@ -167,7 +179,7 @@ storage-provisioner                1/1     Running   11 (21m ago)   4d23h   192.
 ---
 
 그 중에 하나, kube-scheduler를 좀 더 자세히 볼까요?
-정보를 yaml형태로 볼 수 도 있구요.
+정보를 yaml형태로 볼 수 도 있구요. ( `--output yaml` 옵션을 사용 )
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl get pod kube-scheduler-minikube --namespace kube-system --output yaml
 apiVersion: v1
@@ -199,7 +211,7 @@ metadata:
 
 ---
 
-describe명령으로 자세한 정보를 조회할 수도 있습니다.
+`kubectl describe` 명령으로 오브젝트의 자세한 정보를 조회할 수도 있습니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl describe pod kube-scheduler-minikube --namespace kube-system
 Name:                 kube-scheduler-minikube
@@ -253,5 +265,3 @@ I0703 02:26:09.952426       1 shared_informer.go:240] Waiting for caches to sync
 <br>
 
 여기까지, 기본적인 kubectl 명령어들을 알아보았습니다. 더 많은 내용은 차차 알아볼게요~ ٩(ˊᗜˋ*)و
-
-
