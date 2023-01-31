@@ -8,7 +8,20 @@ header: Docker & Kubernetes - [Hands-on] 04. Docker network
 footer: Samsung SDS
 ---
 
-## [Hands-on] 04. Docker network
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Bridge network을 이용하여 Todo app. 실행하기**
+
+
+---
+
+## Bridge network을 이용하여 Todo app. 실행하기
 
 도커 네트워크를 이용해서 아래 그림과 같이 멀티 컨테이너 애플리케이션을 구성해 보겠습니다.
 우리 애플리케이션에 Database(MySQL)를 연결해서 서비스하도록 합니다.
@@ -122,7 +135,7 @@ ubuntu@ip-10-0-1-14:~$ docker run -dp 3000:3000 \
 --env MYSQL_PASSWORD=secret \
 --env MYSQL_DB=todos \
 --name my-todo-manager \
-rogallo/101-todo-app:1.0.0
+rogallo/todo-app:1.0.0
 e831c21bfbbc9fbb6402c8dc3bbf4b0bd906ab1f0e0ad727f3fad1d37063a0db
 ```
 > **명령어** : 
@@ -134,7 +147,7 @@ e831c21bfbbc9fbb6402c8dc3bbf4b0bd906ab1f0e0ad727f3fad1d37063a0db
 >  --env MYSQL_PASSWORD=secret \
 >  --env MYSQL_DB=todos \
 >  --name my-todo-manager \
-> [USER-NAME]/101-todo-app:1.0.0
+> [USER-NAME]/todo-app:1.0.0
 > ```  
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
@@ -157,7 +170,7 @@ mysql 과 잘 연결됐다는 로그가 보이시나요?
 
 이제 실행된 애플리케이션에 접속하고 오늘 할 일을 몇 개 적어볼까요?
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
-- Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
+- Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
 
 ![h:200](img/todo-list-sample3.png)
 
