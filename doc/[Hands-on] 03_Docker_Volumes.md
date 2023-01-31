@@ -30,7 +30,7 @@ footer: Samsung SDS
 
 직접 한번 컨테이너를 생성해서 볼까요?
 
-먼저 ubuntu를 하나 실행합니다.
+먼저 ubuntu 컨테이너를 하나 실행합니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"
 Unable to find image 'ubuntu:latest' locally
@@ -42,8 +42,7 @@ Status: Downloaded newer image for ubuntu:latest
 ```
 > **명령어** : `docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"`
 
-"Hello Docker..." 라는 문자열을 담은 txt파일(`/test.txt)을 하나 만들고,
-컨테이너를 running상태로 두기 위해서 `tail`명령을 실행했습니다.
+"Hello Docker..." 라는 문자열을 담은 txt파일(**/test.txt**)을 하나 만들고, 컨테이너를 running상태로 두기 위해서 `tail`명령을 실행했습니다.
 
 ---
 
@@ -119,6 +118,7 @@ Mountpoint가 바로 실제 데이터가 저장되는 Host 머신의 위치입�
 ---
 
 이제 방금 생성한 볼륨을 우리 애플리케이션의 데이터 저장경로로 마운트해서 실행해 보겠습니다.
+- Private repository의 이미지를 사용할 경우 로그인(`docker login -u [USER-NAME]`)이 필요합니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager rogallo/todo-app:1.0.0
 Unable to find image 'rogallo/todo-app:1.0.0' locally
@@ -137,8 +137,11 @@ Status: Downloaded newer image for rogallo/todo-app:1.0.0
 > **명령어** : `docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/todo-app:1.0.0`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
+<br>
+
 `--volume todo-db:/etc/todos`에서 콜론(:)을 구분자로 사용해서 첫 번째로는 volume의 이름을,
 두 번째로는 마운트할 컨테이너의 경로를 적어줍니다.
+> 또는 `--mount source=todo-db,target=/etc/todos` 로 옵션을 설정해도 됩니다.
 
 ---
 
@@ -146,7 +149,7 @@ Status: Downloaded newer image for rogallo/todo-app:1.0.0
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
 - Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
 
-![h:250](img/todo-list-sample3.png)
+![h:200](img/todo-list-sample3.png)
 
 그리고, 컨테이너를 멈추고 삭제합니다.
 ```bash
@@ -156,7 +159,7 @@ ubuntu@ip-10-0-1-14:~$ docker rm my-todo-manager
 my-todo-manager
 ```
 > **명령어** : `docker stop my-todo-manager` , `docker rm my-todo-manager`
-컨테이너는 생성할때 --name 옵션으로 이름을 정하면, 이후에 이 이름을 이용할 수 있습니다.
+> - 컨테이너는 생성할때 --name 옵션으로 이름을 정하면, 이후에 이 이름을 이용할 수 있습니다.
 
 ---
 
