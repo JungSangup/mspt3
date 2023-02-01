@@ -44,3 +44,8 @@ MSP T3 강의계획
 - 3일차
   - 이론 : K8s service ~ Helm
   - 실습 : K8s service ~ Helm
+  
+  
+  
+순서조정 (K8s)
+Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deployment strategy > HPA > Helm
