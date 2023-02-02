@@ -27,14 +27,14 @@
 | 8   | [[Book] 08_Kubernetes_Workload(1).md](./doc/%5BBook%5D%2008_Kubernetes_Workload(1).md)                                 |
 | 9   | [[Book] 09_Kubernetes_Workload(2).md](./doc/%5BBook%5D%2009_Kubernetes_Workload(2).md)                                 |
 | 10  | [[Book] 10_Kubernetes_Service.md](./doc/%5BBook%5D%2010_Kubernetes_Service.md)                                         |
-| 11  | [[Book] 11_Kubernetes_Deployment_strategies.md](./doc/%5BBook%5D%2011_Kubernetes_Deployment_strategies.md)             |
-| 12  | [[Book] 12_Kubernetes_Configmaps & Secrets](./doc/%5BBook%5D%2012_Kubernetes_ConfigMaps%20&%20Secrets.md)              |
-| 13  | [[Book] 13_Kubernetes_Horizontal Pod Autoscaler.md](./doc/%5BBook%5D%2013_Kubernetes_Horizontal%20Pod%20Autoscaler.md) |
-| 14  | [[Book] 14_Kubernetes_Volume.md](./doc/%5BBook%5D%2014_Kubernetes_Volume.md)                                           |
+| 11  | [[Book] 11_Kubernetes_Storage.md](./doc/%5BBook%5D%2011_Kubernetes_Storage.md)                                         |
+| 12  | [[Book] 12_Kubernetes_Configuration](./doc/%5BBook%5D%2012_Kubernetes_Configuration.md)                                |
+| 13  | [[Book] 13_Kubernetes_Deployment_strategies.md](./doc/%5BBook%5D%2013_Kubernetes_Deployment_strategies.md)             |
+| 14  | [[Book] 14_Kubernetes_Horizontal Pod Autoscaler.md](./doc/%5BBook%5D%2014_Kubernetes_Horizontal%20Pod%20Autoscaler.md) |
 | 15  | [[Book] 15_Helm.md](./doc/%5BBook%5D%2015_Helm.md)                                                                     |
 
-
 MSP T3 강의계획
+
 - 1일차
   - 이론 : Docker overview ~ network
   - 실습 : Docker 설치 ~ network
@@ -44,8 +44,6 @@ MSP T3 강의계획
 - 3일차
   - 이론 : K8s service ~ Helm
   - 실습 : K8s service ~ Helm
-  
-  
-  
+
 순서조정 (K8s)
 Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deployment strategy > HPA > Helm
