@@ -18,6 +18,7 @@ footer: Samsung SDS
 
 - **Service를 이용해서 Pod에 연결하기**
   - **ClusterIP타입 Service 이용해보기**
+  - **NodePort타입 Service 이용해보기**
 - **Ingress를 이용해서 Pod에 연결하기**
 
 ---
@@ -266,27 +267,99 @@ nginx-nodeport-service    NodePort    10.104.230.63   <none>        80:30007/TCP
 
 이제는 Node의 IP를 통해서 내부의 Pod로 연결이 가능합니다.
 Node까지의 경로가 열려있다면 어디서든 이 IP로 접근 가능합니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ curl http://192.168.49.2:30007
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-...생략...
+
+웹 브라우저에서 아래와 같이 조회해보세요.
+
+![h:300](img/k8s_nginx_nodeport.png)
+> http://[Node의 IP]:30007 로 접속합니다. (EC2 Instance인 경우 **Public IPv4 address**)
+
+---
+
+## Ingress를 이용해서 Pod에 연결하기
+
+이번에는 Ingress 리소스를 생성하고 등록된 URL을 이용해서 접속해 보겠습니다.
+
+먼저 Ingress 리소스를 아래와 같이 준비합니다.
+웹 브라우저에서 http://my-nginx.info 와 같이 입력해서 접속해보려고 합니다.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: my-nginx.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-clusterip-service
+                port:
+                  number: 80
 ```
-> **명령어** : `curl http://[NODE_IP]:30007`
-> [NODE_IP] 는 Node의 IP (EC2 Instance인 경우 **Public IPv4 address**)
+> 파일명은 **nginx-ingress.yaml**로 합니다.
 
+---
 
+이제 Ingress 리소스를 생성합니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-ingress.yaml
+ingress.networking.k8s.io/my-nginx-ingress created
+```
+> **명령어** : `kubectl apply -f nginx-ingress.yaml`
+
+웹 브라우저에서 접속을 하기전에 한 가지 준비할 게 있습니다.
+
+우리가 만든 URL은 DNS에 등록되어 있지 않기 때문에, 접속을 시도해도 어디로 라우팅 되어야하는지 알 수가 없습니다.
+간단히 우리가 접속을 하려고 하는 환경(PC)의 host파일에 다음과 같이 등록해줍니다.
+(웹 브라우저는 DNS 이전에 hosts파일을 먼저 참조합니다.)
+- Windows라면 **C:\Windows\System32\drivers\etc\hosts** 파일에,
+- Linux계열은 **/etc/hosts** 파일에 추가하면 됩니다.
+
+```bash
+#mspt3
+11.22.33.44  my-nginx.info
+```
+> 11.22.33.44 대신 여러분 EC2 Instance의 **Public IPv4 address**를 써주세요.
+
+---
+
+자 이제 정말로 모두 준비가 됐습니다.
+웹 브라우저에서 아래 URL로 접속해보세요.
+
+http://my-nginx.info
+
+![h:300](img/k8s_nginx_ingress.png)
+
+잘 되네요. (ง˙∇˙)ว
+
+**nginx-ingress.yaml** 파일의 path부분을 `/` 에서 `/test` 처럼 바꾸면 어떻게 될까요?
+한 번 해보세요.
+
+---
+
+아래와 같이 사용한 리소스들을 정리해주세요.
+
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl delete -f nginx-ingress.yaml
+ingress.networking.k8s.io "my-nginx-ingress" deleted
+ubuntu@ip-10-0-1-161:~$ kubectl delete -f nginx-nodeport-service.yaml
+service "nginx-nodeport-service" deleted
+ubuntu@ip-10-0-1-161:~$ kubectl delete -f nginx-clusterip-service.yaml
+service "nginx-clusterip-service" deleted
+ubuntu@ip-10-0-1-161:~$ kubectl delete -f nginx-deployment.yaml
+deployment.apps "my-nginx-deployment" deleted
+ubuntu@ip-10-0-1-161:~$ kubectl delete po curlpod
+pod "curlpod" deleted
+```
+> **명령어** : `kubectl delete -f nginx-ingress.yaml`
+> **명령어** : `kubectl delete -f nginx-nodeport-service.yaml`
+> **명령어** : `kubectl delete -f nginx-clusterip-service.yaml`
+> **명령어** : `kubectl delete -f nginx-deployment.yaml`
+> **명령어** : `kubectl delete po curlpod`
+
+끝~
