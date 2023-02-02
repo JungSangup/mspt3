@@ -184,20 +184,20 @@ spec:
 
 그리고, 아래 명령어를 이용해서 Pod를 생성합니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ kubectl apply -f livenessProbe_httpGet.yaml
+ubuntu@ip-10-0-1-14:~$ kubectl apply -f livenessProbe-httpGet.yaml
 pod/liveness-http created
 ```
-> **명령어** : `kubectl apply -f livenessProbe_httpGet.yaml`
+> **명령어** : `kubectl apply -f livenessProbe-httpGet.yaml`
 
 어느정도(10초이상) 시간이 지난 후 조회를 해보면 아래와 같이 보일거예요.
 
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl get pods -o wide
-NAME            READY   STATUS    RESTARTS      AGE   IP           NODE       NOMINATED NODE   READINESS GATES
-liveness-http   1/1     Running   1 (12s ago)   33s   172.17.0.8   minikube   <none>           <none>
-my-nginx1       1/1     Running   0             68s   172.17.0.5   minikube   <none>           <none>
-my-nginx2       1/1     Running   0             59s   172.17.0.6   minikube   <none>           <none>
-my-nginx3       1/1     Running   0             51s   172.17.0.7   minikube   <none>           <none>
+NAME            READY   STATUS    RESTARTS     AGE     IP           NODE              NOMINATED NODE   READINESS GATES
+liveness-http   1/1     Running   1 (8s ago)   26s     172.17.0.8   ip-172-31-20-30   <none>           <none>
+my-nginx1       1/1     Running   0            2m54s   172.17.0.5   ip-172-31-20-30   <none>           <none>
+my-nginx2       1/1     Running   0            2m44s   172.17.0.6   ip-172-31-20-30   <none>           <none>
+my-nginx3       1/1     Running   0            2m34s   172.17.0.7   ip-172-31-20-30   <none>           <none>
 ```
 > **명령어** : `kubectl get pods -o wide`
 
@@ -214,6 +214,7 @@ livenessProbe는 계속해서 Pod의 상태를 살피고, 문제가 발생하면
 다음 실습을 위해서 생성한 모든 Pod를 삭제할게요.
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl delete pod --all
+pod "liveness-http" deleted
 pod "my-nginx1" deleted
 pod "my-nginx2" deleted
 pod "my-nginx3" deleted
