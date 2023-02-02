@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - 12. Kubernetes ConfigMaps & Secrets
+header: Docker & Kubernetes - 12. Kubernetes Configuration
 footer: Samsung SDS
 ---
 
@@ -16,6 +16,8 @@ footer: Samsung SDS
 
 - **ConfigMap**
 - **Secret**
+- **Resource 관리**
+- **Namespace settings**
 
 ---
 
@@ -157,7 +159,118 @@ spec:
 
 > 환경변수로 앞에서 생성된 Secret의 정보를 사용
 
-<br><br><br><br><br><br><br>
+---
+
+#### Resource 관리
+
+Pod의 Spec.을 정할 때 컨테이너에 필요한 각 리소스의 양을 지정할 수 있습니다. 지정할 수 있는 대표적인 리소스는 **CPU**와 **메모리**(RAM)가 있습니다.  
+
+##### requests and limits
+
+Pod에서 리소스 요청(request)을 지정하면, kube-scheduler는 이 정보를 사용하여 Pod가 배치될 Node를 결정합니다. **리소스 제한**(**limit**)을 지정하면, kublet은 실행중인 컨테이너가 설정한 제한보다 많은 리소스를 사용할 수 없도록 해당 제한을 적용합니다. 또한, kubelet은 컨테이너가 사용할 수 있도록 해당 시스템 **리소스의 최소 요청**(**request**)량을 예약합니다.  
+컨테이너의 프로세스가 허용된 양보다 많은 메모리를 사용하려고 하면, 시스템 커널은 메모리 부족(Out of memory, OOM) 오류와 함께 프로세스를 종료합니다.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+spec:
+  containers:
+  - name: wp
+    image: wordpress
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+```
+
+> 위 예제는 250 milicore / 64 MiB ~ 500 milicore / 128 MiB 로 설정함.
+
+---
+
+###### CPU
+
+1 CPU 단위는 물리호스트인지 가상머신인지에 따라서 **1 physical CPU Core** 또는 **1 virtual core** 에 해당합니다.  
+
+> 1 core = 1000m core
+
+<br>
+
+###### Memory
+
+메모리에 대한 요청(request)과 제한(limit)은 바이트(byte) 단위로 주어집니다. 
+
+> **1 Ki** = 1 KiB (Kibibyte, Kilo binary byte) = 2^10 byte
+> **1 Mi** = 1 MiB (Mebibyte, Mega binary byte) = 2^20 byte
+> **1 Gi** = 1 GiB (Gibibyte, Giga binary byte) = 2^30 byte
+
+---
+
+#### Namespace settings
+
+Kubernetes cluster에는 다수의 Namespace가 존재할 수 있고, 각 Namespace간에 리소스 사용에 대한 제한을 둘 필요가 있습니다. 
+이를 위해 Kubernetes에서는 Namespace 단위로 리소스 사용에 대한 설정을 할 수 있습니다.
+
+##### [ResourceQuotas](https://kubernetes.io/ko/docs/concepts/policy/resource-quotas/)
+
+ResourceQuota는 **Namespace별 총 리소스** 사용을 제한하는 제약 조건입니다.  
+예를들면 다음과 같은 유형으로 사용할 수 있습니다.
+
+- 용량이 32GiB RAM, 16 코어인 클러스터에서 A 팀이 20GiB 및 10 코어를 사용하고 B 팀은 10GiB 및 4 코어를 사용하게 하고 2GiB 및 2 코어를 향후 할당을 위해 보유하도록 한다.
+- "testing" 네임스페이스를 1 코어 및 1GiB RAM을 사용하도록 제한하고 "production" 네임스페이스에는 원하는 양을 사용하도록 한다.
+  
+  ```yaml
+  apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+  name: demo
+  spec:
+  hard:
+    requests.cpu: 500m
+    requests.memory: 100Mib
+    limits.cpu:700m
+    limits.memory: 500Mib
+  ```
+  
+  > request.cpu / request.memory : 모든 Pod에서 CPU/memory 요청(request)의 합은 이 값을 초과할 수 없음.
+  > limits.cpu / limits.memory : 모든 Pod에서 CPU/memory 제한(limit)의 합은 이 값을 초과할 수 없음.
+
+---
+
+##### [LimitRange](https://kubernetes.io/ko/docs/concepts/policy/limit-range/)
+
+ResourceQuotas는 Namespace 전체영역에 대한 리소스의 제한을 정의하는반면, LimitRange는 **개별 컨테이너 단위의 리소스**에 대한 제약입니다. 즉, 사용자들이 개별 컨테이너에 대한 리소스를 정의할때 해당되는 범위를 제한하는 개념입니다.
+
+```yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-resource-constraint
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 500m
+      memory: 100Mib
+    defaultRequest: # this section defines default requests
+      cpu: 100m
+      memory: 50Mib
+    max: # max and min define the limit range
+      cpu: "1""
+      memory: 200Mib
+    min:
+      cpu: "1"
+      memory: 10Mib
+    type: Container
+```
+
+> default : 컨테이너에서 지정된 값이 없을 경우 적용되는 limit
+> defaultRequest : 컨테이너에서 지정된 값이 없을 경우 적용되는 request
+> max : limit으로 지정할 수 있는 최대 크기
+> min : limit으로 지정할 수 있는 최소 크기
 
 ![](img/handson.png) **Hands-on :** 12_Kubernetes_ConfigMaps & Secrets
 

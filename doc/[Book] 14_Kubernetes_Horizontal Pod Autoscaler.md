@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - 13. Kubernetes Horizontal Pod Autoscaler
+header: Docker & Kubernetes - 14. Kubernetes Horizontal Pod Autoscaler
 footer: Samsung SDS
 ---
 
