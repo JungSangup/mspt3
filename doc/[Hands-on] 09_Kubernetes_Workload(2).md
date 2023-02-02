@@ -325,3 +325,13 @@ NAME                                          DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-deployment-596ff98864   4         4         4       21m
 ```
 > **명령어** : `kubectl get all`
+
+---
+
+마지막으로 생성한 리소스들을 삭제하고 마치겠습니다.  ˘◡˘  
+
+```bash
+ubuntu@ip-10-0-1-14:~$ kubectl delete -f nginx-deployment.yaml
+deployment.apps "my-nginx-deployment" deleted
+```
+> **명령어** : `kubectl delete -f nginx-deployment.yaml`

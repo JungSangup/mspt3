@@ -53,7 +53,7 @@ spec:
         ports:
         - containerPort: 80
 ```
-> 파일명은 nginx-deployment.yaml로 합니다.
+> 파일명은 **nginx-deployment.yaml**로 합니다.
 
 ---
 
@@ -143,7 +143,7 @@ spec:
       port: 80
       targetPort: 80
 ```
-> 파일명은 nginx-clusterip-service.yaml로 합니다.
+> 파일명은 **nginx-clusterip-service.yaml**로 합니다.
 
 그리고, 생성합니다.
 ```bash
@@ -213,8 +213,10 @@ ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl nginx-clusterip-service
 > [SVC_NAME] 는 Service의 NAME
 
 잘 되네요...
-
 이제 Service를 만들면 클러스터 내에서는 서비스의 **이름**(**NAME**)으로도 접근이 가능합니다.
+
+> K8s DNS에는 `<service-name>.<namespace-name>.svc.cluster.local`로 등록이 됩니다.
+> `<service-name>`만으로 조회가 되는 이유는 [/etc/resolv.conf](https://man7.org/linux/man-pages/man5/resolv.conf.5.html)에 **search 옵션**이 자동으로 주어지기 때문입니다.
 
 ---
 
@@ -239,7 +241,7 @@ spec:
       targetPort: 80
       nodePort: 30007
 ```
-> 파일명은 nginx-nodeport-service.yaml로 합니다.
+> 파일명은 **nginx-nodeport-service.yaml**로 합니다.
 
 ---
 
