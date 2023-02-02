@@ -4,10 +4,10 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 12. Kubernetes ConfigMaps & Secrets
+header: Docker & Kubernetes - [Hands-on] 12. Kubernetes Configuration
 ---
 
-## [Hands-on] 12. Kubernetes ConfigMaps & Secrets
+## [Hands-on] 12. Kubernetes Configuration
 
 ConfigMap은 Key:Value 형식으로 저장이 됩니다.
 

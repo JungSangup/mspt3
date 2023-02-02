@@ -4,10 +4,10 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 14. Kubernetes Volume
+header: Docker & Kubernetes - [Hands-on] 11. Kubernetes Storage
 ---
 
-## [Hands-on] 14. Kubernetes Volume
+## [Hands-on] 11. Kubernetes Storage
 
 PVC를 통해서 PV를 동적으로 Provisioning하고 구성하는 실습입니다.
 이 실습은 실행 환경에 따라 동적 생성이 안될 수도 있으니, 그 경우에는 실습 환경에 맞게 설정을 변경하여 진행하시기 바랍니다.

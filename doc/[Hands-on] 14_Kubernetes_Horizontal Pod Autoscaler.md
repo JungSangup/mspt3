@@ -4,10 +4,10 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Hands-on] 13. Kubernetes Horizontal Pod Autoscaler
+header: Docker & Kubernetes - [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
 ---
 
-## [Hands-on] 13. Kubernetes Horizontal Pod Autoscaler
+## [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
 
 Horizontal Pod Autoscaler(HPA)를 이용하여 자동으로 Pod의 개수를 조절하는 실습입니다.
 
