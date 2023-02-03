@@ -21,7 +21,7 @@ header: Docker & Kubernetes - [Hands-on] 12. Kubernetes Configuration
 
 ---
 
-## [Hands-on] 12. Kubernetes ConfigMaps & Secrets
+## ConfigMap 생성하기
 
 ConfigMap은 Key:Value 형식으로 저장이 됩니다.
 
