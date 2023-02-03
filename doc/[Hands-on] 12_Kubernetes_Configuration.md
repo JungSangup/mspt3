@@ -15,7 +15,9 @@ header: Docker & Kubernetes - [Hands-on] 12. Kubernetes Configuration
 
 <br>
 
-- **...**
+- **ConfigMap 생성하기**
+- **Secret 생성하기**
+- **ConfigMap과 Secret을 이용해서 Pod 생성하기**
 
 ---
 
