@@ -62,7 +62,7 @@ ubuntu@ip-10-0-1-14:~$ kubectl version
 Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.3", GitCommit:"816c97ab8cff8a1c72eccca1026f7820e93e0d25", GitTreeState:"clean", BuildDate:"2022-01-25T21:25:17Z", GoVersion:"go1.17.6", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.3", GitCommit:"816c97ab8cff8a1c72eccca1026f7820e93e0d25", GitTreeState:"clean", BuildDate:"2022-01-25T21:19:12Z", GoVersion:"go1.17.6", Compiler:"gc", Platform:"linux/amd64"}
 ```
-> **명령어** : `kubectl version`
+> **명령어** : `kubectl version` 또는 `kubectl version --output yaml`
 
 쿠버네티스 클러스터 정보를 확인하려면,
 ```bash
