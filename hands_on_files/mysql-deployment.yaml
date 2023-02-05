@@ -1,65 +1,45 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress-mysql
-  labels:
-    app: wordpress
-spec:
-  ports:
-    - port: 3306
-  selector:
-    app: wordpress
-    tier: mysql
-  clusterIP: None
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pv-claim
-  labels:
-    app: wordpress
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-mysql
+  name: todo-mysql-deployment
   labels:
-    app: wordpress
+    app: mysql
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: wordpress
-      tier: mysql
-  strategy:
-    type: Recreate
+      app: todo-mysql
   template:
     metadata:
       labels:
-        app: wordpress
-        tier: mysql
+        app: todo-mysql
     spec:
       containers:
-      - image: mysql:5.6
-        name: mysql
+      - name: todo-mysql-pod
+        image: mysql:5.7
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-pass
+              name: mysql-secret
               key: password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: database
+        - name: LANG
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: lang
         ports:
         - containerPort: 3306
-          name: mysql
+        args: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
         volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+          - mountPath: "/var/lib/mysql"
+            name: mysql-storage
       volumes:
-      - name: mysql-persistent-storage
+      - name: mysql-storage
         persistentVolumeClaim:
-          claimName: mysql-pv-claim
+          claimName: mysql-pvc
