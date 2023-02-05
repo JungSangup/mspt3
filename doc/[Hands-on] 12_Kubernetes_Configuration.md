@@ -15,365 +15,236 @@ header: Docker & Kubernetes - [Hands-on] 12. Kubernetes Configuration
 
 <br>
 
-- **ConfigMap 생성하기**
-- **Secret 생성하기**
-- **ConfigMap과 Secret을 이용해서 Pod 생성하기**
+- **ConfigMap, Secret 생성하고 사용하기**
 
 ---
 
-## ConfigMap 생성하기
+## ConfigMap, Secret 생성하고 사용하기
 
-ConfigMap은 Key:Value 형식으로 저장이 됩니다.
+**ToDo App**을 또 다른 방법으로 실행해보려고 합니다.
+**Docker Network** 실습에서 했던 방법과 동일하게
 
-문자로 생성하는 방식과 파일로 생성하는 방식이 있습니다.
+- MySQL
+- Todo App
 
-<br><br>
+을 각각 실행해서 연동하려고 합니다.
+이렇게요.
 
-### ConfigMap from Literal
-문자로 생성하는 방법은 kubectl create configmap 명령을 사용하여 다음과 같이 생성할 수 있습니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl create configmap literal-config --from-literal=company=Samsung
-configmap/literal-config created
-```
-> **명령어** : `kubectl create configmap literal-config --from-literal=company=Samsung`
-> key는 company, value는 samsung 으로 생성
+![](img/multi-app-architecture.png)
+
+기본적인 구조와 방법은 **Docker Network** 실습과 같고, Kubernetes환경에 맞게 리소스들을 생성해서 해볼게요.
 
 ---
 
-원하는대로 잘 생성되었는지는 describe를 통해 확인 가능합니다.
-
+먼저 MySQL을 실행합니다.
+Docker에서는 아래와 같이 했습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl get configmap
-NAME               DATA   AGE
-kube-root-ca.crt   1      2d2h
-literal-config     1      3s
-
-ubuntu@ip-10-0-1-161:~$ kubectl describe configmaps literal-config
-Name:         literal-config
-Namespace:    default
-Labels:       <none>
-Annotations:  <none>
-
-Data
-====
-company:
-----
-Samsung
-
-BinaryData
-====
-
-Events:  <none>
+ubuntu@ip-10-0-1-14:~$ docker run -d \
+    --network todo-app --network-alias mysql \
+    --volume todo-mysql-data:/var/lib/mysql \
+    --env MYSQL_ROOT_PASSWORD=secret \
+    --env MYSQL_DATABASE=todos \
+    --env LANG=C.UTF-8 \
+    --name my-mysql \
+    mysql:5.7 \
+    --character-set-server=utf8mb4 \
+    --collation-server=utf8mb4_unicode_ci
+c9d83cbd2ac8941da32d8d64103223fe1c6937c9c28507c6e19ed91fca740c98
 ```
-> **명령어** : `kubectl get configmap` , `kubectl describe configmaps literal-config`
+> 환경변수를 이용해서 MySQL 설정을 하고, user-defined bridge 네트워크를 이용했습니다.
+
+쿠버네티스에서는 설정에 필요한 환경변수를 ConfigMap과 Secret으로 만들어서 사용해볼게요.
+
+- ConfigMap으로 만들 환경변수
+  - MYSQL_DATABASE
+  - LANG
+- Secret으로 만들 환경변수
+  - MYSQL_ROOT_PASSWORD
 
 ---
 
-### ConfigMap from File
-파일을 통해 생성하는 방법은 다음과 같습니다.
-
---from-file 을 사용하면, key 는 파일명이 되고 value는 파일의 내용 자체가 됩니다.
---from-env-file 을 사용하면, 파일내에 key=value로 선언되어 있는 것들이 각각의 data로 configmap에 저장이 됩니다.
-
-먼저 Properties 파일을 하나 만들어 봅니다.
-```
-database.url=192.168.0.88
-database.port=5432
-database.db=employee
-database.user=hojoon
-database.password=elqlvotmdnjem
-```
-> 파일명은 app.properties 로 합니다.
-
-이제 이 파일을 통해 configmap을 만들어 보겠습니다.
-먼저 --from-file 을 사용하여 file-config 라는 이름의 configmap을 만듭니다.
-
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl create configmap file-config --from-file=./app.properties
-configmap/file-config created
-```
-> **명령어** : `kubectl create configmap file-config --from-file=./app.properties`
-
----
-
-다음으로 --from-env-file 을 사용하여 file-env-config 라는 이름의 configmap을 만듭니다.
-
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl create configmap file-env-config --from-env-file=./app.properties
-configmap/file-env-config created
-```
-> **명령어** : `kubectl create configmap file-env-config --from-env-file=./app.properties`
-
-두개의 configmap 을 만들었고, 앞에서와 동일하게 각각의 configmap을 describe를 통해 확인해 보겠습니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl describe configmaps file-config
-Name:         file-config
-Namespace:    default
-Labels:       <none>
-Annotations:  <none>
-
-Data
-====
-app.properties:
-----
-database.url=192.168.0.88
-database.port=5432
-database.db=employee
-database.user=hojoon
-database.password=elqlvotmdnjem
-
-BinaryData
-====
-
-Events:  <none>
-```
-> **명령어** : `kubectl describe configmaps file-config`
-
----
-
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl describe configmaps file-env-config
-Name:         file-env-config
-Namespace:    default
-Labels:       <none>
-Annotations:  <none>
-
-Data
-====
-database.url:
-----
-192.168.0.88
-database.user:
-----
-hojoon
-database.db:
-----
-employee
-database.password:
-----
-elqlvotmdnjem
-database.port:
-----
-5432
-
-BinaryData
-====
-
-Events:  <none>
-```
-> **명령어** : `kubectl describe configmaps file-env-config`
-
-Data 부분에 Key와 Value가 각각 어떻게 저장되었는지 확인할 수 있습니다.
-
----
-
-### ConfigMap from Yaml
-yaml 파일로도 생성할 수 있으며, key:value를 여러쌍 포함시킬 수도 있습니다.
-
+ConfigMap과 Secret은 각각 아래와 같이 준비합니다.
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: yaml-config
+  name: mysql-config
 data:
-  location: Jamsil
-  business: ITService
+  database: "todos"
+  lang: "C.UTF-8"
 ```
-> 파일명은 yaml-config.yaml 로 합니다.
+> 파일명은 **mysql-configmap.yaml**로 합니다.
 
-작성된 yaml을 적용하겠습니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl apply -f yaml-config.yaml
-configmap/yaml-config created
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+data:
+  password: c2VjcmV0
 ```
-> **명령어** : `kubectl apply -f yaml-config.yaml`
+> 파일명은 **mysql-secret.yaml**로 합니다.
+
+password("c2VjcmV0")는 "secret"을 base64 encoding한 것입니다.
+base64 encoding 은 아래처럼 하면 됩니다.
+```bash
+ubuntu@ip-172-31-20-30:~$ echo -n 'secret' | base64
+c2VjcmV0
+```
 
 ---
 
-동일하게 describe로 확인해 봅니다.
+ConfigMap과 Secret을 위한 파일들이 준비됐으면, 다음은 pvc를 위한 파일도 하나 준비해주세요.
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+```
+> 파일명은 **mysql-pvc.yaml**로 합니다.
+
+그리고, 이제 다들 아시겠지만 Service도 만들어야하니 준비해 주시구요.
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-mysql-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+```
+> 파일명은 **mysql-clusterip-service.yaml**로 합니다.
+
+---
+
+마지막으로 Deployment를 준비합니다.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-mysql-deployment
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-mysql
+  template:
+    metadata:
+      labels:
+        app: todo-mysql
+    spec:
+      containers:
+      - name: todo-mysql-pod
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: database
+        - name: LANG
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: lang
+        ports:
+        - containerPort: 3306
+        args: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: mysql-storage
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+```
+> 파일명은 **mysql-deployment.yaml**로 합니다.
+
+---
+
+이제 하나씩 생성해줍니다.
+모두 다섯 개의 리소스를 생성해야 하니 천천히 생성해주세요.
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl describe configmaps yaml-config
-Name:         yaml-config
+ubuntu@ip-172-31-20-30:~$ kubectl apply -f mysql-configmap.yaml
+configmap/mysql-config created
+ubuntu@ip-172-31-20-30:~$ kubectl apply -f mysql-secret.yaml
+secret/mysql-secret created
+ubuntu@ip-172-31-20-30:~$ kubectl apply -f mysql-pvc.yaml
+persistentvolumeclaim/mysql-pvc created
+ubuntu@ip-172-31-20-30:~$ kubectl apply -f mysql-clusterip-service.yaml
+service/todo-mysql-svc created
+ubuntu@ip-172-31-20-30:~$ kubectl apply -f mysql-deployment.yaml
+deployment.apps/todo-mysql-deployment created
+```
+> **명령어** : `kubectl apply -f mysql-configmap.yaml`
+> **명령어** : `kubectl apply -f mysql-secret.yaml`
+> **명령어** : `kubectl apply -f mysql-pvc.yaml`
+> **명령어** : `kubectl apply -f mysql-clusterip-service.yaml`
+> **명령어** : `kubectl apply -f mysql-deployment.yaml`
+
+---
+
+ConfigMap이 잘 생성됐나 볼까요?
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl get configmaps
+NAME               DATA   AGE
+kube-root-ca.crt   1      3d9h
+mysql-config       2      6m23s
+ubuntu@ip-172-31-20-30:~$ kubectl describe configmaps mysql-config
+Name:         mysql-config
 Namespace:    default
 Labels:       <none>
 Annotations:  <none>
 
 Data
 ====
-business:
+lang:
 ----
-ITService
-location:
+C.UTF-8
+database:
 ----
-Jamsil
+todos
 
 BinaryData
 ====
 
 Events:  <none>
 ```
-> **명령어** : `kubectl describe configmaps yaml-config`
+> **명령어** : `kubectl get configmaps`
+> **명령어** : `kubectl describe configmaps mysql-config`
 
-yaml파일에 작성한 key-value 쌍이 data로 생성되어 있습니다.
-
-이제 만들어진 ConfigMap들을 사용해보도록 하겠습니다.
-먼저 Pod를 생성할 파일을 하나 작성합니다.
+lang(C.UTF-8)과 database(todos)두 개의 데이터가 보입니다.
 
 ---
 
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: configmap-pod
-spec:
-  containers:
-    - name: configmap-container
-      image: k8s.gcr.io/busybox
-      command: [ "/bin/sh", "-c", "while true; do echo hi; sleep 10; done" ]
-      env:
-        - name: COMPANY
-          valueFrom:
-            configMapKeyRef:
-              name: literal-config
-              key: company
-        - name: LOCATION
-          valueFrom:
-            configMapKeyRef:
-              name: yaml-config
-              key: location
-        - name: BUSINESS
-          valueFrom:
-            configMapKeyRef:
-              name: yaml-config
-              key: business
-      envFrom:
-        - configMapRef:
-            name: file-env-config
-      volumeMounts:
-      - name: config-volume
-        mountPath: /etc/config
-  volumes:
-    - name: config-volume
-      configMap:
-        name: file-config
-  restartPolicy: Never
-```
-> 파일명은 configmappod.yaml 로 합니다.
-
----
-
-Manifest를 보면, 아주 가벼운 busybox shell 만 포함하고 있는 이미지를 사용합니다.
-- literal-config에서 company키에 해당하는 value를 COMPANY 환경 변수에 담아주고, 
-- yaml을 통해 생성했던, yaml-config에서 location과 business key에 해당하는 value를 LOCATION과 BUSINESS 환경 변수에 담아주도록 하였습니다.
-- 그리고, 파일로 부터 생성한 file-env-config의 모든 Key와 Value를 환경 변수에 담아 주고
-- 마지막으로 file-config는 Volume으로 정의한 후 /etc/config 경로에 app.properties 파일로 Mount 시켰습니다.
-
-이제 작성한 Manifest를 통해 Pod을 생성합니다.
-
+Secret도 볼게요.
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl apply -f configmappod.yaml
-pod/configmap-pod created
-```
-> **명령어** : `kubectl apply -f configmappod.yaml`
-
----
-
-해당 pod의 환경변수에 어떤 값들이 들어갔는지 확인해 보겠습니다.
-
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl exec -it configmap-pod -- env
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=configmap-pod
-TERM=xterm
-BUSINESS=ITService
-database.password=elqlvotmdnjem
-database.port=5432
-database.url=192.168.0.88
-database.user=hojoon
-database.db=employee
-COMPANY=Samsung
-LOCATION=Jamsil
-KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
-KUBERNETES_SERVICE_HOST=10.96.0.1
-KUBERNETES_SERVICE_PORT=443
-KUBERNETES_SERVICE_PORT_HTTPS=443
-KUBERNETES_PORT=tcp://10.96.0.1:443
-KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
-KUBERNETES_PORT_443_TCP_PROTO=tcp
-KUBERNETES_PORT_443_TCP_PORT=443
-HOME=/root
-```
-> **명령어** : `kubectl exec -it configmap-pod -- env`
-
----
-
-마지막으로, Volume으로 Mount된 파일의 내용도 확인해 보겠습니다.  
-`kubectl exec` 명령어를 실행해 봅니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl exec -it configmap-pod -- cat /etc/config/app.properties
-database.url=192.168.0.88
-database.port=5432
-database.db=employee
-database.user=hojoon
-database.password=elqlvotmdnjem
-```
-> **명령어** : `kubectl exec -it configmap-pod -- cat /etc/config/app.properties`
-
-
----
-
-이제 **Secret**을 작성하고 사용하는 방법을 알아보겠습니다.
-
-**Secret**은 **ConfigMap**과 동일하게 **Key:Value** 형식으로 저장이 됩니다.
-
-차이점은, 저장될 때 base64 encoding이 되어서 저장된다는 점입니다. 사실 암호화되어 저장되는 것도 아니고 단순히 base64 encoding만 되기 때문에 안전하다고 할 수는 없으나 공격자(?)에게는 혼란을 줄 수 있습니다.
-
-### Secret from Yaml
-Secret도 ConfigMap과 동일하게 `--from-literal` 이나 `--from-file`, `--from-env-file`을 사용할 수 있습니다.
-이번 실습에는 YAML파일을 사용하는 방법만 사용해보겠습니다.
-
-
-
-먼저 Secret을 위한 yaml파일을 하나 작성합니다.
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: yaml-secret
-data:
-  location: SmFtc2ls
-  business: SVRTZXJ2aWNl
-```
-> 파일명은 yaml-secret.yaml 로 합니다.
-
----
-
-configmap과 달리 secret을 생성할 때는, value를 base64 encoding한 값으로 작성해야만 합니다.
-location의 value는 Jamsil 을 base64 encoding 한 값이며, business의 value는 ITService를 base64 encoding 한 값입니다.
-
-아래를 참고하세요.
-```bash
-ubuntu@ip-10-0-1-161:~$ echo -n 'Jamsil' | base64
-SmFtc2ls
-ubuntu@ip-10-0-1-161:~$ echo -n 'ITService' | base64
-SVRTZXJ2aWNl
-```
-> **명령어** : `echo -n 'Jamsil' | base64`, `echo -n 'ITService' | base64`
-
-작성된 yaml을 적용하겠습니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl apply -f yaml-secret.yaml
-secret/yaml-secret created
-```
-> **명령어** : `kubectl apply -f yaml-secret.yaml`
-
----
-
-동일하게 describe로 확인해 봅니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl describe secret yaml-secret
-Name:         yaml-secret
+ubuntu@ip-172-31-20-30:~$ kubectl get secrets
+NAME                  TYPE                                  DATA   AGE
+default-token-r7g6g   kubernetes.io/service-account-token   3      3d9h
+mysql-secret          Opaque                                1      6m21s
+ubuntu@ip-172-31-20-30:~$ kubectl describe secrets mysql-secret
+Name:         mysql-secret
 Namespace:    default
 Labels:       <none>
 Annotations:  <none>
@@ -382,71 +253,297 @@ Type:  Opaque
 
 Data
 ====
-business:  9 bytes
-location:  6 bytes
+password:  6 bytes
 ```
-> **명령어** : `kubectl describe secret yaml-secret`
+> **명령어** : `kubectl get secrets`
+> **명령어** : `kubectl describe secrets mysql-secret`
+
+Secret의 Data는 값이 보이지는 않네요.
+Secret이니까요. -_-
 
 ---
 
-이제 앞에서 만든 Secret을 사용할 Pod를 준비하겠습니다.
+Pod도 확인해보세요. (Environment, Mounts, Volumes 부분을 잘 보세요.)
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl get pod
+NAME                                     READY   STATUS    RESTARTS   AGE
+todo-mysql-deployment-78dd847547-xcld4   1/1     Running   0          13m
+ubuntu@ip-172-31-20-30:~$ kubectl describe pod todo-mysql-deployment-78dd847547-xcld4
+Name:         todo-mysql-deployment-78dd847547-xcld4
+...생략...
+
+Containers:
+  todo-mysql-pod:
+    ...생략...
+
+    Environment:
+      MYSQL_ROOT_PASSWORD:  <set to the key 'password' in secret 'mysql-secret'>      Optional: false
+      MYSQL_DATABASE:       <set to the key 'database' of config map 'mysql-config'>  Optional: false
+      LANG:                 <set to the key 'lang' of config map 'mysql-config'>      Optional: false
+    Mounts:
+      /var/lib/mysql from mysql-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-pls6z (ro)
+...생략...
+
+Volumes:
+  mysql-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  mysql-pvc
+    ReadOnly:   false
+...생략...
+```
+> **명령어** : `kubectl get pod`
+> **명령어** : `kubectl describe pod [POD-NAME]`
+> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+
+---
+
+이제 두 번재 워크로드인 ToDo App 을 실행해볼까요?
+MySQL과 마찬가지로 ConfigMap과 Secret을 사용하고, 외부에서 접속을 해야하니 Ingress까지 만들어볼게요.
+
+이번엔 몽땅 하나의 yaml파일로 만들어 보겠습니다.
 
 ```yaml
 apiVersion: v1
-kind: Pod
+kind: Secret
 metadata:
-  name: secret-pod
+  name: todo-secret
+type: Opaque
+data:
+  mysql-user: cm9vdA==
+  mysql-password: c2VjcmV0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-config
+data:
+  mysql-host: "todo-mysql-svc.default.svc.cluster.local"
+  mysql-db: "todos"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app-svc
 spec:
-  containers:
-    - name: secret-container
-      image: k8s.gcr.io/busybox
-      command: [ "/bin/sh", "-c", "while true; do echo hi; sleep 10; done" ]
-      env:
-        - name: LOCATION
-          valueFrom:
-            secretKeyRef:
-              name: yaml-secret
-              key: location
-        - name: BUSINESS
-          valueFrom:
-            secretKeyRef:
-              name: yaml-secret
-              key: business
-  restartPolicy: Never
+  type: NodePort
+  selector:
+    app: todo-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30007
 ```
-> 파일명은 secretpod.yaml 로 합니다.
-> 
-Manifest를 보면, 아주 가벼운 busybox shell 만 포함하고 있는 이미지를 사용합니다.
-- yaml-secret에서 location과 business key에 해당하는 value를 LOCATION과 BUSINESS 환경 변수에 담아주도록 하였습니다.
 
 ---
 
-이제 Pod을 생성합니다.
+앞장에 이어서 계속.
+```yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-deployment
+  labels:
+    app: todo-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+      - name: todo-app
+        image: rogallo/101-todo-app:1.0.0
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: mysql-host
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: mysql-db
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: todo-secret
+              key: mysql-user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-secret
+              key: mysql-password
+        ports:
+        - containerPort: 3000
+---
 ```
-ubuntu@ip-10-0-1-161:~$ kubectl apply -f secretpod.yaml
-pod/secret-pod created
-```
-> **명령어** : `kubectl apply -f secretpod.yaml`
 
-해당 pod의 환경변수에 어떤 값들이 들어갔는지 확인해 보겠습니다.
+---
+
+앞장에 이어서 계속.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: todo-app.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-app-svc
+                port:
+                  number: 3000
 ```
-ubuntu@ip-10-0-1-161:~$ kubectl exec -it secret-pod -- env
+> 파일명은 **todo-all.yaml**로 합니다.
+
+파일이 좀 길죠?
+교재 **hands_on_files**디렉토리에 **todo-all.yaml**이라는 이름으로 미리 만들어 놓았으니, 그걸 사용하셔도 됩니다.
+
+> 하나의 yaml파일 안에 여러개의 K8s [Manifest](https://kubernetes.io/docs/reference/glossary/?fundamental=true#term-manifest)를 정의할때는, `---`를 구분자로 해서 여러개의 리소스 정의를 하나의 파일로 만들면 됩니다.
+
+---
+
+생성은 아래처럼 한 번에 됩니다.
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl apply -f todo-all.yaml
+secret/todo-secret created
+configmap/todo-config created
+service/todo-app-svc created
+deployment.apps/todo-app-deployment created
+ingress.networking.k8s.io/todo-app-ingress created
+```
+> **명령어** : `kubectl apply -f todo-all.yaml`
+
+앞서 MySQL에서 한 것과 비슷하게 ConfigMap, Secret, Pod를 확인해보세요.
+명령어만 알려드릴게요.
+> **명령어** : `kubectl describe configmaps todo-config`
+> **명령어** : `kubectl describe secrets todo-secret`
+> **명령어** : `kubectl describe pod [POD-NAME]`
+> [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+
+---
+
+POD의 환경변수를 확인하려면 아래처럼도 가능합니다.
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl exec todo-app-deployment-df65dc8b6-dmv2m -- env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=secret-pod
+HOSTNAME=todo-app-deployment-df65dc8b6-dmv2m
 TERM=xterm
-LOCATION=Jamsil
-BUSINESS=ITService
-KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
-KUBERNETES_SERVICE_HOST=10.96.0.1
-KUBERNETES_SERVICE_PORT=443
-KUBERNETES_SERVICE_PORT_HTTPS=443
-KUBERNETES_PORT=tcp://10.96.0.1:443
-KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
-KUBERNETES_PORT_443_TCP_PROTO=tcp
-KUBERNETES_PORT_443_TCP_PORT=443
-HOME=/root
+MYSQL_HOST=todo-mysql-svc.default.svc.cluster.local
+MYSQL_DB=todos
+MYSQL_USER=root
+MYSQL_PASSWORD=secret
+TODO_MYSQL_SVC_PORT_3306_TCP_PROTO=tcp
+TODO_MYSQL_SVC_PORT_3306_TCP_PORT=3306
+TODO_MYSQL_SVC_PORT_3306_TCP_ADDR=10.105.99.97
+TODO_APP_SVC_SERVICE_PORT=3000
+TODO_APP_SVC_PORT=tcp://10.98.198.46:3000
+TODO_MYSQL_SVC_SERVICE_PORT=3306
+TODO_APP_SVC_PORT_3000_TCP=tcp://10.98.198.46:3000
+TODO_APP_SVC_PORT_3000_TCP_PORT=3000
+TODO_APP_SVC_PORT_3000_TCP_ADDR=10.98.198.46
+TODO_MYSQL_SVC_SERVICE_HOST=10.105.99.97
+TODO_MYSQL_SVC_PORT=tcp://10.105.99.97:3306
+TODO_MYSQL_SVC_PORT_3306_TCP=tcp://10.105.99.97:3306
+TODO_APP_SVC_SERVICE_HOST=10.98.198.46
+TODO_APP_SVC_PORT_3000_TCP_PROTO=tcp
+
+...생략...
+
 ```
-> **명령어** : `kubectl exec -it secret-pod -- env`
+> **명령어** : `kubectl exec -it [POD-NAME] -- env`
+> [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+
+- [kubectl exec](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec) 명령어의 사용방법은 [동작중인 컨테이너의 셸에 접근하기](https://kubernetes.io/ko/docs/tasks/debug/debug-application/get-shell-running-container/)를 참고하세요.
+
+---
+
+브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
+
+![h:400](img/k8s_todo_ingress.png)
+
+---
+
+MySQL DB의 테이블에 잘 저장됐는지도 확인해보세요.
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl exec -it todo-mysql-deployment-78dd847547-xcld4 -- mysql -p todos
+Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 5.7.41 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from todo_items;
++--------------------------------------+-----------------------+-----------+
+| id                                   | name                  | completed |
++--------------------------------------+-----------------------+-----------+
+| a5964fe2-4992-4a4d-ac25-d44503a4013b | 엠에스피티쓰리            |         0 |
+| 0e7219c5-5843-40f3-beb0-9fc7875b118a | mspt3                 |         0 |
++--------------------------------------+-----------------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> exit;
+Bye
+```
+> **명령어** : `kubectl exec -it [POD-NAME] -- mysql -p todos`
+> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+
+---
+
+이것저것 확인해보시고, 마지막은 생성된 리소스들을 정리해주세요.
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl delete -f todo-all.yaml
+secret "todo-secret" deleted
+configmap "todo-config" deleted
+service "todo-app-svc" deleted
+deployment.apps "todo-app-deployment" deleted
+ingress.networking.k8s.io "todo-app-ingress" deleted
+ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-deployment.yaml
+deployment.apps "todo-mysql-deployment" deleted
+ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-clusterip-service.yaml
+service "todo-mysql-svc" deleted
+ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-pvc.yaml
+persistentvolumeclaim "mysql-pvc" deleted
+ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-secret.yaml
+secret "mysql-secret" deleted
+ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-configmap.yaml
+configmap "mysql-config" deleted
+```
+> **명령어** : `kubectl delete -f todo-all.yaml`
+> **명령어** : `kubectl delete -f mysql-deployment.yaml`
+> **명령어** : `kubectl delete -f mysql-clusterip-service.yaml`
+> **명령어** : `kubectl delete -f mysql-pvc.yaml`
+> **명령어** : `kubectl delete -f mysql-secret.yaml`
+> **명령어** : `kubectl delete -f mysql-configmap.yaml`
+
+<br><br>
 
 이번 실습은 여기까지 입니다.   ＿〆(。╹‿ ╹ 。)
 
