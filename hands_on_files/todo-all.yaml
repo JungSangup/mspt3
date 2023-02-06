@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
       - name: todo-app
-        image: rogallo/101-todo-app:1.0.0
+        image: [USER-NAME]/todo-app:1.0.0
         env:
         - name: MYSQL_HOST
           valueFrom:
@@ -79,6 +79,8 @@ spec:
               key: mysql-password
         ports:
         - containerPort: 3000
+      imagePullSecrets:
+      - name: regcred
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
