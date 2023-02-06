@@ -55,10 +55,10 @@ c9d83cbd2ac8941da32d8d64103223fe1c6937c9c28507c6e19ed91fca740c98
 
 쿠버네티스에서는 설정에 필요한 환경변수를 ConfigMap과 Secret으로 만들어서 사용해볼게요.
 
-- ConfigMap으로 만들 환경변수
+- **ConfigMap**으로 만들 환경변수
   - MYSQL_DATABASE
   - LANG
-- Secret으로 만들 환경변수
+- **Secret**으로 만들 환경변수
   - MYSQL_ROOT_PASSWORD
 
 ---
@@ -298,11 +298,10 @@ Volumes:
 
 ---
 
-이제 두 번재 워크로드인 ToDo App 을 실행해볼까요?
+이제 두 번재 워크로드인 **ToDo App**을 실행해볼까요?
 MySQL과 마찬가지로 ConfigMap과 Secret을 사용하고, 외부에서 접속을 해야하니 Ingress까지 만들어볼게요.
 
 이번엔 몽땅 하나의 yaml파일로 만들어 보겠습니다.
-
 ```yaml
 apiVersion: v1
 kind: Secret
@@ -361,7 +360,7 @@ spec:
     spec:
       containers:
       - name: todo-app
-        image: rogallo/101-todo-app:1.0.0
+        image: [USER-NAME]/todo-app:1.0.0
         env:
         - name: MYSQL_HOST
           valueFrom:
@@ -412,14 +411,47 @@ spec:
                   number: 3000
 ```
 > 파일명은 **todo-all.yaml**로 합니다.
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요. (58번째 라인 -> Deployment의 .spec.containers[0].image 입니다.)
 
 파일이 좀 길죠?
 교재 **hands_on_files**디렉토리에 **todo-all.yaml**이라는 이름으로 미리 만들어 놓았으니, 그걸 사용하셔도 됩니다.
 
-> 하나의 yaml파일 안에 여러개의 K8s [Manifest](https://kubernetes.io/docs/reference/glossary/?fundamental=true#term-manifest)를 정의할때는, `---`를 구분자로 해서 여러개의 리소스 정의를 하나의 파일로 만들면 됩니다.
+> 하나의 yaml파일 안에 여러개의 K8s [Manifest](https://kubernetes.io/docs/reference/glossary/?fundamental=true#term-manifest)를 정의할때는, `---`를 구분자로 해서 여러개를 담으면 됩니다.
 
 ---
 
+생성하기 전에 한 가지 더 해줘야할 일이 있습니다.
+
+image([USER-NAME]/todo-app:1.0.0)를 여러분의 private repository에서 pull해야하기 때문에, **자격증명**을 해야합니다.
+여러가지 방법이 있지만, 간단하게 [커맨드 라인에서 자격 증명을 통하여 시크릿 생성하기](https://kubernetes.io/ko/docs/tasks/configure-pod-container/pull-image-private-registry/#%EC%BB%A4%EB%A7%A8%EB%93%9C-%EB%9D%BC%EC%9D%B8%EC%97%90%EC%84%9C-%EC%9E%90%EA%B2%A9-%EC%A6%9D%EB%AA%85%EC%9D%84-%ED%86%B5%ED%95%98%EC%97%AC-%EC%8B%9C%ED%81%AC%EB%A6%BF-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)방법으로 해볼게요.
+
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=rogallo --docker-password=XXXXXX
+secret/regcred created
+```
+> **명령어** : `kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=[USER-NAME] --docker-password=[PASSWORD]`
+> [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
+
+이것도 많이 쓰이는 Secret의 사용방법 중 하나입니다.
+조회도 한 번 해보세요.
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl describe secrets regcred
+Name:         regcred
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  kubernetes.io/dockerconfigjson
+
+Data
+====
+.dockerconfigjson:  114 bytes
+```
+> **명령어** : `kubectl describe secrets regcred`
+
+---
+
+이제 ToDo App을 생성해볼게요.
 생성은 아래처럼 한 번에 됩니다.
 ```bash
 ubuntu@ip-172-31-20-30:~$ kubectl apply -f todo-all.yaml
@@ -431,7 +463,7 @@ ingress.networking.k8s.io/todo-app-ingress created
 ```
 > **명령어** : `kubectl apply -f todo-all.yaml`
 
-앞서 MySQL에서 한 것과 비슷하게 ConfigMap, Secret, Pod를 확인해보세요.
+앞서 MySQL에서 한 것과 비슷하게 ConfigMap, Secret, Pod도 확인해보세요.
 명령어만 알려드릴게요.
 > **명령어** : `kubectl describe configmaps todo-config`
 > **명령어** : `kubectl describe secrets todo-secret`
@@ -525,6 +557,8 @@ configmap "todo-config" deleted
 service "todo-app-svc" deleted
 deployment.apps "todo-app-deployment" deleted
 ingress.networking.k8s.io "todo-app-ingress" deleted
+ubuntu@ip-172-31-20-30:~$ kubectl delete secrets regcred
+secret "regcred" deleted
 ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-deployment.yaml
 deployment.apps "todo-mysql-deployment" deleted
 ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-clusterip-service.yaml
@@ -537,13 +571,13 @@ ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-configmap.yaml
 configmap "mysql-config" deleted
 ```
 > **명령어** : `kubectl delete -f todo-all.yaml`
+> **명령어** : `kubectl delete secret regcred`
 > **명령어** : `kubectl delete -f mysql-deployment.yaml`
 > **명령어** : `kubectl delete -f mysql-clusterip-service.yaml`
 > **명령어** : `kubectl delete -f mysql-pvc.yaml`
 > **명령어** : `kubectl delete -f mysql-secret.yaml`
 > **명령어** : `kubectl delete -f mysql-configmap.yaml`
 
-<br><br>
+<br>
 
 이번 실습은 여기까지 입니다.   ＿〆(。╹‿ ╹ 。)
-

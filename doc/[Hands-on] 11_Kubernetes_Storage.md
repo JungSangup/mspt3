@@ -267,7 +267,7 @@ persistentvolumeclaim "nginx-pvc" deleted
 
 ---
 
-### 보나스 실습
+### 보너스 실습
 
 앞의 실습까지 하고도 시간이 남으면 해보세요.
 
