@@ -414,7 +414,7 @@ spec:
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요. (58번째 라인 -> Deployment의 .spec.containers[0].image 입니다.)
 
 파일이 좀 길죠?
-교재 **hands_on_files**디렉토리에 **todo-all.yaml**이라는 이름으로 미리 만들어 놓았으니, 그걸 사용하셔도 됩니다.
+교재 **hands_on_files**디렉토리에 [todo-all.yaml](https://raw.githubusercontent.com/JungSangup/mspt3/main/hands_on_files/todo-all.yaml)이라는 이름으로 미리 만들어 놓았으니, 그걸 사용하셔도 됩니다.
 
 > 하나의 yaml파일 안에 여러개의 K8s [Manifest](https://kubernetes.io/docs/reference/glossary/?fundamental=true#term-manifest)를 정의할때는, `---`를 구분자로 해서 여러개를 담으면 됩니다.
 

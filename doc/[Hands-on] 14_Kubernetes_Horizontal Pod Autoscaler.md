@@ -7,37 +7,32 @@ paginate: true
 header: Docker & Kubernetes - [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
 ---
 
-## [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **HPA를 사용해서 자동 스케일링 해보기**
+
+---
+
+## HPA를 사용해서 자동 스케일링 해보기
 
 Horizontal Pod Autoscaler(HPA)를 이용하여 자동으로 Pod의 개수를 조절하는 실습입니다.
 
 실습 내용은 [HorizontalPodAutoscaler Walkthrough](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) 를 기반으로 하였습니다.
 
-먼저 자원 모니터링을 위한 metrics-server를 준비합니다.
+먼저 자원 모니터링을 위한 metrics-server가 필요합니다.
+우리는 앞서 Minikube의 Metrics-Server Addon을 Enable시켰기 때문에 따로 해줄일은 없습니다.
 
-```bash
-ubuntu@ip-10-0-1-161:~$ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-serviceaccount/metrics-server created
-clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/system:metrics-server created
-rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
-clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
-clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
-service/metrics-server created
-deployment.apps/metrics-server created
-apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
-```
-> **명령어** : `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
-
-> Minikube에서는 Metrics-Server Addon을 Enable 시키면 됩니다.
-> **명령어** : `minikube addons enable metrics-server`
-
-바로 적용되지는 않습니다. 아래와 같이 명령어의 결과가 나올 때 까지 조금 기다려주세요.
+정상적으로 Addon이 Enable된 경우 아래와 같이 확인 가능합니다.
 ```bash
 ubuntu@ip-10-0-10-180:~$ kubectl top node
-NAME                                             CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
-ip-10-0-10-216.ap-northeast-2.compute.internal   56m          2%     639Mi           19%
-ip-10-0-11-55.ap-northeast-2.compute.internal    54m          2%     617Mi           18%
+NAME              CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+ip-172-31-20-30   187m         9%     2234Mi          57%
 ```
 > **명령어** : `kubectl top node`
 
@@ -54,7 +49,7 @@ service/php-apache created
 > Deployment와 Service가 만들어집니다.
 
 
-이제 hpa를 생성합니다.
+이제 **hpa**를 생성합니다.
 
 명령어는 다음과 같습니다.
 CPU 사용량을 50%로 유지하기 위해서 Pod의 개수를 1 에서 10 사이로 조정하라는 의미입니다.
@@ -67,7 +62,7 @@ horizontalpodautoscaler.autoscaling/php-apache autoscaled
 
 잘 만들어졌나 볼까요?
 ```bash
-ubuntu@ip-10-0-10-180:~/mspt2/hands_on_files$ kubectl get hpa
+ubuntu@ip-10-0-10-180:~$ kubectl get hpa
 NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 php-apache   Deployment/php-apache   0%/50%    1         10        1          24s
 ```
@@ -75,15 +70,15 @@ php-apache   Deployment/php-apache   0%/50%    1         10        1          24
 
 ---
 
-이제 먼저 생성한 Pod에 부하를 줄 도우미 친구 입니다.
+다음은 먼저 생성한 Pod에 부하를 줄 도우미 친구 입니다.
 
 간단한 sh 명령어를 실행할 pod(load-generator)를 만들어서 반복문을 실행합니다.
-앞에서 만든 Pod에 계속 요청을 보내서 CPU 사용율을 높이게 됩니다.
+앞에서 만든 Pod에 계속 요청(http request)을 보내서 CPU 사용율을 높이게 됩니다.
 
 시스템에 사용자가 늘어난 상황을 비슷하게 만든거라고 보시면 됩니다.
 
 ```bash
-ubuntu@ip-10-0-10-180:~/mspt2/hands_on_files$ kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+ubuntu@ip-10-0-10-180:~$ kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
 If you don't see a command prompt, try pressing enter.
 OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!
 OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!

@@ -8,7 +8,21 @@ header: Docker & Kubernetes - [Hands-on] 13. Kubernetes Deployment strategies
 footer: Samsung SDS
 ---
 
-## [Hands-on] 13. Kubernetes Deployment strategies
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Recreate 방법으로 업데이트 해보기**
+- **Recreate 방법으로 롤백 해보기**
+- **RollingUpdate 방법으로 업데이트 해보기**
+
+---
+
+## Recreate 방법으로 업데이트 해보기
 
 이번 실습은 Deployment의 업데이트 방법 두 가지를 비교해보는 실습입니다.
 
@@ -16,8 +30,6 @@ footer: Samsung SDS
 미리 준비해주세요.
 
 <br>
-
-### Recreate
 
 첫 번째는 **Recreate** 입니다.
 말 그대로 **다시 생성**하는 방법입니다. 기존에 서비스되고 있던 Pod들을 모두 정지하고, 새로운 Pod를 실행하는거죠.
@@ -61,7 +73,7 @@ spec:
         ports:
         - containerPort: 80
 ```
-> 파일명은 nginx-recreate.yaml로 합니다.
+> 파일명은 **nginx-recreate.yaml**로 합니다.
 
 ---
 
@@ -120,7 +132,7 @@ ubuntu@ip-10-0-1-161:~$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-r
 ---
 
 그리고, Pod들이 어떻게 변하는지 살펴보기 위해서 다음 명령어를 실행해주세요.
-이 명령어는 두 번째 Terminal에서 실행해주세요.
+이 명령어는 **두 번째 Terminal**에서 실행해주세요.
 ```bash
 ubuntu@ip-10-0-1-161:~/mspt2$ kubectl get pods --watch
 NAME                                READY   STATUS    RESTARTS   AGE
@@ -205,11 +217,9 @@ ubuntu@ip-10-0-1-161:~$ kubectl describe pod nginx-deployment-6866dc769c-lk922 |
 이제 두 번째 터미널은 Ctrl + c 를 눌러 Watch를 멈추겠습니다.
 
 ---
+## Recreate 방법으로 롤백 해보기
 
-업데이트에 문제가 생기면 **롤백**도 할 수 있습니다.
-이번에는 Deployment의 **롤백** 방법을 알아보겠습니다.
-
-먼저 업데이트 History는 아래와 같이 확인해볼 수 있습니다.
+이번에는 Deployment의 **롤백** 방법을 알아보겠습니다. 먼저 업데이트 **History**는 아래와 같이 확인해볼 수 있습니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl rollout history deployment nginx-deployment
 deployment.apps/nginx-deployment
@@ -219,7 +229,7 @@ REVISION  CHANGE-CAUSE
 ```
 > **명령어** : `kubectl rollout history deployment nginx-deployment`
 
-최초 생성된 **Revision #1**과 한 번 업데이트 후의 **Revision #2**가 보입니다.
+최초 생성된 **Revision #1**과 한 번 업데이트 후의 **Revision #2**가 보입니다. 
 그 중 하나의 Revision을 콕 집어서 자세히 볼 수도 있습니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl rollout history deployment nginx-deployment --revision=1
@@ -259,7 +269,7 @@ Pod Template:
 
 
 
-역시 두 번째 Terminal에 어떤 변화가 일어날지 모니터할 준비를 하고,
+역시 **두 번째 Terminal**에 어떤 변화가 일어날지 확인 할 준비를 하고,
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl get pods --watch
 NAME                                READY   STATUS    RESTARTS   AGE
@@ -274,14 +284,14 @@ nginx-deployment-6866dc769c-zjv2b   1/1     Running   0          17m
 
 ---
 
-첫 번째 Terminal에서 revision1으로 롤백 합니다.
+**첫 번째 Terminal**에서 **revision1**으로 롤백 합니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl rollout undo deployment nginx-deployment --to-revision=1
 deployment.apps/nginx-deployment rolled back
 ```
 > **명령어** : `kubectl rollout undo deployment nginx-deployment --to-revision=1`
 
-두 번째 터미널에는 업데이트 할 때와 비슷한 변경내용을 볼 수 있을겁니다.
+**두 번째 Terminal**에는 업데이트 할 때와 비슷한 변경내용을 볼 수 있을겁니다.
 Pod들을 먼저 삭제하고, 새로은 Pod들을 만드는 걸 볼 수 있습니다.
 
 이전 버젼으로 롤백이 잘 됐는지 아래 명령어로 확인해보세요.
@@ -305,9 +315,9 @@ deployment.apps "nginx-deployment" deleted
 
 ---
 
-### RollingUpdate
+## RollingUpdate 방법으로 업데이트 해보기
 
-이번엔 RollingUpdate 입니다.
+이번엔 **RollingUpdate** 입니다.
 기존에 서비스되고 있던 Pod들을 새로운 Pod로 조금씩(N개씩) 업데이트 하는 방식입니다.
 
 Deployment 의 `.spec.strategy`를 아래와 같이 지정하면 됩니다.
@@ -398,7 +408,7 @@ ubuntu@ip-10-0-1-161:~$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-r
 
 ---
 
-두 번째 Terminal에는 확인할 명령어를 실행한 후에
+**두 번째 Terminal**에는 확인 할 명령어를 실행한 후에
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl get pods --watch
 NAME                                READY   STATUS    RESTARTS   AGE
@@ -409,7 +419,7 @@ nginx-deployment-5777d8dcc8-sj4b2   1/1     Running   0          7m21s
 ```
 > **명령어** : `kubectl get pods --watch`
 
-첫 번재 Terminal에서 업데이트를 합니다.
+**첫 번재 Terminal**에서 업데이트를 합니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-rollingupdate.yaml
 deployment.apps/nginx-deployment configured
@@ -418,7 +428,7 @@ deployment.apps/nginx-deployment configured
 
 ---
 
-두 번째 Terminal은 아래와 비슷한 걸 볼 수 있을겁니다. **Recreate**때와는 달리 Pod들이 순차적으로 변경되는 걸 볼 수 있습니다.
+**두 번째 Terminal**은 아래와 비슷한 걸 볼 수 있을겁니다. **Recreate**때와는 달리 Pod들이 순차적으로 변경되는 걸 볼 수 있습니다.
 ```bash
 ubuntu@ip-10-0-1-161:~/mspt2$ kubectl get pods --watch
 NAME                                READY   STATUS    RESTARTS   AGE
