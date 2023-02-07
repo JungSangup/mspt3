@@ -79,10 +79,12 @@ resources: {}
   #   memory: 128Mi
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 10
+  targetCPUType: Utilization
   targetCPUUtilizationPercentage: 80
+  # targetMemoryType: Utilization
   # targetMemoryUtilizationPercentage: 80
 
 configmap:
