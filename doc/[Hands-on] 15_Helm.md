@@ -5,6 +5,7 @@ size: 16:9
 theme: mspt2
 paginate: true
 header: Docker & Kubernetes - [Hands-on] 15. Helm
+footer: Samsung SDS
 ---
 
 ![bg left:40%](img/hands_on.png)
@@ -22,7 +23,6 @@ header: Docker & Kubernetes - [Hands-on] 15. Helm
 ## Helm
 
 자주 사용되는 Helm 명령어들을 실습해 보겠습니다.
-
 먼저 어떤 명령어들이 있는지 살펴볼까요?
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm help
@@ -48,7 +48,6 @@ Environment variables:
 | $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                                   |
 | $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                                   |
 | $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                                        |
-| $HELM_PLUGINS                      | set the path to the plugins directory                                                             |
 ...생략...
 ```
 > **명령어** : `helm --help`
@@ -255,7 +254,6 @@ statefulset.apps/my-wordpress-mariadb   1/1     3m40s
 > **명령어** : `kubectl get all`
 
 와우~ 뭔가 Wordpress 소프트웨어에 필요한 모든게 한 번에 설치가 된 것 같네요. 패키지로...
-이게 바로 **Helm** 이랍니다.
 
 삭제도 한 번에 가능합니다.
 ```bash

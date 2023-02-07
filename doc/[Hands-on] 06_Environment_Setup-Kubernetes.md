@@ -28,9 +28,9 @@ footer: Samsung SDS
 Kubernetes 실습을 위해서 **K8s cluster**를 구성합니다.
 K8s cluster는 다양한 방법으로 구성할 수 있지만, 우리 실습과정은 **단일노드 cluster**인 [Minikube](https://minikube.sigs.k8s.io/)를 이용합니다.
 
-먼저 기존에 Docker 실습에서 사용하던 Instance로 로그인합니다.
 우리가 앞에서 사용한 VM Instance는 Minikube의 [설치조건](https://minikube.sigs.k8s.io/docs/start/#what-youll-need)을 만족하도록 구성되어 있습니다.
 
+먼저 기존에 Docker 실습에서 사용하던 Instance로 로그인합니다.
 ```bash
 > ssh -i "mspt3.pem" ubuntu@ec2-00-00-00-00.compute-1.amazonaws.com
 Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-1028-aws x86_64)
@@ -63,7 +63,7 @@ ubuntu@ip-10-0-2-33:~$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 ---
 
-minikube를 시작하기 전에 먼저 한 가지 패키지(conntrack)를 설치합니다.
+minikube를 시작하기 전에 먼저 한 가지 패키지(**conntrack**)를 설치합니다.
 ```bash
 ubuntu@ip-10-0-2-33:~$ sudo apt-get update
 ...생략...
@@ -255,3 +255,7 @@ ubuntu@ip-10-0-2-33:~$ helm version
 version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
 ```
 > **명령어** : `helm version`
+
+<br><br><br>
+
+여기까지 하시면 Kubernetes와 Helm을 공부할 준비는 됐습니다.  ˘◡˘

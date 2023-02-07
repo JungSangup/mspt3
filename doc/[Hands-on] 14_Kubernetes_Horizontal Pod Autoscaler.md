@@ -5,6 +5,7 @@ size: 16:9
 theme: mspt2
 paginate: true
 header: Docker & Kubernetes - [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
+footer: Samsung SDS
 ---
 
 ![bg left:40%](img/hands_on.png)

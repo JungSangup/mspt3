@@ -464,10 +464,14 @@ a6524c5b12a6: Layer already exists
 
 [https://hub.docker.com/](https://hub.docker.com/) 에 방금 push한 이미지가 잘 올라가 있나요?
 
-![h:350](img/docker_create_repository4.png)
+![h:300](img/docker_create_repository4.png)
 
 축하합니다.  (๑˃̵ᴗ˂̵)و
 
 이제 여러분들의 저장공간도 생겼고, 언제 어디서든 방금 올려두신 이미지를 이용해서 여러분의 샘플 애플리케이션을 실행해보실 수 있게 됐습니다.  
 
 이번 실습은 여기까지 입니다.
+
+<br>
+
+> 위의 두 개 이미지는 뒤의 과정에서 계속 필요하니, 잘 준비해두세요.

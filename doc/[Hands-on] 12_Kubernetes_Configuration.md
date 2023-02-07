@@ -432,7 +432,7 @@ secret/regcred created
 > **명령어** : `kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=[USER-NAME] --docker-password=[PASSWORD]`
 > [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
 
-이것도 많이 쓰이는 Secret의 사용방법 중 하나입니다.
+이것도 많이 쓰이는 Secret의 용도 중 하나입니다.
 조회도 한 번 해보세요.
 ```bash
 ubuntu@ip-172-31-20-30:~$ kubectl describe secrets regcred

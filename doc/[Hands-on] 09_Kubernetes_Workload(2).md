@@ -214,7 +214,7 @@ nginx-deployment-596ff98864-ccgxd   1/1     Running   0          113s   app=my-n
 > **명령어** : `kubectl get po --show-labels`
 
 
-이제 Pod 하나를 삭제(delete)해 볼까요?
+이제 Pod 하나를 삭제(**delete**)해 볼까요?
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl delete po nginx-deployment-596ff98864-7rcc5
 pod "nginx-deployment-596ff98864-7rcc5" deleted

@@ -217,3 +217,16 @@ ubuntu@ip-10-0-1-14:~$ docker run hellodocker:v2
 Hello Docker!!!
 ```
 > **명령어** : `docker run hellodocker:v2`
+
+---
+
+지금까지 실행한 컨테이너들을 모두 삭제하고 마치겠습니다.
+
+```bash
+ubuntu@ip-10-0-1-14:~$ docker rm -f $(docker ps -aq)
+```
+> **명령어** : `docker rm -f $(docker ps -aq)`
+
+<br><br><br>
+
+수고하셨습니다. (〃･ิ‿･ิ)ゞ
