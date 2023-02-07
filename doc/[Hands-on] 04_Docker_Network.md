@@ -127,6 +127,7 @@ ubuntu@ip-10-0-1-14:~$
 ---
 
 이번에는 우리의 샘플 애플리케이션을 mysql과 연계해서 실행해 보겠습니다.
+- Private repository의 이미지를 사용할 경우 로그인(`docker login -u [USER-NAME]`)이 필요합니다.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run -dp 3000:3000 \
 --network todo-app \

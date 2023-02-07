@@ -275,7 +275,7 @@ release "my-wordpress" uninstalled
 
 설치는 간단합니다.
 ```bash
-ubuntu@ip-172-31-20-30:~$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+ubuntu@ip-10-0-1-161:~$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 NAME: my-todo-app
 LAST DEPLOYED: Tue Feb  7 05:24:08 2023
 NAMESPACE: default
@@ -295,6 +295,40 @@ NOTES:
 > **명령어** : `helm install my-todo-app ./todo-app` -> 로컬 경로의 차트 디렉토리
 > **hands_on_files** 아래에 위의 두 가지 경우도 가능하도록 미리 파일을 준비해 놓았습니다.
 
+우선 이 Helm release는 Uninstall을 할게요. 뒤에 다른 방법으로 다시 설치하겠습니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ helm uninstall my-todo-app
+release "my-todo-app" uninstalled
+```
+> **명령어** : `helm uninstall my-todo-app`
+
+---
+
+이번에는 구성을 조금 달리해서 설치하겠습니다.
+여러분의 Docker private repository에 올려놓은 이미지를 사용하도록 하고, 이미지 pull을 위해서 자격증명을 사용하도록 할게요.
+
+역시 아래와 같이 간단하게 실행할 수 있습니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ helm install my-todo-app --set image.repository=rogallo/todo-app --set imageCredentials.create=true --set imageCredentials.username=rogallo --set imageCredentials.password=XXX https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+NAME: my-todo-app
+LAST DEPLOYED: Tue Feb  7 09:50:25 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+1. Get the application URL by running these commands:
+  http://todo-app.info/
+```
+> **명령어** : `helm install my-todo-app --set image.repository=[USER-NAME]/todo-app --set imageCredentials.create=true --set imageCredentials.username=[USER-NAME] --set imageCredentials.password=[PASSWORD] https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+> [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
+
+설치 시점에 아래 키-값 들을 변경해서 적용한 것입니다.
+- image.repository=[USER-NAME]/todo-app
+- imageCredentials.create=true
+- imageCredentials.username=[USER-NAME]
+- imageCredentials.password=[PASSWORD]
+
 ---
 
 브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
@@ -305,27 +339,81 @@ NOTES:
 
 생성된 K8s 리소스들도 확인해보세요.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl get all
+ubuntu@ip-10-0-1-161:~$ kubectl get all
 NAME                                    READY   STATUS    RESTARTS   AGE
-pod/my-todo-app-6b8b4887d5-bxg92        1/1     Running   0          129m
-pod/my-todo-app-mysql-7d8c985b5-m9m25   1/1     Running   0          129m
+pod/my-todo-app-6b8b4887d5-66d4b        1/1     Running   0          3m4s
+pod/my-todo-app-mysql-7d8c985b5-6v25l   1/1     Running   0          3m4s
 
 NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-service/kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP    5d2h
-service/my-todo-app         ClusterIP   10.104.107.242   <none>        3000/TCP   129m
-service/my-todo-app-mysql   ClusterIP   10.98.235.190    <none>        3306/TCP   129m
+service/kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP    5d5h
+service/my-todo-app         ClusterIP   10.101.188.213   <none>        3000/TCP   3m4s
+service/my-todo-app-mysql   ClusterIP   10.101.187.212   <none>        3306/TCP   3m4s
 
 NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/my-todo-app         1/1     1            1           129m
-deployment.apps/my-todo-app-mysql   1/1     1            1           129m
+deployment.apps/my-todo-app         1/1     1            1           3m4s
+deployment.apps/my-todo-app-mysql   1/1     1            1           3m4s
 
 NAME                                          DESIRED   CURRENT   READY   AGE
-replicaset.apps/my-todo-app-6b8b4887d5        1         1         1       129m
-replicaset.apps/my-todo-app-mysql-7d8c985b5   1         1         1       129m
+replicaset.apps/my-todo-app-6b8b4887d5        1         1         1       3m4s
+replicaset.apps/my-todo-app-mysql-7d8c985b5   1         1         1       3m4s
 
 NAME                                              REFERENCE                TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-horizontalpodautoscaler.autoscaling/my-todo-app   Deployment/my-todo-app   <unknown>/80%   1         10        1          129m
+horizontalpodautoscaler.autoscaling/my-todo-app   Deployment/my-todo-app   <unknown>/80%   1         10        1          3m4s
 ```
+> **명령어** : `kubectl get all`
+
+---
+
+private repository의 이미지를 pull 하기 위해서 자격증명도 secret으로 생성했습니다.
+```base
+ubuntu@ip-10-0-1-161:~$ kubectl describe secrets regcred
+Name:         regcred
+Namespace:    default
+Labels:       app.kubernetes.io/managed-by=Helm
+Annotations:  meta.helm.sh/release-name: my-todo-app
+              meta.helm.sh/release-namespace: default
+
+Type:  kubernetes.io/dockerconfigjson
+
+Data
+====
+.dockerconfigjson:  135 bytes
+```
+> **명령어** : `kubectl describe secrets regcred`
+
+다른 리소스들 (ConfitMap, Secret, PVC, PV, Ingress) 도 한 번 확인해보세요.
+
+---
+
+이제 Helm 에서 업그레이드를 해볼게요.
+```bash
+ubuntu@ip-10-0-1-161:~$ helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+Release "my-todo-app" has been upgraded. Happy Helming!
+NAME: my-todo-app
+LAST DEPLOYED: Tue Feb  7 10:14:33 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+NOTES:
+1. Get the application URL by running these commands:
+  http://todo-app.info/
+```
+> **명령어** : `helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+> **image.tag**만 변경해서 간단히 업그레이드 할 수 있습니다.
+
+바뀐 Deployment, Pod도 확인해 보시구요.
+```bash
+ubuntu@ip-10-0-1-161:~$ kubectl describe deployments my-todo-app | grep Image
+    Image:      rogallo/101-todo-app:2.0.0
+```
+> **명령어** : `kubectl describe deployments my-todo-app | grep Image`
+
+---
+
+브라우저에서 http://todo-app.info/ 로 접속해서 업그레이드 결과도 보세요.
+
+![h:400](img/k8s_todo_ingress2.png)
 
 ---
 
