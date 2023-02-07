@@ -160,7 +160,7 @@ ubuntu@ip-10-0-1-161:~$ tree ./wordpress
 > **명령어** : `tree ./wordpress`
 
 
-- `tree` 명령어는 리눅스에서 파일구조를 볼 수 있는 명령어 입니다. 혹시 안되면 아래와 같이 **tree**를 설치하고 해주세요.
+- `tree` 명령어는 리눅스에서 디렉토리/파일구조를 볼 수 있는 명령어 입니다. 혹시 안되면 아래와 같이 **tree**를 설치하고 해주세요.
 > **명령어** : `sudo apt-get update`
 > **명령어** : `sudo apt-get install tree`
 
@@ -221,7 +221,7 @@ To access your WordPress site from outside the cluster follow the steps below:
 
 
 설치된 Helm chart는 **Release**라고 합니다.
-Release의 목록은 `helm list`명령으로 조회할 수 있구요.
+**Release**의 목록은 `helm list`명령으로 조회할 수 있구요.
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm list
 NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART           	APP VERSION
@@ -266,14 +266,14 @@ release "my-wordpress" uninstalled
 
 ---
 
-**ToDo App**을 이용해서 좀 더 자세히 볼게요.
+우리가 익숙한 **ToDo App**을 이용해서 좀 더 자세히 볼게요.
 차트는 아래와 같은 구조를 가지고 있습니다. 우리가 배운 여러가지가 다 들어있네요.
 
 ![h:500](img/helm_todo_app.png)
 
 ---
 
-설치는 간단합니다.
+설치는 간단합니다. 명령어 하나면 끝.
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 NAME: my-todo-app
@@ -288,12 +288,12 @@ NOTES:
 ```
 > **명령어** : `helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
 
-위의 방법은 Helm chart 패키지 파일의 URL을 직접 지정해서 설치한 것입니다.
+위의 방법은 Helm chart 패키지 파일의 URL(깃헙에 올려놓은 파일)을 직접 지정해서 설치한 것입니다.
 위의 방법 외에도 아래와 같은 다양한 방법으로 설치 가능합니다. 
 
 > **명령어** : `helm install my-todo-app ./todo-app-1.0.0.tgz` -> 로컬 경로의 tgz파일(패키징 된 Helm chart)
 > **명령어** : `helm install my-todo-app ./todo-app` -> 로컬 경로의 차트 디렉토리
-> **hands_on_files** 아래에 위의 두 가지 경우도 가능하도록 미리 파일을 준비해 놓았습니다.
+> **hands_on_files** 아래에 위의 두 가지 방법을 위한 파일/디렉토리도 준비해 놓았습니다.
 
 우선 이 Helm release는 Uninstall을 할게요. 뒤에 다른 방법으로 다시 설치하겠습니다.
 ```bash
@@ -305,7 +305,7 @@ release "my-todo-app" uninstalled
 ---
 
 이번에는 구성을 조금 달리해서 설치하겠습니다.
-여러분의 Docker private repository에 올려놓은 이미지를 사용하도록 하고, 이미지 pull을 위해서 자격증명을 사용하도록 할게요.
+여러분의 **Docker private repository**에 올려놓은 이미지를 사용하도록 하고, 이미지 pull을 위해서 자격증명을 사용하도록 할게요.
 
 역시 아래와 같이 간단하게 실행할 수 있습니다.
 ```bash
@@ -331,9 +331,11 @@ NOTES:
 
 ---
 
-브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
+브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보세요.
 
 ![h:400](img/k8s_todo_ingress.png)
+
+잘 되나요?
 
 ---
 
@@ -385,7 +387,8 @@ Data
 
 ---
 
-이제 Helm 에서 업그레이드를 해볼게요.
+이제 Helm 에서 **업그레이드**를 해볼게요.
+여러가지 업그레이드가 있겠지만, 간단히 이미지의 Tag를 변경하는 경우만 해보겠습니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 Release "my-todo-app" has been upgraded. Happy Helming!
@@ -400,22 +403,56 @@ NOTES:
   http://todo-app.info/
 ```
 > **명령어** : `helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
-> **image.tag**만 변경해서 간단히 업그레이드 할 수 있습니다.
+> **image.tag**만 변경해서 새로운 버젼으로 업그레이드 합니다.
 
-바뀐 Deployment, Pod도 확인해 보시구요.
+바뀐 Deployment도 확인해 보시구요.
+이렇게요.
 ```bash
 ubuntu@ip-10-0-1-161:~$ kubectl describe deployments my-todo-app | grep Image
-    Image:      rogallo/101-todo-app:2.0.0
+    Image:      rogallo/todo-app:2.0.0
 ```
 > **명령어** : `kubectl describe deployments my-todo-app | grep Image`
 
 ---
 
-브라우저에서 http://todo-app.info/ 로 접속해서 업그레이드 결과도 보세요.
+브라우저에서 http://todo-app.info/로 접속해서 업그레이드 결과도 보세요.
 
 ![h:400](img/k8s_todo_ingress2.png)
 
+> 구분하기 위해서 하단에 버젼을 표시하도록 해 놓았습니다.
+
 ---
+
+롤백도 해볼까요?
+간단히 History를 조회하고, 원하는 **Revision**으로 돌아가면 됩니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ helm history my-todo-app
+REVISION	UPDATED                 	STATUS    	CHART         	APP VERSION	DESCRIPTION
+1       	Tue Feb  7 09:50:25 2023	superseded	todo-app-1.0.0	1.0.0      	Install complete
+2       	Tue Feb  7 10:14:33 2023	deployed  	todo-app-1.0.0	1.0.0      	Upgrade complete
+ubuntu@ip-10-0-1-161:~$ helm rollback my-todo-app 1
+Rollback was a success! Happy Helming!
+ubuntu@ip-172-31-20-30:~/mspt3$ kubectl describe deployments my-todo-app | grep Image
+    Image:      rogallo/todo-app:1.0.0
+```
+> **명령어** : `helm history my-todo-app`
+> **명령어** : `helm rollback my-todo-app 1`
+> **명령어** : `kubectl describe deployments my-todo-app | grep Image`
+
+http://todo-app.info/ 화면도 확인 해 보시구요.
+
+---
+
+역시 마지막은 정리.
+아래 명령어로 삭제(Uninstall) 해 주세요.
+
+```bash
+ubuntu@ip-10-0-1-161:~$ helm uninstall my-todo-app
+release "my-todo-app" uninstalled
+```
+> **명령어** : `helm uninstall my-todo-app`
+
+한꺼번에 설치(install), 업데이트(update), 롤백(rollback), 삭제(uninstall)되니 편하네요.
 
 여기까지 Helm 에 대해 알아보았습니다.
 
