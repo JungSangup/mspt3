@@ -288,12 +288,44 @@ NOTES:
 ```
 > **명령어** : `helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
 
-위의 방법은 Helm chart 패키지 파일을 직접 
+위의 방법은 Helm chart 패키지 파일의 URL을 직접 지정해서 설치한 것입니다.
+위의 방법 외에도 아래와 같은 다양한 방법으로 설치 가능합니다. 
 
-> 또는, `helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+> **명령어** : `helm install my-todo-app ./todo-app-1.0.0.tgz` -> 로컬 경로의 tgz파일(패키징 된 Helm chart)
+> **명령어** : `helm install my-todo-app ./todo-app` -> 로컬 경로의 차트 디렉토리
+> **hands_on_files** 아래에 위의 두 가지 경우도 가능하도록 미리 파일을 준비해 놓았습니다.
 
+---
 
+브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
 
+![h:400](img/k8s_todo_ingress.png)
+
+---
+
+생성된 K8s 리소스들도 확인해보세요.
+```bash
+ubuntu@ip-172-31-20-30:~$ kubectl get all
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/my-todo-app-6b8b4887d5-bxg92        1/1     Running   0          129m
+pod/my-todo-app-mysql-7d8c985b5-m9m25   1/1     Running   0          129m
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP    5d2h
+service/my-todo-app         ClusterIP   10.104.107.242   <none>        3000/TCP   129m
+service/my-todo-app-mysql   ClusterIP   10.98.235.190    <none>        3306/TCP   129m
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/my-todo-app         1/1     1            1           129m
+deployment.apps/my-todo-app-mysql   1/1     1            1           129m
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/my-todo-app-6b8b4887d5        1         1         1       129m
+replicaset.apps/my-todo-app-mysql-7d8c985b5   1         1         1       129m
+
+NAME                                              REFERENCE                TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/my-todo-app   Deployment/my-todo-app   <unknown>/80%   1         10        1          129m
+```
 
 ---
 
