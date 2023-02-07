@@ -7,13 +7,25 @@ paginate: true
 header: Docker & Kubernetes - [Hands-on] 15. Helm
 ---
 
-## [Hands-on] 15. Helm
+![bg left:40%](img/hands_on.png)
+
+<br>
+
+# Contents
+
+<br>
+
+- **Helm**
+
+---
+
+## Helm
 
 자주 사용되는 Helm 명령어들을 실습해 보겠습니다.
 
 먼저 어떤 명령어들이 있는지 살펴볼까요?
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm --help
+ubuntu@ip-10-0-1-161:~$ helm help
 The Kubernetes package manager
 
 Common actions for Helm:
@@ -25,27 +37,28 @@ Common actions for Helm:
 
 Environment variables:
 
-| Name                               | Description                                                                       |
-|------------------------------------|-----------------------------------------------------------------------------------|
-| $HELM_CACHE_HOME                   | set an alternative location for storing cached files.                             |
-| $HELM_CONFIG_HOME                  | set an alternative location for storing Helm configuration.                       |
-| $HELM_DATA_HOME                    | set an alternative location for storing Helm data.                                |
-| $HELM_DEBUG                        | indicate whether or not Helm is running in Debug mode                             |
-| $HELM_DRIVER                       | set the backend storage driver. Values are: configmap, secret, memory, sql.       |
-| $HELM_DRIVER_SQL_CONNECTION_STRING | set the connection string the SQL storage driver should use.                      |
-| $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                   |
-| $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                   |
-| $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                        |
-| $HELM_PLUGINS                      | set the path to the plugins directory                                             |
+| Name                               | Description                                                                                       |
+|------------------------------------|---------------------------------------------------------------------------------------------------|
+| $HELM_CACHE_HOME                   | set an alternative location for storing cached files.                                             |
+| $HELM_CONFIG_HOME                  | set an alternative location for storing Helm configuration.                                       |
+| $HELM_DATA_HOME                    | set an alternative location for storing Helm data.                                                |
+| $HELM_DEBUG                        | indicate whether or not Helm is running in Debug mode                                             |
+| $HELM_DRIVER                       | set the backend storage driver. Values are: configmap, secret, memory, sql.                       |
+| $HELM_DRIVER_SQL_CONNECTION_STRING | set the connection string the SQL storage driver should use.                                      |
+| $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                                   |
+| $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                                   |
+| $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                                        |
+| $HELM_PLUGINS                      | set the path to the plugins directory                                                             |
 ...생략...
 ```
 > **명령어** : `helm --help`
 
 ---
 
-이제 설치(install)를 한 번 진행해볼까요?
+**Common actions for Helm** 의 명령어들을 하나씩 해볼까요?
 
-먼저 Repository를 add해줍니다.
+첫 번째는 `helm search`인데, 그 전에 **helm repository**를 먼저 추가(add)해줘야 합니다.
+
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm repo add bitnami https://charts.bitnami.com/bitnami
 "bitnami" has been added to your repositories
@@ -62,7 +75,7 @@ bitnami	https://charts.bitnami.com/bitnami
 
 ---
 
-검색도 가능하구요.
+이제 검색(`helm search`) 가능합니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm search repo bitnami
 NAME                                        	CHART VERSION	APP VERSION  	DESCRIPTION
@@ -93,7 +106,67 @@ bitnami/wordpress-intel	2.0.7        	6.0.0      	WordPress for Intel is the mos
 
 ---
 
-이제 설치를 진행해 보겠습니다.
+다음은 `helm pull` 명령어 입니다.
+**Helm repository**에 등록되어 있는 Helm chart를 다운로드(pull)하는 명령어 입니다.
+
+```bash
+ubuntu@ip-10-0-1-161:~$ helm pull bitnami/wordpress --version 15.0.7
+ubuntu@ip-10-0-1-161:~$ ls wordpress*
+wordpress-15.0.7.tgz
+```
+> **명령어** : `helm pull bitnami/wordpress --version 15.0.7`
+
+tar 파일로 받아지네요.
+
+압축도 풀어볼까요?
+```bash
+ubuntu@ip-10-0-1-161:~$ tar -xvf wordpress-15.0.7.tgz
+wordpress/Chart.yaml
+wordpress/Chart.lock
+wordpress/values.yaml
+wordpress/values.schema.json
+wordpress/templates/NOTES.txt
+wordpress/templates/_helpers.tpl
+wordpress/templates/config-secret.yaml
+wordpress/templates/deployment.yaml
+wordpress/templates/externaldb-secrets.yaml
+wordpress/templates/extra-list.yaml
+...생략...
+```
+> **명령어** : `tar -xvf wordpress-15.0.7.tgz`
+
+---
+
+어떤 파일들이 있는지 한 번 살펴보겠습니다.
+```bash
+ubuntu@ip-10-0-1-161:~$ tree ./wordpress
+./wordpress
+├── Chart.lock
+├── Chart.yaml
+├── README.md
+├── charts
+│   ├── common
+│   │   ├── Chart.yaml
+│   │   ├── README.md
+│   │   ├── templates
+│   │   │   ├── _affinities.tpl
+│   │   │   ├── _capabilities.tpl
+│   │   │   ├── _errors.tpl
+│   │   │   ├── _images.tpl
+│   │   │   ├── _ingress.tpl
+│   │   │   ├── _labels.tpl
+│   │   │   ├── _names.tpl
+```
+> **명령어** : `tree ./wordpress`
+
+
+- `tree` 명령어는 리눅스에서 파일구조를 볼 수 있는 명령어 입니다. 혹시 안되면 아래와 같이 **tree**를 설치하고 해주세요.
+> **명령어** : `sudo apt-get update`
+> **명령어** : `sudo apt-get install tree`
+
+---
+
+이제 설치(`helm install`)를 진행해 보겠습니다.
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm repo update
 Hang tight while we grab the latest from your chart repositories...
@@ -148,7 +221,7 @@ To access your WordPress site from outside the cluster follow the steps below:
 
 
 설치된 Helm chart는 **Release**라고 합니다.
-Release의 목록은 다음 명령으로 조회할 수 있구요.
+Release의 목록은 `helm list`명령으로 조회할 수 있구요.
 ```bash
 ubuntu@ip-10-0-1-161:~$ helm list
 NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART           	APP VERSION
@@ -182,63 +255,47 @@ statefulset.apps/my-wordpress-mariadb   1/1     3m40s
 > **명령어** : `kubectl get all`
 
 와우~ 뭔가 Wordpress 소프트웨어에 필요한 모든게 한 번에 설치가 된 것 같네요. 패키지로...
-
 이게 바로 **Helm** 이랍니다.
 
----
-
-chart를 다운로드(pull)도 해볼게요.
+삭제도 한 번에 가능합니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm pull bitnami/wordpress --version 15.0.7
-ubuntu@ip-10-0-1-161:~$ ls wordpress*
-wordpress-15.0.7.tgz
+ubuntu@ip-10-0-1-161:~$ helm uninstall my-wordpress
+release "my-wordpress" uninstalled
 ```
-> **명령어** : `helm pull bitnami/wordpress --version 15.0.7`
-
-tar 파일로 받아지네요.
-
-압축도 풀어볼까요?
-```bash
-ubuntu@ip-10-0-1-161:~$ tar -xvf wordpress-15.0.7.tgz
-wordpress/Chart.yaml
-wordpress/Chart.lock
-wordpress/values.yaml
-wordpress/values.schema.json
-wordpress/templates/NOTES.txt
-wordpress/templates/_helpers.tpl
-wordpress/templates/config-secret.yaml
-wordpress/templates/deployment.yaml
-wordpress/templates/externaldb-secrets.yaml
-wordpress/templates/extra-list.yaml
-...생략...
-```
-> **명령어** : `tar -xvf wordpress-15.0.7.tgz`
+> **명령어** : `kubectl uninstall my-wordpress`
 
 ---
 
-어떤 파일들이 있는지 한 번 살펴보겠습니다.
-```bash
-ubuntu@ip-10-0-1-161:~$ tree ./wordpress
-./wordpress
-├── Chart.lock
-├── Chart.yaml
-├── README.md
-├── charts
-│   ├── common
-│   │   ├── Chart.yaml
-│   │   ├── README.md
-│   │   ├── templates
-│   │   │   ├── _affinities.tpl
-│   │   │   ├── _capabilities.tpl
-│   │   │   ├── _errors.tpl
-│   │   │   ├── _images.tpl
-│   │   │   ├── _ingress.tpl
-│   │   │   ├── _labels.tpl
-│   │   │   ├── _names.tpl
-```
-> **명령어** : `tree ./wordpress`
+**ToDo App**을 이용해서 좀 더 자세히 볼게요.
+차트는 아래와 같은 구조를 가지고 있습니다. 우리가 배운 여러가지가 다 들어있네요.
 
-<br>
+![h:500](img/helm_todo_app.png)
+
+---
+
+설치는 간단합니다.
+```bash
+ubuntu@ip-172-31-20-30:~$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+NAME: my-todo-app
+LAST DEPLOYED: Tue Feb  7 05:24:08 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+1. Get the application URL by running these commands:
+  http://todo-app.info/
+```
+> **명령어** : `helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+
+위의 방법은 Helm chart 패키지 파일을 직접 
+
+> 또는, `helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+
+
+
+
+---
 
 여기까지 Helm 에 대해 알아보았습니다.
 
