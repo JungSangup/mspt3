@@ -146,7 +146,7 @@ replicaset.apps "nginx-replicaset" deleted
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: my-nginx-deployment
   labels:
     app: my-nginx
     tier: frontend
@@ -176,7 +176,7 @@ spec:
 일단 한번 생성해볼게요.
 ```bash
 ubuntu@ip-10-0-1-14:~$ kubectl apply -f nginx-deployment.yaml
-deployment.apps/nginx-deployment created
+deployment.apps/my-nginx-deployment created
 ```
 > **명령어** : `kubectl apply -f nginx-deployment.yaml`
 
@@ -239,7 +239,7 @@ nginx-deployment-596ff98864-8sqsn   1/1     Running   0          11s    app=my-n
 이번엔 scale in/out 방법을 알아보겠습니다. (replicas를 조정)
 **명령형 커맨드** 방식으로는 이렇게 할 수 있습니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ kubectl scale deployment nginx-deployment --replicas=5
+ubuntu@ip-10-0-1-14:~$ kubectl scale deployment my-nginx-deployment --replicas=5
 deployment.apps/nginx-deployment scaled
 ```
 > **명령어** : `kubectl scale deployment my-nginx-deployment --replicas=5`
@@ -269,10 +269,10 @@ replicaset.apps/nginx-deployment-596ff98864   5         5         5       8m50s
 
 ---
 
-`kubectl edit deployment nginx-deployment` 명령어로 생성된 리소스를 수정할 수도 있습니다.
+`kubectl edit deployment my-nginx-deployment` 명령어로 생성된 리소스를 수정할 수도 있습니다.
 마치 vi editor를 이용하여 YAML파일을 수정하는 것과 동일합니다.
 한 번 해보세요. (vi가 익숙하지 않은 경우, 이 실습은 생략해도 됩니다.)
-> **명령어** : `kubectl edit deployment nginx-deployment`
+> **명령어** : `kubectl edit deployment my-nginx-deployment`
 
 `replicas`를 2로 바꾸고 저장후 빠져나옵니다. (`:wq`)
 
