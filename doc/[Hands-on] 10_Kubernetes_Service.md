@@ -72,18 +72,18 @@ my-nginx-deployment-55985c7fcf-xmn72   1/1     Running   0          17s   172.17
 이제 위에서 생성한 Pod들을 사용하는 또다른 Pod를 하나 만들겠습니다.
 
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl run curlpod --image=radial/busyboxplus:curl --command -- /bin/sh -c "while true; do echo hi; sleep 10; done"
+ubuntu@ip-172-31-16-225:~$ kubectl run curlpod --image=radial/busyboxplus:curl --command -- /bin/sh -c "while true; do echo hi; sleep 10; done"
 pod/curlpod created
 ```
-
-> **명령어** : `kubectl run curlpod --image=radial/busyboxplus:curl --command -- /bin/sh -c "while true; do echo hi; sleep 10; done"`
-
-
+![](img/handson.png):명령어
+> ```bash
+>kubectl run curlpod --image=radial/busyboxplus:curl --command -- /bin/sh -c "while true; do echo hi; sleep 10; done"
+>```
 
 그리고,앞에서 만들어진 Nginx Pod의 IP를 이용해서 접속해보겠습니다.
 
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl http://172.17.0.3
+ubuntu@ip-172-31-16-225:~$ kubectl exec -it curlpod -- curl http://172.17.0.5
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,9 +110,11 @@ Commercial support is available at
 </body>
 </html>
 ```
-
-> **명령어** : `kubectl exec -it curlpod -- curl http://[POD_IP]`
-> [POD_IP]는 Nginx Pod 중 하나의 IP
+![](img/handson.png):명령어
+> ```bash
+> kubectl exec -it curlpod -- curl http://[POD_IP]
+>```
+- [POD_IP]는 Nginx Pod 중 하나의 IP를 사용하세요.
 
 
 
@@ -153,10 +155,12 @@ spec:
 ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-clusterip-service.yaml
 service/nginx-clusterip-service created
 ```
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f nginx-clusterip-service.yaml
+>```
 
-> **명령어** : `kubectl apply -f nginx-clusterip-service.yaml`
-
-
+<br>
 
 생성된걸 조회할 때는 아래와 같이 합니다.
 
@@ -166,8 +170,12 @@ NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   A
 kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP   45h
 nginx-clusterip-service   ClusterIP   10.105.111.120   <none>        80/TCP    10s
 ```
+![](img/handson.png):명령어
+>```bash
+>kubectl get services
+>```
 
-> **명령어** : `kubectl get services`
+<br>
 
 생성된 Service의 **CLUSTER-IP**가 보이시나요?
 이 아이피로 Pod까지 접근할 수도 있습니다.
@@ -190,11 +198,13 @@ ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl http://10.105.111.120
 <h1>Welcome to nginx!</h1>
 ... 생략 ...
 ```
+![](img/handson.png):명령어
+>```bash
+>kubectl exec -it curlpod -- curl http://[SVC_IP]
+>```
+- [SVC_IP]는 Service의 CLUSTER-IP
 
-> **명령어** : `kubectl exec -it curlpod -- curl http://[SVC_IP]`
-> [SVC_IP]는 Service의 CLUSTER-IP
-
-
+<br>
 
 IP가 아닌 Name으로도 가능합니다.
 이렇게요.
@@ -217,9 +227,11 @@ ubuntu@ip-10-0-1-161:~$ kubectl exec -it curlpod -- curl nginx-clusterip-service
 <h1>Welcome to nginx!</h1>
 ... 생략 ...
 ```
-
-> **명령어** : `kubectl exec -it curlpod -- curl [SVC_NAME]`
-> [SVC_NAME] 는 Service의 NAME
+![](img/handson.png):명령어
+>```bash
+>kubectl exec -it curlpod -- curl [SVC_NAME]
+>```
+- [SVC_NAME] 는 Service의 NAME
 
 잘 되네요...
 이제 Service를 만들면 클러스터 내에서는 서비스의 **이름**(**NAME**)으로도 접근이 가능합니다.
@@ -251,7 +263,6 @@ spec:
       targetPort: 80
       nodePort: 30007
 ```
-
 > 파일명은 **nginx-nodeport-service.yaml**로 합니다.
 
 
@@ -268,9 +279,14 @@ kubernetes                ClusterIP   10.96.0.1       <none>        443/TCP     
 nginx-clusterip-service   ClusterIP   10.107.31.242   <none>        80/TCP         20m
 nginx-nodeport-service    NodePort    10.104.230.63   <none>        80:30007/TCP   60s
 ```
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f nginx-nodeport-service.yaml
+>```
 
-> **명령어** : `kubectl apply -f nginx-nodeport-service.yaml`
-> **명령어** : `kubectl get services`
+>```bash
+>kubectl get services
+>```
 
 **ClusterIP**와 **NodePort** 유형의 Service간 차이가 보이시나요? (힌트 : PORT(S))
 
@@ -314,7 +330,6 @@ spec:
                 port:
                   number: 80
 ```
-
 > 파일명은 **nginx-ingress.yaml**로 합니다.
 
 
@@ -325,8 +340,10 @@ spec:
 ubuntu@ip-10-0-1-161:~$ kubectl apply -f nginx-ingress.yaml
 ingress.networking.k8s.io/my-nginx-ingress created
 ```
-
-> **명령어** : `kubectl apply -f nginx-ingress.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f nginx-ingress.yaml
+>```
 
 웹 브라우저에서 접속을 하기전에 한 가지 준비할 게 있습니다.
 
@@ -374,12 +391,14 @@ deployment.apps "my-nginx-deployment" deleted
 ubuntu@ip-10-0-1-161:~$ kubectl delete po curlpod
 pod "curlpod" deleted
 ```
-
-> **명령어** : `kubectl delete -f nginx-ingress.yaml`
-> **명령어** : `kubectl delete -f nginx-nodeport-service.yaml`
-> **명령어** : `kubectl delete -f nginx-clusterip-service.yaml`
-> **명령어** : `kubectl delete -f nginx-deployment.yaml`
-> **명령어** : `kubectl delete po curlpod`
+![](img/handson.png):명령어
+>```bash
+>kubectl delete -f nginx-ingress.yaml
+>kubectl delete -f nginx-nodeport-service.yaml
+>kubectl delete -f nginx-clusterip-service.yaml
+>kubectl delete -f nginx-deployment.yaml
+>kubectl delete po curlpod
+>```
 
 
 
