@@ -1,7 +1,7 @@
 
 # [Hands-on] 11. Kubernetes Storage
 
-<img src="img/hands_on.png" width="1000px"></img>
+![](img/hands_on.png)
 
 # Contents
 

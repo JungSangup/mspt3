@@ -1,19 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 12. Kubernetes Configuration
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 12. Kubernetes Configuration
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **ConfigMap, Secret 생성하고 사용하기**
 

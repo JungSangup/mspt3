@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 13. Kubernetes Deployment strategies
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 13. Kubernetes Deployment strategies
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **Recreate 방법으로 업데이트 해보기**
 - **Recreate 방법으로 롤백 해보기**

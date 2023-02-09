@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 15. Helm
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 15. Helm
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **Helm**
 

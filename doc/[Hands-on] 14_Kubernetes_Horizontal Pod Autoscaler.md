@@ -1,20 +1,10 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
 
-<br>
+
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **HPA를 사용해서 자동 스케일링 해보기**
 
