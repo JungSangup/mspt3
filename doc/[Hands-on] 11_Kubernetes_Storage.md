@@ -27,7 +27,10 @@ ubuntu@ip-172-31-20-30:~$ kubectl get storageclasses
 NAME                 PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 standard (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  11h
 ```
-> **명령어** : `kubectl get storageclasses`
+![](img/handson.png):명령어
+>```bash
+>kubectl get storageclasses
+>```
 
 Minikube는 기본적으로 위와같은 StorageClass가 있습니다.
 간단히 테스트해볼 수 있도록, hostPath 타입의 Volume을 만들 수 있습니다.
@@ -58,7 +61,10 @@ spec:
 ubuntu@ip-172-31-20-30:~$ kubectl apply -f nginx-pvc.yaml
 persistentvolumeclaim/nginx-pvc created
 ```
-> **명령어** : `kubectl apply -f nginx-pvc.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f nginx-pvc.yaml
+>```
 
 <br>
 
@@ -69,7 +75,14 @@ ubuntu@ip-172-31-20-30:~$ kubectl get persistentvolumeclaims
 NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 nginx-pvc   Bound    pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO            standard       15s
 ```
-> **명령어** : `kubectl get persistentvolumeclaims` 또는 `kubectl get pvc`
+![](img/handson.png):명령어
+>```bash
+>kubectl get persistentvolumeclaims
+>```
+>또는
+>```bash
+>kubectl get pvc
+>```
 
 결과를 보니 **VOLUME(pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa)** 도 보이고, STATUS는 **Bound**네요.
 
@@ -79,7 +92,14 @@ ubuntu@ip-172-31-20-30:~$ kubectl get persistentvolume
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM               STORAGECLASS   REASON   AGE
 pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO            Delete           Bound    default/nginx-pvc   standard                3m36s
 ```
-> **명령어** : `kubectl get persistentvolume` 또는 `kubectl get pv`
+![](img/handson.png):명령어
+>```bash
+>kubectl get persistentvolume
+>```
+>또는
+>```bash
+>kubectl get pv
+>```
 
 예상한대로 PVC를 생성했더니, PV가 동적으로 생성됐습니다.  
 
@@ -110,8 +130,15 @@ Source:
     HostPathType:
 Events:            <none>
 ```
-> **명령어** : `kubectl describe persistentvolume [PV-NAME]` 또는 `kubectl describe pv [PV-NAME]`
-> [PV-NAME] 에는 앞에서 만들어진 PV의 Name을 넣어주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl describe persistentvolume [PV-NAME]
+>```
+>또는
+>```bash
+>kubectl describe pv [PV-NAME]
+>```
+- [PV-NAME] 에는 앞에서 만들어진 PV의 Name을 넣어주세요.
 
 Source아래 내용을 보시면 어디에 Volume영역이 할당되었는지 알 수 있습니다.
 위의 경우는 HostPath타입을 이용했고, **/tmp/hostpath-provisioner/default/nginx-pvc**를 Volume의 위치로 사용하고 있습니다.
@@ -192,9 +219,13 @@ service/nginx-clusterip-service created
 ubuntu@ip-172-31-20-30:~$ kubectl apply -f nginx-ingress.yaml
 ingress.networking.k8s.io/my-nginx-ingress created
 ```
-> **명령어** : `kubectl apply -f nginx-deployment-volume.yaml`
-> **명령어** : `kubectl apply -f nginx-clusterip-service.yaml`
-> **명령어** : `kubectl apply -f nginx-ingress.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f nginx-deployment-volume.yaml
+>kubectl apply -f nginx-clusterip-service.yaml
+>kubectl apply -f nginx-ingress.yaml
+>```
+
 
 <br>
 
@@ -202,7 +233,11 @@ ingress.networking.k8s.io/my-nginx-ingress created
 ```bash
 ubuntu@ip-172-31-20-30:~$ echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
 ```
-**명령어** : `echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html`
+![](img/handson.png):명령어
+>```bash
+>echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
+>```
+
 
 Nginx에서 보여줄 간단한 **index.html**파일을 하나 만들었습니다.
 혹시 PV의 경로가 다르다면 거기에 맞춰서 해주세요.
@@ -228,9 +263,15 @@ my-nginx-deployment-7cbbdb88f6-whzp8   1/1     Running   0          166m
 ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl exec -it my-nginx-deployment-7cbbdb88f6-56r2d -- cat /usr/share/nginx/html/index.html
 <h1>Hello kubernetes</h1>
 ```
-> **명령어** : `kubectl get pod`
-> **명령어** : `kubectl exec -it [POD-NAME] -- cat /usr/share/nginx/html/index.html`
-> [POD-NAME] 에는 앞에서 조회한 POD중 하나의 이름을 넣어주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl get pod
+>```
+
+>```bash
+>kubectl exec -it [POD-NAME] -- cat /usr/share/nginx/html/index.html
+>```
+- [POD-NAME] 에는 앞에서 조회한 POD중 하나의 이름을 넣어주세요.
 
 <br>
 
@@ -246,10 +287,13 @@ deployment.apps "my-nginx-deployment" deleted
 ubuntu@ip-172-31-20-30:~$ kubectl delete -f nginx-pvc.yaml
 persistentvolumeclaim "nginx-pvc" deleted
 ```
-> **명령어** : `kubectl delete -f nginx-ingress.yaml`
-> **명령어** : `kubectl delete -f nginx-clusterip-service.yaml`
-> **명령어** : `kubectl delete -f nginx-deployment-volume.yaml`
-> **명령어** : `kubectl delete -f nginx-pvc.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl delete -f nginx-ingress.yaml
+>kubectl delete -f nginx-clusterip-service.yaml
+>kubectl delete -f nginx-deployment-volume.yaml
+>kubectl delete -f nginx-pvc.yaml
+>```
 
 
 이번 실습은 여기까지 입니다.  ˘◡˘
@@ -278,10 +322,13 @@ service/todo-clusterip-service created
 ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl apply -f todo-ingress.yaml
 ingress.networking.k8s.io/todo-app-ingress created
 ```
-> **명령어** : `kubectl apply -f todo-pvc.yaml`
-> **명령어** : `kubectl apply -f todo-deployment-volume.yaml`
-> **명령어** : `kubectl apply -f todo-clusterip-service.yaml`
-> **명령어** : `kubectl apply -f todo-ingress.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f todo-pvc.yaml
+>kubectl apply -f todo-deployment-volume.yaml
+>kubectl apply -f todo-clusterip-service.yaml
+>kubectl apply -f todo-ingress.yaml
+>```
 
 <br>
 
@@ -318,9 +365,18 @@ todo-app-deployment-55464569cf-5wmcx   1/1     Running   0          9s
 todo-app-deployment-55464569cf-d8sx4   1/1     Running   0          9s
 todo-app-deployment-55464569cf-dlsrp   1/1     Running   0          9s
 ```
-> **명령어** : `kubectl get pod`
-> **명령어** : `kubectl delete pod --all`
-> **명령어** : `kubectl get pod`
+![](img/handson.png):명령어
+>```bash
+>kubectl get pod
+>```
+
+>```bash
+>kubectl delete pod --all
+>```
+
+>```bash
+>kubectl get pod
+>```
 
 <br>
 
@@ -336,10 +392,13 @@ deployment.apps "todo-app-deployment" deleted
 ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl delete -f todo-pvc.yaml
 persistentvolumeclaim "todo-pvc" deleted
 ```
-> **명령어** : `kubectl delete -f todo-ingress.yaml`
-> **명령어** : `kubectl delete -f todo-clusterip-service.yaml`
-> **명령어** : `kubectl delete -f todo-deployment-volume.yaml`
-> **명령어** : `kubectl delete -f todo-pvc.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl delete -f todo-ingress.yaml
+>kubectl delete -f todo-clusterip-service.yaml
+>kubectl delete -f todo-deployment-volume.yaml
+>kubectl delete -f todo-pvc.yaml
+>```
 
 <br>
 
