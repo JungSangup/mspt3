@@ -407,7 +407,7 @@ REPOSITORY         TAG       IMAGE ID       CREATED          SIZE
 rogallo/todo-app   2.0.0     51829023f79f   45 seconds ago   172MB
 rogallo/todo-app   1.0.0     bed2b2f466e4   14 minutes ago   172MB
 ```
-> **명령어** : `docker images rogallo/todo-app`
+> **명령어** : `docker images [USER-NAME]/todo-app`
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 
 ---
