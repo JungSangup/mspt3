@@ -242,7 +242,7 @@ nginx-deployment-596ff98864-8sqsn   1/1     Running   0          11s    app=my-n
 ubuntu@ip-10-0-1-14:~$ kubectl scale deployment nginx-deployment --replicas=5
 deployment.apps/nginx-deployment scaled
 ```
-> **명령어** : `kubectl scale deployment nginx-deployment --replicas=5`
+> **명령어** : `kubectl scale deployment my-nginx-deployment --replicas=5`
 
 조회결과도 보겠습니다.
 ```bash
