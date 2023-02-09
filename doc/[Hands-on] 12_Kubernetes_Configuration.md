@@ -24,7 +24,7 @@
 
 기본적인 구조와 방법은 **Docker Network** 실습과 같고, Kubernetes환경에 맞게 리소스들을 생성해서 해볼게요.
 
----
+<br>
 
 먼저 MySQL을 실행합니다.
 Docker에서는 아래와 같이 했습니다.
@@ -51,7 +51,7 @@ c9d83cbd2ac8941da32d8d64103223fe1c6937c9c28507c6e19ed91fca740c98
 - **Secret**으로 만들 환경변수
   - MYSQL_ROOT_PASSWORD
 
----
+<br>
 
 ConfigMap과 Secret은 각각 아래와 같이 준비합니다.
 ```yaml
@@ -83,7 +83,7 @@ ubuntu@ip-172-31-20-30:~$ echo -n 'secret' | base64
 c2VjcmV0
 ```
 
----
+<br>
 
 ConfigMap과 Secret을 위한 파일들이 준비됐으면, 다음은 pvc를 위한 파일도 하나 준비해주세요.
 ```yaml
@@ -118,7 +118,7 @@ spec:
 ```
 > 파일명은 **mysql-clusterip-service.yaml**로 합니다.
 
----
+<br>
 
 마지막으로 Deployment를 준비합니다.
 ```yaml
@@ -170,7 +170,7 @@ spec:
 ```
 > 파일명은 **mysql-deployment.yaml**로 합니다.
 
----
+<br>
 
 이제 하나씩 생성해줍니다.
 모두 다섯 개의 리소스를 생성해야 하니 천천히 생성해주세요.
@@ -186,13 +186,16 @@ service/todo-mysql-svc created
 ubuntu@ip-172-31-20-30:~$ kubectl apply -f mysql-deployment.yaml
 deployment.apps/todo-mysql-deployment created
 ```
-> **명령어** : `kubectl apply -f mysql-configmap.yaml`
-> **명령어** : `kubectl apply -f mysql-secret.yaml`
-> **명령어** : `kubectl apply -f mysql-pvc.yaml`
-> **명령어** : `kubectl apply -f mysql-clusterip-service.yaml`
-> **명령어** : `kubectl apply -f mysql-deployment.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f mysql-configmap.yaml
+>kubectl apply -f mysql-secret.yaml
+>kubectl apply -f mysql-pvc.yaml
+>kubectl apply -f mysql-clusterip-service.yaml
+>kubectl apply -f mysql-deployment.yaml
+>```
 
----
+<br>
 
 ConfigMap이 잘 생성됐나 볼까요?
 ```bash
@@ -220,12 +223,19 @@ BinaryData
 
 Events:  <none>
 ```
-> **명령어** : `kubectl get configmaps`
-> **명령어** : `kubectl describe configmaps mysql-config`
+![](img/handson.png):명령어
+>```bash
+>kubectl get configmaps
+>```
+
+>```bash
+>kubectl describe configmaps mysql-config
+>```
+
 
 lang(C.UTF-8)과 database(todos)두 개의 데이터가 보입니다.
 
----
+<br>
 
 Secret도 볼게요.
 ```bash
@@ -245,13 +255,19 @@ Data
 ====
 password:  6 bytes
 ```
-> **명령어** : `kubectl get secrets`
-> **명령어** : `kubectl describe secrets mysql-secret`
+![](img/handson.png):명령어
+>```bash
+>kubectl get secrets
+>```
+
+>```bash
+>kubectl describe secrets mysql-secret
+>```
 
 Secret의 Data는 값이 보이지는 않네요.
 Secret이니까요. -_-
 
----
+<br>
 
 Pod도 확인해보세요. (Environment, Mounts, Volumes 부분을 잘 보세요.)
 ```bash
@@ -282,11 +298,17 @@ Volumes:
     ReadOnly:   false
 ...생략...
 ```
-> **명령어** : `kubectl get pod`
-> **명령어** : `kubectl describe pod [POD-NAME]`
-> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl get pod
+>```
 
----
+>```bash
+>kubectl describe pod [POD-NAME]
+>```
+- [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+
+<br>
 
 이제 두 번재 워크로드인 **ToDo App**을 실행해볼까요?
 MySQL과 마찬가지로 ConfigMap과 Secret을 사용하고, 외부에서 접속을 해야하니 Ingress까지 만들어볼게요.
@@ -323,12 +345,6 @@ spec:
       port: 3000
       targetPort: 3000
       nodePort: 30007
-```
-
----
-
-앞장에 이어서 계속.
-```yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -375,12 +391,6 @@ spec:
         ports:
         - containerPort: 3000
 ---
-```
-
----
-
-앞장에 이어서 계속.
-```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -408,7 +418,7 @@ spec:
 
 > 하나의 yaml파일 안에 여러개의 K8s [Manifest](https://kubernetes.io/docs/reference/glossary/?fundamental=true#term-manifest)를 정의할때는, `---`를 구분자로 해서 여러개를 담으면 됩니다.
 
----
+<br>
 
 생성하기 전에 한 가지 더 해줘야할 일이 있습니다.
 
@@ -419,8 +429,11 @@ image([USER-NAME]/todo-app:1.0.0)를 여러분의 private repository에서 pull�
 ubuntu@ip-172-31-20-30:~$ kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=rogallo --docker-password=XXXXXX
 secret/regcred created
 ```
-> **명령어** : `kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=[USER-NAME] --docker-password=[PASSWORD]`
-> [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=[USER-NAME] --docker-password=[PASSWORD]
+>```
+- [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
 
 이것도 많이 쓰이는 Secret의 용도 중 하나입니다.
 조회도 한 번 해보세요.
@@ -437,9 +450,12 @@ Data
 ====
 .dockerconfigjson:  114 bytes
 ```
-> **명령어** : `kubectl describe secrets regcred`
+![](img/handson.png):명령어
+>```bash
+>kubectl describe secrets regcred
+>```
 
----
+<br>
 
 이제 ToDo App을 생성해볼게요.
 생성은 아래처럼 한 번에 됩니다.
@@ -451,16 +467,29 @@ service/todo-app-svc created
 deployment.apps/todo-app-deployment created
 ingress.networking.k8s.io/todo-app-ingress created
 ```
-> **명령어** : `kubectl apply -f todo-all.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl apply -f todo-all.yaml
+>```
+
 
 앞서 MySQL에서 한 것과 비슷하게 ConfigMap, Secret, Pod도 확인해보세요.
 명령어만 알려드릴게요.
-> **명령어** : `kubectl describe configmaps todo-config`
-> **명령어** : `kubectl describe secrets todo-secret`
-> **명령어** : `kubectl describe pod [POD-NAME]`
-> [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl describe configmaps todo-config
+>```
 
----
+>```bash
+>kubectl describe secrets todo-secret
+>```
+
+>```bash
+>kubectl describe pod [POD-NAME]
+>```
+- [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+
+<br>
 
 POD의 환경변수를 확인하려면 아래처럼도 가능합니다.
 ```bash
@@ -490,18 +519,21 @@ TODO_APP_SVC_PORT_3000_TCP_PROTO=tcp
 ...생략...
 
 ```
-> **명령어** : `kubectl exec -it [POD-NAME] -- env`
-> [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl exec -it [POD-NAME] -- env
+>```
+- [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
 
 - [kubectl exec](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec) 명령어의 사용방법은 [동작중인 컨테이너의 셸에 접근하기](https://kubernetes.io/ko/docs/tasks/debug/debug-application/get-shell-running-container/)를 참고하세요.
 
----
+<br>
 
 브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
 
 ![h:400](img/k8s_todo_ingress.png)
 
----
+<br>
 
 MySQL DB의 테이블에 잘 저장됐는지도 확인해보세요.
 ```bash
@@ -534,10 +566,13 @@ mysql> select * from todo_items;
 mysql> exit;
 Bye
 ```
-> **명령어** : `kubectl exec -it [POD-NAME] -- mysql -p todos`
-> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+![](img/handson.png):명령어
+>```bash
+>kubectl exec -it [POD-NAME] -- mysql -p todos
+>```
+- [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
 
----
+<br>
 
 이것저것 확인해보시고, 마지막은 생성된 리소스들을 정리해주세요.
 ```bash
@@ -560,13 +595,16 @@ secret "mysql-secret" deleted
 ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-configmap.yaml
 configmap "mysql-config" deleted
 ```
-> **명령어** : `kubectl delete -f todo-all.yaml`
-> **명령어** : `kubectl delete secret regcred`
-> **명령어** : `kubectl delete -f mysql-deployment.yaml`
-> **명령어** : `kubectl delete -f mysql-clusterip-service.yaml`
-> **명령어** : `kubectl delete -f mysql-pvc.yaml`
-> **명령어** : `kubectl delete -f mysql-secret.yaml`
-> **명령어** : `kubectl delete -f mysql-configmap.yaml`
+![](img/handson.png):명령어
+>```bash
+>kubectl delete -f todo-all.yaml
+>kubectl delete secret regcred
+>kubectl delete -f mysql-deployment.yaml
+>kubectl delete -f mysql-clusterip-service.yaml
+>kubectl delete -f mysql-pvc.yaml
+>kubectl delete -f mysql-secret.yaml
+>kubectl delete -f mysql-configmap.yaml
+>```
 
 <br>
 
