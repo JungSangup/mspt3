@@ -52,7 +52,7 @@ nginx:1.19.3 이미지를 이용해서 my-nginx1 pod를 생성했습니다.
 ---
 
 두 번째는, [명령형 오브젝트 구성 (Imperative object configuration)](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/object-management/#%EB%AA%85%EB%A0%B9%ED%98%95-%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%84%B1) 입니다.
-미리 정의된 yaml파일을 이용해서 생성(creat) 합니다.
+미리 정의된 yaml파일을 이용해서 생성(create) 합니다.
 
 먼저 아래와 같은 파일을 작성합니다.
 
