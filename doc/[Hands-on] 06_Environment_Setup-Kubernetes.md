@@ -294,9 +294,18 @@ linux-amd64/LICENSE
 linux-amd64/README.md
 ubuntu@ip-10-0-2-33:~$ sudo mv linux-amd64/helm /usr/local/bin/helm
 ```
-> **명령어** : `wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz`
-> **명령어** : `tar -zxvf helm-v3.11.0-linux-amd64.tar.gz`
-> **명령어** : `sudo mv linux-amd64/helm /usr/local/bin/helm`
+> **명령어** : 
+> ```bash
+> wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+> ```
+> **명령어** : 
+> ```bash
+> tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
+> ```
+> **명령어** : 
+> ```bash
+> sudo mv linux-amd64/helm /usr/local/bin/helm
+> ```
 
 ---
 
@@ -305,7 +314,10 @@ ubuntu@ip-10-0-2-33:~$ sudo mv linux-amd64/helm /usr/local/bin/helm
 ubuntu@ip-10-0-2-33:~$ helm version
 version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
 ```
-> **명령어** : `helm version`
+> **명령어** : 
+> ```bash
+> helm version
+> ```
 
 <br><br><br>
 
