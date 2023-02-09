@@ -45,7 +45,10 @@ Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-1028-aws x86_64)
 
 Last login: Tue Jan 24 12:06:05 2023 from 121.165.174.35
 ```
-> **명령어** : `ssh -i "mspt3.pem" ubuntu@[PUBLIC_IPV4_ADDRESS/DNS]`
+> **명령어** : 
+> ```bash
+> ssh -i "mspt3.pem" ubuntu@[PUBLIC_IPV4_ADDRESS/DNS]
+> ```
 > **[PUBLIC_IPV4_ADDRESS/DNS]** 에는 여러분의 VM Instance 정보를 넣으세요.
 
 ---
@@ -58,8 +61,14 @@ ubuntu@ip-10-0-2-33:~$ curl -LO https://storage.googleapis.com/minikube/releases
 100 73.1M  100 73.1M    0     0   132M      0 --:--:-- --:--:-- --:--:--  132M
 ubuntu@ip-10-0-2-33:~$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
-> **명령어** : `curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64`
-> **명령어** : `sudo install minikube-linux-amd64 /usr/local/bin/minikube`
+> **명령어** : 
+> ```bash
+> curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+> ```
+> **명령어** : 
+> ```bash
+> sudo install minikube-linux-amd64 /usr/local/bin/minikube
+> ```
 
 ---
 
@@ -85,8 +94,14 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 ```
-> **명령어** : `sudo apt-get update`
-> **명령어** : `sudo apt-get install conntrack`
+> **명령어** : 
+> ```bash
+> sudo apt-get update
+> ```
+> **명령어** : 
+> ```bash
+> sudo apt-get install conntrack
+> ```
 
 ---
 
@@ -132,7 +147,10 @@ ubuntu@ip-10-0-2-33:~$ minikube start --driver=none --kubernetes-version=v1.23.0
 💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
-> **명령어** : `minikube start --driver=none --kubernetes-version=v1.23.0`
+> **명령어** : 
+> ```bash
+> minikube start --driver=none --kubernetes-version=v1.23.0
+> ```
 
 문제없이 시작된 경우 다음과 같이 표시됩니다.
 
@@ -145,7 +163,10 @@ kubelet: Running
 apiserver: Running
 kubeconfig: Configured
 ```
-> **명령어** : `minikube status`
+> **명령어** : 
+> ```bash
+> minikube status
+> ```
 
 ---
 
@@ -167,8 +188,14 @@ You can view the list of minikube maintainers at: https://github.com/kubernetes/
     ▪ Using image k8s.gcr.io/metrics-server/metrics-server:v0.6.1
 🌟  The 'metrics-server' addon is enabled
 ```
-> **명령어** : `minikube addons enable ingress`
-> **명령어** : `minikube addons enable metrics-server`
+> **명령어** : 
+> ```bash
+> minikube addons enable ingress
+> ```
+> **명령어** : 
+> ```bash
+> minikube addons enable metrics-server
+> ```
 
 ---
 
@@ -182,8 +209,14 @@ ubuntu@ip-10-0-2-33:~$ curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd6
 100 44.4M  100 44.4M    0     0  94.2M      0 --:--:-- --:--:-- --:--:--  572M
 ubuntu@ip-10-0-2-33:~$ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
-> **명령어** : `curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl`
-> **명령어** : `sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
+> **명령어** : 
+> ```bash
+> curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+> ```
+> **명령어** : 
+> ```bash
+> sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+> ```
 
 아래와 같이 표시되면 정상입니다.
 
@@ -192,7 +225,10 @@ ubuntu@ip-10-0-2-33:~$ kubectl version
 Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:16:20Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:09:57Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 ```
-> **명령어** : `kubectl version`
+> **명령어** : 
+> ```bash
+> kubectl version
+> ```
 
 ---
 
@@ -204,10 +240,22 @@ ubuntu@ip-10-0-2-33:~$ echo 'alias k=kubectl' >>~/.bashrc
 ubuntu@ip-10-0-2-33:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 ubuntu@ip-10-0-2-33:~$ exec bash
 ```
-> **명령어** : `echo 'source <(kubectl completion bash)' >>~/.bashrc`
-> **명령어** : `echo 'alias k=kubectl' >>~/.bashrc`
-> **명령어** : `echo 'complete -o default -F __start_kubectl k' >>~/.bashrc`
-> **명령어** : `exec bash`
+> **명령어** : 
+> ```bash
+> echo 'source <(kubectl completion bash)' >>~/.bashrc
+> ```
+> **명령어** : 
+> ```bash
+> echo 'alias k=kubectl' >>~/.bashrc
+> ```
+> **명령어** : 
+> ```bash
+> echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+> ```
+> **명령어** : 
+> ```bash
+> exec bash
+> ```
 
 이제 명령어 작성 중 `TAB`키를 눌러 자동완성을 사용하거나, `kubectl` 대신 Alias인 `k`를 사용할 수 있습니다.
 ```bash
@@ -215,7 +263,10 @@ ubuntu@ip-10-0-2-33:~$ k version
 Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:16:20Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:09:57Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 ```
-> **명령어** : `k version`
+> **명령어** : 
+> ```bash
+> k version
+> ```
 
 ---
 
