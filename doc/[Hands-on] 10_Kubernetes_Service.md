@@ -12,7 +12,6 @@
 
 ---
 
-
 ## Service를 이용해서 Pod에 연결하기
 
 이번 실습에서는 **Service**를 이용하는 방법을 알아보겠습니다.
@@ -46,7 +45,7 @@ spec:
 ```
 > 파일명은 **nginx-deployment.yaml**로 합니다.
 
-
+<br>
 
 그리고, 아래와 같이 생성한 다음, 생성된 Pod을 조회합니다.
 
@@ -59,10 +58,11 @@ NAME                                   READY   STATUS    RESTARTS   AGE   IP    
 my-nginx-deployment-55985c7fcf-djcp6   1/1     Running   0          17s   172.17.0.5   ip-172-31-16-225   <none>           <none>
 my-nginx-deployment-55985c7fcf-xmn72   1/1     Running   0          17s   172.17.0.6   ip-172-31-16-225   <none>           <none>
 ```
-![](img/handson.png) 명령어
+![](img/handson.png):명령어
 >```bash
 >kubectl apply -f nginx-deployment.yaml
 >```
+
 >```bash
 >kubectl get pods -o wide
 >```
