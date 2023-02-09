@@ -57,3 +57,6 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - 리눅스 명령어 정리
 - 각 실습 마지막 정리하기 추가
 - pdf, powershell 복사/붙여넣기 이슈
+  - 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)
+- Editor는 VI를 사용. (가이드 활용)
+
