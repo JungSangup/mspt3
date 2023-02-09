@@ -329,7 +329,7 @@ ubuntu@ip-10-0-2-33:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
 
 ---
 
-Docker 설치를 위서 APT Repository를 설정합니다.
+Docker 설치를 위해서 APT Repository를 설정합니다.
 
 ```bash
 ubuntu@ip-10-0-2-33:~$ echo \
