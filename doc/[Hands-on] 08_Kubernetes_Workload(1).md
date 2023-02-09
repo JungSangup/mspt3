@@ -177,7 +177,7 @@ spec:
       initialDelaySeconds: 3
       periodSeconds: 3
 ```
-> 파일명은 livenessProbe_httpGet.yaml로 합니다.
+> 파일명은 livenessProbe-httpGet.yaml로 합니다.
 > `livenessProbe` 부분이 설정 부분입니다.
 
 ---
