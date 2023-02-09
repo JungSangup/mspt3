@@ -1,19 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 11. Kubernetes Storage
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 11. Kubernetes Storage
 
-<br>
+<img src="img/hands_on.png" width="1000px"></img>
 
 # Contents
-
-<br>
 
 - **PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기**
 - **Volume을 사용하여 Pod 생성하기**
@@ -42,7 +32,7 @@ standard (default)   k8s.io/minikube-hostpath   Delete          Immediate       
 Minikube는 기본적으로 위와같은 StorageClass가 있습니다.
 간단히 테스트해볼 수 있도록, hostPath 타입의 Volume을 만들 수 있습니다.
 
----
+<br>
 
 이제 PVC를 만들어볼게요.
 아래와 같은 파일을 준비합니다.
@@ -70,7 +60,7 @@ persistentvolumeclaim/nginx-pvc created
 ```
 > **명령어** : `kubectl apply -f nginx-pvc.yaml`
 
----
+<br>
 
 만들어진 K8s 리소스들을 볼까요?
 먼저 PVC를 확인해볼게요.
@@ -95,7 +85,7 @@ pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO            Delete     
 
 일반적인 사용 유형이니 잘 익혀두세요.
 
----
+<br>
 
 PV를 좀 더 자세히 볼까요?
 ```bash
@@ -126,7 +116,7 @@ Events:            <none>
 Source아래 내용을 보시면 어디에 Volume영역이 할당되었는지 알 수 있습니다.
 위의 경우는 HostPath타입을 이용했고, **/tmp/hostpath-provisioner/default/nginx-pvc**를 Volume의 위치로 사용하고 있습니다.
 
----
+<br>
 
 ## Volume을 사용하여 Pod 생성하기
 
@@ -152,7 +142,7 @@ Source아래 내용을 보시면 어디에 Volume영역이 할당되었는지 �
 
 앞에서 만든 **nginx-pvc** 를 사용하고, 컨테이너의 **/usr/share/nginx/html**를 마운트합니다.
 
----
+<br>
 
 다음과 같이 Deployment를 준비해주세요.
 ```yaml
@@ -190,7 +180,7 @@ spec:
 ```
 > 파일명은 **nginx-deployment-volume.yaml**로 합니다.
 
----
+<br>
 
 다음은 Deployment와 앞에서 실습한 Service, Ingress까지 리소스를 생성해주세요.
 
@@ -219,7 +209,7 @@ Nginx에서 보여줄 간단한 **index.html**파일을 하나 만들었습니�
 
 * 이 실습은 PVC, PV, Pod의 동작을 살펴보기 위한 것입니다. HostPath유형의 사용상 주의사항은 [hostPath](https://kubernetes.io/ko/docs/concepts/storage/volumes/#hostpath)를 참고하세요.
 
----
+<br>
 
 이제 브라우저에서 어떻게 나오나 볼까요?
 
@@ -242,7 +232,7 @@ ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl exec -it my-nginx-deploym
 > **명령어** : `kubectl exec -it [POD-NAME] -- cat /usr/share/nginx/html/index.html`
 > [POD-NAME] 에는 앞에서 조회한 POD중 하나의 이름을 넣어주세요.
 
----
+<br>
 
 아래와 같이 사용한 리소스들을 정리해주세요.
 
@@ -265,7 +255,7 @@ persistentvolumeclaim "nginx-pvc" deleted
 이번 실습은 여기까지 입니다.  ˘◡˘
 끝~
 
----
+<br>
 
 ### 보너스 실습
 
@@ -293,7 +283,7 @@ ingress.networking.k8s.io/todo-app-ingress created
 > **명령어** : `kubectl apply -f todo-clusterip-service.yaml`
 > **명령어** : `kubectl apply -f todo-ingress.yaml`
 
----
+<br>
 
 ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-app.info***)를 추가합니다.
 - Windows라면 **C:\Windows\System32\drivers\etc\hosts** 파일에,
@@ -308,7 +298,7 @@ ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-
 
 ![h:300](img/k8s_todo_ingress.png)
 
----
+<br>
 
 그리고, 아래처럼 Pod들이 삭제와 생성을 반복해도 데이터는 사라지지 않고 유지될거예요.
 
@@ -332,7 +322,7 @@ todo-app-deployment-55464569cf-dlsrp   1/1     Running   0          9s
 > **명령어** : `kubectl delete pod --all`
 > **명령어** : `kubectl get pod`
 
----
+<br>
 
 다 해보셨으면, 깨끗이 정리하고 마칠게요.
 
@@ -351,6 +341,6 @@ persistentvolumeclaim "todo-pvc" deleted
 > **명령어** : `kubectl delete -f todo-deployment-volume.yaml`
 > **명령어** : `kubectl delete -f todo-pvc.yaml`
 
-<br><br><br>
+<br>
 
 정말로 끝~   ˘◡˘
