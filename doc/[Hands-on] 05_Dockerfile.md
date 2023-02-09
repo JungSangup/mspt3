@@ -97,7 +97,10 @@ Removing intermediate container 6fdc1dad43f4
 Successfully built d187b50492c2
 Successfully tagged hellodocker:v1
 ```
-> **명령어** : `docker build -t hellodocker:v1 .`
+> **명령어** : 
+> ```bash
+> docker build -t hellodocker:v1 .
+> ```
 
 ---
 
@@ -108,14 +111,20 @@ REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
 hellodocker   v1        d187b50492c2   6 minutes ago   526MB
 openjdk       8         2a8331246713   6 days ago      526MB
 ```
-> **명령어** : `docker images`
+> **명령어** : 
+> ```bash
+> docker images
+> ```
 
 이미지가 준비됐으니 이제 실행을 해볼게요.
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker run hellodocker:v1
 Hello Docker!!!
 ```
-> **명령어** : `docker run hellodocker:v1`
+> **명령어** : 
+> ```bash
+> docker run hellodocker:v1
+> ```
 
 결과가 예상한 것과 같은가요?
 
