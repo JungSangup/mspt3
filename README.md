@@ -47,3 +47,7 @@ MSP T3 강의계획
 
 순서조정 (K8s)
 Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deployment strategy > HPA > Helm
+
+
+
+- ubuntu 20.04 사용.
