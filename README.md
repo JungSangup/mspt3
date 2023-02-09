@@ -59,4 +59,4 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - pdf, powershell 복사/붙여넣기 이슈
   - 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)
 - Editor는 VI를 사용. (가이드 활용)
-
+- minikube start 시 오류 (/etc/docker)
