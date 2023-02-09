@@ -50,4 +50,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 
 
+- A반/B반으로 나누어서 진행함.
 - ubuntu 20.04 사용.
+- mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지...
+- 
