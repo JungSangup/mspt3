@@ -2,8 +2,7 @@
 
 ### [Hands-on] 04. Docker network
 
-04-01 :
-```bash
+04-01 : ```bash
 docker network create todo-app
 ```
 
