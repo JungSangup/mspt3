@@ -54,3 +54,4 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - ubuntu 20.04 사용.
 - mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )
 - powershell, mac 기본 terminal 기준으로 
+- 리눅스 명령어 정리
