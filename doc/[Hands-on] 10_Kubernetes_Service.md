@@ -1,7 +1,7 @@
 
 # [Hands-on] 10. Kubernetes Service
 
-<img src="img/hands_on.png" width="800px"></img>
+<img src="img/hands_on.png" width="1000px"></img>
 
 ## Contents
 
