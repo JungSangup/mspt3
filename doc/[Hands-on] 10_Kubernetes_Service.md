@@ -1,15 +1,14 @@
 
 # [Hands-on] 10. Kubernetes Service
 
-## Contents
+<img src="img/hands_on.png" width="800px"></img>
 
-<br>
+## Contents
 
 - **Service를 이용해서 Pod에 연결하기**
   - **ClusterIP타입 Service 이용해보기**
   - **NodePort타입 Service 이용해보기**
 - **Ingress를 이용해서 Pod에 연결하기**
-
 
 ---
 
