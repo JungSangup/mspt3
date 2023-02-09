@@ -199,7 +199,10 @@ Removing intermediate container 0c3c772a09dd
 Successfully built 61de5a0b96a9
 Successfully tagged hellodocker:v2
 ```
-> **명령어** : `docker build -t hellodocker:v2 .`
+> [**명령어**]
+> ```bash
+> docker build -t hellodocker:v2 .
+> ```
 
 ---
 
@@ -212,7 +215,10 @@ hellodocker   v1        d187b50492c2   29 minutes ago       526MB
 openjdk       8-jre     d991802804b7   6 days ago           274MB
 openjdk       8         2a8331246713   6 days ago           526MB
 ```
-> **명령어** : `docker images`
+> [**명령어**]
+> ```bash
+> docker images
+> ```
 
 v1 과 v2 는 Java Application은 동일하지만, base image의 차이 때문에 이미지 전체의 사이즈가 크게 차이가 납니다.
 - **v1** : 526MB -> **v2** : 274MB   （°o°；）
@@ -225,7 +231,10 @@ Cloud native 환경에서는 가능하면 이미지 사이즈를 작게 가져�
 ubuntu@ip-10-0-1-14:~$ docker run hellodocker:v2
 Hello Docker!!!
 ```
-> **명령어** : `docker run hellodocker:v2`
+> [**명령어**]
+> ```bash
+> docker run hellodocker:v2
+> ```
 
 ---
 
@@ -234,7 +243,10 @@ Hello Docker!!!
 ```bash
 ubuntu@ip-10-0-1-14:~$ docker rm -f $(docker ps -aq)
 ```
-> **명령어** : `docker rm -f $(docker ps -aq)`
+> [**명령어**]
+> ```bash
+> docker rm -f $(docker ps -aq)
+> ```
 
 <br><br><br>
 
