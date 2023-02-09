@@ -56,3 +56,4 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - powershell, mac 기본 terminal 기준으로 
 - 리눅스 명령어 정리
 - 각 실습 마지막 정리하기 추가
+- pdf, powershell 복사/붙여넣기 이슈
