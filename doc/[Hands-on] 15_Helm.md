@@ -249,7 +249,7 @@ statefulset.apps/my-wordpress-mariadb   1/1     3m40s
 ubuntu@ip-10-0-1-161:~$ helm uninstall my-wordpress
 release "my-wordpress" uninstalled
 ```
-> **명령어** : `kubectl uninstall my-wordpress`
+> **명령어** : `helm uninstall my-wordpress`
 
 ---
 
