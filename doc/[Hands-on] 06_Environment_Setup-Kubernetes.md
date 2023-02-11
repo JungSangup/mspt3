@@ -111,6 +111,21 @@ kubeconfig: Configured
 >minikube status
 >```
 
+<details><summary>`minikube start` 중 **conntrack** 관련 에러가 발생하면</summary>
+<p>
+
+아래 명령어를 실행해서 설치해주세요.
+
+![](img/command.png)
+>```bash
+>sudo apt-get update
+>sudo apt-get install conntrack
+>
+>```
+
+</p>
+</details>
+
 <br><br><br><br><br>
 
 ## 2. Kubectl 설치하기 ( [리눅스에 kubectl 설치 및 설정](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-linux/) )  
