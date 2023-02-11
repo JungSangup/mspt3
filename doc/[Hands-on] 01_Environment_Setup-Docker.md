@@ -23,64 +23,73 @@
 먼저 AWS Console에 로그인합니다.  
 - AWS Console : [https://aws.amazon.com/console/](https://aws.amazon.com/console/)
 
-![h:320](img/aws_signin_1.png)  
+![](img/aws_signin_1.png)
 > 화면 우측 상단의 `Sign in to the Console`을 클릭합니다.
 
 <br>
 
-![h:230](img/aws_signin_2.png)
+![](img/aws_signin_2.png)
 > **Account ID**와 **IAM user name**을 이용해서 `sign in` 합니다.
-
-![h:230](img/aws_signin_3.png)  
-[MFA](https://docs.aws.amazon.com/ko_kr/singlesignon/latest/userguide/enable-mfa.html) 구성을 한 경우, 위 그림과 같은 화면에서 MFA Code를 입력해야 합니다.
-
-![h:300](img/aws_signin_4.png)
-Sign in 후에는 가장 먼저 어느 **Region**에 VM Instance를 구성할지 결정해야 합니다.
-우측 상단 Region 선택 메뉴에서 Region을 선택합니다.
 
 <br>
 
+![](img/aws_signin_3.png)  
+> [MFA](https://docs.aws.amazon.com/ko_kr/singlesignon/latest/userguide/enable-mfa.html) 구성을 한 경우, 위 그림과 같은 화면에서 `MFA Code`를 입력해야 합니다.
+
+<br>
+
+![](img/aws_signin_4.png)
+> Sign in 후에는 가장 먼저 어느 **Region**에 VM Instance를 구성할지 결정해야 합니다.
+우측 상단 Region 선택 메뉴에서 Region을 선택합니다.
+
 - 반(별로 정해진 **Region**이 있습니다. 확인 후 진행해주세요.
 
-
+<br>
 
 이제 EC2 Instance를 만들어 보겠습니다.
 
-![h:200](img/aws_ec2_1.png)
-**서비스** 중에서 **EC2**를 검색하고 이동합니다.
+![](img/aws_ec2_1.png)
+> **서비스** 중에서 **EC2**를 검색하고 이동합니다.
 
-![h:200](img/aws_ec2_2.png)
-**EC2 dashboard** 화면에서 `Launch instance`버튼을 클릭합니다.
+<br>
 
+![](img/aws_ec2_2.png)
+> **EC2 dashboard** 화면에서 `Launch instance`버튼을 클릭합니다.
 
+<br>
 
-![h:350](img/aws_ec2_3.png)
-Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 **Ubuntu**를 선택합니다.
+![](img/aws_ec2_3.png)
+> Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 **Ubuntu**를 선택합니다.
 
-![h:120](img/aws_ec2_4.png)
-그 다음 Instance type은 `t3.medium`을 선택합니다.
+<br>
 
+![](img/aws_ec2_4.png)
+> 그 다음 Instance type은 `t3.medium`을 선택합니다.
 
+<br>
 
-![h:120](img/aws_ec2_5.png)
-**Key pair**는 기존의 것을 사용하거나, 없는 경우에는 `Create new key pair`를 눌러 **Key pair** 생성 화면으로 이동합니다.
+![](img/aws_ec2_5.png)
+> **Key pair**는 기존의 것을 사용하거나, 없는 경우에는 `Create new key pair`를 눌러 **Key pair** 생성 화면으로 이동합니다.
 
-![h:320](img/aws_ec2_6.png)
-신규 생성이 필요한 경우 Key pair name에 **mspt3**를 입력하고,  **RSA** type과 **.pem** format 선택 후 `Create key pair`버튼을 클릭합니다.
+<br>
+
+![](img/aws_ec2_6.png)
+> 신규 생성이 필요한 경우 Key pair name에 **mspt3**를 입력하고,  **RSA** type과 **.pem** format 선택 후 `Create key pair`버튼을 클릭합니다.
 
 > 생성되면 브라우저를 통해서 **mspt3.pem** 파일이 다운로드 됩니다. 잘 보관해두세요.
 
+<br>
 
 
-![h:120](img/aws_ec2_7.png)
+![](img/aws_ec2_7.png)
 다시 Instance 생성 화면으로 돌아오면, 앞에서 생성한 **Key pair**를 선택할 수 있습니다.
 
-![h:350](img/aws_ec2_8.png)
+![](img/aws_ec2_8.png)
 그 다음 Network settings에서 `Edit`버튼을 클릭하여 상세 설정을 진행합니다.
 
 
 
-![h:550](img/aws_ec2_9.png)
+![](img/aws_ec2_9.png)
 위 그림과 같이 입력합니다. (상세 내용은 다음페이지에 있습니다.)
 
 
@@ -101,15 +110,15 @@ Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 
 
 
 
-![h:150](img/aws_ec2_10.png)
+![](img/aws_ec2_10.png)
 Storage를 20GiB로 설정합니다.
 
-![h:350](img/aws_ec2_11.png)
+![](img/aws_ec2_11.png)
 Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
 
 
-![h:400](img/aws_ec2_12.png)
+![](img/aws_ec2_12.png)
 정상적으로 EC2 Instance가 생성되면 화면과 같이 표시됩니다.
 
 > SSH 접속을 위해 필요한 **Public IPv4 address** 또는 **Public IPv4 DNS** 정보를 기록해둡니다.
@@ -119,17 +128,17 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 과정중에는 SSH를 이용한 Instance 접속 외에도, 실행되는 애플리케이션 접속도 필요합니다.
 애플리케이션 접속을 위해서 추가적인 Security group 설정을 진행합니다.
 
-![h:400](img/aws_ec2_13.png)
+![](img/aws_ec2_13.png)
 위와같이 EC2 Instance의 **Security** 탭에서 해당 **Security group**으로 이동합니다. (Security group명 옆의 아이콘 클릭)
 
 
 
-![h:400](img/aws_ec2_14.png)
+![](img/aws_ec2_14.png)
 Serurity group화면의 Inbound rules 탭에서 `Edit inbound rules` 버튼을 클릭합니다.
 
 
 
-![h:350](img/aws_ec2_15.png)
+![](img/aws_ec2_15.png)
 `Add rule` 버튼을 누르면 규칙을 추가할 수 있습니다. 아래 규칙을 추가해주세요.
 
 | **Type**   | **Port range** | Source |
@@ -170,12 +179,12 @@ OS마다 제공되는 기본 툴을 사용해도 되고, 별도로 설치해서 
 윈도우즈인 경우 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ko-kr&gl=kr&rtc=1)를 사용하면 여러가지 기능을 사용할 수 있어 편리합니다. (선택사항)
 
 AWS Console에서 EC2 > Instances 화면으로 이동합니다.
-![h:300](img/terminal1.png)
+![](img/terminal1.png)
 접속하려는 EC2 Instance를 선택하고, `Connect`버튼을 클릭합니다.
 
 
 
-![h:450](img/terminal2.png)
+![](img/terminal2.png)
 위 그림과 같이 **Connect to instance** 화면에서 **SSH client** 탭을 클릭하고, 아래 표시되는 절차에 따라 접속을 진행합니다.
 
 > 윈도우즈 환경에서는 3번 절차 (chomod 400 mspt3.pem)를 진행할 수 없습니다. 다음장의 내용을 참고하세요.
@@ -207,7 +216,7 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 
 
 
-![h:500](img/terminal4.png)
+![](img/terminal4.png)
 필요한 모든 절차를 거치고 정상적으로 접속되면 위와같은 화면이 표시됩니다.
 
 
@@ -215,12 +224,12 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 **[접속방법2]**  MobaXterm
 MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 
-![h:450](img/mobaxterm1.png)
+![](img/mobaxterm1.png)
 MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
 
 
-![h:450](img/mobaxterm2.png)
+![](img/mobaxterm2.png)
 접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.
 
 - **Remote host** : EC2 Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
@@ -229,7 +238,7 @@ MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
 
 
-![h:500](img/mobaxterm3.png)
+![](img/mobaxterm3.png)
 접속되면 위와같은 화면이 표시됩니다.
 다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
