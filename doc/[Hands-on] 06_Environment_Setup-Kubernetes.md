@@ -7,9 +7,9 @@
 
 # Contents
 
-**[1. Minikube 설치하기]()**  
-**[2. Kubectl 설치하기]()**  
-**[3. Helm 설치하기]()**  
+**[1. Minikube 설치하기](#1-minikube-설치하기)**  
+**[2. Kubectl 설치하기](#2-kubectl-설치하기--리눅스에-kubectl-설치-및-설정-)**  
+**[3. Helm 설치하기](#3-helm-설치하기--헬름-설치하기-)**  
 
 ---
 
