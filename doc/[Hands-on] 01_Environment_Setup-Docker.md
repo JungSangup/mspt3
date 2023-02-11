@@ -202,7 +202,7 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 처리된 파일: mspt3.pem
 1 파일을 처리했으며 0 파일은 처리하지 못했습니다.
 ```
-![](img/handson.png)
+![](img/command.png)
 > ```bash
 > icacls.exe mspt3.pem /reset
 > icacls.exe mspt3.pem /GRANT:R "$($env:USERNAME):(R)"
