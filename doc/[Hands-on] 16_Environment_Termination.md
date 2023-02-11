@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 16. Environment termination
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 16. Environment termination
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **VM Instance 삭제하기**
 - **Security group 삭제하기**

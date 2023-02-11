@@ -1,23 +1,11 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 04. Docker network
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 04. Docker network
 
-<br>
+![](img/hands_on.png)
 
 # Contents
 
-<br>
-
 - **Bridge network을 이용하여 Todo app. 실행하기**
-
 
 ---
 

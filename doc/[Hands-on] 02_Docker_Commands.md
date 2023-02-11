@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 02. Docker commands
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 02. Docker commands
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **이미지 검색하기**
 - **이미지 다운로드(Pull)하기**

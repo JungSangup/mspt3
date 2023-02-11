@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 09. Kubernetes Workload(2)
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 09. Kubernetes Workload(2)
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **ReplicaSet을 이용해 Pod 관리하기**
 - **Deployment를 이용해 Pod 관리하기**

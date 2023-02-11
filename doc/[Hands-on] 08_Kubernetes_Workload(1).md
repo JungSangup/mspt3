@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 08. Kubernetes Workload(1)
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 08. Kubernetes Workload(1)
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **Pod 관리하기**
   - **명령형 커맨드**

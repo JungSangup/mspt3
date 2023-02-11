@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 01. Environment setup - Docker
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 01. Environment setup - Docker
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **VM Instance 만들기**
 - **VM Instance 접속하기**

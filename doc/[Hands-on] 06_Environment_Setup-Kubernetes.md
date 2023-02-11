@@ -1,26 +1,14 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 06. Environment setup - Kubernetes
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 06. Environment setup - Kubernetes
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **Minikube 설치하기**
 - **Minikube 설정하기(Addons)**
 - **Kubectl 설치하기**
 - **Helm 설치하기**
-
 
 ---
 

@@ -1,24 +1,12 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 05. Dockerfile
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 05. Dockerfile
 
-<br>
+![](img/hands_on.png)
 
 # Contents
 
-<br>
-
 - **Dockerfile을 이용한 이미지 빌드**
 - **Multi-stage build**
-
 
 ---
 

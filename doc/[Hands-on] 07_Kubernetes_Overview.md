@@ -1,20 +1,9 @@
----
-marp: true
-author: sangup.jung@gmail.com
-size: 16:9
-theme: mspt2
-paginate: true
-header: Docker & Kubernetes - [Hands-on] 07. Kubernetes Overview
-footer: Samsung SDS
----
 
-![bg left:40%](img/hands_on.png)
+# [Hands-on] 07. Kubernetes Overview
 
-<br>
+![](img/hands_on.png)
 
 # Contents
-
-<br>
 
 - **kubectl 기본 명령어 사용**
 
