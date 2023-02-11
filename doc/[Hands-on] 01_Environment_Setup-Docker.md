@@ -262,138 +262,159 @@ MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 
 기존에 설치된 버젼이 있거나 다시 설치를 진행하려고 하는 경우 먼저 기존버젼 삭제를 진행합니다.  
 처음 설치를 하는 경우라면, 생략하고 다음 단계를 진행합니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo apt-get remove docker docker-engine docker.io containerd runc
+ubuntu@ip-172-31-23-60:~$ sudo apt-get remove docker docker-engine docker.io containerd runc
 Reading package lists... Done
-Building dependency tree... Done
+Building dependency tree
 Reading state information... Done
+Package 'docker.io' is not installed, so not removed
+E: Unable to locate package docker
 E: Unable to locate package docker-engine
 ```
 
 ![](img/command.png)
-> ```bash
-> sudo apt-get remove docker docker-engine docker.io containerd runc
-> ```
+>```bash
+>sudo apt-get remove docker docker-engine docker.io containerd runc
+>```
 
-
+<br>
 
 ### [Install using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
 Ubuntu의 [Advanced Packaging Tool (APT)](https://ubuntu.com/server/docs/package-management)를 이용해서 설치를 진행합니다.
 
 먼저 package index를 업데이트 합니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo apt-get update
-Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
-Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
-Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
-Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
-Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [831 kB]
-Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [566 kB]
-Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [785 kB]
-Fetched 2507 kB in 1s (3302 kB/s)
+ubuntu@ip-172-31-23-60:~$ sudo apt-get update
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal InRelease
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1993 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [326 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [12.2 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1495 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [211 kB]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+...생략...
+Fetched 25.7 MB in 4s (6120 kB/s)
 Reading package lists... Done
 ```
 
-> **명령어** : `sudo apt-get update`
+![](img/command.png)
+>```bash
+>sudo apt-get update
+>```
 
-
+<br><br><br>
 
 다음은, HTTPS를 이용하기 위해서 몇 가지 패키지를 설치합니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo apt-get install -y ca-certificates curl gnupg lsb-release
+ubuntu@ip-172-31-23-60:~$ sudo apt-get install -y ca-certificates curl gnupg lsb-release
 Reading package lists... Done
-Building dependency tree... Done
+Building dependency tree
 Reading state information... Done
-lsb-release is already the newest version (11.1.0ubuntu4).
+lsb-release is already the newest version (11.1.0ubuntu2).
 lsb-release set to manually installed.
-ca-certificates is already the newest version (20211016ubuntu0.22.04.1).
+ca-certificates is already the newest version (20211016ubuntu0.20.04.1).
 ca-certificates set to manually installed.
-curl is already the newest version (7.81.0-1ubuntu1.7).
+curl is already the newest version (7.68.0-1ubuntu2.15).
 curl set to manually installed.
-gnupg is already the newest version (2.2.27-3ubuntu2.1).
+gnupg is already the newest version (2.2.19-3ubuntu2.2).
 gnupg set to manually installed.
-0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
 ```
 
-> **명령어** : `sudo apt-get install -y ca-certificates curl gnupg lsb-release`
+![](img/command.png)
+>```bash
+>sudo apt-get install -y ca-certificates curl gnupg lsb-release
+>```
+
+<br><br><br>
 
 Docker GPG key를 추가합니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo mkdir -p /etc/apt/keyrings
-ubuntu@ip-10-0-2-33:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ubuntu@ip-172-31-23-60:~$ sudo mkdir -m 0755 -p /etc/apt/keyrings
+ubuntu@ip-172-31-23-60:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
-> **명령어** : `sudo mkdir -p /etc/apt/keyrings`
-> **명령어** : `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
+![](img/command.png)
+>```bash
+>sudo mkdir -m 0755 -p /etc/apt/keyrings
+>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+>```
 
-
+<br><br><br>
 
 Docker 설치를 위해서 APT Repository를 설정합니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ubuntu@ip-172-31-23-60:~$ echo \
+>   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+>   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-> **명령어** : `echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
+![](img/command.png)
+>```bash
+>echo \
+>  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+>  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+>```
+
+<br><br><br>
 
 다시 Package index를 업데이트 합니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo apt-get update
-Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
-Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
-Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
-Get:4 https://download.docker.com/linux/ubuntu jammy InRelease [48.9 kB]
-Get:5 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
-Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [11.9 kB]
-Fetched 385 kB in 1s (652 kB/s)
+ubuntu@ip-172-31-23-60:~$ sudo apt-get update
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports InRelease
+Get:4 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:6 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [24.5 kB]
+Fetched 196 kB in 1s (264 kB/s)
 Reading package lists... Done
 ```
 
-> **명령어** : `sudo apt-get update`
+![](img/command.png)
+>```bash
+>sudo apt-get update
+>```
 
+<br><br><br>
 
-
-그리고, 마지막으로 Docker를 설치합니다.
-
+그리고, 마지막으로 Docker를 설치합니다. (**Docker version : 20.10.23**)
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+ubuntu@ip-172-31-23-60:~$ sudo apt-get install -y docker-ce=5:20.10.23~3-0~ubuntu-focal docker-ce-cli=5:20.10.23~3-0~ubuntu-focal containerd.io docker-buildx-plugin docker-compose-plugin
 Reading package lists... Done
-Building dependency tree... Done
+Building dependency tree
 Reading state information... Done
 The following additional packages will be installed:
-  docker-ce-rootless-extras docker-scan-plugin libltdl7 libslirp0 pigz slirp4netns
+  docker-ce-rootless-extras docker-scan-plugin pigz slirp4netns
 Suggested packages:
   aufs-tools cgroupfs-mount | cgroup-lite
 The following NEW packages will be installed:
-  containerd.io docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin docker-scan-plugin libltdl7 libslirp0 pigz slirp4netns
-0 upgraded, 10 newly installed, 0 to remove and 3 not upgraded.
-Need to get 113 MB of archives.
-After this operation, 431 MB of additional disk space will be used.
-Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 pigz amd64 2.6-1 [63.6 kB]
-Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 libltdl7 amd64 2.4.6-15build2 [39.6 kB]
-Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 libslirp0 amd64 4.6.1-1build1 [61.5 kB]
-Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 slirp4netns amd64 1.0.1-2 [28.2 kB]
-Get:5 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.15-1 [27.7 MB]
-Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce-cli amd64 5:20.10.23~3-0~ubuntu-jammy [42.6 MB]
-Get:7 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce amd64 5:20.10.23~3-0~ubuntu-jammy [20.5 MB]
-Get:8 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce-rootless-extras amd64 5:20.10.23~3-0~ubuntu-jammy [8390 kB]
-Get:9 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-compose-plugin amd64 2.15.1-1~ubuntu.22.04~jammy [9570 kB]
-Get:10 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-scan-plugin amd64 0.23.0~ubuntu-jammy [3623 kB]
-Fetched 113 MB in 1s (81.5 MB/s)
-
-... 생략 ...
+  containerd.io docker-buildx-plugin docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin docker-scan-plugin pigz slirp4netns
+0 upgraded, 9 newly installed, 0 to remove and 11 not upgraded.
+Need to get 139 MB of archives.
+After this operation, 505 MB of additional disk space will be used.
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe amd64 pigz amd64 2.4-1 [57.4 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe amd64 slirp4netns amd64 0.4.3-1 [74.3 kB]
+Get:3 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.16-1 [27.7 MB]
+Get:4 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-buildx-plugin amd64 0.10.2-1~ubuntu.20.04~focal [25.9 MB]
+Get:5 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-cli amd64 5:20.10.23~3-0~ubuntu-focal [42.6 MB]
+Get:6 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce amd64 5:20.10.23~3-0~ubuntu-focal [20.5 MB]
+Get:7 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-rootless-extras amd64 5:23.0.1-1~ubuntu.20.04~focal [8765 kB]
+...생략...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for systemd (245.4-4ubuntu3.19) ...
 ```
 
-> **명령어** : `sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin`
+![](img/command.png)
+>```bash
+>sudo apt-get install -y docker-ce=5:20.10.23~3-0~ubuntu-focal docker-ce-cli=5:20.10.23~3-0~ubuntu-focal containerd.io docker-buildx-plugin docker-compose-plugin
+>```
 
+<br><br><br>
 
 
 설치 후 다음 설정을 진행합니다. ([Docker Engine post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/))
@@ -401,11 +422,11 @@ Fetched 113 MB in 1s (81.5 MB/s)
 Docker daemon은 root 유저로 동작하고, Docker CLI(/usr/bin/docker)는 root 그룹/계정 권한을 가지고 있습니다.
 
 ```bash
-ubuntu@ip-10-0-2-33:~$ ps -ef | grep -i dockerd
-root        9282       1  0 07:09 ?        00:00:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
-ubuntu      9514    8611  0 07:18 pts/1    00:00:00 grep --color=auto -i dockerd
-ubuntu@ip-10-0-2-33:~$ ls -al /usr/bin/docker
--rwxr-xr-x 1 root root 50717552 Jan 19 17:42 /usr/bin/docker
+ubuntu@ip-172-31-23-60:~$ ps -ef | grep -i dockerd
+root        3039       1  0 08:56 ?        00:00:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ubuntu      4078    1407  0 08:58 pts/0    00:00:00 grep --color=auto -i dockerd
+ubuntu@ip-172-31-23-60:~$ ls -al /usr/bin/docker
+-rwxr-xr-x 1 root root 50722320 Jan 19 17:34 /usr/bin/docker
 ```
 
 root가 아닌 계정(우리 실습환경의 user는 `ubuntu` 입니다.)을 이용하여 Docker CLI를 사용하기 위해서 다음과 같이 진행합니다.
@@ -413,29 +434,36 @@ root가 아닌 계정(우리 실습환경의 user는 `ubuntu` 입니다.)을 이
 먼저 `docker`그룹을 추가합니다.
 
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo groupadd docker
+ubuntu@ip-172-31-23-60:~$ sudo groupadd docker
 ```
 
-> **명령어** : `sudo groupadd docker`
-> 이미 docker 그룹이 있을수도 있습니다. (groupadd: group 'docker' already exists)
+![](img/command.png)
+>```bash
+>sudo groupadd docker
+>```
+- 이미 docker 그룹이 있을수도 있습니다. (groupadd: group 'docker' already exists)
+
+<br><br><br>
 
 다음은 사용 중인 User(`ubuntu`)를 docker 그룹에 추가하고, 적용(docker 그룹으로 로그인)합니다.
 
 ```bash
-ubuntu@ip-10-0-2-33:~$ sudo usermod -aG docker $USER
-ubuntu@ip-10-0-2-33:~$ newgrp docker
+ubuntu@ip-172-31-23-60:~$ sudo usermod -aG docker $USER
+ubuntu@ip-172-31-23-60:~$ newgrp docker
 ```
 
-> **명령어** : `sudo usermod -aG docker $USER`
-> **명령어** : `newgrp docker`
+![](img/command.png)
+>```bash
+>sudo usermod -aG docker $USER
+>newgrp docker
+>```
 
-
+<br><br><br>
 
 모두 정상적으로 설치되고 설정된 경우 다음과 같이 동작해야 합니다.
 한 번 테스트 해보세요.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ docker run --rm hello-world
+ubuntu@ip-172-31-23-60:~$ docker run --rm hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 2db29710123e: Pull complete
@@ -464,23 +492,78 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-> **명령어** : `docker run --rm hello-world`
+![](img/command.png)
+>```bash
+>docker run --rm hello-world
+>```
 
+<br><br><br>
 
+그리고, 실습에 필요한 몇 가지 패키지를 추가로 더 설치할게요.  
+```bash
+ubuntu@ip-172-31-23-60:~$ sudo apt-get update
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports InRelease
+Get:4 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:5 https://download.docker.com/linux/ubuntu focal InRelease
+Fetched 114 kB in 1s (150 kB/s)
+Reading package lists... Done
+ubuntu@ip-172-31-23-60:~$ sudo apt-get install -y net-tools tree conntrack
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack net-tools tree
+0 upgraded, 3 newly installed, 0 to remove and 13 not upgraded.
+Need to get 270 kB of archives.
+After this operation, 1083 kB of additional disk space will be used.
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/main amd64 net-tools amd64 1.60+git20180626.aebd88e-1ubuntu1 [196 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe amd64 tree amd64 1.8.0-1 [43.0 kB]
+Fetched 270 kB in 0s (12.2 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 62118 files and directories currently installed.)
+Preparing to unpack .../conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package net-tools.
+Preparing to unpack .../net-tools_1.60+git20180626.aebd88e-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Selecting previously unselected package tree.
+Preparing to unpack .../tree_1.8.0-1_amd64.deb ...
+Unpacking tree (1.8.0-1) ...
+Setting up net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up tree (1.8.0-1) ...
+Processing triggers for man-db (2.9.1-1) ...
+```
+
+![](img/command.png)
+>```bash
+>sudo apt-get update
+>sudo apt-get install -y net-tools tree conntrack
+>```
+
+<br><br><br>
 
 ## Git clone하기 (실습파일 다운로드)
 이후 진행되는 실습과정들에 사용되는 파일들을 다운로드 하겠습니다.
 
 ```bash
-ubuntu@ip-10-0-2-33:~$ git clone https://github.com/JungSangup/mspt3.git
+ubuntu@ip-172-31-23-60:~$ git clone https://github.com/JungSangup/mspt3.git
 Cloning into 'mspt3'...
-remote: Enumerating objects: 2715, done.
-remote: Counting objects: 100% (362/362), done.
-remote: Compressing objects: 100% (212/212), done.
-remote: Total 2715 (delta 150), reused 360 (delta 148), pack-reused 2353
-Receiving objects: 100% (2715/2715), 285.64 MiB | 40.88 MiB/s, done.
-Resolving deltas: 100% (1530/1530), done.
+remote: Enumerating objects: 3210, done.
+remote: Counting objects: 100% (857/857), done.
+remote: Compressing objects: 100% (481/481), done.
+remote: Total 3210 (delta 406), reused 775 (delta 374), pack-reused 2353
+Receiving objects: 100% (3210/3210), 328.05 MiB | 51.34 MiB/s, done.
+Resolving deltas: 100% (1786/1786), done.
 ```
-> **명령어** : `git clone https://github.com/JungSangup/mspt3.git`
 
-**hands_on_files** 디렉토리 아래에 실습에 필요한 파일들이 있습니다.
+![](img/command.png)
+>```bash
+>git clone https://github.com/JungSangup/mspt3.git
+>```
+- **hands_on_files** 디렉토리 아래에 실습에 필요한 파일들이 있습니다.
