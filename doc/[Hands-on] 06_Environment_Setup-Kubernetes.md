@@ -3,112 +3,63 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
-- **Minikube 설치하기**
-- **Minikube 설정하기(Addons)**
-- **Kubectl 설치하기**
-- **Helm 설치하기**
+**[1. Minikube 설치하기]()**  
+**[2. Minikube 설정하기(Addons)]()**  
+**[3. Kubectl 설치하기]()**  
+**[4. Helm 설치하기]()**  
 
 ---
 
-## Minikube 설치하기
-Kubernetes 실습을 위해서 **K8s cluster**를 구성합니다.
+<br>
+
+## 1. Minikube 설치하기
+Kubernetes 실습을 위해서 **K8s cluster**를 구성합니다.  
 K8s cluster는 다양한 방법으로 구성할 수 있지만, 우리 실습과정은 **단일노드 cluster**인 [Minikube](https://minikube.sigs.k8s.io/)를 이용합니다.
 
 우리가 앞에서 사용한 VM Instance는 Minikube의 [설치조건](https://minikube.sigs.k8s.io/docs/start/#what-youll-need)을 만족하도록 구성되어 있습니다.
 
-먼저 기존에 Docker 실습에서 사용하던 Instance로 로그인합니다.
+minikube 설치파일을 다운로드 하고 설치를 진행해볼까요?
 ```bash
-> ssh -i "mspt3.pem" ubuntu@ec2-00-00-00-00.compute-1.amazonaws.com
-Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-1028-aws x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-  System information as of Tue Jan 24 12:28:17 UTC 2023
-
-... 생략 ...
-
-Last login: Tue Jan 24 12:06:05 2023 from 121.165.174.35
-```
-> **명령어** : 
-> ```bash
-> ssh -i "mspt3.pem" ubuntu@[PUBLIC_IPV4_ADDRESS/DNS]
-> ```
-> **[PUBLIC_IPV4_ADDRESS/DNS]** 에는 여러분의 VM Instance 정보를 넣으세요.
-
----
-
-minikube 설치파일을 다운로드 하고 설치를 진행합니다.
-```bash
-ubuntu@ip-10-0-2-33:~$ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+ubuntu@ip-172-31-23-60:~$ curl -LO https://github.com/kubernetes/minikube/releases/download/v1.28.0/minikube-linux-amd64
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 73.1M  100 73.1M    0     0   132M      0 --:--:-- --:--:-- --:--:--  132M
-ubuntu@ip-10-0-2-33:~$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 73.1M  100 73.1M    0     0  92.3M      0 --:--:-- --:--:-- --:--:--  141M
+ubuntu@ip-172-31-23-60:~$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
-> **명령어** : 
-> ```bash
-> curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-> ```
-> **명령어** : 
-> ```bash
-> sudo install minikube-linux-amd64 /usr/local/bin/minikube
-> ```
 
----
+![](img/command.png)
+>```bash
+>curl -LO https://github.com/kubernetes/minikube/releases/download/v1.28.0/minikube-linux-amd64
+>sudo install minikube-linux-amd64 /usr/local/bin/minikube
+>
+>```
 
-minikube를 시작하기 전에 먼저 한 가지 패키지(**conntrack**)를 설치합니다.
-```bash
-ubuntu@ip-10-0-2-33:~$ sudo apt-get update
-...생략...
-ubuntu@ip-10-0-2-33:~$ sudo apt-get install conntrack
-...생략...
-Unpacking conntrack (1:1.4.6-2build2) ...
-Setting up conntrack (1:1.4.6-2build2) ...
-Processing triggers for man-db (2.10.2-1) ...
-Scanning processes...
-Scanning linux images...
-
-Running kernel seems to be up-to-date.
-
-No services need to be restarted.
-
-No containers need to be restarted.
-
-No user sessions are running outdated binaries.
-
-No VM guests are running outdated hypervisor (qemu) binaries on this host.
-```
-> **명령어** : 
-> ```bash
-> sudo apt-get update
-> ```
-> **명령어** : 
-> ```bash
-> sudo apt-get install conntrack
-> ```
-
----
+<br><br><br>
 
 이제 minikube CLI를 이용해서 minikube cluster를 시작합니다.
 ```bash
-ubuntu@ip-10-0-2-33:~$ minikube start --driver=none --kubernetes-version=v1.23.0
-😄  minikube v1.28.0 on Ubuntu 22.04
+ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
+😄  minikube v1.28.0 on Ubuntu 20.04
 ✨  Using the none driver based on user configuration
 👍  Starting control plane node minikube in cluster minikube
 🤹  Running on localhost (CPUs=2, Memory=3863MB, Disk=19662MB) ...
-ℹ️  OS release is Ubuntu 22.04.1 LTS
+🎉  minikube 1.29.0 is available! Download it: https://github.com/kubernetes/minikube/releases/tag/v1.29.0
+💡  To disable this notice, run: 'minikube config set WantUpdateNotification false'
+
+ℹ️  OS release is Ubuntu 20.04.5 LTS
 🐳  Preparing Kubernetes v1.23.0 on Docker 20.10.23 ...
     ▪ kubelet.resolv-conf=/run/systemd/resolve/resolv.conf
-    > kubectl.sha256:  64 B / 64 B [-------------------------] 100.00% ? p/s 0s
     > kubelet.sha256:  64 B / 64 B [-------------------------] 100.00% ? p/s 0s
     > kubeadm.sha256:  64 B / 64 B [-------------------------] 100.00% ? p/s 0s
-    > kubectl:  44.42 MiB / 44.42 MiB [----------] 100.00% 431.68 MiB p/s 300ms
-    > kubeadm:  43.11 MiB / 43.11 MiB [----------] 100.00% 215.70 MiB p/s 400ms
-    > kubelet:  118.73 MiB / 118.73 MiB [---------] 100.00% 156.81 MiB p/s 1.0s
+    > kubectl.sha256:  64 B / 64 B [-------------------------] 100.00% ? p/s 0s
+    > kubeadm:  43.11 MiB / 43.11 MiB [----------] 100.00% 281.72 MiB p/s 400ms
+    > kubectl:  44.42 MiB / 44.42 MiB [----------] 100.00% 470.78 MiB p/s 300ms
+    > kubelet:  118.73 MiB / 118.73 MiB [---------] 100.00% 142.07 MiB p/s 1.0s
     ▪ Generating certificates and keys ...
     ▪ Booting up control plane ...
     ▪ Configuring RBAC rules ...
@@ -123,27 +74,31 @@ ubuntu@ip-10-0-2-33:~$ minikube start --driver=none --kubernetes-version=v1.23.0
 
     ▪ sudo mv /home/ubuntu/.kube /home/ubuntu/.minikube $HOME
     ▪ sudo chown -R $USER $HOME/.kube $HOME/.minikube
-```
 
----
-
-```bash
 💡  This can also be done automatically by setting the env var CHANGE_MINIKUBE_NONE_USER=true
 🔎  Verifying Kubernetes components...
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/controller:v1.2.1
+    ▪ Using image docker.io/metallb/speaker:v0.9.6
     ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
-🌟  Enabled addons: default-storageclass, storage-provisioner
+    ▪ Using image k8s.gcr.io/metrics-server/metrics-server:v0.6.1
+    ▪ Using image docker.io/metallb/controller:v0.9.6
+🔎  Verifying ingress addon...
+🌟  Enabled addons: default-storageclass, storage-provisioner, metrics-server, metallb, ingress
 💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
-> **명령어** : 
-> ```bash
-> minikube start --driver=none --kubernetes-version=v1.23.0
-> ```
+
+![](img/command.png)
+>```bash
+>minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
+>```
 
 문제없이 시작된 경우 다음과 같이 표시됩니다.
 
 ```bash
-ubuntu@ip-10-0-2-33:~/minikube$ minikube status
+ubuntu@ip-172-31-23-60:~$ minikube status
 minikube
 type: Control Plane
 host: Running
@@ -151,10 +106,11 @@ kubelet: Running
 apiserver: Running
 kubeconfig: Configured
 ```
-> **명령어** : 
-> ```bash
-> minikube status
-> ```
+
+![](img/command.png)
+>```bash
+>minikube status
+>```
 
 ---
 
