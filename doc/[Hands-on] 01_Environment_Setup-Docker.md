@@ -7,10 +7,10 @@
 
 # Contents
 
-- **[1. VM Instance 만들기](#1-vm-instance-만들기)**
-- **[2. VM Instance 접속하기](#2-vm-instance-접속하기)**
-- **[3. Docker 설치하기](#3-docker-설치하기)**
-- **[4. Git clone하기 (실습파일 다운로드)](#4-git-clone하기-실습파일-다운로드)**
+**[1. VM Instance 만들기](#1-vm-instance-만들기)**  
+**[2. VM Instance 접속하기](#2-vm-instance-접속하기)**  
+**[3. Docker 설치하기](#3-docker-설치하기)**  
+**[4. Git clone하기 (실습파일 다운로드)](#4-git-clone하기-실습파일-다운로드)**  
 
 ---
 
