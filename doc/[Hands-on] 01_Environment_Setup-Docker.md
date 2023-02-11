@@ -31,7 +31,7 @@
 ![](img/aws_signin_2.png)
 > **Account ID**와 **IAM user name**을 이용해서 `sign in` 합니다.
 
-<br>
+<br><br><br>
 
 ![](img/aws_signin_3.png)  
 > [MFA](https://docs.aws.amazon.com/ko_kr/singlesignon/latest/userguide/enable-mfa.html) 구성을 한 경우, 위 그림과 같은 화면에서 `MFA Code`를 입력해야 합니다.
