@@ -19,7 +19,8 @@
 먼저 AWS Console에 로그인합니다.
 [https://aws.amazon.com/console/](https://aws.amazon.com/console/)
 
-![h:320](img/test.png)
+![h:320](img/test1.png)
+
 화면 우측 상단의 `Sign in to the Console`을 클릭합니다.
 
 ---
