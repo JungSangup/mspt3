@@ -271,7 +271,10 @@ Reading state information... Done
 E: Unable to locate package docker-engine
 ```
 
-> **명령어** : `sudo apt-get remove docker docker-engine docker.io containerd runc`
+![](img/command.png)
+> ```bash
+> sudo apt-get remove docker docker-engine docker.io containerd runc
+> ```
 
 
 
