@@ -8,9 +8,8 @@
 # Contents
 
 **[1. Minikube 설치하기]()**  
-**[2. Minikube 설정하기(Addons)]()**  
-**[3. Kubectl 설치하기]()**  
-**[4. Helm 설치하기]()**  
+**[2. Kubectl 설치하기]()**  
+**[3. Helm 설치하기]()**  
 
 ---
 
@@ -112,156 +111,132 @@ kubeconfig: Configured
 >minikube status
 >```
 
----
+<br><br><br><br><br>
 
-## Minikube 설정하기(Addons)
-앞으로 진행할 실습을 위해 몇 가지 minikube addon들을 활성화 하겠습니다.
-
-```bash
-ubuntu@ip-10-0-2-33:~$ minikube addons enable ingress
-💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
-You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
-    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
-    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
-    ▪ Using image k8s.gcr.io/ingress-nginx/controller:v1.2.1
-🔎  Verifying ingress addon...
-🌟  The 'ingress' addon is enabled
-ubuntu@ip-10-0-2-33:~$ minikube addons enable metrics-server
-💡  metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
-You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
-    ▪ Using image k8s.gcr.io/metrics-server/metrics-server:v0.6.1
-🌟  The 'metrics-server' addon is enabled
-```
-> **명령어** : 
-> ```bash
-> minikube addons enable ingress
-> ```
-> **명령어** : 
-> ```bash
-> minikube addons enable metrics-server
-> ```
-
----
-
-## Kubectl 설치하기 ( [리눅스에 kubectl 설치 및 설정](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-linux/) )
+## 2. Kubectl 설치하기 ( [리눅스에 kubectl 설치 및 설정](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-linux/) )  
 Kubernetes command-line tool인 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)을 다운로드 하고 설치합니다.
 ```bash
-ubuntu@ip-10-0-2-33:~$ curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+ubuntu@ip-172-31-23-60:~$ curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+do install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   138  100   138    0     0    940      0 --:--:-- --:--:-- --:--:--   945
-100 44.4M  100 44.4M    0     0  94.2M      0 --:--:-- --:--:-- --:--:--  572M
-ubuntu@ip-10-0-2-33:~$ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+100   138  100   138    0     0   3066      0 --:--:-- --:--:-- --:--:--  3066
+100 44.4M  100 44.4M    0     0   141M      0 --:--:-- --:--:-- --:--:--  141M
+ubuntu@ip-172-31-23-60:~$ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
-> **명령어** : 
-> ```bash
-> curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+
+![](img/command.png)
+>```bash
+>curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+>sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+>
 > ```
-> **명령어** : 
-> ```bash
-> sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-> ```
+
+<br><br><br>
 
 아래와 같이 표시되면 정상입니다.
-
 ```bash
-ubuntu@ip-10-0-2-33:~$ kubectl version
-Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:16:20Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
-Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:09:57Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
+ubuntu@ip-172-31-23-60:~$ kubectl version --output yaml
+clientVersion:
+  buildDate: "2021-12-07T18:16:20Z"
+  compiler: gc
+  gitCommit: ab69524f795c42094a6630298ff53f3c3ebab7f4
+  gitTreeState: clean
+  gitVersion: v1.23.0
+  goVersion: go1.17.3
+  major: "1"
+  minor: "23"
+  platform: linux/amd64
+serverVersion:
+  buildDate: "2021-12-07T18:09:57Z"
+  compiler: gc
+  gitCommit: ab69524f795c42094a6630298ff53f3c3ebab7f4
+  gitTreeState: clean
+  gitVersion: v1.23.0
+  goVersion: go1.17.3
+  major: "1"
+  minor: "23"
+  platform: linux/amd64
 ```
-> **명령어** : 
-> ```bash
-> kubectl version
-> ```
 
----
+![](img/command.png)
+>```bash
+>kubectl version --output yaml
+>```
 
-편리한 사용을 위해서 [선택적 kubectl 구성 및 플러그인](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-linux/#%EC%84%A0%ED%83%9D%EC%A0%81-kubectl-%EA%B5%AC%EC%84%B1-%EB%B0%8F-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8) 을 진행합니다. (명령어 자동완성, alias 적용)
+<br><br><br>
+
+편리한 사용을 위해서 [리눅스에서 bash 자동 완성 사용하기](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/) 을 진행합니다. (명령어 자동완성, alias 적용)  
 필수사항은 아니니 필요없는 경우 생략해도 됩니다.
 ```bash
-ubuntu@ip-10-0-2-33:~$ echo 'source <(kubectl completion bash)' >>~/.bashrc
-ubuntu@ip-10-0-2-33:~$ echo 'alias k=kubectl' >>~/.bashrc
-ubuntu@ip-10-0-2-33:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
-ubuntu@ip-10-0-2-33:~$ exec bash
+ubuntu@ip-172-31-23-60:~$ echo 'source <(kubectl completion bash)' >>~/.bashrc
+ubuntu@ip-172-31-23-60:~$ echo 'alias k=kubectl' >>~/.bashrc
+ubuntu@ip-172-31-23-60:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+ubuntu@ip-172-31-23-60:~$ exec bash
 ```
-> **명령어** : 
-> ```bash
-> echo 'source <(kubectl completion bash)' >>~/.bashrc
-> ```
-> **명령어** : 
-> ```bash
-> echo 'alias k=kubectl' >>~/.bashrc
-> ```
-> **명령어** : 
-> ```bash
-> echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
-> ```
-> **명령어** : 
-> ```bash
-> exec bash
-> ```
+
+![](img/command.png)
+>```bash
+>echo 'source <(kubectl completion bash)' >>~/.bashrc
+>echo 'alias k=kubectl' >>~/.bashrc
+>echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+>exec bash
+>
+>```
+
+<br><br><br>
 
 이제 명령어 작성 중 `TAB`키를 눌러 자동완성을 사용하거나, `kubectl` 대신 Alias인 `k`를 사용할 수 있습니다.
 ```bash
-ubuntu@ip-10-0-2-33:~$ k version
+ubuntu@ip-172-31-23-60:~$ k version
 Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:16:20Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:09:57Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 ```
-> **명령어** : 
-> ```bash
-> k version
-> ```
 
----
+![](img/command.png)
+>```bash
+>k version
+>```
 
-## Helm 설치하기 ( [헬름 설치하기](https://helm.sh/ko/docs/intro/install/) )
+<br><br><br><br><br>
+
+## 3. Helm 설치하기 ( [헬름 설치하기](https://helm.sh/ko/docs/intro/install/) )
 
 Kubernetes 패키지 매니저인 Helm을 설치합니다.
 
 ```bash
-ubuntu@ip-10-0-2-33:~$ wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
---2023-01-25 14:37:05--  https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
-Resolving get.helm.sh (get.helm.sh)... 152.195.19.97, 2606:2800:11f:1cb7:261b:1f9c:2074:3c
-Connecting to get.helm.sh (get.helm.sh)|152.195.19.97|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 15023353 (14M) [application/x-tar]
-Saving to: ‘helm-v3.11.0-linux-amd64.tar.gz’
-
-helm-v3.11.0-linux-amd64.tar.gz         100%[===============================================================================>]  14.33M  --.-KB/s    in 0.1s
-
-2023-01-25 14:37:06 (130 MB/s) - ‘helm-v3.11.0-linux-amd64.tar.gz’ saved [15023353/15023353]
-
-ubuntu@ip-10-0-2-33:~$ tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
+ubuntu@ip-172-31-23-60:~$ curl -LO https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 14.3M  100 14.3M    0     0   106M      0 --:--:-- --:--:-- --:--:--  106M
+ubuntu@ip-172-31-23-60:~$ tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
 linux-amd64/
 linux-amd64/helm
 linux-amd64/LICENSE
 linux-amd64/README.md
-ubuntu@ip-10-0-2-33:~$ sudo mv linux-amd64/helm /usr/local/bin/helm
+ubuntu@ip-172-31-23-60:~$ sudo mv linux-amd64/helm /usr/local/bin/helm
 ```
-> **명령어** : 
-> ```bash
-> wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
-> ```
-> **명령어** : 
-> ```bash
-> tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
-> ```
-> **명령어** : 
-> ```bash
-> sudo mv linux-amd64/helm /usr/local/bin/helm
-> ```
 
----
+![](img/command.png)
+>```bash
+>curl -LO https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+>tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
+>sudo mv linux-amd64/helm /usr/local/bin/helm
+>
+>```
+
+<br><br><br>
 
 설치 후 아래와 같이 확인합니다.
 ```bash
-ubuntu@ip-10-0-2-33:~$ helm version
+ubuntu@ip-172-31-23-60:~$ helm version
 version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
 ```
-> **명령어** : 
-> ```bash
-> helm version
-> ```
+
+![](img/command.png)
+>```bash
+>helm version
+>```
 
 <br><br><br>
 
