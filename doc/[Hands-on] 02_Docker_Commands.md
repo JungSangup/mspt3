@@ -131,8 +131,8 @@ root@5229efb2bd11:/#
 >```bash
 >docker run --interactive --tty ubuntu /bin/bash
 >```
-> `--interactive --tty` 는 `-it`로 줄여서 쓸 수도 있습니다.
 
+`--interactive --tty` 는 `-it`로 줄여서 쓸 수도 있습니다.  
 `--interactive --tty (-it)`  로 실행했기 때문에 ubuntu의 bash shell에 콘솔로 연결되었습니다. (프롬프트 확인!)
 
 <br><br><br>
@@ -616,6 +616,7 @@ a6524c5b12a6: Layer already exists
 [https://hub.docker.com/](https://hub.docker.com/) 에 방금 push한 이미지가 잘 올라가 있나요?
 
 ![h:300](img/docker_create_repository4.png)
+> 위의 두 개 이미지는 뒤의 과정에서 계속 필요하니, 잘 준비해두세요.
 
 <br><br><br>
 
@@ -625,8 +626,18 @@ a6524c5b12a6: Layer already exists
 
 <br>
 
-이번 실습은 여기까지 입니다.
+이번 실습은 여기까지 입니다.  
+마지막으로 정리하고 마칠게요.
+```bash
+ubuntu@ip-172-31-23-60:~/app$ docker rm -f $(docker ps -aq)
+b160f01ddc62
+8dcd5ce92e9a
+147645108dc1
+```
 
-<br>
+![](img/command.png)
+>```bash
+>docker rm -f $(docker ps -aq)
+>```
 
-> 위의 두 개 이미지는 뒤의 과정에서 계속 필요하니, 잘 준비해두세요.
+- 위의 명령어는 주의해서 사용해야 합니다. 모든 컨테이너를 강제로(**-f**) 삭제하는 명령어 입니다.
