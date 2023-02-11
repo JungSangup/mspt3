@@ -1,7 +1,7 @@
 
 # [Hands-on] 01. Environment setup - Docker
 
-![](img/hands_on.png)
+![](img/hands_on.png | width=100)
 
 # Contents
 
