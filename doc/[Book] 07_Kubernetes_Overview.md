@@ -344,10 +344,6 @@ spec:
 
 > `accelerator=nvidia-tesla-p100` Label을 가진 Node를 선택하여 Pod를 처리함
 
-<br>
-
-![](img/handson.png) **Hands-on :** 07_Kubernetes_Overview
-
 ---
 
 ## Summary

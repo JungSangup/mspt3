@@ -179,10 +179,6 @@ spec:
       - {key: environment, operator: In, values: [dev]}
 ```
 
-<br><br><br><br><br>
-
-![](img/handson.png) **Hands-on :** 14_Kubernetes_Volume
-
 ---
 
 ## Summary

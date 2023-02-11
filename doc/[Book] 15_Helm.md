@@ -594,10 +594,6 @@ Successfully packaged chart and saved it to: /home/hojoon/helm/mychart-0.1.0.tgz
 
 > 위와 같이 압축된 파일은 **chart repository**에 등록할 때 사용됩니다.
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-![](img/handson.png) **Hands-on :** 15_Helm
-
 ---
 
 ## Summary

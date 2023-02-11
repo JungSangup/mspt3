@@ -283,10 +283,6 @@ Bind mount는 Volume에 비해 아래와 같은 불리한 점이 있기 때문�
 - Docker에 의해 관리되어지지 않습니다.
 - Container의 프로세스가 Host의 파일시스템을 변경할 수 있으므로 보안상 위협이 될 수 있습니다.
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-![](img/handson.png) **Hands-on :** 04_Docker_Volumes
-
 ---
 
 ## Summary

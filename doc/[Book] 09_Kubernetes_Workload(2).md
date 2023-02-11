@@ -301,8 +301,6 @@ Node마다 실행되어야 하는 Pod가 있을때 사용되며 대표적으로 
 
 ![](img/hyperlink.png)[DaemonSet](https://kubernetes.io/ko/docs/concepts/workloads/controllers/daemonset/)
 
-![](img/handson.png) **Hands-on :** 09_Kubernetes_Workload(2)
-
 ---
 
 ## Summary

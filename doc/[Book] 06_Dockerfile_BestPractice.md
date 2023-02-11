@@ -271,8 +271,6 @@ Dockerfile에서 User를 생성하여 필요한 최소한의 권한을 부여하
 - 최소한의 권한부여
 - USER 지시자로 실행 USER 변경
 
-![](img/handson.png) **Hands-on :** 06_Dockerfile
-
 ---
 
 ## Summary

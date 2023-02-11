@@ -201,10 +201,6 @@ ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
 
 > 명령어 : `docker network create -d bridge my_bridge`
 
-<br>
-
-![](img/handson.png) **Hands-on :** 05_Docker_Network
-
 ---
 
 ## Summary

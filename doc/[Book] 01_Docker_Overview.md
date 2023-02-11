@@ -143,10 +143,6 @@ Docker는 UnionFS를 사용하여 Container에 대한 Building Block을 제공�
 
 [![Build](img/docker_moby_build_s.png)](https://www.docker.com/)[![Share](img/docker_moby_share_s.png)](https://www.docker.com/)[![Run](img/docker_moby_run_s.png)](https://www.docker.com/)
 
-<br><br>
-
-![](img/handson.png) **Hands-on :** 02_Docker_Intro
-
 ---
 
 ## Docker architecture

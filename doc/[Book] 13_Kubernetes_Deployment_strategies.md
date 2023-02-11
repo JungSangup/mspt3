@@ -232,10 +232,6 @@ spec:
      tier: frontend
 ```
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
-
-![](img/handson.png) **Hands-on :** 11_Kubernetes_Deployment_strategies
-
 ---
 
 ## Summary

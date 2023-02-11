@@ -291,9 +291,6 @@ $ docker cp ./some_file my-ubuntu:/work # some_file을 my-ubuntu 컨테이너의
 ```
 > `주의` : 첫 번째와 두 번째 명령어(전체 삭제)는 학습환경이나 테스트환경에서만 사용하세요.
 
-<br><br><br><br><br><br><br>
-![](img/handson.png) **Hands-on :** 03_Docker_Commands
-
 ---
 
 ## Summary

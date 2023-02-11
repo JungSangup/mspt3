@@ -110,10 +110,6 @@ node1    46m          2%     2289Mi          59%
 node2    42m          2%     2141Mi          55% 
 ```
 
-<br><br><br><br>
-
-![](img/handson.png) **Hands-on :** 13_Kubernetes_Horizontal Pod Autoscaler
-
 ---
 
 ## Summary
