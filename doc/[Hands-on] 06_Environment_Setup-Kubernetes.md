@@ -115,7 +115,7 @@ kubeconfig: Configured
 
 <br>
 
-<details><summary>minikube start 중 conntrack 관련 에러가 발생하면</summary>
+<details><summary>❗ minikube start 중 conntrack 관련 에러가 발생하면</summary>
 <p>
 
 아래 명령어를 실행해서 설치해주세요.
