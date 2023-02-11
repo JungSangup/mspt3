@@ -92,9 +92,9 @@
 <br><br><br>
 
 ![](img/aws_ec2_9.png)
-> 위 그림과 같이 입력합니다. (상세 내용은 다음페이지에 있습니다.)
+> 위 그림과 같이 입력합니다. (상세 내용은 아래 표에 있습니다.)
 
-<br><br><br>
+<br>
 
 ### Network 구성 (Network Settings)
 
@@ -107,7 +107,7 @@
 | **Security group name**           | mspt3-sg                          |
 | **Description**                   | sg for mspt3                      |
 | **Inbound security groups rules** | ssh (TCP,22) , My IP              |
-> Security group은 우선 꼭 필요한 ssh (TCP,22) 만 My IP로 설정합니다. (이후에 추가로 설정합니다.)
+> **Inbound security groups rules**은 우선 꼭 필요한 ssh (TCP,22) 만 My IP로 설정합니다. (이후에 추가로 설정합니다.)
 
 <br><br><br>
 
@@ -124,7 +124,7 @@
 ![](img/aws_ec2_12.png)
 > 정상적으로 EC2 Instance가 생성되면 화면과 같이 표시됩니다.
 
-- SSH 접속을 위해 필요한 **Public IPv4 address** 또는 **Public IPv4 DNS** 정보는 이 화면에서 확인 가능합니다.
+- SSH 접속을 위해 필요한 **Public IPv4 address** 또는 **Public IPv4 DNS** 정보는 이 화면에서 확인 가능합니다. (이후 실습에서 수시로 확인이 필요합니다.)
 
 <br><br><br>
 
@@ -207,12 +207,13 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 > icacls.exe mspt3.pem /reset
 > icacls.exe mspt3.pem /GRANT:R "$($env:USERNAME):(R)"
 > icacls.exe mspt3.pem /inheritance:r
+>
 > ```
 
 <br>
 
 ![h:200](img/terminal3.png)
-> 그림과 같이 mspt3.pem 파일의 권한을 변경하는 것입니다.
+> 그림과 같이 mspt3.pem 파일의 권한을 변경하는 것입니다.  
 > 자세한 내용은은 [오류: 보호되지 않는 프라이빗 키 파일](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key)의 내용을 참고하세요.
 
 <br><br><br>
@@ -243,7 +244,7 @@ MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 > 접속되면 위와같은 화면이 표시됩니다.  
 > 다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
-
+<br><br><br>
 
 ## Docker 설치하기
 
