@@ -10,28 +10,29 @@
 - **Docker 설치하기**
 - **Git clone하기 (실습파일 다운로드)**
 
+<br>
+
 ---
 
-## VM Instance 만들기
+<br>
+
+## 1. VM Instance 만들기
 
 실습을 위한 환경구성을 진행합니다.
 
-먼저 AWS Console에 로그인합니다.
-[https://aws.amazon.com/console/](https://aws.amazon.com/console/)
+먼저 AWS Console에 로그인합니다.  
+- AWS Console : [https://aws.amazon.com/console/](https://aws.amazon.com/console/)
 
-![h:320](img/aws_signin_1.png)
+![h:320](img/aws_signin_1.png)  
+> 화면 우측 상단의 `Sign in to the Console`을 클릭합니다.
 
-화면 우측 상단의 `Sign in to the Console`을 클릭합니다.
-
----
+<br>
 
 ![h:230](img/aws_signin_2.png)
-**Account ID**와 **IAM user name**을 이용해서 `sign in` 합니다.
+> **Account ID**와 **IAM user name**을 이용해서 `sign in` 합니다.
 
-![h:230](img/aws_signin_3.png)
+![h:230](img/aws_signin_3.png)  
 [MFA](https://docs.aws.amazon.com/ko_kr/singlesignon/latest/userguide/enable-mfa.html) 구성을 한 경우, 위 그림과 같은 화면에서 MFA Code를 입력해야 합니다.
-
----
 
 ![h:300](img/aws_signin_4.png)
 Sign in 후에는 가장 먼저 어느 **Region**에 VM Instance를 구성할지 결정해야 합니다.
@@ -41,7 +42,7 @@ Sign in 후에는 가장 먼저 어느 **Region**에 VM Instance를 구성할지
 
 - 반(별로 정해진 **Region**이 있습니다. 확인 후 진행해주세요.
 
----
+
 
 이제 EC2 Instance를 만들어 보겠습니다.
 
@@ -51,7 +52,7 @@ Sign in 후에는 가장 먼저 어느 **Region**에 VM Instance를 구성할지
 ![h:200](img/aws_ec2_2.png)
 **EC2 dashboard** 화면에서 `Launch instance`버튼을 클릭합니다.
 
----
+
 
 ![h:350](img/aws_ec2_3.png)
 Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 **Ubuntu**를 선택합니다.
@@ -59,7 +60,7 @@ Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 
 ![h:120](img/aws_ec2_4.png)
 그 다음 Instance type은 `t3.medium`을 선택합니다.
 
----
+
 
 ![h:120](img/aws_ec2_5.png)
 **Key pair**는 기존의 것을 사용하거나, 없는 경우에는 `Create new key pair`를 눌러 **Key pair** 생성 화면으로 이동합니다.
@@ -69,7 +70,7 @@ Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 
 
 > 생성되면 브라우저를 통해서 **mspt3.pem** 파일이 다운로드 됩니다. 잘 보관해두세요.
 
----
+
 
 ![h:120](img/aws_ec2_7.png)
 다시 Instance 생성 화면으로 돌아오면, 앞에서 생성한 **Key pair**를 선택할 수 있습니다.
@@ -77,17 +78,17 @@ Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 
 ![h:350](img/aws_ec2_8.png)
 그 다음 Network settings에서 `Edit`버튼을 클릭하여 상세 설정을 진행합니다.
 
----
+
 
 ![h:550](img/aws_ec2_9.png)
 위 그림과 같이 입력합니다. (상세 내용은 다음페이지에 있습니다.)
 
----
+
 
 ### Network 구성 (Network Settings)
 
 | **구분**                            | **설정**                          |
-| --------------------------------- | --------------------------------- |
+|  |  |
 | **VPC**                           | default VPC를 선택                  |
 | **Subnet**                        | subnet 중 하나를 선택 (public subnet) |
 | **Auto-assign public IP**         | Enable                            |
@@ -98,7 +99,7 @@ Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 
 
 > Security group은 우선 꼭 필요한 ssh (TCP,22) 만 My IP로 설정합니다. (이후에 추가로 설정합니다.)
 
----
+
 
 ![h:150](img/aws_ec2_10.png)
 Storage를 20GiB로 설정합니다.
@@ -106,14 +107,14 @@ Storage를 20GiB로 설정합니다.
 ![h:350](img/aws_ec2_11.png)
 Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 
----
+
 
 ![h:400](img/aws_ec2_12.png)
 정상적으로 EC2 Instance가 생성되면 화면과 같이 표시됩니다.
 
 > SSH 접속을 위해 필요한 **Public IPv4 address** 또는 **Public IPv4 DNS** 정보를 기록해둡니다.
 
----
+
 
 과정중에는 SSH를 이용한 Instance 접속 외에도, 실행되는 애플리케이션 접속도 필요합니다.
 애플리케이션 접속을 위해서 추가적인 Security group 설정을 진행합니다.
@@ -121,25 +122,25 @@ Number of instances를 1로 하고 `Launch instance`버튼을 클릭합니다.
 ![h:400](img/aws_ec2_13.png)
 위와같이 EC2 Instance의 **Security** 탭에서 해당 **Security group**으로 이동합니다. (Security group명 옆의 아이콘 클릭)
 
----
+
 
 ![h:400](img/aws_ec2_14.png)
 Serurity group화면의 Inbound rules 탭에서 `Edit inbound rules` 버튼을 클릭합니다.
 
----
+
 
 ![h:350](img/aws_ec2_15.png)
 `Add rule` 버튼을 누르면 규칙을 추가할 수 있습니다. 아래 규칙을 추가해주세요.
 
 | **Type**   | **Port range** | Source |
-| ---------- | -------------- | ------ |
+| - | -- |  |
 | Custom TCP | 80             | My IP  |
 | Custom TCP | 443            | My IP  |
 | Custom TCP | 8080           | My IP  |
 | Custom TCP | 3000           | My IP  |
 | Custom TCP | 30000-32767    | My IP  |
 
----
+
 
 ## VM Instance 접속하기
 
@@ -160,7 +161,7 @@ SSH 접속을 위해서는 다음을 먼저 확인해야 합니다.
 
 > 다양한 접속방법에 대한 자세한 설명은 AWS 문서인 [Linux 인스턴스에 연결합니다](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/AccessingInstances.html)를 참고하세요.
 
----
+
 
 **[접속방법1]** Terminal 프로그램
 기본적인 터미널 프로그램을 사용한 접속방법 입니다.
@@ -172,14 +173,14 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 ![h:300](img/terminal1.png)
 접속하려는 EC2 Instance를 선택하고, `Connect`버튼을 클릭합니다.
 
----
+
 
 ![h:450](img/terminal2.png)
 위 그림과 같이 **Connect to instance** 화면에서 **SSH client** 탭을 클릭하고, 아래 표시되는 절차에 따라 접속을 진행합니다.
 
 > 윈도우즈 환경에서는 3번 절차 (chomod 400 mspt3.pem)를 진행할 수 없습니다. 다음장의 내용을 참고하세요.
 
----
+
 
 (윈도우즈 환경인 경우 3번 절차 처리방법)
 터미널 프로그램(e.g. PowerShell)에서 다음과 같이 실행합니다.
@@ -204,12 +205,12 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 
 > 자세한 내용은은 [오류: 보호되지 않는 프라이빗 키 파일](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key)의 내용을 참고하세요.
 
----
+
 
 ![h:500](img/terminal4.png)
 필요한 모든 절차를 거치고 정상적으로 접속되면 위와같은 화면이 표시됩니다.
 
----
+
 
 **[접속방법2]**  MobaXterm
 MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
@@ -217,7 +218,7 @@ MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 ![h:450](img/mobaxterm1.png)
 MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
----
+
 
 ![h:450](img/mobaxterm2.png)
 접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.
@@ -226,13 +227,13 @@ MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 - **Specify username** : ubuntu
 - **Use private key** : mspt3.pem
 
----
+
 
 ![h:500](img/mobaxterm3.png)
 접속되면 위와같은 화면이 표시됩니다.
 다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
----
+
 
 ## Docker 설치하기
 
@@ -262,7 +263,7 @@ E: Unable to locate package docker-engine
 
 > **명령어** : `sudo apt-get remove docker docker-engine docker.io containerd runc`
 
----
+
 
 ### [Install using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
@@ -285,7 +286,7 @@ Reading package lists... Done
 
 > **명령어** : `sudo apt-get update`
 
----
+
 
 다음은, HTTPS를 이용하기 위해서 몇 가지 패키지를 설치합니다.
 
@@ -317,7 +318,7 @@ ubuntu@ip-10-0-2-33:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
 > **명령어** : `sudo mkdir -p /etc/apt/keyrings`
 > **명령어** : `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
 
----
+
 
 Docker 설치를 위해서 APT Repository를 설정합니다.
 
@@ -345,7 +346,7 @@ Reading package lists... Done
 
 > **명령어** : `sudo apt-get update`
 
----
+
 
 그리고, 마지막으로 Docker를 설치합니다.
 
@@ -380,7 +381,7 @@ Fetched 113 MB in 1s (81.5 MB/s)
 
 > **명령어** : `sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin`
 
----
+
 
 설치 후 다음 설정을 진행합니다. ([Docker Engine post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/))
 
@@ -415,7 +416,7 @@ ubuntu@ip-10-0-2-33:~$ newgrp docker
 > **명령어** : `sudo usermod -aG docker $USER`
 > **명령어** : `newgrp docker`
 
----
+
 
 모두 정상적으로 설치되고 설정된 경우 다음과 같이 동작해야 합니다.
 한 번 테스트 해보세요.
@@ -452,7 +453,7 @@ For more examples and ideas, visit:
 
 > **명령어** : `docker run --rm hello-world`
 
----
+
 
 ## Git clone하기 (실습파일 다운로드)
 이후 진행되는 실습과정들에 사용되는 파일들을 다운로드 하겠습니다.
