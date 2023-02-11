@@ -117,7 +117,6 @@ kubeconfig: Configured
 Kubernetes command-line tool인 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)을 다운로드 하고 설치합니다.
 ```bash
 ubuntu@ip-172-31-23-60:~$ curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
-do install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   138  100   138    0     0   3066      0 --:--:-- --:--:-- --:--:--  3066
