@@ -94,6 +94,8 @@ ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.2
 >minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
 >```
 
+<br>
+
 문제없이 시작된 경우 다음과 같이 표시됩니다.
 
 ```bash
@@ -110,6 +112,8 @@ kubeconfig: Configured
 >```bash
 >minikube status
 >```
+
+<br>
 
 <details><summary>minikube start 중 conntrack 관련 에러가 발생하면</summary>
 <p>
