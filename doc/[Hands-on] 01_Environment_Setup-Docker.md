@@ -343,6 +343,7 @@ ubuntu@ip-172-31-23-60:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gp
 >```bash
 >sudo mkdir -m 0755 -p /etc/apt/keyrings
 >curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+>
 >```
 
 <br><br><br>
@@ -457,6 +458,7 @@ ubuntu@ip-172-31-23-60:~$ newgrp docker
 >```bash
 >sudo usermod -aG docker $USER
 >newgrp docker
+>
 >```
 
 <br><br><br>
@@ -545,6 +547,7 @@ Processing triggers for man-db (2.9.1-1) ...
 >```bash
 >sudo apt-get update
 >sudo apt-get install -y net-tools tree conntrack
+>
 >```
 
 <br><br><br><br><br>
