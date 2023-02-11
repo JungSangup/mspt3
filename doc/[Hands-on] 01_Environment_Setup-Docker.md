@@ -25,7 +25,7 @@
 
 ---
 
-![h:230](img/aws_signin_2.png)
+![h:230](img/aws_signin_2.png){: width="100" height="100"}
 **Account ID**와 **IAM user name**을 이용해서 `sign in` 합니다.
 
 ![h:230](img/aws_signin_3.png)
