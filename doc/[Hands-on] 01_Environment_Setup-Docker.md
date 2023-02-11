@@ -5,10 +5,10 @@
 
 # Contents
 
-- **VM Instance 만들기**
-- **VM Instance 접속하기**
-- **Docker 설치하기**
-- **Git clone하기 (실습파일 다운로드)**
+- **1. VM Instance 만들기**
+- **2. VM Instance 접속하기**
+- **3. Docker 설치하기**
+- **4. Git clone하기 (실습파일 다운로드)**
 
 <br>
 
@@ -152,9 +152,9 @@
 | Custom TCP | 3000           | My IP  |
 | Custom TCP | 30000-32767    | My IP  |
 
-<br><br><br>
+<br><br><br><br><br>
 
-## VM Instance 접속하기
+## 2. VM Instance 접속하기
 
 생성된 VM Instance의 접속(SSH)은 다음의 방법 중 하나를 사용하면 됩니다.
 
@@ -244,9 +244,9 @@ MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 > 접속되면 위와같은 화면이 표시됩니다.  
 > 다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
-<br><br><br>
+<br><br><br><br><br>
 
-## Docker 설치하기
+## 3. Docker 설치하기
 
 실습을 위해서 Docker 설치를 진행합니다.
 설치하는 방법은 아래 두 가지 방법이 있습니다.
@@ -547,9 +547,9 @@ Processing triggers for man-db (2.9.1-1) ...
 >sudo apt-get install -y net-tools tree conntrack
 >```
 
-<br><br><br>
+<br><br><br><br><br>
 
-## Git clone하기 (실습파일 다운로드)
+## 4. Git clone하기 (실습파일 다운로드)
 이후 진행되는 실습과정들에 사용되는 파일들을 다운로드 하겠습니다.
 
 ```bash
