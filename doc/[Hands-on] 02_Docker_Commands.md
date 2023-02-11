@@ -123,13 +123,13 @@ ubuntu       latest    58db3edaf2be   2 weeks ago   77.8MB
 
 이제 실행(**run**)을 해보겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker run --interactive --tty ubuntu /bin/bash
-root@5229efb2bd11:/#
+ubuntu@ip-172-31-23-60:~/app$ docker run --interactive --tty --name my-ubuntu1 ubuntu /bin/bash
+root@d68fe3ec9f65:/#
 ```
 
 ![](img/command.png)
 >```bash
->docker run --interactive --tty ubuntu /bin/bash
+>docker run --interactive --tty --name my-ubuntu1 ubuntu /bin/bash
 >```
 
 `--interactive --tty` 는 `-it`로 줄여서 쓸 수도 있습니다.  
@@ -182,13 +182,13 @@ ubuntu@ip-172-31-23-60:~$
 
 이번에는 `ubuntu:18.04`를 실행해봅시다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker run --interactive --tty ubuntu:18.04 /bin/bash
-root@69a29fac3bd8:/#
+ubuntu@ip-172-31-23-60:~/app$ docker run --interactive --tty --name my-ubuntu2 ubuntu:18.04 /bin/bash
+root@cac6c7cab1f9:/#
 ```
 
 ![](img/command.png)
 >```bash
->docker run --interactive --tty ubuntu:18.04 /bin/bash
+>docker run --interactive --tty --name my-ubuntu2 ubuntu:18.04 /bin/bash
 >```
 
 <br><br><br>
@@ -243,7 +243,7 @@ ubuntu@ip-172-31-23-60:~$
 
 이번엔 다른 방법(`--detach`)으로 실행해 보겠습니다. (다른 이미지를 사용합니다.)
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker run --detach --name my-nginx --publish 8080:80 nginx
+ubuntu@ip-172-31-23-60:~/app$ docker run --detach --name my-nginx --publish 8080:80 nginx
 Unable to find image 'nginx:latest' locally
 latest: Pulling from library/nginx
 bb263680fed1: Pull complete
@@ -254,8 +254,8 @@ a0bc35e70773: Pull complete
 7e9b29976cce: Pull complete
 Digest: sha256:6650513efd1d27c1f8a5351cbd33edf85cc7e0d9d0fcb4ffb23d8fa89b601ba8
 Status: Downloaded newer image for nginx:latest
-b160f01ddc624d29ede7c46c2ade438664abd697c5bc5cfd24277b03a232e62f
-ubuntu@ip-172-31-23-60:~$
+2fc9e3a49e91f4d8ba07ea2dc80a9ee79260354d97b44486333f6661867f8c26
+ubuntu@ip-172-31-23-60:~/app$
 ```
 
 ![](img/command.png)
@@ -269,11 +269,11 @@ ubuntu@ip-172-31-23-60:~$
 
 이제 `docker ps --all` 명령어로 컨테이너 목록을 조회해보세요.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker ps --all
-CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                      PORTS                                   NAMES
-b160f01ddc62   nginx          "/docker-entrypoint.…"   8 seconds ago    Up 7 seconds                0.0.0.0:8080->80/tcp, :::8080->80/tcp   my-nginx
-8dcd5ce92e9a   ubuntu:18.04   "/bin/bash"              22 seconds ago   Exited (0) 20 seconds ago                                           relaxed_hellman
-147645108dc1   ubuntu         "/bin/bash"              33 seconds ago   Exited (0) 31 seconds ago                                           focused_feistel
+ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                          PORTS                                   NAMES
+2fc9e3a49e91   nginx          "/docker-entrypoint.…"   45 seconds ago       Up 44 seconds                   0.0.0.0:8080->80/tcp, :::8080->80/tcp   my-nginx
+cac6c7cab1f9   ubuntu:18.04   "/bin/bash"              About a minute ago   Exited (0) About a minute ago                                           my-ubuntu2
+d68fe3ec9f65   ubuntu         "/bin/bash"              2 minutes ago        Exited (0) About a minute ago                                           my-ubuntu1
 ```
 
 ![](img/command.png)
@@ -296,8 +296,8 @@ nginx가 정말 Running 상태인지 8080번 포트로 접속해서 확인도 �
 
 이번엔 `docker stop` 명령어로 nginx 컨테이너를 멈춰봅시다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker stop $(docker ps --filter "name=my-nginx" --quiet)
-b160f01ddc62
+ubuntu@ip-172-31-23-60:~/app$ docker stop $(docker ps --filter "name=my-nginx" --quiet)
+2fc9e3a49e91
 ```
 
 ![](img/command.png)
@@ -309,11 +309,11 @@ b160f01ddc62
 
 `docker ps --all`로 상태도 확인해보시고, 8080번 포트로 접속이 되는지 확인도 해보세요.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker ps --all
-CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                      PORTS     NAMES
-b160f01ddc62   nginx          "/docker-entrypoint.…"   About a minute ago   Exited (0) 19 seconds ago             my-nginx
-8dcd5ce92e9a   ubuntu:18.04   "/bin/bash"              4 minutes ago        Exited (0) 4 minutes ago              relaxed_hellman
-147645108dc1   ubuntu         "/bin/bash"              4 minutes ago        Exited (0) 4 minutes ago              focused_feistel
+ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                          PORTS     NAMES
+2fc9e3a49e91   nginx          "/docker-entrypoint.…"   About a minute ago   Exited (0) 18 seconds ago                 my-nginx
+cac6c7cab1f9   ubuntu:18.04   "/bin/bash"              2 minutes ago        Exited (0) About a minute ago             my-ubuntu2
+d68fe3ec9f65   ubuntu         "/bin/bash"              3 minutes ago        Exited (0) 2 minutes ago                  my-ubuntu1
 ```
 
 ![](img/command.png)
@@ -629,15 +629,13 @@ a6524c5b12a6: Layer already exists
 이번 실습은 여기까지 입니다.  
 마지막으로 정리하고 마칠게요.
 ```bash
-ubuntu@ip-172-31-23-60:~/app$ docker rm -f $(docker ps -aq)
-b160f01ddc62
-8dcd5ce92e9a
-147645108dc1
+ubuntu@ip-172-31-23-60:~/app$ docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+2fc9e3a49e91
+cac6c7cab1f9
+d68fe3ec9f65
 ```
 
 ![](img/command.png)
 >```bash
->docker rm -f $(docker ps -aq)
+>docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 >```
-
-- 위의 명령어는 주의해서 사용해야 합니다. 모든 컨테이너를 강제로(**-f**) 삭제하는 명령어 입니다.
