@@ -1,38 +1,37 @@
 
-# [Hands-on] 03. Docker volumes
+# [Hands-on] 03. Docker storage
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
-- **Container layer(R/W layer)**
-- **Volume을 이용하여 Todo app. 실행하기**
+**[Container layer(R/W layer)]()**
+**[Volume을 이용하여 Todo app. 실행하기]()**
 
 ---
 
-## Container layer(R/W layer)
+## 1. Container layer(R/W layer)
 
-앞서 우리는 도커가 사용하는 레이어 파일시스템에 대해 알아보았습니다.
-
+앞서 우리는 도커가 사용하는 레이어 파일시스템에 대해 알아보았습니다.  
 컨테이너가 실행될 때 마다 새로운 레이어(Container layer, R/W layer)가 생성되고, 컨테이너가 삭제될 경우 그 레이어의 내용은 사라지게 됩니다.
 
-직접 한번 컨테이너를 생성해서 볼까요?
-
+직접 한번 컨테이너를 생성해서 볼까요?  
 먼저 ubuntu 컨테이너를 하나 실행합니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"
-Unable to find image 'ubuntu:latest' locally
-latest: Pulling from library/ubuntu
-405f018f9d1d: Pull complete
-Digest: sha256:b6b83d3c331794420340093eb706a6f152d9c1fa51b262d9bf34594887c2c7ac
-Status: Downloaded newer image for ubuntu:latest
-6f4a471389915ed1d2b47d7814899968a3f05aab34de2b62721a0ee694a38f70
+ubuntu@ip-172-31-23-60:~$ docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"
+8079d39c226fc03f7c3f9c6038e8038395e3671021a81cfe23e8ce16c11c36a1
 ```
-> **명령어** : `docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"`
 
-"Hello Docker..." 라는 문자열을 담은 txt파일(**/test.txt**)을 하나 만들고, 컨테이너를 running상태로 두기 위해서 `tail`명령을 실행했습니다.
+![](img/command.png)
+>```bash
+>docker run --name my-ubuntu --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"
+>```
 
----
+"Hello Docker..." 라는 문자열을 담은 txt파일(**/test.txt**)을 하나 만들고, 컨테이너를 **running**상태로 두기 위해서 `tail`명령을 실행했습니다.
+
+<br><br><br>
 
 이제 우리가 만든 파일을 한 번 볼까요?
 ```bash
@@ -58,7 +57,7 @@ boot  etc  lib	 lib64	media	opt  root  sbin  sys  usr
 
 ---
 
-## Volume을 이용하여 Todo app. 실행하기
+## 2. Volume을 이용하여 Todo app. 실행하기
 
 이제 도커 볼륨(Volume)을 이용해서 데이터를 유지하는 방법을 알아보겠습니다.
 
