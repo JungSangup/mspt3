@@ -3,14 +3,16 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
-- **Dockerfile을 이용한 이미지 빌드**
-- **Multi-stage build**
+**[1. Dockerfile을 이용한 이미지 빌드]()**
+**[2. Multi-stage build]()**
 
 ---
 
-## Dockerfile을 이용한 이미지 빌드
+## 1. Dockerfile을 이용한 이미지 빌드
 
 이번 실습은 Dockerfile을 이용하여 이미지를 생성하는 방법을 알아보겠습니다.
 어떻게 하면 좀 더 효율적인 이미지를 만들 수 있는지도 알아볼게요.
@@ -120,7 +122,7 @@ Hello Docker!!!
 
 ---
 
-## Multi-stage build
+## 2. Multi-stage build
 
 이전 Step에서 Java Application을 포함하는 docker 이미지를 생성해 보았습니다.  
 Base image로 openjdk:8 (JDK)을 사용했기 때문에 이미지의 크기가 큽니다. (앞의 결과는 **526MB**)
