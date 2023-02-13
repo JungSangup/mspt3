@@ -3,13 +3,15 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
-- **Bridge network을 이용하여 Todo app. 실행하기**
+**[1. Bridge network을 이용하여 Todo app. 실행하기]()**
 
 ---
 
-## Bridge network을 이용하여 Todo app. 실행하기
+## 1. Bridge network을 이용하여 Todo app. 실행하기
 
 도커 네트워크를 이용해서 아래 그림과 같이 멀티 컨테이너 애플리케이션을 구성해 보겠습니다.
 우리 애플리케이션에 Database(MySQL)를 연결해서 서비스하도록 합니다.
@@ -22,6 +24,12 @@
 ubuntu@ip-10-0-1-14:~$ docker network create todo-app
 8440c866efe789d8dac94820c2bbbdca4ca7a6985acff2c3136dd3be31f13203
 ```
+
+![](img/command.png)
+>```bash
+>docker network create todo-app
+>```
+
 > **명령어** : `docker network create todo-app`  
 - 생성된 `network`는 `docker network inspect [OPTIONS] NETWORK [NETWORK...]` 명령어를 이용하여 상세 내용을 확인할 수 있습니다.
 
