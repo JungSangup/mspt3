@@ -21,8 +21,8 @@
 
 먼저 docker network create명령으로 bridge network을 하나 생성하겠습니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker network create todo-app
-8440c866efe789d8dac94820c2bbbdca4ca7a6985acff2c3136dd3be31f13203
+ubuntu@ip-172-31-23-60:~$ docker network create todo-app
+b9040c02cb3e54eb51b4fa76dfc1031a7b3f02f0cd194de0a2097509e10e498a
 ```
 
 ![](img/command.png)
@@ -30,28 +30,53 @@ ubuntu@ip-10-0-1-14:~$ docker network create todo-app
 >docker network create todo-app
 >```
 
-> **명령어** : `docker network create todo-app`  
-- 생성된 `network`는 `docker network inspect [OPTIONS] NETWORK [NETWORK...]` 명령어를 이용하여 상세 내용을 확인할 수 있습니다.
+<br><br><br>
 
----
+생성된 Network는 아래와 같이 상세내용을 확인할 수 있습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ docker network inspect todo-app
+[
+    {
+        "Name": "todo-app",
+        "Id": "b9040c02cb3e54eb51b4fa76dfc1031a7b3f02f0cd194de0a2097509e10e498a",
+        "Created": "2023-02-13T06:11:05.735784274Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+```
+
+![](img/command.png)
+>```bash
+>docker network inspect todo-app
+>```
+
+<br><br><br>
 
 그리고, 생성한 네트워크를 이용해서 mysql을 실행합니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker run -d \
-    --network todo-app --network-alias mysql \
-    --volume todo-mysql-data:/var/lib/mysql \
-    --env MYSQL_ROOT_PASSWORD=secret \
-    --env MYSQL_DATABASE=todos \
-    --env LANG=C.UTF-8 \
-    --name my-mysql \
-    mysql:5.7 \
-    --character-set-server=utf8mb4 \
-    --collation-server=utf8mb4_unicode_ci
-c9d83cbd2ac8941da32d8d64103223fe1c6937c9c28507c6e19ed91fca740c98
-```
-> **명령어** :
-> ```bash
-> docker run -d \
+ubuntu@ip-172-31-23-60:~$ docker run -d \
 >     --network todo-app --network-alias mysql \
 >     --volume todo-mysql-data:/var/lib/mysql \
 >     --env MYSQL_ROOT_PASSWORD=secret \
@@ -61,23 +86,53 @@ c9d83cbd2ac8941da32d8d64103223fe1c6937c9c28507c6e19ed91fca740c98
 >     mysql:5.7 \
 >     --character-set-server=utf8mb4 \
 >     --collation-server=utf8mb4_unicode_ci
-> ```
+Unable to find image 'mysql:5.7' locally
+5.7: Pulling from library/mysql
+e048d0a38742: Pull complete
+c7847c8a41cb: Pull complete
+351a550f260d: Pull complete
+8ce196d9d34f: Pull complete
+17febb6f2030: Pull complete
+d4e426841fb4: Pull complete
+fda41038b9f8: Pull complete
+f47aac56b41b: Pull complete
+a4a90c369737: Pull complete
+97091252395b: Pull complete
+84fac29d61e9: Pull complete
+Digest: sha256:8cf035b14977b26f4a47d98e85949a7dd35e641f88fc24aa4b466b36beecf9d6
+Status: Downloaded newer image for mysql:5.7
+b0cd02ef4766a2107e2404bc2c637c4a8b3088e4c1608151d6810122c287659c
+```
 
-이전에 배운 `volume`도 사용하네요.
-데이터의 영속성을 위해서 데이터는 `volume`에 저장하도록 구성했습니다.
-`docker volume create`명령으로 생성하지 않아도, 없는경우엔 도커가 알아서 생성해줍니다. ◟(ˊᗨˋ)◞ 
+![](img/command.png)
+>```bash
+>docker run -d \
+>    --network todo-app --network-alias mysql \
+>    --volume todo-mysql-data:/var/lib/mysql \
+>    --env MYSQL_ROOT_PASSWORD=secret \
+>    --env MYSQL_DATABASE=todos \
+>    --env LANG=C.UTF-8 \
+>    --name my-mysql \
+>    mysql:5.7 \
+>    --character-set-server=utf8mb4 \
+>    --collation-server=utf8mb4_unicode_ci
+>```
 
----
+이전에 배운 **volume**도 사용하네요.  
+데이터의 영속성을 위해서 데이터는 **volume(todo-mysql-data)**에 저장하도록 구성했습니다.  
+`docker volume create`명령으로 생성하지 않아도, 없는 경우엔 도커가 알아서 생성해줍니다. ◟(ˊᗨˋ)◞ 
+
+<br><br><br>
 
 이제 mysql에 로그인해서 데이터베이스가 잘 생성됐나 봅시다.  
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker exec -it my-mysql mysql -p
+ubuntu@ip-172-31-23-60:~$ docker exec -it my-mysql mysql -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 2
-Server version: 5.7.38 MySQL Community Server (GPL)
+Server version: 5.7.41 MySQL Community Server (GPL)
 
-Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
@@ -87,12 +142,16 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql>
 ```
-> **명령어** :`docker exec -it my-mysql mysql -p`
-Password는 `secret` 입니다.  
 
-`mysql>` 프롬프트가 표시되면, 정상적으로 로그인 된겁니다.
+![](img/command.png)
+>```bash
+>docker exec -it my-mysql mysql -p
+>```
+- Password는 **secret**입니다.  
 
----
+**mysql>** 프롬프트가 표시되면, 정상적으로 로그인 된겁니다.
+
+<br><br><br>
 
 이제 mysql 명령어로 database를 조회해볼까요?
 ```bash
@@ -108,17 +167,28 @@ mysql> show databases;
 +--------------------+
 5 rows in set (0.00 sec)
 ```
-> **명령어** :`show databases;`
 
-`todos`라는 database가 보이시나요?  
+![](img/command.png)
+>```bash
+>show databases;
+>```
+
+**todos**라는 database가 보이시나요?  
+
+
+<br><br><br>
 
 이제 mysql 에서 나갈게요.
 ```bash
 mysql> exit
 Bye
-ubuntu@ip-10-0-1-14:~$
+ubuntu@ip-172-31-23-60:~$
 ```
-> **명령어** : `exit`
+
+![](img/command.png)
+>```bash
+>exit
+>```
 
 ---
 
