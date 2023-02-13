@@ -11,6 +11,8 @@
 ░░░░░     ░░░░░  ░░░░░░░░░  ░░░░░              ░░░░░     ░░░░░░░░                                   
 ```
 
+이 Repository는 MSP T3 과정 중 **Docker & Kubernetes** 학습을 위한 교재와 파일들의 저장소 입니다.  
+
 ### 디렉토리 구조 및 설명
 
 | 디렉토리             | 설명                                   |
@@ -18,31 +20,13 @@
 | ./doc            | 이론/실습 교재 (markdown)                  |
 | ./doc/themes     | 교재(md)의 slides 형식을 위한 themes (css적용) |
 | ./doc/img        | 교재에 사용된 이미지                          |
-| ./doc/pdf        | 이론교재의 slides 형식 출력본(pdf)               |
+| ./doc/pdf        | 이론교재의 slides 형식 출력본(pdf)             |
 | ./hands_on_files | 실습에 사용되는 파일들                         |
 | ./qna            | 각 차수별 메모와 질문/답변                      |
 
 ---
 
-### 이론 Contents
 
-| No. | 이론                                   |
-|:---:|:------------------------------------ |
-| 1   | Docker_Overview                      |
-| 2   | Docker_Commands                      |
-| 3   | Docker_Storage                       |
-| 4   | Docker_Network                       |
-| 5   | Dockerfile                           |
-| 6   | Dockerfile_BestPractice              |
-| 7   | Kubernetes_Overview                  |
-| 8   | Kubernetes_Workload(1)               |
-| 9   | Kubernetes_Workload(2)               |
-| 10  | Kubernetes_Service                   |
-| 11  | Kubernetes_Storage                   |
-| 12  | Kubernetes_Configuration             |
-| 13  | Kubernetes_Deployment_strategies     |
-| 14  | Kubernetes_Horizontal Pod Autoscaler |
-| 15  | Helm                                 |
 
 MSP T3 강의계획
 
@@ -58,8 +42,6 @@ MSP T3 강의계획
 
 순서조정 (K8s)
 Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deployment strategy > HPA > Helm
-
-
 
 - A반/B반으로 나누어서 진행함.
 - ubuntu 20.04 사용.
