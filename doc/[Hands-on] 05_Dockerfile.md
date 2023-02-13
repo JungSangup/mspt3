@@ -7,20 +7,17 @@
 
 # Contents
 
-**[1. Dockerfile을 이용한 이미지 빌드]()**
-**[2. Multi-stage build]()**
+**[1. Dockerfile을 이용한 이미지 빌드](#1-dockerfile을-이용한-이미지-빌드)**
+**[2. Multi-stage build](#2-multi-stage-build)**
 
 ---
 
 ## 1. Dockerfile을 이용한 이미지 빌드
 
-이번 실습은 Dockerfile을 이용하여 이미지를 생성하는 방법을 알아보겠습니다.
+이번 실습은 Dockerfile을 이용하여 이미지를 생성하는 방법을 알아보겠습니다.  
 어떻게 하면 좀 더 효율적인 이미지를 만들 수 있는지도 알아볼게요.
 
-<br>
-
-#### Java Application
-먼저 간단한 Java 파일(`HelloDocker.java`)을 준비합니다.
+먼저 간단한 Java 파일을 준비합니다.
 ```java
 public class HelloDocker {
     public static void main(String[] args) {
@@ -28,9 +25,10 @@ public class HelloDocker {
     }
 }
 ```
-<br>
+> 파일명은 **HelloDocker.java**로 합니다.
 
-#### Dockerfile
+<br><br><br>
+
 이제 Dockerfile 하나를 준비합니다.
 이미지를 만드는 여러가지 방법 중 하나인 Dockerfile을 이용한 빌드를 해볼게요.
 ```dockerfile
@@ -40,8 +38,9 @@ WORKDIR /hello
 RUN javac HelloDocker.java
 CMD ["java","HelloDocker"]
 ```
+> 파일명은 **Dockerfile1**로 합니다.
 
----
+<br><br><br>
 
 위에서 만든 Dockerfile을 간단히 설명하자면 다음과 같습니다.
 > 1. openjdk8을 Base image로 사용하고
@@ -52,75 +51,86 @@ CMD ["java","HelloDocker"]
 
 준비를 마친 상태는 아래와 같습니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ tree
+ubuntu@ip-172-31-23-60:~$ tree
 .
-├── Dockerfile
+├── Dockerfile1
 └── HelloDocker.java
 
 0 directories, 2 files
 ```
-> 우리 애플리케이션 소스파일인 `HelloDocker.java` 와 이미지를 만들 때 사용할 `Dockerfile`이 준비됨.
 
----
+<br><br><br>
 
-#### Docker image 생성
 이제 아래 명령어로 hellodocker 이미지를 생성합니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker build -t hellodocker:v1 .
-Sending build context to Docker daemon  3.072kB
+ubuntu@ip-172-31-23-60:~$ docker build -f Dockerfile1 -t hellodocker:v1 .
+Sending build context to Docker daemon  4.096kB
 Step 1/5 : FROM openjdk:8
- ---> 2a8331246713
+8: Pulling from library/openjdk
+001c52e26ad5: Pull complete
+d9d4b9b6e964: Pull complete
+2068746827ec: Pull complete
+9daef329d350: Pull complete
+d85151f15b66: Pull complete
+52a8c426d30b: Pull complete
+8754a66e0050: Pull complete
+Digest: sha256:86e863cc57215cfb181bd319736d0baf625fe8f150577f9eb58bd937f5452cb8
+Status: Downloaded newer image for openjdk:8
+ ---> b273004037cc
 Step 2/5 : COPY HelloDocker.java /hello/
- ---> 898708a1fb93
+ ---> 586ddfe9c462
 Step 3/5 : WORKDIR /hello
- ---> Running in 711b58d64ddb
-Removing intermediate container 711b58d64ddb
- ---> f6d8741cd695
+ ---> Running in b6c0c7b804ce
+Removing intermediate container b6c0c7b804ce
+ ---> 31be5909e298
 Step 4/5 : RUN javac HelloDocker.java
- ---> Running in 6f510b4106f9
-Removing intermediate container 6f510b4106f9
- ---> 24ec44b764c2
+ ---> Running in 8cc4ee5c98f4
+Removing intermediate container 8cc4ee5c98f4
+ ---> a12ffad6b75b
 Step 5/5 : CMD ["java","HelloDocker"]
- ---> Running in 6fdc1dad43f4
-Removing intermediate container 6fdc1dad43f4
- ---> d187b50492c2
-Successfully built d187b50492c2
+ ---> Running in d6f4b1a2ebef
+Removing intermediate container d6f4b1a2ebef
+ ---> 91d22f496ae4
+Successfully built 91d22f496ae4
 Successfully tagged hellodocker:v1
 ```
-> [**명령어**]
-> ```bash
-> docker build -t hellodocker:v1 .
-> ```
 
----
+![](img/command.png)
+>```bash
+>docker build -f Dockerfile1 -t hellodocker:v1 .
+>```
+
+<br><br><br>
 
 빌드가 성공하면 `docker images`명령어로 조회도 해보세요.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker images
-REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
-hellodocker   v1        d187b50492c2   6 minutes ago   526MB
-openjdk       8         2a8331246713   6 days ago      526MB
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/dockerfile$ docker images hellodocker
+REPOSITORY    TAG       IMAGE ID       CREATED              SIZE
+hellodocker   v1        91d22f496ae4   About a minute ago   526MB
 ```
-> [**명령어**]
-> ```bash
-> docker images
-> ```
+
+![](img/command.png)
+>```bash
+>docker images hellodocker
+>```
 
 이미지가 준비됐으니 이제 실행을 해볼게요.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker run hellodocker:v1
+ubuntu@ip-172-31-23-60:~$ docker run --rm hellodocker:v1
 Hello Docker!!!
 ```
-> [**명령어**]
-> ```bash
-> docker run hellodocker:v1
-> ```
+
+![](img/command.png)
+>```bash
+>docker run --rm hellodocker:v1
+>```
+- `--rm` : Automatically remove the container when it exits
 
 결과가 예상한 것과 같은가요?
 
 일단 첫 번째 단계는 성공입니다. (ง˙∇˙)ว
 
----
+<br><br><br><br><br>
 
 ## 2. Multi-stage build
 
@@ -133,11 +143,9 @@ docker는 multi-stage build 기능을 제공하기 때문에 최종 docker 이�
 
 ![h:300](img/docker_multi_stage_build.PNG)
 
----
+<br>
 
-#### Dockerfile 수정
-애플리케이션 파일인 HelloDocker.java 파일은 그대로 두고 Dockerfile만 아래와 같이 수정합니다.
-
+애플리케이션 파일인 HelloDocker.java 파일은 그대로 두고 **Dockerfile**을 하나 더 준비하겠습니다.
 ```dockerfile
 # Build stage
 FROM openjdk:8 as build-stage
@@ -151,92 +159,92 @@ COPY --from=build-stage /hello/HelloDocker.class /hello/HelloDocker.class
 WORKDIR /hello
 CMD ["java","HelloDocker"]
 ```
+> 파일명은 **Dockerfile2**로 합니다.
 
 | Build stage | Production stage |
 | :--- | :--- |
 | 1. openjdk8을 build-stage로 정하고<br>2. /hello 경로에 HelloDocker.java파일을 복사<br>3. /hello 경로로 이동<br>4. HelloDocker.java를 컴파일 | 1. openjdk8-jre를 production-stage로 정하고<br>2. /hello/HelloDocker.class 파일 복사 (build -> production)<br>3. 작업 경로를 /hello로 변경<br>4. docker container가 구동되면 `java HelloDocker`를 실행 |
 
----
+<br><br><br>
 
-#### Docker image 생성
 이제 아래 명령어로 hellodocker 이미지 v2를 생성합니다.
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker build -t hellodocker:v2 .
-Sending build context to Docker daemon  3.072kB
+ubuntu@ip-172-31-23-60:~$ docker build -f Dockerfile2 -t hellodocker:v2 .
+Sending build context to Docker daemon  4.096kB
 Step 1/8 : FROM openjdk:8 as build-stage
- ---> 2a8331246713
+ ---> b273004037cc
 Step 2/8 : COPY HelloDocker.java /hello/
  ---> Using cache
- ---> 898708a1fb93
+ ---> 586ddfe9c462
 Step 3/8 : WORKDIR /hello
  ---> Using cache
- ---> f6d8741cd695
+ ---> 31be5909e298
 Step 4/8 : RUN javac HelloDocker.java
  ---> Using cache
- ---> 24ec44b764c2
+ ---> a12ffad6b75b
 Step 5/8 : FROM openjdk:8-jre as production-stage
- ---> d991802804b7
+8-jre: Pulling from library/openjdk
+001c52e26ad5: Already exists
+d9d4b9b6e964: Already exists
+2068746827ec: Already exists
+8510da692cda: Pull complete
+c34215579d03: Pull complete
+73d77b4774a9: Pull complete
+Digest: sha256:667a15e7bc533a90fb39ddb7e5bed63162ac3c13a97e6c698bf4f139f51b7d33
+Status: Downloaded newer image for openjdk:8-jre
+ ---> 0c14a0e20aa3
 Step 6/8 : COPY --from=build-stage /hello/HelloDocker.class /hello/HelloDocker.class
- ---> d1ee4db7b623
+ ---> e6a283c7bcb4
 Step 7/8 : WORKDIR /hello
- ---> Running in 98a5b3f359c0
-Removing intermediate container 98a5b3f359c0
- ---> e5eef1dd32d5
+ ---> Running in 0c29098b40e6
+Removing intermediate container 0c29098b40e6
+ ---> a7703fe64d5f
 Step 8/8 : CMD ["java","HelloDocker"]
- ---> Running in 0c3c772a09dd
-Removing intermediate container 0c3c772a09dd
- ---> 61de5a0b96a9
-Successfully built 61de5a0b96a9
+ ---> Running in beddc772d5b9
+Removing intermediate container beddc772d5b9
+ ---> 9435a2a2311d
+Successfully built 9435a2a2311d
 Successfully tagged hellodocker:v2
 ```
-> [**명령어**]
-> ```bash
-> docker build -t hellodocker:v2 .
-> ```
 
----
+![](img/command.png)
+>```bash
+>docker build -f Dockerfile2 -t hellodocker:v2 .
+>```
+
+<br><br><br>
 
 빌드가 성공하면 `docker images`명령어를 실행해서 결과를 볼까요?
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker images
+ubuntu@ip-172-31-23-60:~$ docker images hellodocker
 REPOSITORY    TAG       IMAGE ID       CREATED              SIZE
-hellodocker   v2        61de5a0b96a9   About a minute ago   274MB
-hellodocker   v1        d187b50492c2   29 minutes ago       526MB
-openjdk       8-jre     d991802804b7   6 days ago           274MB
-openjdk       8         2a8331246713   6 days ago           526MB
+hellodocker   v2        9435a2a2311d   About a minute ago   274MB
+hellodocker   v1        91d22f496ae4   7 minutes ago        526MB
 ```
-> [**명령어**]
-> ```bash
-> docker images
-> ```
+
+![](img/command.png)
+>```bash
+>docker images hellodocker
+>```
 
 v1 과 v2 는 Java Application은 동일하지만, base image의 차이 때문에 이미지 전체의 사이즈가 크게 차이가 납니다.
 - **v1** : 526MB -> **v2** : 274MB   （°o°；）
 
-Cloud native 환경에서는 가능하면 이미지 사이즈를 작게 가져가는게 좋겠죠?
+**Cloud native** 환경에서는 가능하면 이미지 사이즈를 작게 가져가는게 좋겠죠?
+
+<br><br><br>
 
 컨테이너 실행결과는 아래처럼 차이가 없습니다.
-
 ```bash
-ubuntu@ip-10-0-1-14:~$ docker run hellodocker:v2
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/dockerfile$ docker run --rm hellodocker:v2
 Hello Docker!!!
 ```
-> [**명령어**]
-> ```bash
-> docker run hellodocker:v2
-> ```
 
----
-
-지금까지 실행한 컨테이너들을 모두 삭제하고 마치겠습니다.
-
-```bash
-ubuntu@ip-10-0-1-14:~$ docker rm -f $(docker ps -aq)
-```
-> [**명령어**]
-> ```bash
-> docker rm -f $(docker ps -aq)
-> ```
+![](img/command.png)
+>```bash
+>docker run --rm hellodocker:v2
+>```
+- `--rm` : Automatically remove the container when it exits
 
 <br><br><br>
 
