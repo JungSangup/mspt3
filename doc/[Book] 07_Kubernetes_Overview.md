@@ -55,7 +55,7 @@ footer: Samsung SDS
 
 <br><br><br><br>
 
-![](img/hyperlink.png)[What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+🔗[What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 
 ---
 
@@ -312,7 +312,7 @@ spec:
 
 <br><br>
 
-![](img/hyperlink.png)[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
+🔗[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
 
 ---
 
@@ -343,6 +343,10 @@ spec:
 ```
 
 > `accelerator=nvidia-tesla-p100` Label을 가진 Node를 선택하여 Pod를 처리함
+
+<br>
+
+🔗[노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/)
 
 ---
 

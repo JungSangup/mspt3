@@ -36,7 +36,7 @@ Helm을 통해 다음과 같은 일을 할 수 있습니다.
 
 <br><br><br><br><br>
 
-![](img/hyperlink.png)[Helm](https://helm.sh/ko/)
+🔗[Helm](https://helm.sh/ko/)
 
 ---
 

@@ -52,7 +52,7 @@ $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 
 <br><br><br><br><br>
 
-![](img/hyperlink.png)[Docker run reference](https://docs.docker.com/engine/reference/run/)
+🔗[Docker run reference](https://docs.docker.com/engine/reference/run/)
 
 ---
 
@@ -84,7 +84,7 @@ Options:
 
 <br>
 
-![](img/hyperlink.png)[Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground)
+🔗[Detached vs foreground](https://docs.docker.com/engine/reference/run/#detached-vs-foreground)
 
 ---
 
