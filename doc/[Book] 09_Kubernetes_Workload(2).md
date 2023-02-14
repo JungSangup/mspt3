@@ -284,7 +284,7 @@ Pod의 생성과 Scale in/out 시 순서와 고유성이 보장되는 형태입�
 
 ![h:250](img/k8s_statefulsets.png)
 
-🔗[StatefulSets](https://kubernetes.io/ko/docs/concepts/workloads/controllers/statefulset/)
+🔗 [StatefulSets](https://kubernetes.io/ko/docs/concepts/workloads/controllers/statefulset/)
 
 ---
 
@@ -299,7 +299,7 @@ Node마다 실행되어야 하는 Pod가 있을때 사용되며 대표적으로 
 
 ![h:250](img/k8s_daemonset.png)
 
-🔗[DaemonSet](https://kubernetes.io/ko/docs/concepts/workloads/controllers/daemonset/)
+🔗 [DaemonSet](https://kubernetes.io/ko/docs/concepts/workloads/controllers/daemonset/)
 
 ---
 

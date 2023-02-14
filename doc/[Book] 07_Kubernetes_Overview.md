@@ -55,7 +55,7 @@ footer: Samsung SDS
 
 <br><br><br><br>
 
-🔗[What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+🔗 [What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 
 ---
 
@@ -312,7 +312,7 @@ spec:
 
 <br><br>
 
-🔗[Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
+🔗 [Labels and Selectors](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/labels/)
 
 ---
 
@@ -346,7 +346,7 @@ spec:
 
 <br>
 
-🔗[노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/)
+🔗 [노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/)
 
 ---
 
