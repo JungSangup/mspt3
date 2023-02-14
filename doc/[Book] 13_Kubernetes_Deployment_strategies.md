@@ -29,8 +29,8 @@ Kubernetes 환경에서 애플리케이션을 배포하는 방법은 여러가�
 
 ![h:400](img/decision-diagram.png)
 
-🔗 [Kubernetes deployment strategies](https://blog.container-solutions.com/kubernetes-deployment-strategies)
-🔗 [Kubernetes deployment strategies(Github)](https://github.com/ContainerSolutions/k8s-deployment-strategies)
+🔗[Kubernetes deployment strategies](https://blog.container-solutions.com/kubernetes-deployment-strategies)
+🔗[Kubernetes deployment strategies(Github)](https://github.com/ContainerSolutions/k8s-deployment-strategies)
 
 ---
 

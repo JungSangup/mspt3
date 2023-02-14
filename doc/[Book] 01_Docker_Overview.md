@@ -89,7 +89,7 @@ footer: Samsung SDS
 
 <br><br><br><br><br>
 
-🔗 [What is a container?](https://www.docker.com/resources/what-container/) 🔗 [Windows container](https://docs.microsoft.com/ko-kr/virtualization/windowscontainers/about/)  
+🔗[What is a container?](https://www.docker.com/resources/what-container/) 🔗[Windows container](https://docs.microsoft.com/ko-kr/virtualization/windowscontainers/about/)  
 
 ---
 
@@ -154,7 +154,7 @@ Docker client와 daemon은 동일한 시스템상에 존재할 수도 있고, �
 
 <br>
 
-🔗 [Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
+🔗[Docker architecture](https://docs.docker.com/get-started/overview/#docker-architecture)
 
 ---
 
@@ -207,7 +207,7 @@ Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.
 
 <br><br>
 
-🔗 [Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
+🔗[Docker objects](https://docs.docker.com/get-started/overview/#docker-objects)
 
 ---
 
@@ -229,7 +229,7 @@ CMD python /app/app.py
 | ----------------------------------- |:-------------------------------------------------------------:|
 | ![h:250](img/docker_container_layers.jpeg) | `Container layer(Thin R/W layer)`<br>+<br>`Image layers(R/O)` |
 
-🔗 [Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
+🔗[Images and Layers](https://docs.docker.com/storage/storagedriver/#images-and-layers)
 
 ---
 

@@ -44,7 +44,7 @@ desiredReplicas = ceil[currentReplicas * ( currentMetricValue / desiredMetricVal
 
 <br><br><br><br><br><br><br><br><br><br>
 
-🔗 [Horizontal Pod Autoscaling - 알고리즘 세부정보](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/#%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%84%B8%EB%B6%80-%EC%A0%95%EB%B3%B4)
+🔗[Horizontal Pod Autoscaling - 알고리즘 세부정보](https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/#%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%84%B8%EB%B6%80-%EC%A0%95%EB%B3%B4)
 
 ---
 
