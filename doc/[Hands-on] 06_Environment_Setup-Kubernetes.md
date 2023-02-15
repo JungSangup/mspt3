@@ -31,7 +31,7 @@ ubuntu@ip-172-31-23-60:~$ curl -LO https://github.com/kubernetes/minikube/releas
 ubuntu@ip-172-31-23-60:~$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
-![](img/command.png)
+💻명령어
 >```bash
 >curl -LO https://github.com/kubernetes/minikube/releases/download/v1.28.0/minikube-linux-amd64
 >sudo install minikube-linux-amd64 /usr/local/bin/minikube
@@ -89,7 +89,7 @@ ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.2
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
 
-![](img/command.png)
+🖥️명령어
 >```bash
 >minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
 >```
