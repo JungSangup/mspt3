@@ -86,7 +86,7 @@ Use "kubectl <command> --help" for more information about a given command.
 Use "kubectl options" for a list of global command-line options (applies to all commands).
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl --help
 >```
@@ -125,7 +125,7 @@ serverVersion:
   platform: linux/amd64
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl version
 >```
@@ -145,7 +145,7 @@ CoreDNS is running at https://172.31.23.60:8443/api/v1/namespaces/kube-system/se
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl cluster-info
 >```
@@ -159,7 +159,7 @@ NAME              STATUS   ROLES                  AGE   VERSION
 ip-172-31-23-60   Ready    control-plane,master   2d    v1.23.0
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get nodes
 >```
@@ -173,7 +173,7 @@ NAME              STATUS   ROLES                  AGE   VERSION   INTERNAL-IP   
 ip-172-31-23-60   Ready    control-plane,master   2d    v1.23.0   172.31.23.60   <none>        Ubuntu 20.04.5 LTS   5.15.0-1028-aws   docker://20.10.23
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get nodes --output wide
 >```
@@ -188,7 +188,7 @@ ubuntu@ip-172-31-23-60:~$ kubectl get pods
 No resources found in default namespace.
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get pods
 >```
@@ -213,7 +213,7 @@ kube-system       Active   2d
 metallb-system    Active   2d
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get namespaces
 >```
@@ -239,7 +239,7 @@ metallb-system   controller-5cd84968b6-bfp98                 1/1     Running    
 metallb-system   speaker-z6phb                               1/1     Running     0          2d    172.31.23.60   ip-172-31-23-60   <none>           <none>
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get pods --all-namespaces --output wide
 >```
@@ -260,7 +260,7 @@ metrics-server-7c57dd9c77-j9866           1/1     Running   0          2d    172
 storage-provisioner                       1/1     Running   0          2d    172.31.23.60   ip-172-31-23-60   <none>           <none>
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get pods --namespace kube-system --output wide
 >```
@@ -308,7 +308,7 @@ spec:
 ...생략...
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl get pod [KUBE-SCHEDULER-NAME] --namespace kube-system --output yaml
 >```
@@ -345,7 +345,7 @@ Containers:
     ... 생략 ...
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl describe pod [KUBE-SCHEDULER-NAME] --namespace kube-system
 >```
@@ -371,7 +371,7 @@ I0211 14:35:05.683681       1 tlsconfig.go:240] "Starting DynamicServingCertific
 ... 생략 ...
 ```
 
-> ⌨️ 명령어
+> 💻 명령어
 >```bash
 >kubectl logs -n kube-system [KUBE-SCHEDULER-NAME]
 >```
