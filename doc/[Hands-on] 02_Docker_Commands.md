@@ -52,7 +52,7 @@ ubuntu/dotnet-aspnet             Chiselled Ubuntu runtime image for ASP.NET a…
 ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …   2
 ```
 
->💻 명령어
+> 💻 명령어
 >```bash
 >docker search ubuntu
 >```
@@ -78,7 +78,7 @@ Status: Downloaded newer image for ubuntu:latest
 docker.io/library/ubuntu:latest
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker pull ubuntu
 >```
@@ -95,7 +95,7 @@ Status: Downloaded newer image for ubuntu:18.04
 docker.io/library/ubuntu:18.04
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker pull ubuntu:18.04
 >```
@@ -110,7 +110,7 @@ ubuntu       18.04     5d2df19066ac   2 weeks ago   63.1MB
 ubuntu       latest    58db3edaf2be   2 weeks ago   77.8MB
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker images ubuntu
 >```
@@ -127,7 +127,7 @@ ubuntu@ip-172-31-23-60:~/app$ docker run --interactive --tty --name my-ubuntu1 u
 root@d68fe3ec9f65:/#
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run --interactive --tty --name my-ubuntu1 ubuntu /bin/bash
 >```
@@ -154,7 +154,7 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 UBUNTU_CODENAME=jammy
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >cat /etc/os-release
 >```
@@ -170,7 +170,7 @@ exit
 ubuntu@ip-172-31-23-60:~$
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >exit
 >```
@@ -186,7 +186,7 @@ ubuntu@ip-172-31-23-60:~/app$ docker run --interactive --tty --name my-ubuntu2 u
 root@cac6c7cab1f9:/#
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run --interactive --tty --name my-ubuntu2 ubuntu:18.04 /bin/bash
 >```
@@ -212,7 +212,7 @@ VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >cat /etc/os-release
 >```
@@ -234,7 +234,7 @@ exit
 ubuntu@ip-172-31-23-60:~$
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >exit
 >```
@@ -258,7 +258,7 @@ Status: Downloaded newer image for nginx:latest
 ubuntu@ip-172-31-23-60:~/app$
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run --detach --name my-nginx --publish 8080:80 nginx
 >```
@@ -276,7 +276,7 @@ cac6c7cab1f9   ubuntu:18.04   "/bin/bash"              About a minute ago   Exit
 d68fe3ec9f65   ubuntu         "/bin/bash"              2 minutes ago        Exited (0) About a minute ago                                           my-ubuntu1
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker ps --all
 >```
@@ -300,7 +300,7 @@ ubuntu@ip-172-31-23-60:~/app$ docker stop $(docker ps --filter "name=my-nginx" -
 2fc9e3a49e91
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker stop $(docker ps --filter "name=my-nginx" --quiet)
 >```
@@ -316,7 +316,7 @@ cac6c7cab1f9   ubuntu:18.04   "/bin/bash"              2 minutes ago        Exit
 d68fe3ec9f65   ubuntu         "/bin/bash"              3 minutes ago        Exited (0) 2 minutes ago                  my-ubuntu1
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker ps --all
 >```
@@ -367,7 +367,7 @@ Receiving objects: 100% (131/131), 1.68 MiB | 24.63 MiB/s, done.
 Resolving deltas: 100% (51/51), done.
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >git clone https://github.com/JungSangup/todo_list_manager.git app
 >```
@@ -380,7 +380,7 @@ ubuntu@ip-172-31-23-60:~$ cd app
 ubuntu@ip-172-31-23-60:~/app$
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >cd app
 >```
@@ -394,7 +394,7 @@ v1.0.0
 v2.0.0
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >git tag
 >```
@@ -425,7 +425,7 @@ Turn off this advice by setting config variable advice.detachedHead to false
 HEAD is now at c7a54f7 .
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >git checkout v1.0.0
 >```
@@ -471,7 +471,7 @@ Successfully built df16f7f47728
 Successfully tagged rogallo/todo-app:1.0.0
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker build -t [USER-NAME]/todo-app:1.0.0 .
 >```
@@ -487,7 +487,7 @@ Previous HEAD position was c7a54f7 .
 HEAD is now at d1c1aaf Update index.html
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >git checkout v2.0.0
 >```
@@ -525,7 +525,7 @@ Successfully built 7a79571ef432
 Successfully tagged rogallo/todo-app:2.0.0
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker build -t [USER-NAME]/todo-app:2.0.0 .
 >```
@@ -541,7 +541,7 @@ rogallo/todo-app   2.0.0     7a79571ef432   56 seconds ago   172MB
 rogallo/todo-app   1.0.0     df16f7f47728   2 minutes ago    172MB
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker images [USER-NAME]/todo-app
 >```
@@ -561,7 +561,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker login -u [USER-NAME]
 >```
@@ -583,7 +583,7 @@ a6524c5b12a6: Layer already exists
 1.0.0: digest: sha256:5cee6f196aa06a6ba00a1b7c40a0b674510cf9f931785d9491daaa31af0d9de1 size: 1787
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker push [USER-NAME]/todo-app:1.0.0
 >```
@@ -605,7 +605,7 @@ a6524c5b12a6: Layer already exists
 2.0.0: digest: sha256:13ba0a28f43b581d260611cd0ecb446eb5b1105334fb5bf9c86e08bbd66bfadb size: 1787
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker push [USER-NAME]/todo-app:2.0.0
 >```
@@ -635,7 +635,7 @@ cac6c7cab1f9
 d68fe3ec9f65
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 >```

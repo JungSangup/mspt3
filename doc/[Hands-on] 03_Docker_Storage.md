@@ -24,7 +24,7 @@ ubuntu@ip-172-31-23-60:~$ docker run --name my-ubuntu1 --detach ubuntu bash -c "
 69a984336a12e4d186399730f1ff3f51300caf95ea9d70a59a235c334da26ea2
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run --name my-ubuntu1 --detach ubuntu bash -c "echo 'Hello Docker...' > /test.txt && tail -f /dev/null"
 >```
@@ -39,7 +39,7 @@ ubuntu@ip-172-31-23-60:~$ docker exec my-ubuntu1 cat /test.txt
 Hello Docker...
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker exec my-ubuntu1 cat /test.txt
 >```
@@ -58,7 +58,7 @@ bin   dev  home  lib32	libx32	mnt  proc  run	 srv  tmp  var
 boot  etc  lib	 lib64	media	opt  root  sbin  sys  usr
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run -it --name my-ubuntu2 ubuntu ls /
 >```
@@ -76,7 +76,7 @@ ubuntu@ip-172-31-23-60:~$ docker rm -f $(docker ps -a -f "name=my-ubuntu1" -f "n
 69a984336a12
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker rm -f $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 >```
@@ -98,7 +98,7 @@ ubuntu@ip-172-31-23-60:~$ docker volume create todo-db
 todo-db
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker volume create todo-db
 >```
@@ -110,7 +110,7 @@ DRIVER    VOLUME NAME
 local     todo-db
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker volume list
 >```
@@ -137,7 +137,7 @@ ubuntu@ip-172-31-23-60:~$ docker volume inspect todo-db
 ]
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker volume inspect todo-db
 >```
@@ -153,7 +153,7 @@ ubuntu@ip-172-31-23-60:~$ docker run --detach --publish 3000:3000 --volume todo-
 9649bfa4eea279378bd7ddd21804ffc0028adb873759b7efa83053ca1627dc9f
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/todo-app:1.0.0
 >```
@@ -181,7 +181,7 @@ ubuntu@ip-172-31-23-60:~$ docker rm my-todo-manager
 my-todo-manager
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker stop my-todo-manager
 >```
@@ -200,7 +200,7 @@ ubuntu@ip-172-31-23-60:~$ docker run --detach --publish 3000:3000 --volume todo-
 c6859ec898566de2e194acd1dd7b1df8832fe035e7e1179deb21c587e66502c9
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker run --detach --publish 3000:3000 --volume todo-db:/etc/todos --name my-todo-manager [USER-NAME]/todo-app:1.0.0
 >```
@@ -223,7 +223,7 @@ ubuntu@ip-172-31-23-60:~$ docker volume rm todo-db
 todo-db
 ```
 
-💻 명령어
+> 💻 명령어
 >```bash
 >docker rm -f my-todo-manager
 >```
