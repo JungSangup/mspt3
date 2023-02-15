@@ -202,7 +202,7 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 처리된 파일: mspt3.pem
 1 파일을 처리했으며 0 파일은 처리하지 못했습니다.
 ```
-![](img/command.png)
+💻 명령어
 > ```bash
 > icacls.exe mspt3.pem /reset
 > icacls.exe mspt3.pem /GRANT:R "$($env:USERNAME):(R)"
@@ -273,7 +273,7 @@ E: Unable to locate package docker
 E: Unable to locate package docker-engine
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get remove docker docker-engine docker.io containerd runc
 >```
@@ -302,7 +302,7 @@ Fetched 25.7 MB in 4s (6120 kB/s)
 Reading package lists... Done
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get update
 >```
@@ -326,7 +326,7 @@ gnupg set to manually installed.
 0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get install -y ca-certificates curl gnupg lsb-release
 >```
@@ -339,7 +339,7 @@ ubuntu@ip-172-31-23-60:~$ sudo mkdir -m 0755 -p /etc/apt/keyrings
 ubuntu@ip-172-31-23-60:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo mkdir -m 0755 -p /etc/apt/keyrings
 >curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -355,7 +355,7 @@ ubuntu@ip-172-31-23-60:~$ echo \
 >   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >echo \
 >  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
@@ -377,7 +377,7 @@ Fetched 196 kB in 1s (264 kB/s)
 Reading package lists... Done
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get update
 >```
@@ -411,7 +411,7 @@ Processing triggers for man-db (2.9.1-1) ...
 Processing triggers for systemd (245.4-4ubuntu3.19) ...
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get install -y docker-ce=5:20.10.23~3-0~ubuntu-focal docker-ce-cli=5:20.10.23~3-0~ubuntu-focal containerd.io docker-buildx-plugin docker-compose-plugin
 >```
@@ -439,7 +439,7 @@ root가 아닌 계정(우리 실습환경의 user는 `ubuntu` 입니다.)을 이
 ubuntu@ip-172-31-23-60:~$ sudo groupadd docker
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo groupadd docker
 >```
@@ -454,7 +454,7 @@ ubuntu@ip-172-31-23-60:~$ sudo usermod -aG docker $USER
 ubuntu@ip-172-31-23-60:~$ newgrp docker
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo usermod -aG docker $USER
 >newgrp docker
@@ -495,7 +495,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker run --rm hello-world
 >```
@@ -543,7 +543,7 @@ Setting up tree (1.8.0-1) ...
 Processing triggers for man-db (2.9.1-1) ...
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get update
 >sudo apt-get install -y net-tools tree conntrack
@@ -566,7 +566,7 @@ Receiving objects: 100% (3210/3210), 328.05 MiB | 51.34 MiB/s, done.
 Resolving deltas: 100% (1786/1786), done.
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >git clone https://github.com/JungSangup/mspt3.git
 >```

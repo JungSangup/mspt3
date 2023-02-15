@@ -25,7 +25,7 @@ ubuntu@ip-172-31-23-60:~$ docker network create todo-app
 b9040c02cb3e54eb51b4fa76dfc1031a7b3f02f0cd194de0a2097509e10e498a
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker network create todo-app
 >```
@@ -67,7 +67,7 @@ ubuntu@ip-172-31-23-60:~$ docker network inspect todo-app
 ]
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker network inspect todo-app
 >```
@@ -104,7 +104,7 @@ Status: Downloaded newer image for mysql:5.7
 b0cd02ef4766a2107e2404bc2c637c4a8b3088e4c1608151d6810122c287659c
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker run -d \
 >    --network todo-app --network-alias mysql \
@@ -143,7 +143,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql>
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker exec -it my-mysql mysql -p
 >```
@@ -168,7 +168,7 @@ mysql> show databases;
 5 rows in set (0.00 sec)
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >show databases;
 >```
@@ -185,7 +185,7 @@ Bye
 ubuntu@ip-172-31-23-60:~$
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >exit
 >```
@@ -206,7 +206,7 @@ ubuntu@ip-172-31-23-60:~$ docker run -dp 3000:3000 \
 1dce849ca625a5c4b4925a90fe0a08dc272cf904682b3554210b94d183f5dfd2
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker run -dp 3000:3000 \
 > --network todo-app \
@@ -234,7 +234,7 @@ Connected to mysql db at host mysql
 Listening on port 3000
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker logs my-todo-manager
 >```
@@ -271,7 +271,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql>
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker exec -it my-mysql mysql -p todos
 >```
@@ -293,7 +293,7 @@ mysql> select * from todo_items;
 3 rows in set (0.00 sec)
 ```  
 
-![](img/command.png)
+💻 명령어
 >```bash
 >select * from todo_items;
 >```
@@ -302,7 +302,7 @@ mysql> select * from todo_items;
 화면에서 입력한 오늘의 할 일이 todo_items table에 잘 저장되어 있나요?
 
 `exit` 명령으로 나와주시구요.
-![](img/command.png)
+💻 명령어
 >```bash
 >exit
 >```
@@ -314,7 +314,7 @@ my-todo-manager
 my-mysql
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >docker rm -f my-todo-manager my-mysql
 >```

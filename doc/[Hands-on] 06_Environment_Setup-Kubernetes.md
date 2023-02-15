@@ -89,7 +89,7 @@ ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.2
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
 
-🖥️ 명령어
+💻 명령어
 >```bash
 >minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
 >```
@@ -108,7 +108,7 @@ apiserver: Running
 kubeconfig: Configured
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >minikube status
 >```
@@ -120,7 +120,7 @@ kubeconfig: Configured
 
 아래 명령어를 실행해서 설치해주세요.
 
-![](img/command.png)
+💻 명령어
 >```bash
 >sudo apt-get update
 >sudo apt-get install conntrack
@@ -143,7 +143,7 @@ ubuntu@ip-172-31-23-60:~$ curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/a
 ubuntu@ip-172-31-23-60:~$ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
 >sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
@@ -177,7 +177,7 @@ serverVersion:
   platform: linux/amd64
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >kubectl version --output yaml
 >```
@@ -193,7 +193,7 @@ ubuntu@ip-172-31-23-60:~$ echo 'complete -o default -F __start_kubectl k' >>~/.b
 ubuntu@ip-172-31-23-60:~$ exec bash
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >echo 'source <(kubectl completion bash)' >>~/.bashrc
 >echo 'alias k=kubectl' >>~/.bashrc
@@ -211,7 +211,7 @@ Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCom
 Server Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.0", GitCommit:"ab69524f795c42094a6630298ff53f3c3ebab7f4", GitTreeState:"clean", BuildDate:"2021-12-07T18:09:57Z", GoVersion:"go1.17.3", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >k version
 >```
@@ -235,7 +235,7 @@ linux-amd64/README.md
 ubuntu@ip-172-31-23-60:~$ sudo mv linux-amd64/helm /usr/local/bin/helm
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >curl -LO https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
 >tar -zxvf helm-v3.11.0-linux-amd64.tar.gz
@@ -251,7 +251,7 @@ ubuntu@ip-172-31-23-60:~$ helm version
 version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
 ```
 
-![](img/command.png)
+💻 명령어
 >```bash
 >helm version
 >```
