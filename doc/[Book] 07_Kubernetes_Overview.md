@@ -346,7 +346,7 @@ spec:
 
 <br>
 
-🔗[노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/)
+🔗[노드에 파드 할당하기](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/assign-pod-node/) 🔗[노드 어피니티를 사용해 노드에 파드 할당](https://kubernetes.io/ko/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/)
 
 ---
 
