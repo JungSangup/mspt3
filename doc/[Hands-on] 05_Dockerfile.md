@@ -95,7 +95,7 @@ Successfully built 91d22f496ae4
 Successfully tagged hellodocker:v1
 ```
 
-> 💻 명령어
+> ⌨️ 명령어
 >```bash
 >docker build -f Dockerfile1 -t hellodocker:v1 .
 >```
@@ -109,7 +109,7 @@ REPOSITORY    TAG       IMAGE ID       CREATED              SIZE
 hellodocker   v1        91d22f496ae4   About a minute ago   526MB
 ```
 
-> 💻 명령어
+> ⌨️ 명령어
 >```bash
 >docker images hellodocker
 >```
@@ -120,7 +120,7 @@ ubuntu@ip-172-31-23-60:~$ docker run --rm hellodocker:v1
 Hello Docker!!!
 ```
 
-> 💻 명령어
+> ⌨️ 명령어
 >```bash
 >docker run --rm hellodocker:v1
 >```
@@ -207,7 +207,7 @@ Successfully built 9435a2a2311d
 Successfully tagged hellodocker:v2
 ```
 
-> 💻 명령어
+> ⌨️ 명령어
 >```bash
 >docker build -f Dockerfile2 -t hellodocker:v2 .
 >```
@@ -222,7 +222,7 @@ hellodocker   v2        9435a2a2311d   About a minute ago   274MB
 hellodocker   v1        91d22f496ae4   7 minutes ago        526MB
 ```
 
-> 💻 명령어
+> ⌨️ 명령어
 >```bash
 >docker images hellodocker
 >```
@@ -240,7 +240,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/dockerfile$ docker run --rm hellod
 Hello Docker!!!
 ```
 
-> 💻 명령어
+> ⌨️ 명령어
 >```bash
 >docker run --rm hellodocker:v2
 >```
