@@ -3,16 +3,16 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 ## Contents
 
-- **Service를 이용해서 Pod에 연결하기**
-  - **ClusterIP타입 Service 이용해보기**
-  - **NodePort타입 Service 이용해보기**
-- **Ingress를 이용해서 Pod에 연결하기**
+**[1. Service를 이용해서 Pod에 연결하기]()**
+**[2. Ingress를 이용해서 Pod에 연결하기]()**
 
 ---
 
-## Service를 이용해서 Pod에 연결하기
+## 1. Service를 이용해서 Pod에 연결하기
 
 이번 실습에서는 **Service**를 이용하는 방법을 알아보겠습니다.
 먼저 **Deployment**를 이용해서 Pod를 몇 개 생성해 보겠습니다.
@@ -303,7 +303,7 @@ Node까지의 경로가 열려있다면 어디서든 이 IP로 접근 가능합�
 
 
 
-## Ingress를 이용해서 Pod에 연결하기
+## 2. Ingress를 이용해서 Pod에 연결하기
 
 이번에는 Ingress 리소스를 생성하고 등록된 URL을 이용해서 접속해 보겠습니다.
 
