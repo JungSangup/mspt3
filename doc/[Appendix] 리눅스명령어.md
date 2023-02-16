@@ -484,6 +484,3 @@ $ sudo apt-get install -y awscli
   > ```
   
 
-<br><br>
-
-<center> <a href="../README.md">[목록]</a> </center>

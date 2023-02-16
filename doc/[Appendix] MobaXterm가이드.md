@@ -68,8 +68,4 @@
   ```
   
 
-<br>
-<br>
-<br>
 
-<center> <a href="../README.md">[목록]</a> </center>
