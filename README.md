@@ -70,12 +70,11 @@ MSP T3 강의계획
 Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deployment strategy > HPA > Helm
 
 ### 개선사항
-- [x] A반/B반으로 나누어서 진행함.  
- - 교재에 내용 반영완료.
-- [ ] ubuntu 20.04 사용.  
-- [ ] mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )  
+- [x] A반/B반으로 나누어서 진행함. -> 교재에 내용 반영완료.
+- [x] ubuntu 20.04 사용. -> 교재에 반영완료.
+- [x] mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )  -> 강의 중 이슈 발생 시 안내.
 - [ ] powershell, mac 기본 terminal 기준으로  
-- [ ] 리눅스 명령어 정리  
+- [x] 리눅스 명령어 정리 -> 
 - [ ] 각 실습 마지막 정리하기 추가  
 - [ ] pdf, powershell 복사/붙여넣기 이슈  
   - 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)  
