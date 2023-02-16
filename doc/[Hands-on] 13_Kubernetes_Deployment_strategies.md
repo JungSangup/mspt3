@@ -3,11 +3,13 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
-- **Recreate 방법으로 업데이트 해보기**
-- **Recreate 방법으로 롤백 해보기**
-- **RollingUpdate 방법으로 업데이트 해보기**
+**[Recreate 방법으로 업데이트 해보기]()**
+**[Recreate 방법으로 롤백 해보기]()**
+**[RollingUpdate 방법으로 업데이트 해보기]()**
 
 ---
 
