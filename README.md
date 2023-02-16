@@ -79,3 +79,10 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
   - 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)
 - Editor는 VI를 사용. (가이드 활용)
 - minikube start 시 오류 (/etc/docker)
+
+- 터미널 프로그램 통일
+- 실습파일 챕터별로 번호(?) 부여
+- 전체 교육과정 맵 제공
+- 사전준비 ( Docker Hub가입, 터미널 툴 설치 )
+- 실습 시작 전 체크사항 정리 (EC2접속해서 어느 디렉토리로 이동하고... 등)
+- 일자가 바뀌어도 실습환경 유지가 되도록 주의. (EC2 stop하지 말고 3일단 유지)
