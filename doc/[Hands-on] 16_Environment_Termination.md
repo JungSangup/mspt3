@@ -7,8 +7,8 @@
 
 # Contents
 
-**[1. VM Instance 삭제하기]()**
-**[2. Security group 삭제하기]()**
+**[1. VM Instance 삭제하기](#1-vm-instance-삭제하기)**  
+**[2. Security group 삭제하기](#2-security-group-삭제하기)**
 
 ---
 
