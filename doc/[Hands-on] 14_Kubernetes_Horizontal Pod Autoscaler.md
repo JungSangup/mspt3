@@ -1,12 +1,13 @@
 
 # [Hands-on] 14. Kubernetes Horizontal Pod Autoscaler
 
-
 ![](img/hands_on.png)
+
+<br>
 
 # Contents
 
-- **HPA를 사용해서 자동 스케일링 해보기**
+**[HPA를 사용해서 자동 스케일링 해보기]()**
 
 ---
 

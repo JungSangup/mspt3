@@ -72,7 +72,7 @@ spec:
 
 그리고, 다음과 같이 **Deployment**를 생성합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl apply -f nginx-recreate.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-recreate.yaml
 deployment.apps/nginx-deployment created
 ```
 
@@ -85,7 +85,7 @@ deployment.apps/nginx-deployment created
 
 그리고, 생성된 Object들도 확인해 보겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get all
+ubuntu@ip-172-31-23-60:~$ kubectl get all
 NAME                                    READY   STATUS    RESTARTS   AGE
 pod/nginx-deployment-85fc747956-4jgxq   1/1     Running   0          15s
 pod/nginx-deployment-85fc747956-vzsbg   1/1     Running   0          15s
@@ -112,7 +112,7 @@ Spec에 정의된 대로 세 개의 Nginx Pod가 생성되어 있습니다.
 
 우리가 생성한 nginx 버젼을 알아볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx-deployment | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe deployment nginx-deployment | grep -i image
     Image:        nginx:1.18
 ```
 
@@ -131,7 +131,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx
 
 yaml파일의 버젼부분을 수정합니다. (`image: nginx:1.18` -> `image: nginx:1.19` , [sed](https://www.gnu.org/software/sed/) 명령어 사용)
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-recreate.yaml
+ubuntu@ip-172-31-23-60:~$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-recreate.yaml
 ```
 
 > 💻 명령어
@@ -165,7 +165,7 @@ nginx-deployment-85fc747956-x6zmj   1/1     Running   0          4m23s
 
 그리고 변경된 yaml파일을 이용해서 업데이트를 합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl apply -f nginx-recreate.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-recreate.yaml
 deployment.apps/nginx-deployment configured
 ```
 
@@ -215,7 +215,7 @@ nginx-deployment-7dd48c557f-k6czs   1/1     Running             0          6s
 
 Deployment에 어떤 변화가 생겼나 볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx-deployment | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe deployment nginx-deployment | grep -i image
     Image:        nginx:1.19
 ```
 
@@ -228,12 +228,12 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx
 
 그리고, 새로 생성된 Pod도 한번 보구요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pods
+ubuntu@ip-172-31-23-60:~$ kubectl get pods
 NAME                                READY   STATUS    RESTARTS   AGE
 nginx-deployment-7dd48c557f-6b9b8   1/1     Running   0          92s
 nginx-deployment-7dd48c557f-k6czs   1/1     Running   0          92s
 nginx-deployment-7dd48c557f-s9msd   1/1     Running   0          92s
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe pod nginx-deployment-7dd48c557f-6b9b8 | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe pod nginx-deployment-7dd48c557f-6b9b8 | grep -i image
     Image:          nginx:1.19
     Image ID:       docker-pullable://nginx@sha256:df13abe416e37eb3db4722840dd479b00ba193ac6606e7902331dcea50f4f1f2
   Normal  Pulling    115s  kubelet            Pulling image "nginx:1.19"
@@ -260,7 +260,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe pod nginx-deploy
 이번에는 Deployment의 **롤백** 방법을 알아보겠습니다.  
 먼저 업데이트 **History**는 아래와 같이 확인해볼 수 있습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl rollout history deployment nginx-deployment
+ubuntu@ip-172-31-23-60:~$ kubectl rollout history deployment nginx-deployment
 deployment.apps/nginx-deployment
 REVISION  CHANGE-CAUSE
 1         <none>
@@ -277,7 +277,7 @@ REVISION  CHANGE-CAUSE
 최초 생성된 **Revision #1**과 한 번 업데이트 후의 **Revision #2**가 보입니다.  
 그 중 하나의 Revision을 콕 집어서 자세히 볼 수도 있습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl rollout history deployment nginx-deployment --revision=1
+ubuntu@ip-172-31-23-60:~$ kubectl rollout history deployment nginx-deployment --revision=1
 deployment.apps/nginx-deployment with revision #1
 Pod Template:
   Labels:	app=my-nginx
@@ -300,7 +300,7 @@ Pod Template:
 <br><br><br>
 
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl rollout history deployment nginx-deployment --revision=2
+ubuntu@ip-172-31-23-60:~$ kubectl rollout history deployment nginx-deployment --revision=2
 deployment.apps/nginx-deployment with revision #2
 Pod Template:
   Labels:	app=my-nginx
@@ -343,7 +343,7 @@ nginx-deployment-7dd48c557f-s9msd   1/1     Running   0          4m47s
 
 **첫 번째 Terminal**에서 **revision1**으로 롤백 합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl rollout undo deployment nginx-deployment --to-revision=1
+ubuntu@ip-172-31-23-60:~$ kubectl rollout undo deployment nginx-deployment --to-revision=1
 deployment.apps/nginx-deployment rolled back
 ```
 
@@ -394,12 +394,12 @@ nginx-deployment-85fc747956-7vgpg   1/1     Running             0          3s
 
 이전 버젼으로 롤백이 잘 됐는지 아래 명령어로 확인해보세요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pods
+ubuntu@ip-172-31-23-60:~$ kubectl get pods
 NAME                                READY   STATUS    RESTARTS   AGE
 nginx-deployment-85fc747956-7vgpg   1/1     Running   0          92s
 nginx-deployment-85fc747956-n62jm   1/1     Running   0          92s
 nginx-deployment-85fc747956-rkhf8   1/1     Running   0          92s
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe pod nginx-deployment-85fc747956-7vgpg | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe pod nginx-deployment-85fc747956-7vgpg | grep -i image
     Image:          nginx:1.18
     Image ID:       docker-pullable://nginx@sha256:e90ac5331fe095cea01b121a3627174b2e33e06e83720e9a934c7b8ccc9c55a0
   Normal  Pulled     108s  kubelet            Container image "nginx:1.18" already present on machine
@@ -419,7 +419,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe pod nginx-deploy
 다 해보셨으면 다음 실습을 위해 Object들을 삭제해주세요.  
 아시죠? **선언형(Declarative)**...
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl delete -f nginx-recreate.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-recreate.yaml
 deployment.apps "nginx-deployment" deleted
 ```
 
@@ -481,7 +481,7 @@ spec:
 
 다음과 같이 Deployment를 생성합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl apply -f nginx-rollingupdate.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-rollingupdate.yaml
 deployment.apps/nginx-deployment created
 ```
 
@@ -494,7 +494,7 @@ deployment.apps/nginx-deployment created
 
 그리고, 생성된 Object들도 확인해 보겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get all
+ubuntu@ip-172-31-23-60:~$ kubectl get all
 NAME                                    READY   STATUS    RESTARTS   AGE
 pod/nginx-deployment-85fc747956-4fld8   1/1     Running   0          14s
 pod/nginx-deployment-85fc747956-cjtgn   1/1     Running   0          14s
@@ -519,7 +519,7 @@ replicaset.apps/nginx-deployment-85fc747956   3         3         3       14s
 
 생성된 Deployment의 정보를 보고 현재 실행된 이미지를 확인해봅니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx-deployment | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe deployment nginx-deployment | grep -i image
     Image:        nginx:1.18
 ```
 
@@ -534,7 +534,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx
 
 업데이트를 위해서 Deployment yaml파일에서 버젼을 변경하구요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-rollingupdate.yaml
+ubuntu@ip-172-31-23-60:~$ sed -i 's/image: nginx:1.18/image: nginx:1.19/g' nginx-rollingupdate.yaml
 ```
 
 > 💻 명령어
@@ -563,7 +563,7 @@ nginx-deployment-85fc747956-hkvgs   1/1     Running   0          92s
 
 **첫 번재 Terminal**에서 업데이트를 합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl apply -f nginx-rollingupdate.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-rollingupdate.yaml
 deployment.apps/nginx-deployment configured
 ```
 
@@ -612,7 +612,7 @@ nginx-deployment-85fc747956-hkvgs   0/1     Terminating         0          114s
 
 첫 번째 Terminal에서 아래와 같이 업데이트 이후의 변경사항도 확인해보세요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx-deployment | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe deployment nginx-deployment | grep -i image
     Image:        nginx:1.19
 ```
 
@@ -625,12 +625,12 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe deployment nginx
 
 새로 생성된 Pod의 정보도 확인해봅니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pods
+ubuntu@ip-172-31-23-60:~$ kubectl get pods
 NAME                                READY   STATUS    RESTARTS   AGE
 nginx-deployment-7dd48c557f-4k4zh   1/1     Running   0          87s
 nginx-deployment-7dd48c557f-bvsl8   1/1     Running   0          85s
 nginx-deployment-7dd48c557f-s99mz   1/1     Running   0          86s
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe pod nginx-deployment-7dd48c557f-4k4zh | grep -i image
+ubuntu@ip-172-31-23-60:~$ kubectl describe pod nginx-deployment-7dd48c557f-4k4zh | grep -i image
     Image:          nginx:1.19
     Image ID:       docker-pullable://nginx@sha256:df13abe416e37eb3db4722840dd479b00ba193ac6606e7902331dcea50f4f1f2
   Normal  Pulled     102s  kubelet            Container image "nginx:1.19" already present on machine
@@ -668,7 +668,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe pod nginx-deploy
 
 다 해보셨으면 다음 실습을 위해 Object들을 삭제해주세요.  
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl delete -f nginx-rollingupdate.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-rollingupdate.yaml
 deployment.apps "nginx-deployment" deleted
 ```
 
