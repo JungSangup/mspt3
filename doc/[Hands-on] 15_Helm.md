@@ -566,7 +566,7 @@ image.repository는 여러분의 Private repository에서 pull해서 사용하�
 
 잘 되나요?
 
----
+<br><br><br>
 
 생성된 K8s 리소스들도 확인해보세요.
 ```bash
