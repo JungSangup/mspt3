@@ -74,12 +74,11 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [x] ubuntu 20.04 사용. -> 교재에 반영완료.
 - [x] mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )  -> 강의 중 이슈 발생 시 안내.
 - [ ] powershell, mac 기본 terminal 기준으로  
-- [x] 리눅스 명령어 정리 -> 
-- [ ] 각 실습 마지막 정리하기 추가  
-- [ ] pdf, powershell 복사/붙여넣기 이슈  
-  - 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)  
-- [ ] Editor는 VI를 사용. (가이드 활용)  
-- [ ] minikube start 시 오류 (/etc/docker)  
+- [x] 리눅스 명령어 정리 -> https://github.com/JungSangup/mspt3/blob/main/doc/%5BAppendix%5D%20%EB%A6%AC%EB%88%85%EC%8A%A4%EB%AA%85%EB%A0%B9%EC%96%B4.md 추가
+- [x] 각 실습 마지막 정리하기 추가 -> 교재에 내용 반영완료.
+- [x] pdf, powershell 복사/붙여넣기 이슈 -> 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)  
+- [x] Editor는 VI를 사용. (가이드 활용) -> 강의 중 기본 사용법 안내. 
+- [x] minikube start 시 오류 (/etc/docker)  -> Ubuntu, Docker, Minikube, Kubernetes 버젼을 특정해서 진행. (오류가 발생하지 않는 버젼의 조합 사용)
 
 - [ ] 터미널 프로그램 통일  
 - [ ] 실습파일 챕터별로 번호(?) 부여  
