@@ -86,3 +86,4 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [ ] 사전준비 ( Docker Hub가입, 터미널 툴 설치 )  
 - [ ] 실습 시작 전 체크사항 정리 (EC2접속해서 어느 디렉토리로 이동하고... 등)  
 - [ ] 일자가 바뀌어도 실습환경 유지가 되도록 주의. (EC2 stop하지 말고 3일단 유지)  
+- [ ] 진행 시 화면 해상도 적정하게 
