@@ -31,7 +31,7 @@
 
 ```
 
-
+![](doc/img/docker_k8s.png)
 
 
 # Docker & Kubernetes
