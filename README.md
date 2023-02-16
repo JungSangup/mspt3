@@ -70,20 +70,20 @@ MSP T3 강의계획
 Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deployment strategy > HPA > Helm
 
 ### 개선사항
-- [] A반/B반으로 나누어서 진행함.  
-- [] ubuntu 20.04 사용.  
-- [] mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )  
-- [] powershell, mac 기본 terminal 기준으로  
-- [] 리눅스 명령어 정리  
-- [] 각 실습 마지막 정리하기 추가  
-- [] pdf, powershell 복사/붙여넣기 이슈  
+- [ ] A반/B반으로 나누어서 진행함.  
+- [ ] ubuntu 20.04 사용.  
+- [ ] mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )  
+- [ ] powershell, mac 기본 terminal 기준으로  
+- [ ] 리눅스 명령어 정리  
+- [ ] 각 실습 마지막 정리하기 추가  
+- [ ] pdf, powershell 복사/붙여넣기 이슈  
   - 실습교재는 Github의 md파일로 진행. (code block 복사하기 버튼 활용)  
-- [] Editor는 VI를 사용. (가이드 활용)  
-- [] minikube start 시 오류 (/etc/docker)  
+- [ ] Editor는 VI를 사용. (가이드 활용)  
+- [ ] minikube start 시 오류 (/etc/docker)  
 
-- [] 터미널 프로그램 통일  
-- [] 실습파일 챕터별로 번호(?) 부여  
-- [] 전체 교육과정 맵 제공  
-- [] 사전준비 ( Docker Hub가입, 터미널 툴 설치 )  
-- [] 실습 시작 전 체크사항 정리 (EC2접속해서 어느 디렉토리로 이동하고... 등)  
-- [] 일자가 바뀌어도 실습환경 유지가 되도록 주의. (EC2 stop하지 말고 3일단 유지)  
+- [ ] 터미널 프로그램 통일  
+- [ ] 실습파일 챕터별로 번호(?) 부여  
+- [ ] 전체 교육과정 맵 제공  
+- [ ] 사전준비 ( Docker Hub가입, 터미널 툴 설치 )  
+- [ ] 실습 시작 전 체크사항 정리 (EC2접속해서 어느 디렉토리로 이동하고... 등)  
+- [ ] 일자가 바뀌어도 실습환경 유지가 되도록 주의. (EC2 stop하지 말고 3일단 유지)  
