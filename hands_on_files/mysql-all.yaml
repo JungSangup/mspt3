@@ -1,9 +1,3 @@
-##################################################
-#                                                #
-#            ToDo Application - MySQL            #
-#                                                #
-##################################################
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
