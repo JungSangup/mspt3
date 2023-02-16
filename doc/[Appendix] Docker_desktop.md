@@ -4,7 +4,7 @@ author: sangup.jung@gmail.com
 size: 16:9
 theme: mspt2
 paginate: true
-header: Docker & Kubernetes - [Appendix] 02. Docker desktop
+header: Docker & Kubernetes - [Appendix] Docker desktop
 footer: Samsung SDS
 ---
 
@@ -13,7 +13,7 @@ footer: Samsung SDS
 
 <br>
 
-## [Appendix] 02. Docker desktop
+## [Appendix] Docker desktop
 
 <br>
 
