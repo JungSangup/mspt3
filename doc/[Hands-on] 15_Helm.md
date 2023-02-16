@@ -528,9 +528,14 @@ release "my-todo-app" uninstalled
 
 역시 아래와 같이 간단하게 실행할 수 있습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm install my-todo-app --set image.repository=rogallo/todo-app --set imageCredentials.create=true --set imageCredentials.username=rogallo --set imageCredentials.password=XXX https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm install my-todo-app \
+>     --set image.repository=rogallo/todo-app \
+>     --set imageCredentials.create=true \
+>     --set imageCredentials.username=rogallo \
+>     --set imageCredentials.password=XXXXXX \
+>     https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 NAME: my-todo-app
-LAST DEPLOYED: Tue Feb  7 09:50:25 2023
+LAST DEPLOYED: Thu Feb 16 08:31:07 2023
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
@@ -570,34 +575,38 @@ image.repository는 여러분의 Private repository에서 pull해서 사용하�
 
 생성된 K8s 리소스들도 확인해보세요.
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl get all
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get all
 NAME                                    READY   STATUS    RESTARTS   AGE
-pod/my-todo-app-6b8b4887d5-66d4b        1/1     Running   0          3m4s
-pod/my-todo-app-mysql-7d8c985b5-6v25l   1/1     Running   0          3m4s
+pod/my-todo-app-6b8b4887d5-l5kwf        1/1     Running   0          3m41s
+pod/my-todo-app-mysql-7d8c985b5-5kwk2   1/1     Running   0          3m41s
 
 NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-service/kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP    5d5h
-service/my-todo-app         ClusterIP   10.101.188.213   <none>        3000/TCP   3m4s
-service/my-todo-app-mysql   ClusterIP   10.101.187.212   <none>        3306/TCP   3m4s
+service/kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP    4d17h
+service/my-todo-app         ClusterIP   10.99.25.35      <none>        3000/TCP   3m41s
+service/my-todo-app-mysql   ClusterIP   10.101.118.220   <none>        3306/TCP   3m41s
 
 NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/my-todo-app         1/1     1            1           3m4s
-deployment.apps/my-todo-app-mysql   1/1     1            1           3m4s
+deployment.apps/my-todo-app         1/1     1            1           3m41s
+deployment.apps/my-todo-app-mysql   1/1     1            1           3m41s
 
 NAME                                          DESIRED   CURRENT   READY   AGE
-replicaset.apps/my-todo-app-6b8b4887d5        1         1         1       3m4s
-replicaset.apps/my-todo-app-mysql-7d8c985b5   1         1         1       3m4s
+replicaset.apps/my-todo-app-6b8b4887d5        1         1         1       3m41s
+replicaset.apps/my-todo-app-mysql-7d8c985b5   1         1         1       3m41s
 
 NAME                                              REFERENCE                TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-horizontalpodautoscaler.autoscaling/my-todo-app   Deployment/my-todo-app   <unknown>/80%   1         10        1          3m4s
+horizontalpodautoscaler.autoscaling/my-todo-app   Deployment/my-todo-app   <unknown>/80%   1         10        1          3m41s
 ```
-> **명령어** : `kubectl get all`
 
----
+> 💻 명령어
+>```bash
+>kubectl get all
+>```
+
+<br><br><br>
 
 private repository의 이미지를 pull 하기 위해서 자격증명도 secret으로 생성했습니다.
 ```base
-ubuntu@ip-10-0-1-161:~$ kubectl describe secrets regcred
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe secrets regcred
 Name:         regcred
 Namespace:    default
 Labels:       app.kubernetes.io/managed-by=Helm
@@ -610,11 +619,59 @@ Data
 ====
 .dockerconfigjson:  135 bytes
 ```
-> **명령어** : `kubectl describe secrets regcred`
+
+> 💻 명령어
+>```bash
+>kubectl get all
+>```
 
 다른 리소스들 (ConfitMap, Secret, PVC, PV, Ingress) 도 한 번 확인해보세요.
+```base
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get configmaps
+NAME                 DATA   AGE
+kube-root-ca.crt     1      4d18h
+my-todo-app-config   2      5m5s
+mysql-config         2      5m5s
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get secrets
+NAME                                TYPE                                  DATA   AGE
+default-token-dskrr                 kubernetes.io/service-account-token   3      4d18h
+my-todo-app-mysql-token-d25jp       kubernetes.io/service-account-token   3      5m10s
+my-todo-app-secret                  Opaque                                2      5m10s
+my-todo-app-token-5n24p             kubernetes.io/service-account-token   3      5m10s
+mysql-secret                        Opaque                                1      5m10s
+regcred                             kubernetes.io/dockerconfigjson        1      5m10s
+sh.helm.release.v1.my-todo-app.v1   helm.sh/release.v1                    1      5m10s
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pvc
+NAME                          STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+data-my-wordpress-mariadb-0   Bound    pvc-94d614ca-8cb3-499c-a76f-35e73eca936e   8Gi        RWO            standard       28m
+mysql-pvc                     Bound    pvc-775be31c-d9b9-4e21-b55c-8280af4e342f   3Gi        RWO            standard       5m14s
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                 STORAGECLASS   REASON   AGE
+pvc-775be31c-d9b9-4e21-b55c-8280af4e342f   3Gi        RWO            Delete           Bound    default/mysql-pvc                     standard                5m18s
+pvc-94d614ca-8cb3-499c-a76f-35e73eca936e   8Gi        RWO            Delete           Bound    default/data-my-wordpress-mariadb-0   standard                28m
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get ingress
+NAME          CLASS   HOSTS           ADDRESS        PORTS   AGE
+my-todo-app   nginx   todo-app.info   172.31.23.60   80      5m23s
+```
 
----
+> 💻 명령어
+>```bash
+>kubectl get configmaps
+>```
+>```bash
+>kubectl get secrets
+>```
+>```bash
+>kubectl get pvc
+>```
+>```bash
+>kubectl get pv
+>```
+>```bash
+>kubectl get ingress
+>```
+
+<br><br><br>
 
 이제 Helm 에서 **업그레이드**를 해볼게요.
 여러가지 업그레이드가 있겠지만, 간단히 이미지의 Tag를 변경하는 경우만 해보겠습니다.
