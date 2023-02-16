@@ -232,6 +232,7 @@ BinaryData
 
 Events:  <none>
 ```
+
 > 💻 명령어
 >```bash
 >kubectl get configmaps
