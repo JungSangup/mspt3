@@ -7,12 +7,12 @@
 
 # Contents
 
-- **PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기**
-- **Volume을 사용하여 Pod 생성하기**
+**[1. PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기]()**  
+**[2. Volume을 사용하여 Pod 생성하기]()**
 
 ---
 
-## PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기
+## 1. PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기
 
 도커에서와 마찬가지로 컨테이너의 데이터 저장을 위해서 Volume을 생성해 보겠습니다.  
 이번 실습은 다양한 방법 중에서
@@ -22,24 +22,27 @@
 
 해서 진행해 보겠습니다.
 
-먼저 우리 환경이 준비가 되어있는지 확인해볼게요.
+먼저 우리 환경이 준비가 되어있는지 확인해볼게요.  
 우리 Cluster에서 사용가능한 Storageclass가 있는지 확인합니다.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl get storageclasses
+ubuntu@ip-172-31-23-60:~$ kubectl get storageclasses
 NAME                 PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-standard (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  11h
+standard (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  4d12h
 ```
-![](img/handson.png):명령어
+
+> 💻 명령어
 >```bash
 >kubectl get storageclasses
 >```
 
-Minikube는 기본적으로 위와같은 StorageClass가 있습니다.
-간단히 테스트해볼 수 있도록, hostPath 타입의 Volume을 만들 수 있습니다.
-
 <br>
 
-이제 PVC를 만들어볼게요.
+Minikube는 기본적으로 위와같은 StorageClass가 있습니다.  
+간단히 테스트해볼 수 있도록, hostPath 타입의 Volume을 만들 수 있습니다.
+
+<br><br><br>
+
+이제 **PersistentVolumeClaim**(**PVC**)를 만들어볼게요.  
 아래와 같은 파일을 준비합니다.
 ```yaml
 apiVersion: v1
@@ -60,24 +63,25 @@ spec:
 
 그리고, 아래와 같이 적용합니다.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl apply -f nginx-pvc.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-pvc.yaml
 persistentvolumeclaim/nginx-pvc created
 ```
-![](img/handson.png):명령어
+
+> 💻 명령어
 >```bash
 >kubectl apply -f nginx-pvc.yaml
 >```
 
-<br>
+<br><br><br>
 
-만들어진 K8s 리소스들을 볼까요?
+만들어진 K8s 리소스들을 볼까요?  
 먼저 PVC를 확인해볼게요.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl get persistentvolumeclaims
+ubuntu@ip-172-31-23-60:~$ kubectl get persistentvolumeclaims
 NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-nginx-pvc   Bound    pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO            standard       15s
+nginx-pvc   Bound    pvc-07b9d09b-af9d-4828-b12b-e59960ec7ae9   3Gi        RWO            standard       38s
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl get persistentvolumeclaims
 >```
@@ -88,13 +92,15 @@ nginx-pvc   Bound    pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO  
 
 결과를 보니 **VOLUME(pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa)** 도 보이고, STATUS는 **Bound**네요.
 
-그럼, 이번에는 PV를 볼까요?
+<br><br><br>
+
+그럼, 이번에는 **PersistentVolume**(**PV**)을 볼까요?
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl get persistentvolume
+ubuntu@ip-172-31-23-60:~$ kubectl get persistentvolume
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM               STORAGECLASS   REASON   AGE
-pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO            Delete           Bound    default/nginx-pvc   standard                3m36s
+pvc-07b9d09b-af9d-4828-b12b-e59960ec7ae9   3Gi        RWO            Delete           Bound    default/nginx-pvc   standard                95s
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl get persistentvolume
 >```
@@ -107,14 +113,14 @@ pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa   3Gi        RWO            Delete     
 
 일반적인 사용 유형이니 잘 익혀두세요.
 
-<br>
+<br><br><br>
 
 PV를 좀 더 자세히 볼까요?
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl describe persistentvolume pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa
-Name:            pvc-5347efb3-5aaf-437e-ad7d-9be120c190fa
+ubuntu@ip-172-31-23-60:~$ kubectl describe persistentvolume pvc-07b9d09b-af9d-4828-b12b-e59960ec7ae9
+Name:            pvc-07b9d09b-af9d-4828-b12b-e59960ec7ae9
 Labels:          <none>
-Annotations:     hostPathProvisionerIdentity: f5c4df7d-df7c-41dd-ba21-7392f383138d
+Annotations:     hostPathProvisionerIdentity: ee1f3efd-6ed4-4c8d-8fa2-9c85a7795642
                  pv.kubernetes.io/provisioned-by: k8s.io/minikube-hostpath
 Finalizers:      [kubernetes.io/pv-protection]
 StorageClass:    standard
@@ -132,7 +138,7 @@ Source:
     HostPathType:
 Events:            <none>
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl describe persistentvolume [PV-NAME]
 >```
@@ -140,38 +146,16 @@ Events:            <none>
 >```bash
 >kubectl describe pv [PV-NAME]
 >```
-- [PV-NAME] 에는 앞에서 만들어진 PV의 Name을 넣어주세요.
+> [PV-NAME] 에는 앞에서 만들어진 PV의 Name을 넣어주세요.
 
-Source아래 내용을 보시면 어디에 Volume영역이 할당되었는지 알 수 있습니다.
-위의 경우는 HostPath타입을 이용했고, **/tmp/hostpath-provisioner/default/nginx-pvc**를 Volume의 위치로 사용하고 있습니다.
+**Source**아래 내용을 보시면 어디에 Volume영역이 할당되었는지 알 수 있습니다.  
+위의 경우는 **HostPath**타입을 이용했고, **/tmp/hostpath-provisioner/default/nginx-pvc**를 Volume의 위치로 사용하고 있습니다.
 
-<br>
+<br><br><br><br><br>
 
-## Volume을 사용하여 Pod 생성하기
+## 2. Volume을 사용하여 Pod 생성하기
 
-이제 만들어진 PVC, PV를 사용하는 Pod를 생성해 보겠습니다.
-
-아래와 같이 volumes와 volumeMounts를 정의하려고 합니다.
-
-```yaml
-...
-      volumes:
-      - name: nginx-storage
-        persistentVolumeClaim:
-          claimName: nginx-pvc
-      containers:
-      - image: nginx:1.19.3
-        name: my-nginx
-        ports:
-        - containerPort: 80
-        volumeMounts:
-          - mountPath: "/usr/share/nginx/html"
-            name: nginx-storage
-```
-
-앞에서 만든 **nginx-pvc** 를 사용하고, 컨테이너의 **/usr/share/nginx/html**를 마운트합니다.
-
-<br>
+이제 만들어진 PVC, PV를 사용하는 Pod를 생성해 보겠습니다.  
 
 다음과 같이 Deployment를 준비해주세요.
 ```yaml
@@ -209,44 +193,48 @@ spec:
 ```
 > 파일명은 **nginx-deployment-volume.yaml**로 합니다.
 
-<br>
+앞에서 만든 **nginx-pvc**를 사용하고, 컨테이너의 **/usr/share/nginx/html**에 마운트합니다.
+
+<br><br><br>
 
 다음은 Deployment와 앞에서 실습한 Service, Ingress까지 리소스를 생성해주세요.
-
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl apply -f nginx-deployment-volume.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-deployment-volume.yaml
 deployment.apps/my-nginx-deployment created
-ubuntu@ip-172-31-20-30:~$ kubectl apply -f nginx-clusterip-service.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-clusterip-service.yaml
 service/nginx-clusterip-service created
-ubuntu@ip-172-31-20-30:~$ kubectl apply -f nginx-ingress.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-ingress.yaml
 ingress.networking.k8s.io/my-nginx-ingress created
 ```
-![](img/handson.png):명령어
+
+> 💻 명령어
 >```bash
 >kubectl apply -f nginx-deployment-volume.yaml
 >kubectl apply -f nginx-clusterip-service.yaml
 >kubectl apply -f nginx-ingress.yaml
+>
 >```
 
-
-<br>
+<br><br><br>
 
 아직 한 가지 더 할 일이 남았습니다.
 ```bash
-ubuntu@ip-172-31-20-30:~$ echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
+ubuntu@ip-172-31-23-60:~$ echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
 ```
-![](img/handson.png):명령어
+
+> 💻 명령어
 >```bash
 >echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
 >```
 
+<br>
 
-Nginx에서 보여줄 간단한 **index.html**파일을 하나 만들었습니다.
+Nginx에서 보여줄 간단한 **index.html**파일을 하나 만들었습니다.  
 혹시 PV의 경로가 다르다면 거기에 맞춰서 해주세요.
 
 * 이 실습은 PVC, PV, Pod의 동작을 살펴보기 위한 것입니다. HostPath유형의 사용상 주의사항은 [hostPath](https://kubernetes.io/ko/docs/concepts/storage/volumes/#hostpath)를 참고하세요.
 
-<br>
+<br><br><br>
 
 이제 브라우저에서 어떻게 나오나 볼까요?
 
@@ -255,86 +243,86 @@ http://my-nginx.info
 ![h:200](img/k8s_nginx_pvc.png)
 
 Pod의 파일시스템에도 위의 내용이 반영되어 있는지도 확인해보세요.
-
 ```bash
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl get pod
+ubuntu@ip-172-31-23-60:~$ kubectl get pods
 NAME                                   READY   STATUS    RESTARTS   AGE
-my-nginx-deployment-7cbbdb88f6-56r2d   1/1     Running   0          166m
-my-nginx-deployment-7cbbdb88f6-ppbwm   1/1     Running   0          166m
-my-nginx-deployment-7cbbdb88f6-whzp8   1/1     Running   0          166m
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl exec -it my-nginx-deployment-7cbbdb88f6-56r2d -- cat /usr/share/nginx/html/index.html
+my-nginx-deployment-7cbbdb88f6-8n59s   1/1     Running   0          116s
+my-nginx-deployment-7cbbdb88f6-jvvsm   1/1     Running   0          116s
+my-nginx-deployment-7cbbdb88f6-w44q8   1/1     Running   0          116s
+ubuntu@ip-172-31-23-60:~$ kubectl exec -it my-nginx-deployment-7cbbdb88f6-8n59s -- cat /usr/share/nginx/html/index.html
 <h1>Hello kubernetes</h1>
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl get pod
 >```
-
 >```bash
 >kubectl exec -it [POD-NAME] -- cat /usr/share/nginx/html/index.html
 >```
-- [POD-NAME] 에는 앞에서 조회한 POD중 하나의 이름을 넣어주세요.
+> [POD-NAME] 에는 앞에서 조회한 POD중 하나의 이름을 넣어주세요.
 
-<br>
+<br><br><br>
 
 아래와 같이 사용한 리소스들을 정리해주세요.
 
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f nginx-ingress.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-ingress.yaml
 ingress.networking.k8s.io "my-nginx-ingress" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f nginx-clusterip-service.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-clusterip-service.yaml
 service "nginx-clusterip-service" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f nginx-deployment-volume.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-deployment-volume.yaml
 deployment.apps "my-nginx-deployment" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f nginx-pvc.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-pvc.yaml
 persistentvolumeclaim "nginx-pvc" deleted
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl delete -f nginx-ingress.yaml
 >kubectl delete -f nginx-clusterip-service.yaml
 >kubectl delete -f nginx-deployment-volume.yaml
 >kubectl delete -f nginx-pvc.yaml
+>
 >```
 
 
-이번 실습은 여기까지 입니다.  ˘◡˘
+이번 실습은 여기까지 입니다.  ˘◡˘  
 끝~
 
-<br>
+<br><br><br><br><br>
 
 ### 보너스 실습
 
 앞의 실습까지 하고도 시간이 남으면 해보세요.
 
-도커 실습에서 사용한 **ToDo App**을 PVC를 사용해서 데이터를 저장하는 방법입니다.
+도커 실습에서 사용한 **ToDo App**을 PVC를 사용해서 데이터를 저장하는 방법입니다.  
 Docker Volumes 실습의 Kubernetes 버젼이라고 보시면 될 것 같아요.
 
-실습에 필요한 파일은 모두 **hands_on_files**아래에 있습니다.
+실습에 필요한 파일은 모두 **hands_on_files**아래에 있습니다.  
 아래 참고해서 해보세요.
 > PVC 생성 > Deployment 생성 > Service 생성 > Ingress 생성
 
 ```bash
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl apply -f todo-pvc.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f todo-pvc.yaml
 persistentvolumeclaim/todo-pvc created
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl apply -f todo-deployment-volume.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f todo-deployment-volume.yaml
 deployment.apps/todo-app-deployment created
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl apply -f todo-clusterip-service.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f todo-clusterip-service.yaml
 service/todo-clusterip-service created
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl apply -f todo-ingress.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f todo-ingress.yaml
 ingress.networking.k8s.io/todo-app-ingress created
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl apply -f todo-pvc.yaml
 >kubectl apply -f todo-deployment-volume.yaml
 >kubectl apply -f todo-clusterip-service.yaml
 >kubectl apply -f todo-ingress.yaml
+>
 >```
 
-<br>
+<br><br><br>
 
-ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-app.info***)를 추가합니다.
+ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-app.info***)를 추가합니다.  
 - Windows라면 **C:\Windows\System32\drivers\etc\hosts** 파일에,
 - Linux계열은 **/etc/hosts** 파일에 추가하면 됩니다.
 ```bash
@@ -347,59 +335,57 @@ ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-
 
 ![h:300](img/k8s_todo_ingress.png)
 
-<br>
+<br><br><br>
 
 그리고, 아래처럼 Pod들이 삭제와 생성을 반복해도 데이터는 사라지지 않고 유지될거예요.
-
 ```bash
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl get pod
+ubuntu@ip-172-31-23-60:~$ kubectl get pod
 NAME                                   READY   STATUS    RESTARTS   AGE
-todo-app-deployment-55464569cf-4zmfj   1/1     Running   0          9m38s
-todo-app-deployment-55464569cf-9ndh8   1/1     Running   0          9m38s
-todo-app-deployment-55464569cf-9psmb   1/1     Running   0          9m38s
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl delete pod --all
-pod "todo-app-deployment-55464569cf-4zmfj" deleted
-pod "todo-app-deployment-55464569cf-9ndh8" deleted
-pod "todo-app-deployment-55464569cf-9psmb" deleted
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl get pod
+todo-app-deployment-55464569cf-2stsv   1/1     Running   0          91s
+todo-app-deployment-55464569cf-4jdq8   1/1     Running   0          91s
+todo-app-deployment-55464569cf-zwh9z   1/1     Running   0          91s
+ubuntu@ip-172-31-23-60:~$ kubectl delete pod --all
+pod "todo-app-deployment-55464569cf-2stsv" deleted
+pod "todo-app-deployment-55464569cf-4jdq8" deleted
+pod "todo-app-deployment-55464569cf-zwh9z" deleted
+ubuntu@ip-172-31-23-60:~$ kubectl get pod
 NAME                                   READY   STATUS    RESTARTS   AGE
-todo-app-deployment-55464569cf-5wmcx   1/1     Running   0          9s
-todo-app-deployment-55464569cf-d8sx4   1/1     Running   0          9s
-todo-app-deployment-55464569cf-dlsrp   1/1     Running   0          9s
+todo-app-deployment-55464569cf-7gn5v   1/1     Running   0          8s
+todo-app-deployment-55464569cf-plnfd   1/1     Running   0          8s
+todo-app-deployment-55464569cf-x8l6h   1/1     Running   0          8s
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl get pod
 >```
-
 >```bash
 >kubectl delete pod --all
 >```
-
 >```bash
 >kubectl get pod
 >```
 
-<br>
+<br><br><br>
 
 다 해보셨으면, 깨끗이 정리하고 마칠게요.
 
 ```bash
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl delete -f todo-ingress.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f todo-ingress.yaml
 ingress.networking.k8s.io "todo-app-ingress" deleted
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl delete -f todo-clusterip-service.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f todo-clusterip-service.yaml
 service "todo-clusterip-service" deleted
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl delete -f todo-deployment-volume.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f todo-deployment-volume.yaml
 deployment.apps "todo-app-deployment" deleted
-ubuntu@ip-172-31-20-30:~/mspt3/hands_on_files$ kubectl delete -f todo-pvc.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f todo-pvc.yaml
 persistentvolumeclaim "todo-pvc" deleted
 ```
-![](img/handson.png):명령어
+> 💻 명령어
 >```bash
 >kubectl delete -f todo-ingress.yaml
 >kubectl delete -f todo-clusterip-service.yaml
 >kubectl delete -f todo-deployment-volume.yaml
 >kubectl delete -f todo-pvc.yaml
+>
 >```
 
 <br>
