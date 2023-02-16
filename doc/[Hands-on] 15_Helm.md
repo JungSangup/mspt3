@@ -3,13 +3,15 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
-- **Helm**
+**[1. Helm](#1-helm)**
 
 ---
 
-## Helm
+## 1. Helm
 
 자주 사용되는 Helm 명령어들을 실습해 보겠습니다.
 먼저 어떤 명령어들이 있는지 살펴볼까요?
