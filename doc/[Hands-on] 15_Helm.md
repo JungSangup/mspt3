@@ -7,16 +7,17 @@
 
 # Contents
 
-**[1. Helm](#1-helm)**
+**[1. Helm 기본 사용법 알아보기]()**  
+**[2. ToDo App. 실행해보기]()** 
 
 ---
 
-## 1. Helm
+## 1. Helm 기본 사용법 알아보기
 
-자주 사용되는 Helm 명령어들을 실습해 보겠습니다.
+자주 사용되는 Helm 명령어들을 실습해 보겠습니다.  
 먼저 어떤 명령어들이 있는지 살펴볼까요?
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm help
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm --help
 The Kubernetes package manager
 
 Common actions for Helm:
@@ -28,89 +29,144 @@ Common actions for Helm:
 
 Environment variables:
 
-| Name                               | Description                                                                                       |
-|------------------------------------|---------------------------------------------------------------------------------------------------|
-| $HELM_CACHE_HOME                   | set an alternative location for storing cached files.                                             |
-| $HELM_CONFIG_HOME                  | set an alternative location for storing Helm configuration.                                       |
-| $HELM_DATA_HOME                    | set an alternative location for storing Helm data.                                                |
-| $HELM_DEBUG                        | indicate whether or not Helm is running in Debug mode                                             |
-| $HELM_DRIVER                       | set the backend storage driver. Values are: configmap, secret, memory, sql.                       |
-| $HELM_DRIVER_SQL_CONNECTION_STRING | set the connection string the SQL storage driver should use.                                      |
-| $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                                   |
-| $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                                   |
-| $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                                        |
 ...생략...
-```
-> **명령어** : `helm --help`
 
----
+Helm stores cache, configuration, and data based on the following configuration order:
+
+- If a HELM_*_HOME environment variable is set, it will be used
+- Otherwise, on systems supporting the XDG base directory specification, the XDG variables will be used
+- When no other location is set a default location will be used based on the operating system
+
+By default, the default directories depend on the Operating System. The defaults are listed below:
+
+| Operating System | Cache Path                | Configuration Path             | Data Path               |
+|------------------|---------------------------|--------------------------------|-------------------------|
+| Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
+| macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
+| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm          |
+
+Usage:
+  helm [command]
+
+Available Commands:
+  completion  generate autocompletion scripts for the specified shell
+  create      create a new chart with the given name
+  dependency  manage a chart's dependencies
+
+... 생략 ...
+
+Use "helm [command] --help" for more information about a command.
+```
+
+> 💻 명령어
+>```bash
+>helm --help
+>```
+
+<br><br><br>
 
 **Common actions for Helm** 의 명령어들을 하나씩 해볼까요?
-
-첫 번째는 `helm search`인데, 그 전에 **helm repository**를 먼저 추가(add)해줘야 합니다.
-
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm repo add bitnami https://charts.bitnami.com/bitnami
+Common actions for Helm:
+
+- helm search:    search for charts
+- helm pull:      download a chart to your local directory to view
+- helm install:   upload the chart to Kubernetes
+- helm list:      list releases of charts
+```
+
+첫 번째는 `helm search`인데, 그 전에 **helm repository**를 먼저 추가(**add**)해줘야 합니다.
+```bash
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo add bitnami https://charts.bitnami.com/bitnami
 "bitnami" has been added to your repositories
 ```
-> **명령어** : `helm repo add bitnami https://charts.bitnami.com/bitnami`
+
+> 💻 명령어
+>```bash
+>helm repo add bitnami https://charts.bitnami.com/bitnami
+>```
+
+<br><br><br>
 
 Repository 목록도 볼 수 있습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm repo list
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo list
 NAME   	URL
 bitnami	https://charts.bitnami.com/bitnami
 ```
-> **명령어** : `helm repo list`
 
----
+> 💻 명령어
+>```bash
+>helm repo list
+>```
+
+<br><br><br>
 
 이제 검색(`helm search`) 가능합니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm search repo bitnami
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm search repo bitnami
 NAME                                        	CHART VERSION	APP VERSION  	DESCRIPTION
-bitnami/airflow                             	12.5.12      	2.3.2        	Apache Airflow is a tool to express and execute...
-bitnami/apache                              	9.1.13       	2.4.54       	Apache HTTP Server is an open-source HTTP serve...
-bitnami/argo-cd                             	3.4.4        	2.4.3        	Argo CD is a continuous delivery tool for Kuber...
-bitnami/argo-workflows                      	2.3.5        	3.3.8        	Argo Workflows is meant to orchestrate Kubernet...
-bitnami/aspnet-core                         	3.4.10       	6.0.6        	ASP.NET Core is an open-source framework for we...
-bitnami/cassandra                           	9.2.7        	4.0.4        	Apache Cassandra is an open source distributed ...
-bitnami/cert-manager                        	0.7.1        	1.8.2        	Cert Manager is a Kubernetes add-on to automate...
-bitnami/common                              	1.16.0       	1.16.0       	A Library Helm Chart for grouping common logic ...
-bitnami/concourse                           	1.3.7        	7.8.1        	Concourse is an automation system written in Go...
-bitnami/consul                              	10.7.3       	1.12.2       	HashiCorp Consul is a tool for discovering and ...
-bitnami/contour                             	8.0.4        	1.21.1       	Contour is an open source Kubernetes ingress co...
-bitnami/contour-operator                    	1.2.1        	1.20.1       	The Contour Operator extends the Kubernetes API...
+bitnami/airflow                             	14.0.11      	2.5.1        	Apache Airflow is a tool to express and execute...
+bitnami/apache                              	9.2.15       	2.4.55       	Apache HTTP Server is an open-source HTTP serve...
+bitnami/appsmith                            	0.1.12       	1.9.7        	Appsmith is an open source platform for buildin...
+bitnami/argo-cd                             	4.4.9        	2.6.1        	Argo CD is a continuous delivery tool for Kuber...
+bitnami/argo-workflows                      	5.1.6        	3.4.5        	Argo Workflows is meant to orchestrate Kubernet...
+bitnami/aspnet-core                         	4.0.5        	7.0.3        	ASP.NET Core is an open-source framework for we...
+bitnami/cassandra                           	10.0.2       	4.1.0        	Apache Cassandra is an open source distributed ...
+bitnami/cert-manager                        	0.9.0        	1.11.0       	cert-manager is a Kubernetes add-on to automate...
+bitnami/clickhouse                          	3.0.1        	23.1.3       	ClickHouse is an open-source column-oriented OL...
+bitnami/common                              	2.2.3        	2.2.3        	A Library Helm Chart for grouping common logic ...
+bitnami/concourse                           	2.0.3        	7.9.0        	Concourse is an automation system written in Go...
+bitnami/consul                              	10.9.11      	1.14.4       	HashiCorp Consul is a tool for discovering and ...
+bitnami/contour                             	10.2.2       	1.23.3       	Contour is an open source Kubernetes ingress co...
+bitnami/contour-operator                    	3.0.3        	1.23.0       	The Contour Operator extends the Kubernetes API...
 ...생략...
 ```
-> **명령어** : `helm search repo bitnami`
+
+> 💻 명령어
+>```bash
+>helm search repo bitnami
+>```
+
+<br><br><br>
 
 Wordpress를 한 번 찾아볼까요?
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm search repo wordpress
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm search repo wordpress
 NAME                   	CHART VERSION	APP VERSION	DESCRIPTION
-bitnami/wordpress      	15.0.7       	6.0.0      	WordPress is the world's most popular blogging ...
-bitnami/wordpress-intel	2.0.7        	6.0.0      	WordPress for Intel is the most popular bloggin...
+bitnami/wordpress      	15.2.42      	6.1.1      	WordPress is the world's most popular blogging ...
+bitnami/wordpress-intel	2.1.31       	6.1.1      	DEPRECATED WordPress for Intel is the most popu...
 ```
-> **명령어** : `helm search repo wordpress`
 
----
+> 💻 명령어
+>```bash
+>helm search repo wordpress
+>```
 
-다음은 `helm pull` 명령어 입니다.
+<br><br><br>
+
+다음은 `helm pull` 명령어 입니다.  
 **Helm repository**에 등록되어 있는 Helm chart를 다운로드(pull)하는 명령어 입니다.
-
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm pull bitnami/wordpress --version 15.0.7
-ubuntu@ip-10-0-1-161:~$ ls wordpress*
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm pull bitnami/wordpress --version 15.0.7
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ ls wordpress*
 wordpress-15.0.7.tgz
 ```
-> **명령어** : `helm pull bitnami/wordpress --version 15.0.7`
 
-tar 파일로 받아지네요.
+> 💻 명령어
+>```bash
+>helm pull bitnami/wordpress --version 15.0.7
+>```
+>```bash
+>ls wordpress*
+>```
 
+<br><br><br>
+
+tar 파일로 받아지네요.  
 압축도 풀어볼까요?
 ```bash
-ubuntu@ip-10-0-1-161:~$ tar -xvf wordpress-15.0.7.tgz
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ tar -xvf wordpress-15.0.7.tgz
 wordpress/Chart.yaml
 wordpress/Chart.lock
 wordpress/values.yaml
@@ -119,17 +175,19 @@ wordpress/templates/NOTES.txt
 wordpress/templates/_helpers.tpl
 wordpress/templates/config-secret.yaml
 wordpress/templates/deployment.yaml
-wordpress/templates/externaldb-secrets.yaml
-wordpress/templates/extra-list.yaml
 ...생략...
 ```
-> **명령어** : `tar -xvf wordpress-15.0.7.tgz`
 
----
+> 💻 명령어
+>```bash
+>tar -xvf wordpress-15.0.7.tgz
+>```
+
+<br><br><br>
 
 어떤 파일들이 있는지 한 번 살펴보겠습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ tree ./wordpress
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ tree ./wordpress
 ./wordpress
 ├── Chart.lock
 ├── Chart.yaml
@@ -146,37 +204,182 @@ ubuntu@ip-10-0-1-161:~$ tree ./wordpress
 │   │   │   ├── _ingress.tpl
 │   │   │   ├── _labels.tpl
 │   │   │   ├── _names.tpl
+│   │   │   ├── _secrets.tpl
+│   │   │   ├── _storage.tpl
+│   │   │   ├── _tplvalues.tpl
+│   │   │   ├── _utils.tpl
+│   │   │   ├── _warnings.tpl
+│   │   │   └── validations
+│   │   │       ├── _cassandra.tpl
+│   │   │       ├── _mariadb.tpl
+│   │   │       ├── _mongodb.tpl
+│   │   │       ├── _mysql.tpl
+│   │   │       ├── _postgresql.tpl
+│   │   │       ├── _redis.tpl
+│   │   │       └── _validations.tpl
+│   │   └── values.yaml
+│   ├── mariadb
+│   │   ├── Chart.lock
+│   │   ├── Chart.yaml
+│   │   ├── README.md
+│   │   ├── charts
+│   │   │   └── common
+│   │   │       ├── Chart.yaml
+│   │   │       ├── README.md
+│   │   │       ├── templates
+│   │   │       │   ├── _affinities.tpl
+│   │   │       │   ├── _capabilities.tpl
+│   │   │       │   ├── _errors.tpl
+│   │   │       │   ├── _images.tpl
+│   │   │       │   ├── _ingress.tpl
+│   │   │       │   ├── _labels.tpl
+│   │   │       │   ├── _names.tpl
+│   │   │       │   ├── _secrets.tpl
+│   │   │       │   ├── _storage.tpl
+│   │   │       │   ├── _tplvalues.tpl
+│   │   │       │   ├── _utils.tpl
+│   │   │       │   ├── _warnings.tpl
+│   │   │       │   └── validations
+│   │   │       │       ├── _cassandra.tpl
+│   │   │       │       ├── _mariadb.tpl
+│   │   │       │       ├── _mongodb.tpl
+│   │   │       │       ├── _mysql.tpl
+│   │   │       │       ├── _postgresql.tpl
+│   │   │       │       ├── _redis.tpl
+│   │   │       │       └── _validations.tpl
+│   │   │       └── values.yaml
+│   │   ├── templates
+│   │   │   ├── NOTES.txt
+│   │   │   ├── _helpers.tpl
+│   │   │   ├── extra-list.yaml
+│   │   │   ├── networkpolicy-egress.yaml
+│   │   │   ├── primary
+│   │   │   │   ├── configmap.yaml
+│   │   │   │   ├── initialization-configmap.yaml
+│   │   │   │   ├── networkpolicy-ingress.yaml
+│   │   │   │   ├── pdb.yaml
+│   │   │   │   ├── statefulset.yaml
+│   │   │   │   └── svc.yaml
+│   │   │   ├── prometheusrules.yaml
+│   │   │   ├── role.yaml
+│   │   │   ├── rolebinding.yaml
+│   │   │   ├── secondary
+│   │   │   │   ├── configmap.yaml
+│   │   │   │   ├── networkpolicy-ingress.yaml
+│   │   │   │   ├── pdb.yaml
+│   │   │   │   ├── statefulset.yaml
+│   │   │   │   └── svc.yaml
+│   │   │   ├── secrets.yaml
+│   │   │   ├── serviceaccount.yaml
+│   │   │   └── servicemonitor.yaml
+│   │   ├── values.schema.json
+│   │   └── values.yaml
+│   └── memcached
+│       ├── Chart.lock
+│       ├── Chart.yaml
+│       ├── README.md
+│       ├── charts
+│       │   └── common
+│       │       ├── Chart.yaml
+│       │       ├── README.md
+│       │       ├── templates
+│       │       │   ├── _affinities.tpl
+│       │       │   ├── _capabilities.tpl
+│       │       │   ├── _errors.tpl
+│       │       │   ├── _images.tpl
+│       │       │   ├── _ingress.tpl
+│       │       │   ├── _labels.tpl
+│       │       │   ├── _names.tpl
+│       │       │   ├── _secrets.tpl
+│       │       │   ├── _storage.tpl
+│       │       │   ├── _tplvalues.tpl
+│       │       │   ├── _utils.tpl
+│       │       │   ├── _warnings.tpl
+│       │       │   └── validations
+│       │       │       ├── _cassandra.tpl
+│       │       │       ├── _mariadb.tpl
+│       │       │       ├── _mongodb.tpl
+│       │       │       ├── _mysql.tpl
+│       │       │       ├── _postgresql.tpl
+│       │       │       ├── _redis.tpl
+│       │       │       └── _validations.tpl
+│       │       └── values.yaml
+│       ├── templates
+│       │   ├── NOTES.txt
+│       │   ├── _helpers.tpl
+│       │   ├── deployment.yaml
+│       │   ├── extra-list.yaml
+│       │   ├── hpa.yaml
+│       │   ├── metrics-svc.yaml
+│       │   ├── pdb.yaml
+│       │   ├── secrets.yaml
+│       │   ├── service.yaml
+│       │   ├── serviceaccount.yaml
+│       │   ├── servicemonitor.yaml
+│       │   └── statefulset.yaml
+│       └── values.yaml
+├── templates
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── config-secret.yaml
+│   ├── deployment.yaml
+│   ├── externaldb-secrets.yaml
+│   ├── extra-list.yaml
+│   ├── hpa.yaml
+│   ├── httpd-configmap.yaml
+│   ├── ingress.yaml
+│   ├── metrics-svc.yaml
+│   ├── networkpolicy-backend-ingress.yaml
+│   ├── networkpolicy-egress.yaml
+│   ├── networkpolicy-ingress.yaml
+│   ├── pdb.yaml
+│   ├── postinit-configmap.yaml
+│   ├── pvc.yaml
+│   ├── secrets.yaml
+│   ├── serviceaccount.yaml
+│   ├── servicemonitor.yaml
+│   ├── svc.yaml
+│   └── tls-secrets.yaml
+├── values.schema.json
+└── values.yaml
+
+19 directories, 134 files
 ```
-> **명령어** : `tree ./wordpress`
 
+> 💻 명령어
+>```bash
+>tree ./wordpress
+>```
 
-- `tree` 명령어는 리눅스에서 디렉토리/파일구조를 볼 수 있는 명령어 입니다. 혹시 안되면 아래와 같이 **tree**를 설치하고 해주세요.
-> **명령어** : `sudo apt-get update`
-> **명령어** : `sudo apt-get install tree`
-
----
+<br><br><br>
 
 이제 설치(`helm install`)를 진행해 보겠습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm repo update
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo update
 Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
 ```
-> **명령어** : `helm repo update`
+
+> 💻 명령어
+>```bash
+>helm repo update
+>```
+
+<br><br><br>
 
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm install my-wordpress bitnami/wordpress
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm install my-wordpress bitnami/wordpress
 NAME: my-wordpress
-LAST DEPLOYED: Thu Jul  7 16:28:16 2022
+LAST DEPLOYED: Thu Feb 16 08:08:04 2023
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
 CHART NAME: wordpress
-CHART VERSION: 15.0.7
-APP VERSION: 6.0.0
+CHART VERSION: 15.2.42
+APP VERSION: 6.1.1
 
 ** Please be patient while the chart is being deployed **
 
@@ -187,16 +390,11 @@ Your WordPress site can be accessed through the following DNS name from within y
 To access your WordPress site from outside the cluster follow the steps below:
 
 1. Get the WordPress URL by running these commands:
-```
 
----
-
-앞장에서 계속
-```bash
   NOTE: It may take a few minutes for the LoadBalancer IP to be available.
         Watch the status with: 'kubectl get svc --namespace default -w my-wordpress'
 
-   export SERVICE_IP=$(kubectl get svc --namespace default my-wordpress --include "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+   export SERVICE_IP=$(kubectl get svc --namespace default my-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
    echo "WordPress URL: http://$SERVICE_IP/"
    echo "WordPress Admin URL: http://$SERVICE_IP/admin"
 
@@ -207,66 +405,87 @@ To access your WordPress site from outside the cluster follow the steps below:
   echo Username: user
   echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
 ```
-> **명령어** : `helm install my-wordpress bitnami/wordpress`
 
+> 💻 명령어
+>```bash
+>helm install my-wordpress bitnami/wordpress
+>```
 
-설치된 Helm chart는 **Release**라고 합니다.
+<br><br><br>
+
+설치된 Helm chart는 **[Release](https://helm.sh/ko/docs/glossary/#release)**라고 합니다.  
 **Release**의 목록은 `helm list`명령으로 조회할 수 있구요.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm list
-NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART           	APP VERSION
-my-wordpress	default  	1       	2022-07-07 16:28:16.316510487 +0000 UTC	deployed	wordpress-15.0.7	6.0.0
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm list
+NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART            	APP VERSION
+my-wordpress	default  	1       	2023-02-16 08:08:04.880473857 +0000 UTC	deployed	wordpress-15.2.42	6.1.1
 ```
-> **명령어** : `helm list`
 
----
+> 💻 명령어
+>```bash
+>helm list
+>```
+
+<br><br><br>
 
 쿠버네티스 명령어로 어떤 리소스들이 생성됐나 볼까요?
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl get all
-NAME                                READY   STATUS    RESTARTS   AGE
-pod/my-wordpress-56bff78c5d-szzbg   1/1     Running   0          3m40s
-pod/my-wordpress-mariadb-0          1/1     Running   0          3m39s
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get all
+NAME                               READY   STATUS    RESTARTS   AGE
+pod/my-wordpress-5786598c5-5fqln   1/1     Running   0          2m59s
+pod/my-wordpress-mariadb-0         1/1     Running   0          2m59s
 
-NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
-service/kubernetes             ClusterIP      10.96.0.1       <none>        443/TCP                      3d5h
-service/my-wordpress           LoadBalancer   10.103.84.122   <pending>     80:30798/TCP,443:31520/TCP   3m40s
-service/my-wordpress-mariadb   ClusterIP      10.110.56.55    <none>        3306/TCP                     3m40s
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+service/kubernetes             ClusterIP      10.96.0.1        <none>        443/TCP                      4d17h
+service/my-wordpress           LoadBalancer   10.109.136.241   <pending>     80:30606/TCP,443:32687/TCP   2m59s
+service/my-wordpress-mariadb   ClusterIP      10.111.195.166   <none>        3306/TCP                     2m59s
 
 NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/my-wordpress   1/1     1            1           3m40s
+deployment.apps/my-wordpress   1/1     1            1           2m59s
 
-NAME                                      DESIRED   CURRENT   READY   AGE
-replicaset.apps/my-wordpress-56bff78c5d   1         1         1       3m40s
+NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/my-wordpress-5786598c5   1         1         1       2m59s
 
 NAME                                    READY   AGE
-statefulset.apps/my-wordpress-mariadb   1/1     3m40s
+statefulset.apps/my-wordpress-mariadb   1/1     2m59s
 ```
-> **명령어** : `kubectl get all`
+
+> 💻 명령어
+>```bash
+>kubectl get all
+>```
+
+<br><br><br>
 
 와우~ 뭔가 Wordpress 소프트웨어에 필요한 모든게 한 번에 설치가 된 것 같네요. 패키지로...
 
 삭제도 한 번에 가능합니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm uninstall my-wordpress
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm uninstall my-wordpress
 release "my-wordpress" uninstalled
 ```
-> **명령어** : `helm uninstall my-wordpress`
 
----
+> 💻 명령어
+>```bash
+>kubectl get all
+>```
 
-우리가 익숙한 **ToDo App**을 이용해서 좀 더 자세히 볼게요.
+<br><br><br><br><br>
+
+## 2. ToDo App. 실행해보기
+
+우리가 익숙한 **ToDo App**을 이용해서 좀 더 자세히 볼게요.  
 차트는 아래와 같은 구조를 가지고 있습니다. 우리가 배운 여러가지가 다 들어있네요.
 
 ![h:500](img/helm_todo_app.png)
 
----
+<br><br><br>
 
-설치는 간단합니다. 명령어 하나면 끝.
+설치는 간단합니다. 명령어 하나면 끝. （°o°；）
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 NAME: my-todo-app
-LAST DEPLOYED: Tue Feb  7 05:24:08 2023
+LAST DEPLOYED: Thu Feb 16 08:19:57 2023
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
@@ -275,26 +494,37 @@ NOTES:
 1. Get the application URL by running these commands:
   http://todo-app.info/
 ```
-> **명령어** : `helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
 
-위의 방법은 Helm chart 패키지 파일의 URL(깃헙에 올려놓은 파일)을 직접 지정해서 설치한 것입니다.
+> 💻 명령어
+>```bash
+>helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+>```
+
+<br>
+
+위의 방법은 Helm chart 패키지 파일의 URL(깃헙에 올려놓은 파일)을 직접 지정해서 설치한 것입니다.  
 위의 방법 외에도 아래와 같은 다양한 방법으로 설치 가능합니다. 
+> - `helm install my-todo-app ./todo-app-1.0.0.tgz` -> 로컬 경로의 tgz파일(패키징 된 Helm chart)
+> - `helm install my-todo-app ./todo-app` -> 로컬 경로의 차트 디렉토리  
+- **hands_on_files** 아래에 위의 두 가지 방법을 위한 파일/디렉토리도 준비해 놓았습니다.
 
-> **명령어** : `helm install my-todo-app ./todo-app-1.0.0.tgz` -> 로컬 경로의 tgz파일(패키징 된 Helm chart)
-> **명령어** : `helm install my-todo-app ./todo-app` -> 로컬 경로의 차트 디렉토리
-> **hands_on_files** 아래에 위의 두 가지 방법을 위한 파일/디렉토리도 준비해 놓았습니다.
+<br><br><br>
 
 우선 이 Helm release는 Uninstall을 할게요. 뒤에 다른 방법으로 다시 설치하겠습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm uninstall my-todo-app
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm uninstall my-todo-app
 release "my-todo-app" uninstalled
 ```
-> **명령어** : `helm uninstall my-todo-app`
 
----
+> 💻 명령어
+>```bash
+>helm uninstall my-todo-app
+>```
 
-이번에는 구성을 조금 달리해서 설치하겠습니다.
-여러분의 **Docker private repository**에 올려놓은 이미지를 사용하도록 하고, 이미지 pull을 위해서 자격증명을 사용하도록 할게요.
+<br><br><br>
+
+이번에는 구성을 조금 달리해서 설치하겠습니다.  
+여러분의 **Docker private repository**에 올려놓은 이미지를 사용하도록 하고, 이미지 pull을 위해서 **자격증명**을 사용하도록 할게요.
 
 역시 아래와 같이 간단하게 실행할 수 있습니다.
 ```bash
@@ -309,16 +539,26 @@ NOTES:
 1. Get the application URL by running these commands:
   http://todo-app.info/
 ```
-> **명령어** : `helm install my-todo-app --set image.repository=[USER-NAME]/todo-app --set imageCredentials.create=true --set imageCredentials.username=[USER-NAME] --set imageCredentials.password=[PASSWORD] https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+
+> 💻 명령어
+>```bash
+>helm install my-todo-app \
+>     --set image.repository=[USER-NAME]/todo-app \
+>     --set imageCredentials.create=true \
+>     --set imageCredentials.username=[USER-NAME] \
+>     --set imageCredentials.password=[PASSWORD] \
+>     https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+>```
 > [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
 
-설치 시점에 아래 키-값 들을 변경해서 적용한 것입니다.
+설치 시점에 아래 키-값 들을 변경해서 적용한 것입니다.  
+image.repository는 여러분의 Private repository에서 pull해서 사용하도록 하고, imageCredentials 값들을 이용해서 도커허브 자격증명을 위햔 Secret을 생성합니다.
 - image.repository=[USER-NAME]/todo-app
 - imageCredentials.create=true
 - imageCredentials.username=[USER-NAME]
 - imageCredentials.password=[PASSWORD]
 
----
+<br><br><br>
 
 브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보세요.
 

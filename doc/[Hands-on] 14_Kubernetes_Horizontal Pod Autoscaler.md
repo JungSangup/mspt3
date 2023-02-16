@@ -22,7 +22,7 @@ Horizontal Pod Autoscaler(HPA)를 이용하여 자동으로 Pod의 개수를 조
 
 정상적으로 Addon이 Enable된 경우 아래와 같이 확인 가능합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl top node
+ubuntu@ip-172-31-23-60:~$ kubectl top node
 NAME              CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 ip-172-31-23-60   121m         6%     1921Mi          49%
 ```
@@ -36,7 +36,7 @@ ip-172-31-23-60   121m         6%     1921Mi          49%
 
 이제 준비가 됐으면, 다음 명령어를 실행하여 간단한 테스트용 Pod 를 준비합니다.
 ```yaml
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
 deployment.apps/php-apache created
 service/php-apache created
 ```
@@ -54,7 +54,7 @@ service/php-apache created
 명령어는 다음과 같습니다.  
 CPU 사용량을 50%로 유지하기 위해서 Pod의 개수를 1 에서 10 사이로 조정하라는 의미입니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+ubuntu@ip-172-31-23-60:~$ kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
 horizontalpodautoscaler.autoscaling/php-apache autoscaled
 ```
 
@@ -67,7 +67,7 @@ horizontalpodautoscaler.autoscaling/php-apache autoscaled
 
 잘 만들어졌나 볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get hpa
+ubuntu@ip-172-31-23-60:~$ kubectl get hpa
 NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 php-apache   Deployment/php-apache   0%/50%    1         10        1          39s
 ```
@@ -87,7 +87,7 @@ php-apache   Deployment/php-apache   0%/50%    1         10        1          39
 시스템에 사용자가 늘어난 상황을 비슷하게 만든거라고 보시면 됩니다.
 
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl run -it load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+ubuntu@ip-172-31-23-60:~$ kubectl run -it load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
 If you don't see a command prompt, try pressing enter.
 OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!
 ```
@@ -135,9 +135,9 @@ Ctrl + c로 중지하시면 됩니다.
 
 마지막으로 사용된 HPA와 Pod를 삭제하고 마치겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl delete hpa php-apache
+ubuntu@ip-172-31-23-60:~$ kubectl delete hpa php-apache
 horizontalpodautoscaler.autoscaling "php-apache" deleted
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl delete -f https://k8s.io/examples/application/php-apache.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f https://k8s.io/examples/application/php-apache.yaml
 deployment.apps "php-apache" deleted
 service "php-apache" deleted
 ```
