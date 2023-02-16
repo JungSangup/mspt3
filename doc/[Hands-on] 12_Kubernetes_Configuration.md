@@ -458,35 +458,40 @@ spec:
                 port:
                   number: 3000
 ```
-> 파일명은 **todo-all.yaml**로 합니다.
-> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요. (58번째 라인 -> Deployment의 .spec.containers[0].image 입니다.)
+> 파일명은 **todo-all.yaml**로 합니다.  
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요. (52번째 라인 -> Deployment의 .spec.containers[0].image 입니다.)  
+> - 만약 [USER-NAME]/todo-app:1.0.0가 준비가 안되어있다면, **rogallo/101-todo-app:1.0.0**을 사용해주세요.
 
-파일이 좀 길죠?
+<br>
+
+파일이 좀 길죠?  
 교재 **hands_on_files**디렉토리에 [todo-all.yaml](https://raw.githubusercontent.com/JungSangup/mspt3/main/hands_on_files/todo-all.yaml)이라는 이름으로 미리 만들어 놓았으니, 그걸 사용하셔도 됩니다.
 
 > 하나의 yaml파일 안에 여러개의 K8s [Manifest](https://kubernetes.io/docs/reference/glossary/?fundamental=true#term-manifest)를 정의할때는, `---`를 구분자로 해서 여러개를 담으면 됩니다.
 
-<br>
+<br><br><br>
 
 생성하기 전에 한 가지 더 해줘야할 일이 있습니다.
+이 과정은 Public repository의 이미지인 **rogallo/101-todo-app:1.0.0**를 사용하는 경우는 생략해도 됩니다.
 
-image([USER-NAME]/todo-app:1.0.0)를 여러분의 private repository에서 pull해야하기 때문에, **자격증명**을 해야합니다.
+컨테이너 이미지([USER-NAME]/todo-app:1.0.0)를 여러분의 private repository에서 pull해야하기 때문에, **자격증명**을 해야합니다.  
 여러가지 방법이 있지만, 간단하게 [커맨드 라인에서 자격 증명을 통하여 시크릿 생성하기](https://kubernetes.io/ko/docs/tasks/configure-pod-container/pull-image-private-registry/#%EC%BB%A4%EB%A7%A8%EB%93%9C-%EB%9D%BC%EC%9D%B8%EC%97%90%EC%84%9C-%EC%9E%90%EA%B2%A9-%EC%A6%9D%EB%AA%85%EC%9D%84-%ED%86%B5%ED%95%98%EC%97%AC-%EC%8B%9C%ED%81%AC%EB%A6%BF-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)방법으로 해볼게요.
 
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=rogallo --docker-password=XXXXXX
+ubuntu@ip-172-31-23-60:~$ kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=rogallo --docker-password=XXXXXX
 secret/regcred created
 ```
+
 > 💻 명령어
 >```bash
 >kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=[USER-NAME] --docker-password=[PASSWORD]
 >```
-- [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
+> [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
 
-이것도 많이 쓰이는 Secret의 용도 중 하나입니다.
+이것도 많이 쓰이는 Secret의 용도 중 하나입니다.  
 조회도 한 번 해보세요.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl describe secrets regcred
+ubuntu@ip-172-31-23-60:~$ kubectl describe secrets regcred
 Name:         regcred
 Namespace:    default
 Labels:       <none>
@@ -503,95 +508,107 @@ Data
 >kubectl describe secrets regcred
 >```
 
-<br>
+<br><br><br>
 
-이제 ToDo App을 생성해볼게요.
+이제 ToDo App을 생성해볼게요.  
 생성은 아래처럼 한 번에 됩니다.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl apply -f todo-all.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl apply -f todo-all.yaml
 secret/todo-secret created
 configmap/todo-config created
 service/todo-app-svc created
 deployment.apps/todo-app-deployment created
 ingress.networking.k8s.io/todo-app-ingress created
 ```
+
 > 💻 명령어
 >```bash
 >kubectl apply -f todo-all.yaml
 >```
 
+<br><br><br>
 
-앞서 MySQL에서 한 것과 비슷하게 ConfigMap, Secret, Pod도 확인해보세요.
+앞서 MySQL에서 한 것과 비슷하게 ConfigMap, Secret, Pod도 확인해보세요.  
 명령어만 알려드릴게요.
 > 💻 명령어
 >```bash
 >kubectl describe configmaps todo-config
 >```
-
 >```bash
 >kubectl describe secrets todo-secret
 >```
-
+>```bash
+>kubectl get pods
+>```
 >```bash
 >kubectl describe pod [POD-NAME]
 >```
-- [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+> [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
 
-<br>
+<br><br><br>
 
 POD의 환경변수를 확인하려면 아래처럼도 가능합니다.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl exec todo-app-deployment-df65dc8b6-dmv2m -- env
+ubuntu@ip-172-31-23-60:~$ kubectl exec -it todo-app-deployment-66764fc999-2b4zp -- env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=todo-app-deployment-df65dc8b6-dmv2m
+HOSTNAME=todo-app-deployment-66764fc999-2b4zp
 TERM=xterm
-MYSQL_HOST=todo-mysql-svc.default.svc.cluster.local
-MYSQL_DB=todos
 MYSQL_USER=root
 MYSQL_PASSWORD=secret
-TODO_MYSQL_SVC_PORT_3306_TCP_PROTO=tcp
-TODO_MYSQL_SVC_PORT_3306_TCP_PORT=3306
-TODO_MYSQL_SVC_PORT_3306_TCP_ADDR=10.105.99.97
-TODO_APP_SVC_SERVICE_PORT=3000
-TODO_APP_SVC_PORT=tcp://10.98.198.46:3000
+MYSQL_HOST=todo-mysql-svc.default.svc.cluster.local
+MYSQL_DB=todos
+TODO_APP_SVC_PORT_3000_TCP_ADDR=10.99.52.118
+KUBERNETES_SERVICE_PORT_HTTPS=443
+TODO_MYSQL_SVC_SERVICE_HOST=10.108.50.108
 TODO_MYSQL_SVC_SERVICE_PORT=3306
-TODO_APP_SVC_PORT_3000_TCP=tcp://10.98.198.46:3000
+TODO_MYSQL_SVC_PORT_3306_TCP_ADDR=10.108.50.108
+TODO_APP_SVC_PORT_3000_TCP=tcp://10.99.52.118:3000
+TODO_MYSQL_SVC_PORT_3306_TCP_PORT=3306
+TODO_APP_SVC_SERVICE_PORT=3000
 TODO_APP_SVC_PORT_3000_TCP_PORT=3000
-TODO_APP_SVC_PORT_3000_TCP_ADDR=10.98.198.46
-TODO_MYSQL_SVC_SERVICE_HOST=10.105.99.97
-TODO_MYSQL_SVC_PORT=tcp://10.105.99.97:3306
-TODO_MYSQL_SVC_PORT_3306_TCP=tcp://10.105.99.97:3306
-TODO_APP_SVC_SERVICE_HOST=10.98.198.46
+KUBERNETES_PORT_443_TCP_PORT=443
+TODO_APP_SVC_PORT=tcp://10.99.52.118:3000
+KUBERNETES_PORT=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+TODO_MYSQL_SVC_PORT=tcp://10.108.50.108:3306
+TODO_MYSQL_SVC_PORT_3306_TCP=tcp://10.108.50.108:3306
+TODO_MYSQL_SVC_PORT_3306_TCP_PROTO=tcp
+TODO_APP_SVC_SERVICE_HOST=10.99.52.118
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
 TODO_APP_SVC_PORT_3000_TCP_PROTO=tcp
-
-...생략...
-
+KUBERNETES_SERVICE_HOST=10.96.0.1
+KUBERNETES_SERVICE_PORT=443
+NODE_VERSION=10.24.1
+YARN_VERSION=1.22.5
+HOME=/root
 ```
+
 > 💻 명령어
 >```bash
 >kubectl exec -it [POD-NAME] -- env
 >```
-- [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
+> [POD-NAME] 에는 ToDo App POD중 하나의 이름을 넣어주세요.
 
 - [kubectl exec](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec) 명령어의 사용방법은 [동작중인 컨테이너의 셸에 접근하기](https://kubernetes.io/ko/docs/tasks/debug/debug-application/get-shell-running-container/)를 참고하세요.
 
-<br>
+<br><br><br>
 
 브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
 
 ![h:400](img/k8s_todo_ingress.png)
 
-<br>
+<br><br><br>
 
 MySQL DB의 테이블에 잘 저장됐는지도 확인해보세요.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl exec -it todo-mysql-deployment-78dd847547-xcld4 -- mysql -p todos
+ubuntu@ip-172-31-23-60:~$ kubectl exec -it todo-mysql-deployment-78dd847547-2b7ns -- mysql -p todos
 Enter password:
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 11
+Your MySQL connection id is 9
 Server version: 5.7.41 MySQL Community Server (GPL)
 
 Copyright (c) 2000, 2023, Oracle and/or its affiliates.
@@ -606,41 +623,42 @@ mysql> select * from todo_items;
 +--------------------------------------+-----------------------+-----------+
 | id                                   | name                  | completed |
 +--------------------------------------+-----------------------+-----------+
-| a5964fe2-4992-4a4d-ac25-d44503a4013b | 엠에스피티쓰리            |         0 |
-| 0e7219c5-5843-40f3-beb0-9fc7875b118a | mspt3                 |         0 |
+| 4f7c3980-640d-4bec-a04a-467a55fa1de5 | 엠에스피티쓰리            |         0 |
+| 2f6da7dd-859d-4a47-8991-908e239cc1b8 | mspt3                 |         0 |
 +--------------------------------------+-----------------------+-----------+
-2 rows in set (0.00 sec)
+2 rows in set (0.01 sec)
 
 mysql> exit;
 Bye
 ```
+
 > 💻 명령어
 >```bash
 >kubectl exec -it [POD-NAME] -- mysql -p todos
 >```
-- [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
 
-<br>
+<br><br><br>
 
 이것저것 확인해보시고, 마지막은 생성된 리소스들을 정리해주세요.
 ```bash
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f todo-all.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f todo-all.yaml
 secret "todo-secret" deleted
 configmap "todo-config" deleted
 service "todo-app-svc" deleted
 deployment.apps "todo-app-deployment" deleted
 ingress.networking.k8s.io "todo-app-ingress" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete secrets regcred
+ubuntu@ip-172-31-23-60:~$ kubectl delete secret regcred
 secret "regcred" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-deployment.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f mysql-deployment.yaml
 deployment.apps "todo-mysql-deployment" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-clusterip-service.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f mysql-clusterip-service.yaml
 service "todo-mysql-svc" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-pvc.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f mysql-pvc.yaml
 persistentvolumeclaim "mysql-pvc" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-secret.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f mysql-secret.yaml
 secret "mysql-secret" deleted
-ubuntu@ip-172-31-20-30:~$ kubectl delete -f mysql-configmap.yaml
+ubuntu@ip-172-31-23-60:~$ kubectl delete -f mysql-configmap.yaml
 configmap "mysql-config" deleted
 ```
 > 💻 명령어
@@ -652,6 +670,7 @@ configmap "mysql-config" deleted
 >kubectl delete -f mysql-pvc.yaml
 >kubectl delete -f mysql-secret.yaml
 >kubectl delete -f mysql-configmap.yaml
+>
 >```
 
 <br>
