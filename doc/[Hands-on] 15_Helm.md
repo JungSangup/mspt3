@@ -17,7 +17,7 @@
 자주 사용되는 Helm 명령어들을 실습해 보겠습니다.  
 먼저 어떤 명령어들이 있는지 살펴볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm --help
+ubuntu@ip-172-31-23-60:~$ helm --help
 The Kubernetes package manager
 
 Common actions for Helm:
@@ -77,7 +77,7 @@ Common actions for Helm:
 
 첫 번째는 `helm search`인데, 그 전에 **helm repository**를 먼저 추가(**add**)해줘야 합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo add bitnami https://charts.bitnami.com/bitnami
+ubuntu@ip-172-31-23-60:~$ helm repo add bitnami https://charts.bitnami.com/bitnami
 "bitnami" has been added to your repositories
 ```
 
@@ -90,7 +90,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo add bitnami https://cha
 
 Repository 목록도 볼 수 있습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo list
+ubuntu@ip-172-31-23-60:~$ helm repo list
 NAME   	URL
 bitnami	https://charts.bitnami.com/bitnami
 ```
@@ -104,7 +104,7 @@ bitnami	https://charts.bitnami.com/bitnami
 
 이제 검색(`helm search`) 가능합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm search repo bitnami
+ubuntu@ip-172-31-23-60:~$ helm search repo bitnami
 NAME                                        	CHART VERSION	APP VERSION  	DESCRIPTION
 bitnami/airflow                             	14.0.11      	2.5.1        	Apache Airflow is a tool to express and execute...
 bitnami/apache                              	9.2.15       	2.4.55       	Apache HTTP Server is an open-source HTTP serve...
@@ -132,7 +132,7 @@ bitnami/contour-operator                    	3.0.3        	1.23.0       	The Con
 
 Wordpress를 한 번 찾아볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm search repo wordpress
+ubuntu@ip-172-31-23-60:~$ helm search repo wordpress
 NAME                   	CHART VERSION	APP VERSION	DESCRIPTION
 bitnami/wordpress      	15.2.42      	6.1.1      	WordPress is the world's most popular blogging ...
 bitnami/wordpress-intel	2.1.31       	6.1.1      	DEPRECATED WordPress for Intel is the most popu...
@@ -148,8 +148,8 @@ bitnami/wordpress-intel	2.1.31       	6.1.1      	DEPRECATED WordPress for Intel
 다음은 `helm pull` 명령어 입니다.  
 **Helm repository**에 등록되어 있는 Helm chart를 다운로드(pull)하는 명령어 입니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm pull bitnami/wordpress --version 15.0.7
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ ls wordpress*
+ubuntu@ip-172-31-23-60:~$ helm pull bitnami/wordpress --version 15.0.7
+ubuntu@ip-172-31-23-60:~$ ls wordpress*
 wordpress-15.0.7.tgz
 ```
 
@@ -166,7 +166,7 @@ wordpress-15.0.7.tgz
 tar 파일로 받아지네요.  
 압축도 풀어볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ tar -xvf wordpress-15.0.7.tgz
+ubuntu@ip-172-31-23-60:~$ tar -xvf wordpress-15.0.7.tgz
 wordpress/Chart.yaml
 wordpress/Chart.lock
 wordpress/values.yaml
@@ -187,7 +187,7 @@ wordpress/templates/deployment.yaml
 
 어떤 파일들이 있는지 한 번 살펴보겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ tree ./wordpress
+ubuntu@ip-172-31-23-60:~$ tree ./wordpress
 ./wordpress
 ├── Chart.lock
 ├── Chart.yaml
@@ -355,7 +355,7 @@ ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ tree ./wordpress
 
 이제 설치(`helm install`)를 진행해 보겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm repo update
+ubuntu@ip-172-31-23-60:~$ helm repo update
 Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
@@ -369,7 +369,7 @@ Update Complete. ⎈Happy Helming!⎈
 <br><br><br>
 
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm install my-wordpress bitnami/wordpress
+ubuntu@ip-172-31-23-60:~$ helm install my-wordpress bitnami/wordpress
 NAME: my-wordpress
 LAST DEPLOYED: Thu Feb 16 08:08:04 2023
 NAMESPACE: default
@@ -416,7 +416,7 @@ To access your WordPress site from outside the cluster follow the steps below:
 설치된 Helm chart는 **[Release](https://helm.sh/ko/docs/glossary/#release)**라고 합니다.  
 **Release**의 목록은 `helm list`명령으로 조회할 수 있구요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm list
+ubuntu@ip-172-31-23-60:~$ helm list
 NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART            	APP VERSION
 my-wordpress	default  	1       	2023-02-16 08:08:04.880473857 +0000 UTC	deployed	wordpress-15.2.42	6.1.1
 ```
@@ -430,7 +430,7 @@ my-wordpress	default  	1       	2023-02-16 08:08:04.880473857 +0000 UTC	deployed
 
 쿠버네티스 명령어로 어떤 리소스들이 생성됐나 볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get all
+ubuntu@ip-172-31-23-60:~$ kubectl get all
 NAME                               READY   STATUS    RESTARTS   AGE
 pod/my-wordpress-5786598c5-5fqln   1/1     Running   0          2m59s
 pod/my-wordpress-mariadb-0         1/1     Running   0          2m59s
@@ -461,7 +461,7 @@ statefulset.apps/my-wordpress-mariadb   1/1     2m59s
 
 삭제도 한 번에 가능합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm uninstall my-wordpress
+ubuntu@ip-172-31-23-60:~$ helm uninstall my-wordpress
 release "my-wordpress" uninstalled
 ```
 
@@ -483,7 +483,7 @@ release "my-wordpress" uninstalled
 
 설치는 간단합니다. 명령어 하나면 끝. （°o°；）
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+ubuntu@ip-172-31-23-60:~$ helm install my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 NAME: my-todo-app
 LAST DEPLOYED: Thu Feb 16 08:19:57 2023
 NAMESPACE: default
@@ -512,7 +512,7 @@ NOTES:
 
 우선 이 Helm release는 Uninstall을 할게요. 뒤에 다른 방법으로 다시 설치하겠습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm uninstall my-todo-app
+ubuntu@ip-172-31-23-60:~$ helm uninstall my-todo-app
 release "my-todo-app" uninstalled
 ```
 
@@ -528,7 +528,7 @@ release "my-todo-app" uninstalled
 
 역시 아래와 같이 간단하게 실행할 수 있습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ helm install my-todo-app \
+ubuntu@ip-172-31-23-60:~$ helm install my-todo-app \
 >     --set image.repository=rogallo/todo-app \
 >     --set imageCredentials.create=true \
 >     --set imageCredentials.username=rogallo \
@@ -575,7 +575,7 @@ image.repository는 여러분의 Private repository에서 pull해서 사용하�
 
 생성된 K8s 리소스들도 확인해보세요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get all
+ubuntu@ip-172-31-23-60:~$ kubectl get all
 NAME                                    READY   STATUS    RESTARTS   AGE
 pod/my-todo-app-6b8b4887d5-l5kwf        1/1     Running   0          3m41s
 pod/my-todo-app-mysql-7d8c985b5-5kwk2   1/1     Running   0          3m41s
@@ -606,7 +606,7 @@ horizontalpodautoscaler.autoscaling/my-todo-app   Deployment/my-todo-app   <unkn
 
 private repository의 이미지를 pull 하기 위해서 자격증명도 secret으로 생성했습니다.
 ```base
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl describe secrets regcred
+ubuntu@ip-172-31-23-60:~$ kubectl describe secrets regcred
 Name:         regcred
 Namespace:    default
 Labels:       app.kubernetes.io/managed-by=Helm
@@ -627,12 +627,12 @@ Data
 
 다른 리소스들 (ConfitMap, Secret, PVC, PV, Ingress) 도 한 번 확인해보세요.
 ```base
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get configmaps
+ubuntu@ip-172-31-23-60:~$ kubectl get configmaps
 NAME                 DATA   AGE
 kube-root-ca.crt     1      4d18h
 my-todo-app-config   2      5m5s
 mysql-config         2      5m5s
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get secrets
+ubuntu@ip-172-31-23-60:~$ kubectl get secrets
 NAME                                TYPE                                  DATA   AGE
 default-token-dskrr                 kubernetes.io/service-account-token   3      4d18h
 my-todo-app-mysql-token-d25jp       kubernetes.io/service-account-token   3      5m10s
@@ -641,15 +641,15 @@ my-todo-app-token-5n24p             kubernetes.io/service-account-token   3     
 mysql-secret                        Opaque                                1      5m10s
 regcred                             kubernetes.io/dockerconfigjson        1      5m10s
 sh.helm.release.v1.my-todo-app.v1   helm.sh/release.v1                    1      5m10s
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pvc
+ubuntu@ip-172-31-23-60:~$ kubectl get pvc
 NAME                          STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 data-my-wordpress-mariadb-0   Bound    pvc-94d614ca-8cb3-499c-a76f-35e73eca936e   8Gi        RWO            standard       28m
 mysql-pvc                     Bound    pvc-775be31c-d9b9-4e21-b55c-8280af4e342f   3Gi        RWO            standard       5m14s
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get pv
+ubuntu@ip-172-31-23-60:~$ kubectl get pv
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                 STORAGECLASS   REASON   AGE
 pvc-775be31c-d9b9-4e21-b55c-8280af4e342f   3Gi        RWO            Delete           Bound    default/mysql-pvc                     standard                5m18s
 pvc-94d614ca-8cb3-499c-a76f-35e73eca936e   8Gi        RWO            Delete           Bound    default/data-my-wordpress-mariadb-0   standard                28m
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files$ kubectl get ingress
+ubuntu@ip-172-31-23-60:~$ kubectl get ingress
 NAME          CLASS   HOSTS           ADDRESS        PORTS   AGE
 my-todo-app   nginx   todo-app.info   172.31.23.60   80      5m23s
 ```
@@ -673,13 +673,13 @@ my-todo-app   nginx   todo-app.info   172.31.23.60   80      5m23s
 
 <br><br><br>
 
-이제 Helm 에서 **업그레이드**를 해볼게요.
+이제 Helm 에서 **업그레이드**를 해볼게요.  
 여러가지 업그레이드가 있겠지만, 간단히 이미지의 Tag를 변경하는 경우만 해보겠습니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+ubuntu@ip-172-31-23-60:~$ helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
 Release "my-todo-app" has been upgraded. Happy Helming!
 NAME: my-todo-app
-LAST DEPLOYED: Tue Feb  7 10:14:33 2023
+LAST DEPLOYED: Thu Feb 16 10:41:50 2023
 NAMESPACE: default
 STATUS: deployed
 REVISION: 2
@@ -688,18 +688,29 @@ NOTES:
 1. Get the application URL by running these commands:
   http://todo-app.info/
 ```
-> **명령어** : `helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz`
+
+> 💻 명령어
+>```bash
+>helm upgrade --set image.tag=2.0.0 my-todo-app https://github.com/JungSangup/mspt3/raw/main/hands_on_files/todo-app-1.0.0.tgz
+>```
 > **image.tag**만 변경해서 새로운 버젼으로 업그레이드 합니다.
+
+<br><br><br>
 
 바뀐 Deployment도 확인해 보시구요.
 이렇게요.
 ```bash
-ubuntu@ip-10-0-1-161:~$ kubectl describe deployments my-todo-app | grep Image
-    Image:      rogallo/todo-app:2.0.0
+ubuntu@ip-172-31-23-60:~$ kubectl describe deployments my-todo-app | grep Image
+    Image:      rogallo/101-todo-app:2.0.0
 ```
+
+> 💻 명령어
+>```bash
+>kubectl describe deployments my-todo-app | grep Image
+>```
 > **명령어** : `kubectl describe deployments my-todo-app | grep Image`
 
----
+<br><br><br>
 
 브라우저에서 http://todo-app.info/로 접속해서 업그레이드 결과도 보세요.
 
@@ -707,36 +718,48 @@ ubuntu@ip-10-0-1-161:~$ kubectl describe deployments my-todo-app | grep Image
 
 > 구분하기 위해서 하단에 버젼을 표시하도록 해 놓았습니다.
 
----
+<br><br><br>
 
-롤백도 해볼까요?
+롤백도 해볼까요?  
 간단히 History를 조회하고, 원하는 **Revision**으로 돌아가면 됩니다.
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm history my-todo-app
+ubuntu@ip-172-31-23-60:~$ helm history my-todo-app
 REVISION	UPDATED                 	STATUS    	CHART         	APP VERSION	DESCRIPTION
-1       	Tue Feb  7 09:50:25 2023	superseded	todo-app-1.0.0	1.0.0      	Install complete
-2       	Tue Feb  7 10:14:33 2023	deployed  	todo-app-1.0.0	1.0.0      	Upgrade complete
-ubuntu@ip-10-0-1-161:~$ helm rollback my-todo-app 1
+1       	Thu Feb 16 08:31:07 2023	superseded	todo-app-1.0.0	1.0.0      	Install complete
+2       	Thu Feb 16 10:41:50 2023	deployed  	todo-app-1.0.0	1.0.0      	Upgrade complete
+ubuntu@ip-172-31-23-60:~$ helm rollback my-todo-app 1
 Rollback was a success! Happy Helming!
-ubuntu@ip-172-31-20-30:~/mspt3$ kubectl describe deployments my-todo-app | grep Image
+ubuntu@ip-172-31-23-60:~$ kubectl describe deployments my-todo-app | grep Image
     Image:      rogallo/todo-app:1.0.0
 ```
-> **명령어** : `helm history my-todo-app`
-> **명령어** : `helm rollback my-todo-app 1`
-> **명령어** : `kubectl describe deployments my-todo-app | grep Image`
+
+> 💻 명령어
+>```bash
+>helm history my-todo-app
+>```
+>```bash
+>helm rollback my-todo-app 1
+>```
+>```bash
+>kubectl describe deployments my-todo-app | grep Image
+>```
 
 http://todo-app.info/ 화면도 확인 해 보시구요.
 
----
+<br><br><br>
 
-역시 마지막은 정리.
+역시 마지막은 정리.   
 아래 명령어로 삭제(Uninstall) 해 주세요.
 
 ```bash
-ubuntu@ip-10-0-1-161:~$ helm uninstall my-todo-app
+ubuntu@ip-172-31-23-60:~$ helm uninstall my-todo-app
 release "my-todo-app" uninstalled
 ```
-> **명령어** : `helm uninstall my-todo-app`
+
+> 💻 명령어
+>```bash
+>helm uninstall my-todo-app
+>```
 
 한꺼번에 설치(install), 업데이트(update), 롤백(rollback), 삭제(uninstall)되니 편하네요.
 
