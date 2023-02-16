@@ -3,6 +3,8 @@
 
 ![](img/hands_on.png)
 
+<br>
+
 # Contents
 
 - **PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기**

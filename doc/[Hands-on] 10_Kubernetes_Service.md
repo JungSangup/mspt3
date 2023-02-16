@@ -7,8 +7,8 @@
 
 ## Contents
 
-**[1. Service를 이용해서 Pod에 연결하기]()**
-**[2. Ingress를 이용해서 Pod에 연결하기]()**
+**[1. Service를 이용해서 Pod에 연결하기](#1-service를-이용해서-pod에-연결하기)**
+**[2. Ingress를 이용해서 Pod에 연결하기](#2-ingress를-이용해서-pod에-연결하기)**
 
 ---
 
