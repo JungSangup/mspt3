@@ -23,13 +23,13 @@
 ## 실습 시작 전 확인사항
 - Docker 실습인 경우
     - [ ] 실습용 VM(EC2) Instance가 시작되어 있나요?
-        - 아니라면, AWS Console에서 EC2 Instance를 선택하고 시작(`Start instance`)해주세요.
+        - 아니라면, [AWS Console](https://aws.amazon.com/console/)에서 EC2 Instance를 선택하고 시작(`Start instance`)해주세요.
     - [ ] 터미널 S/W(e.g. Windows terminal, MobaXTerm etc.)로 실습용 VM(EC2) Instance에 접속해주세요.
         - 혹시 안된다면 Security group을 확인해보세요. (지금 내 환경에서 22번 포트로 접속 가능한 조건인지)
    
 - Kubernetes 실습인 경우
     - [ ] 실습용 VM(EC2) Instance가 시작되어 있나요?
-        - 아니라면, AWS Console에서 EC2 Instance를 선택하고 시작(`Start instance`)해주세요.
+        - 아니라면, [AWS Console](https://aws.amazon.com/console/)에서 EC2 Instance를 선택하고 시작(`Start instance`)해주세요.
     - [ ] 터미널 S/W(e.g. Windows terminal, MobaXTerm etc.)로 실습용 VM(EC2) Instance에 접속해주세요.
         - 혹시 안된다면 Security group을 확인해보세요. (지금 내 환경에서 22번 포트로 접속 가능한 조건인지)
     - [ ] Minikube가 시작되어 있나요? (`minikube status`명령어로 확인가능)
