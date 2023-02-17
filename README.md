@@ -59,7 +59,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [x] 실습파일 챕터별로 번호(?) 부여  -> hands_on_files/chxx 로 챕터별 실습파일 위치를 나누고, 교재에 반영함.
 
-- [ ] 전체 교육과정 맵 제공  
+- [x] 전체 교육과정 맵 제공  -> 각 차수별 qna에 맵을 제공하고, 진행 중 공유
 
 - [ ] 사전준비 ( Docker Hub가입, 터미널 툴 설치 )  
 
