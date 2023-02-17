@@ -57,7 +57,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [ ] 터미널 프로그램 통일  
 
-- [ ] 실습파일 챕터별로 번호(?) 부여  
+- [x] 실습파일 챕터별로 번호(?) 부여  -> hands_on_files/chxx 로 챕터별 실습파일 위치를 나누고, 교재에 반영함.
 
 - [ ] 전체 교육과정 맵 제공  
 
