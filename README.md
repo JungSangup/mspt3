@@ -18,7 +18,7 @@
 
 
 ## 학습방법
-[Contents](doc#contents) 의 순서에 따라 이론과 실습을 진행합니다.  
+[Contents](https://github.com/JungSangup/mspt3/tree/main/doc#contents) 의 순서에 따라 이론과 실습을 진행합니다.  
 각 이론교재는 기본 내용을 포함하고 있고, 심화학습은 교재의 링크를 참고하시면 됩니다.  
 
 
