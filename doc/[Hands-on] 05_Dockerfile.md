@@ -10,7 +10,7 @@
 **[1. Dockerfile을 이용한 이미지 빌드](#1-dockerfile을-이용한-이미지-빌드)**  
 **[2. Multi-stage build](#2-multi-stage-build)**
 
-> 실습파일 위치 : [hands_on_files/ch05](../hands_on_files/ch05)
+💾 실습파일 위치 : [hands_on_files/ch05](../hands_on_files/ch05)
 
 ---
 
