@@ -10,6 +10,8 @@
 **[1. Helm 기본 사용법 알아보기](#1-helm-기본-사용법-알아보기)**  
 **[2. ToDo App. 실행해보기](#2-todo-app-실행해보기)** 
 
+💾실습파일 위치 : [hands_on_files/ch15](../hands_on_files/ch15)
+
 ---
 
 ## 1. Helm 기본 사용법 알아보기
