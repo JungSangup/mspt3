@@ -10,6 +10,8 @@
 **[1. PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기](#1-persistentvolumeclaimpvc-persistentvolumepv-생성하기)**  
 **[2. Volume을 사용하여 Pod 생성하기](#2-volume을-사용하여-pod-생성하기)**
 
+💾실습파일 위치 : [hands_on_files/ch11](../hands_on_files/ch11)
+
 ---
 
 ## 1. PersistentVolumeClaim(PVC), PersistentVolume(PV) 생성하기

@@ -10,6 +10,8 @@
 **[1. ReplicaSet을 이용해 Pod 관리하기](#1-replicaset을-이용해-pod-관리하기)**  
 **[2. Deployment를 이용해 Pod 관리하기](#2-deployment를-이용해-pod-관리하기)**
 
+💾실습파일 위치 : [hands_on_files/ch09](../hands_on_files/ch09)
+
 ---
 
 ## 1. ReplicaSet을 이용해 Pod 관리하기

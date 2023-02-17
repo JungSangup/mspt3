@@ -11,6 +11,8 @@
 **[2. Recreate 방법으로 롤백 해보기](#2-recreate-방법으로-롤백-해보기)**  
 **[3. RollingUpdate 방법으로 업데이트 해보기](#3-rollingupdate-방법으로-업데이트-해보기)**
 
+💾실습파일 위치 : [hands_on_files/ch13](../hands_on_files/ch13)
+
 ---
 
 ## 1. Recreate 방법으로 업데이트 해보기
@@ -674,9 +676,9 @@ deployment.apps "nginx-deployment" deleted
 
 > 💻 명령어
 >```bash
->kubectl delete -f nginx-recreate.yaml
+>kubectl delete -f nginx-rollingupdate.yaml
 >```
 
-이제 두 번째 터미널은 Ctrl + c 를 눌러 Watch를 멈추겠습니다.
+두 번째 터미널은 Ctrl + c 를 눌러 Watch를 멈추겠습니다.
 
 끝~

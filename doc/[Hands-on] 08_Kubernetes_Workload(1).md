@@ -10,6 +10,8 @@
 **[1. Pod 생성하기](#1-pod-생성하기)**
 **[2. Container probe 사용하기](#2-container-probe-사용하기)**
 
+💾실습파일 위치 : [hands_on_files/ch08](../hands_on_files/ch08)
+
 ---
 
 ## 1. Pod 생성하기

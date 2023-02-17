@@ -9,6 +9,8 @@
 
 **[1. ConfigMap, Secret 생성하고 사용하기](#1-configmap-secret-생성하고-사용하기)**
 
+💾실습파일 위치 : [hands_on_files/ch12](../hands_on_files/ch12)
+
 ---
 
 ## 1. ConfigMap, Secret 생성하고 사용하기

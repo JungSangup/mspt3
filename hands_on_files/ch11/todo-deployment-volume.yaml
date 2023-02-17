@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-deployment
+  labels:
+    app: todo-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+      - name: todo-storage
+        persistentVolumeClaim:
+          claimName: todo-pvc
+      containers:
+      - image: rogallo/101-todo-app:1.0.0
+        name: todo-app
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+          - mountPath: "/etc/todos"
+            name: todo-storage
