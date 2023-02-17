@@ -627,6 +627,8 @@ Data
 >kubectl get all
 >```
 
+<br><br><br>
+
 다른 리소스들 (ConfitMap, Secret, PVC, PV, Ingress) 도 한 번 확인해보세요.
 ```base
 ubuntu@ip-172-31-23-60:~$ kubectl get configmaps
