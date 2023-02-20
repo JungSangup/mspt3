@@ -50,7 +50,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [x] mspt3.pem 파일처리 명령어로 안될 때 어떻게 할지... ( `icacls.exe mspt3.pem /GRANT:R "SDS:(R)"` )  -> 강의 중 이슈 발생 시 안내.
 
-- [ ] powershell, mac 기본 terminal 기준으로  
+- [x] powershell, mac 기본 terminal 기준으로  -> 선행과정에서 MobaXTerm을 설치/사용하므로, MobaXTerm을 기본으로 안내
 
 - [x] 리눅스 명령어 정리 -> https://github.com/JungSangup/mspt3/blob/main/doc/%5BAppendix%5D%20%EB%A6%AC%EB%88%85%EC%8A%A4%EB%AA%85%EB%A0%B9%EC%96%B4.md 추가
 
@@ -62,13 +62,13 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [x] minikube start 시 오류 (/etc/docker)  -> Ubuntu, Docker, Minikube, Kubernetes 버젼을 특정해서 진행. (오류가 발생하지 않는 버젼의 조합 사용)
 
-- [ ] 터미널 프로그램 통일  
+- [x] 터미널 프로그램 통일  -> 선행과정에서 MobaXTerm을 설치/사용하므로, MobaXTerm을 기본으로 안내
 
 - [x] 실습파일 챕터별로 번호(?) 부여  -> hands_on_files/chxx 로 챕터별 실습파일 위치를 나누고, 교재에 반영함.
 
 - [x] 전체 교육과정 맵 제공  -> 각 차수별 qna에 맵을 제공하고, 진행 중 공유
 
-- [ ] 사전준비 ( Docker Hub가입, 터미널 툴 설치 )  
+- [x] 사전준비 ( Docker Hub가입, 터미널 툴 설치 )   -> 두 가지 포함하여 사전준비 안내 준비.
 
 - [x] 실습 시작 전 체크사항 정리 (EC2접속해서 어느 디렉토리로 이동하고... 등) -> https://github.com/JungSangup/mspt3/blob/main/doc/README.md 에 정리함.(매일 실습 전 함께 체크하고 진행)  
 
