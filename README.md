@@ -77,3 +77,5 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [ ] 진행 시 화면 해상도 적정하게 
 
 - [x] A,B반 동일리전 사용 ( 버지니아 ) -> 교재 수정 완료
+
+- [ ] 실습화면에서 예제와 명령어의 순서 변경? 또는, 예제는 복사되지 않도록 (의견)
