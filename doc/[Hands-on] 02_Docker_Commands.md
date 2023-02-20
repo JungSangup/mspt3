@@ -645,10 +645,12 @@ d68fe3ec9f65
 
 # test
 
- ubuntu@ip-172-31-23-60:~/app$ docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
- 2fc9e3a49e91
- cac6c7cab1f9
- d68fe3ec9f65
+```bash {: .no-copy}
+ubuntu@ip-172-31-23-60:~/app$ docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+2fc9e3a49e91
+cac6c7cab1f9
+d68fe3ec9f65
+```
  
 ```
 docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
