@@ -39,7 +39,7 @@
 <br><br><br>
 
 ![](img/aws_signin_4.png)
-> 우측 상단 Region 선택 메뉴에서 US-east Region을 선택합니다.
+> 우측 상단 Region 선택 메뉴에서 **US East(N. Virginia) Region**을 선택합니다.
 
 <br><br><br>
 
