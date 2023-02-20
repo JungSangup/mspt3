@@ -76,4 +76,4 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [ ] 진행 시 화면 해상도 적정하게 
 
-- [ ] A,B반 동일리전 사용 ( 버지니아 )
+- [x] A,B반 동일리전 사용 ( 버지니아 ) -> 교재 수정 완료
