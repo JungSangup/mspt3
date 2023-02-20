@@ -75,3 +75,5 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [x] 일자가 바뀌어도 실습환경 유지가 되도록 주의. (EC2 stop하지 말고 3일단 유지) -> 가능하면 stop하지 않도록 안내하고, stop해도 다시 시작 가능한 방안(실습시작 전 체크사항) 제공. 
 
 - [ ] 진행 시 화면 해상도 적정하게 
+
+- [ ] A,B반 동일리전 사용 ( 버지니아 )
