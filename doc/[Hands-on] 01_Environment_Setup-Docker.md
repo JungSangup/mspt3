@@ -39,10 +39,7 @@
 <br><br><br>
 
 ![](img/aws_signin_4.png)
-> Sign in 후에는 가장 먼저 어느 **Region**에 VM Instance를 구성할지 결정해야 합니다.
-우측 상단 Region 선택 메뉴에서 Region을 선택합니다.
-
-- 반(별로 정해진 **Region**이 있습니다. 확인 후 진행해주세요.
+> 우측 상단 Region 선택 메뉴에서 US-east Region을 선택합니다.
 
 <br><br><br>
 
