@@ -660,10 +660,10 @@ ubuntu@ip-172-31-23-60:~$ kubectl describe pod nginx-deployment-7dd48c557f-4k4zh
 >kubectl rollout undo deployment nginx-deployment --to-revision=1
 >```
 >```bash
->kubectl describe pod [POD-NAME] | grep -i image
+>kubectl get pods
 >```
 >```bash
->kubectl delete -f nginx-rollingupdate.yaml
+>kubectl describe pod [POD-NAME] | grep -i image
 >```
 
 <br><br><br>
