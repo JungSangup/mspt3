@@ -18,12 +18,14 @@
 
 
 ## 학습방법
-[Contents](https://github.com/JungSangup/mspt3/tree/main/doc#contents) 의 순서에 따라 이론과 실습을 진행합니다.  
-각 이론교재는 기본 내용을 포함하고 있고, 심화학습은 교재의 링크를 참고하시면 됩니다.  
+[Contents](https://github.com/JungSangup/mspt3/tree/main/doc#contents) 의 순서에 따라 **이론**과 **실습**을 진행합니다.  
+각 이론교재는 기본 내용을 설명하고 있고, 보다 깊이있는 학습이 필요한 경우 교재의 링크를 참고하시면 됩니다.  
 
 
 ## 실습환경
 ...
+
+<br><br><br><br>
 
 -------------------- 절취선 ----------------------  ( 이하 내용은 삭제 예정 )
 
