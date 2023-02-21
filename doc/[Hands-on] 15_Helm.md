@@ -624,7 +624,7 @@ Data
 
 > 💻 명령어
 >```bash
->kubectl get all
+>kubectl describe secrets regcred
 >```
 
 <br><br><br>
