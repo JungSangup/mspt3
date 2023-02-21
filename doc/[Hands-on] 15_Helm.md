@@ -469,7 +469,7 @@ release "my-wordpress" uninstalled
 
 > 💻 명령어
 >```bash
->kubectl get all
+>helm uninstall my-wordpress
 >```
 
 <br><br><br><br><br>
