@@ -712,7 +712,6 @@ ubuntu@ip-172-31-23-60:~$ kubectl describe deployments my-todo-app | grep Image
 >```bash
 >kubectl describe deployments my-todo-app | grep Image
 >```
-> **명령어** : `kubectl describe deployments my-todo-app | grep Image`
 
 <br><br><br>
 
