@@ -1,7 +1,7 @@
 
 # [Hands-on] 06. Environment setup - Kubernetes
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 

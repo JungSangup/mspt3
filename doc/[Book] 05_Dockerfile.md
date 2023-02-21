@@ -8,7 +8,7 @@ header: Docker & Kubernetes - 05. Dockerfile
 footer: Samsung SDS
 ---
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -33,7 +33,7 @@ footer: Samsung SDS
 
 ## Dockerfile
 
-![h:380](img/docker_stages.png)
+![h:380](./img/docker_stages.png)
 
 Docker에서 이미지를 생성하는 방법은 다음과 같은 방법들이 있습니다.
 

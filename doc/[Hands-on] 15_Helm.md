@@ -1,7 +1,7 @@
 
 # [Hands-on] 15. Helm
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -479,7 +479,7 @@ release "my-wordpress" uninstalled
 우리가 익숙한 **ToDo App**을 이용해서 좀 더 자세히 볼게요.  
 차트는 아래와 같은 구조를 가지고 있습니다. 우리가 배운 여러가지가 다 들어있네요.
 
-![h:500](img/helm_todo_app.png)
+![h:500](./img/helm_todo_app.png)
 
 <br><br><br>
 
@@ -569,7 +569,7 @@ image.repository는 여러분의 Private repository에서 pull해서 사용하�
 
 브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보세요.
 
-![h:400](img/k8s_todo_ingress.png)
+![h:400](./img/k8s_todo_ingress.png)
 
 잘 되나요?
 
@@ -717,7 +717,7 @@ ubuntu@ip-172-31-23-60:~$ kubectl describe deployments my-todo-app | grep Image
 
 브라우저에서 http://todo-app.info/로 접속해서 업그레이드 결과도 보세요.
 
-![h:400](img/k8s_todo_ingress2.png)
+![h:400](./img/k8s_todo_ingress2.png)
 
 > 구분하기 위해서 하단에 버젼을 표시하도록 해 놓았습니다.
 

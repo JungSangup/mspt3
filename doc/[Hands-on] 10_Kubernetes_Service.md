@@ -1,7 +1,7 @@
 
 # [Hands-on] 10. Kubernetes Service
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -334,7 +334,7 @@ Node까지의 경로가 열려있다면 어디서든 이 IP로 접근 가능합�
 
 웹 브라우저에서 아래와 같이 조회해보세요.
 
-![h:300](img/k8s_nginx_nodeport.png)
+![h:300](./img/k8s_nginx_nodeport.png)
 
 > http://[Node의 IP]:30007 로 접속합니다. (EC2 Instance인 경우 **Public IPv4 address**)
 
@@ -406,7 +406,7 @@ ingress.networking.k8s.io/my-nginx-ingress created
 
 http://my-nginx.info
 
-![h:300](img/k8s_nginx_ingress.png)
+![h:300](./img/k8s_nginx_ingress.png)
 
 잘 되네요. (ง˙∇˙)ว
 

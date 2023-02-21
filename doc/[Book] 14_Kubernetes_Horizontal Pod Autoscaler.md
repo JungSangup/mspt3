@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 # Contents
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -25,7 +25,7 @@ footer: Samsung SDS
 
 **수평 스케일링**은 부하 증가에 대해 Pod의 수를 증가시기는 것을 말합니다. 이는 **수직 스케일링**(해당 워크로드를 위해 이미 실행 중인 파드에 더 많은 자원(예: 메모리 또는 CPU)를 할당하는 것)과는 다릅니다.
 
-![h:500](img/horizontal-pod-autoscaler.svg)
+![h:500](./img/horizontal-pod-autoscaler.svg)
 
 ---
 

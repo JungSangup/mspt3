@@ -1,7 +1,7 @@
 
 # [Hands-on] 13. Kubernetes Deployment strategies
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 

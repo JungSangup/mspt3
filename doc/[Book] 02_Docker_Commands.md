@@ -8,7 +8,7 @@ header: Docker & Kubernetes - 02. Docker commands
 footer: Samsung SDS
 ---
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -28,7 +28,7 @@ footer: Samsung SDS
 
 도커 명령어를 이용하여 **이미지**와 **컨테이너**를 다루는 방법을 알아보겠습니다.
 
-![h:450 left](img/docker_stages.png)
+![h:450 left](./img/docker_stages.png)
 
 ---
 

@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 # Contents
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -31,7 +31,7 @@ footer: Samsung SDS
 
 <br>
 
-[![h:400](img/k8s_workload_resources.png)](https://www.reddit.com/r/kubernetes/comments/k26je7/overview_of_builtin_kubernetes_workload_resources/)
+[![h:400](./img/k8s_workload_resources.png)](https://www.reddit.com/r/kubernetes/comments/k26je7/overview_of_builtin_kubernetes_workload_resources/)
 
 ---
 
@@ -94,7 +94,7 @@ spec:
 **Deployment**는 **Pod**를 생성하기 위한 상위 개념의 **Workload resource**이며, 아래 그림과 같이 **ReplicaSet**과 **Pod**에 대한 선언적 업데이트를 제공합니다.
 일반적으로 **Pod**는 개별 생성하지 않고 이 **Deployment**와 (**Deployment**에 의해 관리되는) **ReplicaSet**을 이용하여 생성하고 관리합니다.
 
-![h:380](img/k8s_deployment.png)
+![h:380](./img/k8s_deployment.png)
 
 > 위 그림은 Pod의 image를 v1 > v2 > v3로 변경한 경우를 나타내고 있습니다.
 
@@ -282,7 +282,7 @@ Pod의 생성과 Scale in/out 시 순서와 고유성이 보장되는 형태입�
 - Pod들은 0부터 순차적으로 생성/업데이트 됨
 - PVC(PersistentVolumeClaim) Template을 이용하여 각 Pod는 개별 PVC와 PV를 가짐.
 
-![h:250](img/k8s_statefulsets.png)
+![h:250](./img/k8s_statefulsets.png)
 
 🔗[StatefulSets](https://kubernetes.io/ko/docs/concepts/workloads/controllers/statefulset/)
 
@@ -297,7 +297,7 @@ Node마다 실행되어야 하는 Pod가 있을때 사용되며 대표적으로 
 - 모든 Node에서 로그 수집 데몬 실행
 - 모든 Node에서 Node 모니터링 데몬 실행
 
-![h:250](img/k8s_daemonset.png)
+![h:250](./img/k8s_daemonset.png)
 
 🔗[DaemonSet](https://kubernetes.io/ko/docs/concepts/workloads/controllers/daemonset/)
 

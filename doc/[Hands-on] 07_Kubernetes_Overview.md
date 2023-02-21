@@ -1,7 +1,7 @@
 
 # [Hands-on] 07. Kubernetes Overview
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 

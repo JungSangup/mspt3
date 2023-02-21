@@ -1,7 +1,7 @@
 
 # [Hands-on] 05. Dockerfile
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -143,7 +143,7 @@ docker는 multi-stage build 기능을 제공하기 때문에 최종 docker 이�
 
 <br>
 
-![h:300](img/docker_multi_stage_build.PNG)
+![h:300](./img/docker_multi_stage_build.PNG)
 
 <br>
 

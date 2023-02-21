@@ -1,7 +1,7 @@
 
 # [Hands-on] 04. Docker network
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -16,7 +16,7 @@
 도커 네트워크를 이용해서 아래 그림과 같이 멀티 컨테이너 애플리케이션을 구성해 보겠습니다.
 우리 애플리케이션에 Database(MySQL)를 연결해서 서비스하도록 합니다.
 
-![](img/multi-app-architecture.png)
+![](./img/multi-app-architecture.png)
 
 
 먼저 docker network create명령으로 bridge network을 하나 생성하겠습니다.
@@ -245,7 +245,7 @@ Listening on port 3000
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
 - Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
 
-![h:200](img/todo-list-sample3.png)
+![h:200](./img/todo-list-sample3.png)
 
 <br><br><br>
 

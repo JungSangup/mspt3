@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 # Contents
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -34,13 +34,13 @@ footer: Samsung SDS
 **Service**는 외부사용자나 시스템이 접근할 때도, 클러스터 내부의 Pod들 간에도
 적용됩니다.
 
-![h:250](img/k8s_service1.png)
+![h:250](./img/k8s_service1.png)
 
 ---
 
 ## Service
 
-![h:400](img/k8s_service3.png)
+![h:400](./img/k8s_service3.png)
 Pod는 ReplicaSet에 의해 동적으로 생성되고 소멸되기를 반복하기 때문에 Pod의 IP로
 서비스를 할 수 없습니다. Kubenetes에서는 Pod간의 통신이 필요하다면
 (e.g. Font-ent, Back-end 간 통신) Service Object를 생성하여 통신해야 합니다. 
@@ -84,7 +84,7 @@ spec:
 
 | Service type                |                                         | Description                                           |
 |:--------------------------- |:---------------------------------------:|:----------------------------------------------------- |
-| ClusterIP<br>(Default type) | ![h:230](img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.) |
+| ClusterIP<br>(Default type) | ![h:230](./img/k8s_service_clusterip.png) | 서비스를 클러스터-내부 IP에 노출시킴.<br> (클러스터 내에서만 서비스에 도달할 수 있음.) |
 
 > ClusterIP는 클러스터 **내부에서만 접근 가능**한 IP가 주어지기 때문에 외부에서 접근하기 위해서는 추가적인 방법을 적용해야 합니다.
 > [kubectl proxy](https://kubernetes.io/ko/docs/tasks/access-application-cluster/access-cluster/#kubectl-proxy-%EC%82%AC%EC%9A%A9)명령을 이용하여 localhost와 api서버간에 proxy를 구성하거나, 뒤에 배울 ingress 리소스를 이용하여 외부에서 접속할 수 있습니다.
@@ -97,8 +97,8 @@ spec:
 
 | Service type |                                            | Description                                                                |
 |:------------ |:------------------------------------------:|:-------------------------------------------------------------------------- |
-| NodePort     | ![h:230](img/k8s_service_nodeport.png)     | 고정 포트(NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
-| LoadBalancer | ![h:230](img/k8s_service_loadbalancer.png) | 클라우드 공급자의 로드 밸런서를 사용하여 서비스를 외부에 노출시킴.                                      |
+| NodePort     | ![h:230](./img/k8s_service_nodeport.png)     | 고정 포트(NodePort)로 각 노드의 IP에 서비스를 노출시킴.<br> (외부에서 [NodeIP]:[NodePort]로 접근가능) |
+| LoadBalancer | ![h:230](./img/k8s_service_loadbalancer.png) | 클라우드 공급자의 로드 밸런서를 사용하여 서비스를 외부에 노출시킴.                                      |
 
 ---
 
@@ -108,7 +108,7 @@ spec:
 
 위의 타입별 특징을 한 장의 그림으로 표현하면 다음과 같습니다.
 <br>
-![h:430](img/k8s_service.png)
+![h:430](./img/k8s_service.png)
 
 ---
 
@@ -121,7 +121,7 @@ Service의 `.spec.selector`에 지정된 Label 규칙에 해당하는 Pod를 Tar
 
 <br>
 
-![h:350](img/k8s_service2.svg)
+![h:350](./img/k8s_service2.svg)
 
 > Label은 Object 생성시점 또는 생성 이후에도 추가할 수 있습니다.
 
@@ -201,7 +201,7 @@ Service 의 name은 Kubernetes Cluster상에서 해당 서비스의 Hostname을 
 Ingress는 `NodePort`, `LoadBalancer` 와 마찬가지로 애플리케이션의 Service를 외부로 노출할때 사용되는 리소스입니다.
 외부에서 들어온 HTTP와 HTTPS 트래픽을 ingress resouce를 생성하여 Cluster내부의 Service로 L7영역에서 라우팅하며  로드밸런싱, TLS, 도메인 기반의 Virtual Hosting을 제공합니다.
 이러한 기능은 NodePort로 서비스를 노출하는 것에 비해 외부의 서비스를 보다 손쉽게 관리할 수 있도록해줍니다.
-![h:250](img/k8s_ingress3.png)
+![h:250](./img/k8s_ingress3.png)
 Ingress는 실질적인 라우팅 기능을 제공하는 [Ingress Controller](https://kubernetes.io/ko/docs/concepts/services-networking/ingress-controllers/)와 [Ingress](https://kubernetes.io/ko/docs/concepts/services-networking/ingress/)
 리소스로 구성할 수 있는데, ingress 리소스는 외부의 URLs을 Cluster 내부의
 Service로 라우팅하는 rule이 정의되어 있으며, Ingress Controller에는

@@ -1,7 +1,7 @@
 
 # [Hands-on] 02. Docker commands
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -61,7 +61,7 @@ ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …
 
 [https://hub.docker.com/](https://hub.docker.com/) 에서도 한번 검색을 해보세요.  
 두 가지 결과가 어떤지 비교도 해보시구요.
-![h:500](img/docker_hub1.png)
+![h:500](./img/docker_hub1.png)
 
 <br><br><br><br><br>
 
@@ -223,7 +223,7 @@ UBUNTU_CODENAME=bionic
 
 [https://hub.docker.com/_/ubuntu](https://hub.docker.com/_/ubuntu) 를 보시면, 어떤 tag가 latest인지 알 수 있습니다.
 
-![h:300](img/docker_hub2.png)
+![h:300](./img/docker_hub2.png)
 
 <br>
 
@@ -290,7 +290,7 @@ nginx가 정말 Running 상태인지 8080번 포트로 접속해서 확인도 �
 - AWS EC2인 경우 인스턴스의 **Public IPv4 address**로 접속하면 됩니다. (e.g. http://IP:8080/)
 - Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
 
-![h:400](img/docker_nginx1.png)
+![h:400](./img/docker_nginx1.png)
 
 <br><br><br>
 
@@ -331,7 +331,7 @@ d68fe3ec9f65   ubuntu         "/bin/bash"              3 minutes ago        Exit
 이제 **도커 레지스트리**에 대해 알아보고, 우리가 만든 애플리케이션을 등록해 보겠습니다.
 
 먼저 [https://hub.docker.com/](https://hub.docker.com/) 에 가입(**Register**)을 합니다.
-![h:350](img/docker_create_repository1.png)
+![h:350](./img/docker_create_repository1.png)
 `Register`를 클릭하고, Docker account를 하나 만듭니다. (이미 있으면 있는 Account를 사용해도 됩니다.)
 
 <br><br><br>
@@ -340,7 +340,7 @@ d68fe3ec9f65   ubuntu         "/bin/bash"              3 minutes ago        Exit
 로그인 후 `Create Repository` 버튼을 클릭해서 시작하면 됩니다.  
 이름은 **todo-app** 으로 하고, Visibility는 **Private**으로 합니다.
 
-![h:350](img/docker_create_repository2.png)
+![h:350](./img/docker_create_repository2.png)
 > 무료 계정인 경우 Private repository는 하나만 만들 수 있습니다.
 > 이미 사용중인 Private repository가 있으면, Public으로 만들어도 됩니다.
 
@@ -349,7 +349,7 @@ d68fe3ec9f65   ubuntu         "/bin/bash"              3 minutes ago        Exit
 이제 여러분의 Docker repository가 하나 생겼습니다.
 앞으로 이 곳에 여러분의 컨테이너 이미지를 저장하고 사용하면 됩니다.
 
-![h:450](img/docker_create_repository3.png)
+![h:450](./img/docker_create_repository3.png)
 > `[USER-NAME]/[REPOSITORY-NAME]` 이 여러분의 Repository 입니다. (e.g. `rogallo/todo-app`)
 
 <br><br><br>
@@ -615,7 +615,7 @@ a6524c5b12a6: Layer already exists
 
 [https://hub.docker.com/](https://hub.docker.com/) 에 방금 push한 이미지가 잘 올라가 있나요?
 
-![h:300](img/docker_create_repository4.png)
+![h:300](./img/docker_create_repository4.png)
 > 위의 두 개 이미지는 뒤의 과정에서 계속 필요하니, 잘 준비해두세요.
 
 <br><br><br>

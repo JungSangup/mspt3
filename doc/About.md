@@ -11,7 +11,7 @@
 설치가 필요함.
 
 Visual Studio Code 설치/실행 후 Extension 에서 marp 검색하여 Install
-![](img/marp.png)
+![](./img/marp.png)
 
 
 #### 교재 작성/수정 방법
@@ -22,13 +22,13 @@ Visual Studio Code 에서 File > Open Folder 실행 후 본 Repository 최상위
 
 열기를 했을 때 아래와 같아야 함. (.vscode , doc , hands_on_files 디렉토리가 보여야 함.)
 
-![](img/VSCode2.png)
+![](./img/VSCode2.png)
 
 
 이후 편집 과정은 일반적인 Markdown 문서와 동일함.  
 편집 과정 중 문서 우측상단의 **Preview** 버튼을 클릭하여 출력형태를 확인할 수 있음.
 
-![](img/VSCode4.gif)
+![](./img/VSCode4.gif)
 
 기타 자세한 marp 사용법은 [Marpit Markdown](https://marpit.marp.app/markdown)를 참조.
 
@@ -36,7 +36,7 @@ Visual Studio Code 에서 File > Open Folder 실행 후 본 Repository 최상위
 
 편집을 마친 Markdown 문서의 출력은 아래 그림과 같이 진행.  (Marp 아이콘 > Export Slide Deck...)
 
-![](img/marp_export.gif)
+![](./img/marp_export.gif)
 
 ---
 

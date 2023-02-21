@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 # Contents
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -42,7 +42,7 @@ Helm을 통해 다음과 같은 일을 할 수 있습니다.
 
 ## Helm
 
-![h:380](img/helmchart.png)
+![h:380](./img/helmchart.png)
 
 Helm은 다음과 같은 3가지 중요한 개념([Three Big Concepts](https://helm.sh/ko/docs/intro/using_helm/#%EC%A3%BC%EC%9A%94-%EA%B0%9C%EB%85%90-3%EA%B0%80%EC%A7%80))을 가지고 있습니다.
 
@@ -186,7 +186,7 @@ Template들을 위한 **값**(**Values**)은 아래의 방법으로 제공됩니
   
   > 위와 같은 경우 값의 우선순위는 **명령어 옵션**, **별도의 파일**, 기본 **values.yaml파일** 순으로 적용됩니다.
 
-![w:1000 center](img/helm-template.png)
+![w:1000 center](./img/helm-template.png)
 
 ---
 

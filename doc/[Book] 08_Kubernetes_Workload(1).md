@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 # Contents
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -29,7 +29,7 @@ footer: Samsung SDS
 
 이번 장에서는 이 Workload에 대해 알아보겠습니다.
 
-[![h:400](img/k8s_workload_resources.png)](https://www.reddit.com/r/kubernetes/comments/k26je7/overview_of_builtin_kubernetes_workload_resources/)
+[![h:400](./img/k8s_workload_resources.png)](https://www.reddit.com/r/kubernetes/comments/k26je7/overview_of_builtin_kubernetes_workload_resources/)
 
 ---
 
@@ -43,7 +43,7 @@ Pod는 하나 이상의 컨테이너 그룹으로 구성되며, **스토리지**
 > **Docker**는 대표적인 Kubernetes의 Container runtime이었지만, Kubernetes v1.20이후에는 deprecated 되었습니다. ([참조](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/))
 > 하지만, 앞서 배운 Docker환경에서 만들어진 컨테이너 이미지는 Kubernetes에서 문제없이 동작하니 걱정할 필요는 없습니다.
 
-![h:350](img/module_03_nodes.svg)
+![h:350](./img/module_03_nodes.svg)
 
 ---
 
@@ -93,7 +93,7 @@ Pod의 Lifecycle에서의 단계(Phase)를 나타내는 고수준 요약
 | **Failed** | Pod의 모든 컨테이너가 종료되었고, 그 중 적어도 하나의 컨테이너가 실패로 종료 |
 | **Unknown** | Pod의 상태를 확인할 수 없는 단계로, 일반적으로 Node와의 통신오류로 인해 발생함 |
 
-![h:150](img/k8s_pod_lifecycle.png)
+![h:150](./img/k8s_pod_lifecycle.png)
 
 ---
 
@@ -179,7 +179,7 @@ Probe의 종류는 다음과 같은 것들이 있습니다.
 
 **livenessProbe**를 사용하면 이런경우 애플리케이션이 더 이상 Request를 정상적으로 처리하지 않음을 감지하고 문제가 되는 Pod의 컨테이너를 재시작합니다. (Pod의 Restart 카운트가 증가함.)
 
-![h:350](img/google-kubernetes-probe-livenessae14.GIF)
+![h:350](./img/google-kubernetes-probe-livenessae14.GIF)
 
 ---
 
@@ -191,7 +191,7 @@ Probe의 종류는 다음과 같은 것들이 있습니다.
 
 **readinessProbe**를 사용하면 애플리케이션이 완전히 시작될 때까지 기다렸다가 트래픽을 보낼 수 있습니다.
 
-![h:350](img/google-kubernetes-probe-readiness6ktf.GIF)
+![h:350](./img/google-kubernetes-probe-readiness6ktf.GIF)
 
 ---
 

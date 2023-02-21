@@ -8,7 +8,7 @@ header: Docker & Kubernetes - 06. Dockerfile Best practice
 footer: Samsung SDS
 ---
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -29,7 +29,7 @@ Container 기반의 환경에서는 컨테이너 이미지를 빌드하는 과�
 
 <br>
 
-![h:300 center](img/docker_Captain_Phillips.gif)
+![h:300 center](./img/docker_Captain_Phillips.gif)
 
 <br>
 
@@ -140,7 +140,7 @@ Java 프로젝트인 경우, JDK 보다는 JRE를 Base image로 사용하면 컨
 
 ### Use multi-stage builds
 
-![h:230](img/docker_multi_stage_build.png)
+![h:230](./img/docker_multi_stage_build.png)
 Multi-stage build를 사용하면 중간 레이어와 파일의 수를 줄이지 않고도 최종 이미지의 크기를 크게 줄일 수 있습니다.
 첫 번째 '빌드' 컨테이너에서 앱을 빌드하고 동일한 Dockerfile을 사용하면서 다른 컨테이너에서 결과를 사용할 수 있습니다.
 
@@ -170,7 +170,7 @@ COPY --from=builder /tmp/go/hello /hello
 
 ### Decouple applications
 
-![h:250](img/decouple-applications.png)
+![h:250](./img/decouple-applications.png)
 
 하나의 컨테이너에는 하나의 애플리케이션만 탑재하는 것이 좋습니다.
 여러 개의 애플리케이션이 있는 경우보다 쉽고 간단하게 Scale In/Out이 가능하고, 컨테이너 재사용이 용이하기 때문입니다.  
@@ -181,7 +181,7 @@ COPY --from=builder /tmp/go/hello /hello
 ### multi-line arguments , reducing clutter
 
 이미지의 크기를 줄이려면 이미지 내부에 꼭 필요한 부분만 설치해야합니다. 추가 패키지를 설치했다가 나중에 패키지를 제거할 수도 있지만 이러한 방법으로는 충분하지 않습니다. Dockerfile의 각 명령이 하나의 레이어를 생성하므로, 이미지를 만든 단계보다 나중의 단계에서 이미지의 데이터를 제거해도 전체 이미지의 크기는 줄어들지 않습니다. 데이터가 더 깊은 레이어에 숨겨질 뿐 여전히 존재합니다.
-![h:250](img/docker_reduce_clutter.png)
+![h:250](./img/docker_reduce_clutter.png)
 
 > `[buildpackage]` 와 `/var/lib/apt/lists/*` 파일들은 최종 결과물에는 필요없는 것들입니다.
 > 왼쪽(Bad Dockerfile)의 경우 컨테이너에 포함되는 첫 번째 RUN layer에 이 파일들이 존재합니다.
@@ -208,7 +208,7 @@ Docker 빌드 캐시를 최대한 활용하려면 Dockerfile 맨 아래에 자�
 ---
 
 이러한 이유때문에 소스 코드를 복사하는 Step은 Dockerfile에서 가능한 한 늦게 배치하는 것이 좋습니다. 예를 들어 아래 그림에서  `STEP 1`을 변경하면 Docker는 `FROM debian:9` 단계의 레이어만 다시 사용하지만 `STEP 3`를 변경하면 Docker는 `STEP 1` 및 `STEP 2`의 레이어를 다시 사용할 수 있습니다. ( - 녹색부분은 재사용되는 부분임. )
-![h:250](img/docker_containers_optimization.svg)
+![h:250](./img/docker_containers_optimization.svg)
 
 Docker Build Step이 로컬 파일 시스템에 저장된 모든 종류의 캐시에 의존하는 경우, 이 캐시는 동일한 Build Step에서 수행되어야 합니다. (`apt-get update` 는 캐시를 사용하지 않아야 함.)
 
@@ -262,7 +262,7 @@ git 해시값은 git rev-parse-short명령으로 알수 있습니다.
 기본적으로 Docker 컨테이너 내의 프로세스는 호스트 머신에 액세스할 수 없지만, 컨테이너는 호스트 머신의 커널을 공유하므로 컨테이너 격리는 Hypervisor의 가상 머신만큼 안전한 격리를 제공하지는 않습니다. 
 따라서 해커 등의 공격자가 컨테이너 밖으로 나갈 수 있는 취약점을 발견한다면, 컨테이너 내에서 프로세스가 루트로 실행 중인 경우 공격자는 호스트 머신에 대한 루트 액세스 권한을 얻을 수도 있습니다.
 
-![h:200](img/docker_operating_containers_root.svg)
+![h:200](./img/docker_operating_containers_root.svg)
 
 이 가능성을 피하기 위한 권장사항은 컨테이너 내에서 루트로 프로세스를 실행하지 않는 것입니다.
 Dockerfile에서 User를 생성하여 필요한 최소한의 권한을 부여하고, `USER` 지시자를 사용하여 필요한 처리(RUN, CMD, ENTRYPOINT)들을 해야합니다.

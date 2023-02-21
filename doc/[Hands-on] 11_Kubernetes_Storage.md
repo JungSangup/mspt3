@@ -1,7 +1,7 @@
 
 # [Hands-on] 11. Kubernetes Storage
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -242,7 +242,7 @@ Nginx에서 보여줄 간단한 **index.html**파일을 하나 만들었습니�
 
 http://my-nginx.info
 
-![h:200](img/k8s_nginx_pvc.png)
+![h:200](./img/k8s_nginx_pvc.png)
 
 Pod의 파일시스템에도 위의 내용이 반영되어 있는지도 확인해보세요.
 ```bash
@@ -335,7 +335,7 @@ ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-
 
 이제 브라우저에서 http://todo-app.info/ 로 접속하면, 아래와 같이 접속 가능할거예요.
 
-![h:300](img/k8s_todo_ingress.png)
+![h:300](./img/k8s_todo_ingress.png)
 
 <br><br><br>
 

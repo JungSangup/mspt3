@@ -1,7 +1,7 @@
 
 # [Hands-on] 03. Docker storage
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -171,7 +171,7 @@ ubuntu@ip-172-31-23-60:~$ docker run --detach --publish 3000:3000 --volume todo-
 - AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
 - Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
 
-![h:200](img/todo-list-sample3.png)
+![h:200](./img/todo-list-sample3.png)
 
 그리고, 컨테이너를 멈추고 삭제합니다.
 ```bash
@@ -211,7 +211,7 @@ c6859ec898566de2e194acd1dd7b1df8832fe035e7e1179deb21c587e66502c9
 
 어떤가요? 오늘 할 일 목록이 그대로 남아있나요? **정국이와 저녁식사**도 **장보기**도 잊지않고 할 수 있게 되었습니다.
 
-![h:250](img/todo-list-sample3.png)
+![h:250](./img/todo-list-sample3.png)
 
 이제, 좀 제대로 된 애플리케이션이 된 것 같네요.... (ง˙∇˙)ว
 

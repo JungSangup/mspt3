@@ -1,7 +1,7 @@
 
 # [Hands-on] 09. Kubernetes Workload(2)
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 

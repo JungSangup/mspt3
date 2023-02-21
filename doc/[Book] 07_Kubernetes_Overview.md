@@ -8,7 +8,7 @@ header: Docker & Kubernetes - 07. Kubernetes overview
 footer: Samsung SDS
 ---
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -31,7 +31,7 @@ footer: Samsung SDS
 
 ## What is container orchestration?
 
-![bg left:40%](img/k8s_container_orchestration2.jpeg)
+![bg left:40%](./img/k8s_container_orchestration2.jpeg)
 
 <br><br><br><br><br>
 
@@ -51,7 +51,7 @@ footer: Samsung SDS
 
 <br>
 
-![](img/kubernetes_logo.png)
+![](./img/kubernetes_logo.png)
 
 <br><br><br><br>
 
@@ -66,7 +66,7 @@ footer: Samsung SDS
 
 이런 기본 구조 안에서 어떤 컴포넌트들이 어떤 역할을 하는지 알아보겠습니다.
 
-![h:400](img/components-of-kubernetes.svg)
+![h:400](./img/components-of-kubernetes.svg)
 
 ---
 
@@ -133,7 +133,7 @@ Kubernetes는 Spec과 Status를 일치시키기 위해서 Object의 상태를 �
 예를들어, 아래 그림에서 Nginx 컨테이너의 개수(Replicas)를 2로 지정해 놓으면(-> **Spec**), Kubernetes는 두 개의 Nginx 컨테이너(-> **Status**)를 유지하려고 노력합니다.
 문제가 생겨 하나가 멈춘다면(**Spec ≠ Status**), Kubernetes는 대체 인스턴스를 생성하여 **Spec**과 **Status**를 일치시켜 줍니다. 
 
-![h:300](img/k8s_spec_n_status.png) 
+![h:300](./img/k8s_spec_n_status.png) 
 
 ---
 
@@ -177,7 +177,7 @@ Kubernetes의 CLI툴인 `kubectl`을 이용하여 Kubernetes object들을 관리
 그 전에 먼저 **명령형**(**Imperative**)과 **선언형**(**Declarative**)의 차이에 대해 알아보겠습니다.
 | | |
 | --- | :--- |
-| [![h:450](img/k8s_imperative_vs_peclarative.jpeg)](https://www.digitalocean.com/community/tutorials/imperative-vs-declarative-kubernetes-management-a-digitalocean-comic) | - **명령형**(**Imperative**) : 필요한 동작을 지시 (How)<br>- **선언형**(**Declarative**) : 원하는 상태를 선언 (What) |
+| [![h:450](./img/k8s_imperative_vs_peclarative.jpeg)](https://www.digitalocean.com/community/tutorials/imperative-vs-declarative-kubernetes-management-a-digitalocean-comic) | - **명령형**(**Imperative**) : 필요한 동작을 지시 (How)<br>- **선언형**(**Declarative**) : 원하는 상태를 선언 (What) |
 
 ---
 
@@ -244,7 +244,7 @@ $ kubectl apply -R -f configs/
 규모가 작거나 테스트용 클러스터에서는 크게 신경쓰지 않아도 되지만, 여러 팀이나 프로젝트에서 공동으로 사용하는 클러스터에서는 자원의 격리가 필요합니다.
 예를들어, 아래 그림과 같이 각 System들이 사용하는 영역을 구분하여 사용할 수 있습니다.
 
-![h:400](img/k8s_namespaces.png)
+![h:400](./img/k8s_namespaces.png)
 
 ---
 

@@ -10,7 +10,7 @@ footer: Samsung SDS
 
 # Contents
 
-![bg left:40%](img/docker_k8s.png)
+![bg left:40%](./img/docker_k8s.png)
 
 <br>
 
@@ -40,7 +40,7 @@ Kubernetes에서는 Docker와는 다르게 Pod 단위로 [Volume](https://kubern
 
 ## Volume
 
-![h:500](img/PersistentVolumeClaim.PNG)
+![h:500](./img/PersistentVolumeClaim.PNG)
 
 ---
 

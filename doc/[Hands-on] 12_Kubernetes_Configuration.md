@@ -1,7 +1,7 @@
 
 # [Hands-on] 12. Kubernetes Configuration
 
-![](img/hands_on.png)
+![](./img/hands_on.png)
 
 <br>
 
@@ -24,7 +24,7 @@
 을 각각 실행해서 연동하려고 합니다.  
 이렇게요.
 
-![](img/multi-app-architecture.png)
+![](./img/multi-app-architecture.png)
 
 기본적인 구조와 방법은 **Docker Network** 실습과 같고, Kubernetes환경에 맞게 리소스들을 생성해서 해볼게요.
 
@@ -599,7 +599,7 @@ HOME=/root
 
 브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
 
-![h:400](img/k8s_todo_ingress.png)
+![h:400](./img/k8s_todo_ingress.png)
 
 <br><br><br>
 
