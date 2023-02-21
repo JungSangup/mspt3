@@ -408,7 +408,7 @@ ubuntu@ip-172-31-23-60:~$ kubectl describe pod nginx-deployment-85fc747956-7vgpg
 ```
 
 > 💻 명령어
-> >```bash
+>```bash
 >kubectl get pods
 >```
 >```bash
