@@ -3,7 +3,7 @@
 | No. | 이론                                             | 실습                                                 |
 | --- | ---------------------------------------------- | -------------------------------------------------- |
 | 1   | [Book] 01_Docker_Overview                      | -                                                  |
-| 2   | [Book] 02_Docker_Commands                      | [Hands-on] 02_Docker_Commands                      |
+| 2   | [Book] 02_Docker_Commands                      | [[Hands-on] 02_Docker_Commands](%5BHands-on%5D%2002_Docker_Commands.md){:target="_blank" rel="noopener"}                      |
 | 3   | [Book] 03_Docker_Storage                       | [Hands-on] 03_Docker_Storage                       |
 | 4   | [Book] 04_Docker_Network                       | [Hands-on] 04_Docker_Network                       |
 | 5   | [Book] 05_Dockerfile                           | -                                                  |
