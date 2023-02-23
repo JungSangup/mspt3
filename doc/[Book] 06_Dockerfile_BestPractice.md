@@ -140,7 +140,7 @@ Java 프로젝트인 경우, JDK 보다는 JRE를 Base image로 사용하면 컨
 
 ### Use multi-stage builds
 
-![h:230](./img/docker_multi_stage_build.png)
+![h:230](./img/docker-multi-stage-build.png)
 Multi-stage build를 사용하면 중간 레이어와 파일의 수를 줄이지 않고도 최종 이미지의 크기를 크게 줄일 수 있습니다.
 첫 번째 '빌드' 컨테이너에서 앱을 빌드하고 동일한 Dockerfile을 사용하면서 다른 컨테이너에서 결과를 사용할 수 있습니다.
 
