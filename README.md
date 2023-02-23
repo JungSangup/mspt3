@@ -23,7 +23,19 @@
 
 
 ## 실습환경
-...
+실습교재의 내용을 직접 실행해볼 수 있는 환경은 다음과 같습니다.  
+환경에 따라 교재의 내용 중 일부는 실행되지 않을 수도 있습니다. 
+
+| 실습환경 | 설명 |
+| :--- | :--- |
+| [Minikube](https://minikube.sigs.k8s.io/) | 단일 노드 실행환경 입니다. 리눅스 환경(e.g. EC2 Instance)을 하나 준비한 다음 아래 가이드를 참고하여 준비합니다.<br>이 과정의 실습교재는 EC2 + Minikube를 기준으로 작성되었습니다.<br>[minikube start](https://minikube.sigs.k8s.io/docs/start/) |
+| [Killercoda](https://killercoda.com/brian) | 설치없이 간단히 실습해볼 수 있는 환경입니다.<br>이 과정의 실습교재 내용 대부분을 동일하게 구성해 놓았습니다. |
+| [Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/) | 학습용 환경인 경우 Windows에 Docker Desktop을 설치해서 Docker와 Kubernetes(Single-node)까지 실습해볼 수 있습니다.<br>설치 가이드 : [[Appendix] 02_Docker_desktop.md](./doc/%5BAppendix%5D%2002_Docker_desktop.md) |
+| [Play with Docker](https://labs.play-with-docker.com/) | 설치없이 간단히 실습해볼 수 있는 환경입니다. (Docker) |
+| [Play with Kubernetes](https://labs.play-with-k8s.com/) | 설치없이 간단히 실습해볼 수 있는 환경입니다. (Kubernetes) |  
+
+> WSL2기반의 Docker Desktop on Windows인 경우 Docker root dir.의 위치가 아래와 같습니다.
+> 탐색기에서 `\\wsl.localhost\docker-desktop-data\data\docker` 로 탐색  
 
 <br><br><br><br>
 
