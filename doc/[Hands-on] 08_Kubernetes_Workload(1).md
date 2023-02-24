@@ -196,7 +196,7 @@ spec:
       initialDelaySeconds: 3
       periodSeconds: 3
 ```
-> 파일명은 livenessProbe-httpGet.yaml로 합니다.
+> 파일명은 livenessProbe-httpGet.yaml로 합니다.  
 > `livenessProbe` 부분이 설정 부분입니다.
 
 <br><br><br>
@@ -231,10 +231,10 @@ my-nginx3       1/1     Running   0            6m25s   172.17.0.8   ip-172-31-23
 
 <br><br><br>
 
-테스트에 사용된 컨테이너는 libenessProbe 테스트를 위해서 생성 후 10초가 지난 뒤부터는 httpGet 요청에 대해서 500 Error를 발생하도록 되어있습니다.
+테스트에 사용된 컨테이너는 libenessProbe 테스트를 위해서 생성 후 10초가 지난 뒤부터는 httpGet 요청에 대해서 500 Error를 발생하도록 되어있습니다.  
 ([소스코드](https://github.com/kubernetes/kubernetes/blob/master/test/images/agnhost/liveness/server.go) 참고)
 
-livenessProbe는 계속해서 Pod의 상태를 살피고, 문제가 발생하면(500 error) 컨테이너를 재시작(RESTARTS) 합니다.
+livenessProbe는 계속해서 Pod의 상태를 살피고, 문제가 발생하면(500 error) 컨테이너를 재시작(RESTARTS) 합니다.  
 `kubectl get pods` 명령어의 결과에서 **RESTARTS** 의 숫자가 바로 이 재시작 횟수입니다.
 
 <br><br><br>
