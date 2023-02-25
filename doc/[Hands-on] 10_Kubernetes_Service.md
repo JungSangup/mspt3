@@ -261,7 +261,7 @@ Commercial support is available at
 >```
 > [SVC_NAME] 는 Service의 NAME
 
-잘 되네요...
+잘 되네요...  
 이제 Service를 만들면 클러스터 내에서는 서비스의 **이름**(**NAME**)으로도 접근이 가능합니다.
 
 <br>
@@ -403,7 +403,7 @@ ingress.networking.k8s.io/my-nginx-ingress created
 
 <br><br><br>
 
-자 이제 정말로 모두 준비가 됐습니다.
+자 이제 정말로 모두 준비가 됐습니다.  
 웹 브라우저에서 아래 URL로 접속해보세요.
 
 http://my-nginx.info
