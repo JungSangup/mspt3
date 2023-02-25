@@ -156,6 +156,7 @@ spec:
 ubuntu@ip-172-31-23-60:~$ kubectl apply -f nginx-clusterip-service.yaml
 service/nginx-clusterip-service created
 ```
+
 > 💻 명령어
 >```bash
 >kubectl apply -f nginx-clusterip-service.yaml
@@ -170,6 +171,7 @@ NAME                      TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes                ClusterIP   10.96.0.1      <none>        443/TCP   4d11h
 nginx-clusterip-service   ClusterIP   10.99.203.15   <none>        80/TCP    25s
 ```
+
 > 💻 명령어
 >```bash
 >kubectl get services
@@ -429,6 +431,7 @@ deployment.apps "my-nginx-deployment" deleted
 ubuntu@ip-10-0-1-161:~$ kubectl delete po curlpod
 pod "curlpod" deleted
 ```
+
 > 💻 명령어
 >```bash
 >kubectl delete -f nginx-ingress.yaml
