@@ -158,7 +158,7 @@ nginx-deployment-85fc747956-x6zmj   1/1     Running   0          4m23s
 >```bash
 >kubectl get pods --watch
 >```
-> `--watch` 는 앞의 명령어를 실행한 후 변경(Change)사항을 지속적으로 보여주는 Flag입니다.
+> `--watch` 는 앞의 명령어를 실행한 후 변경(Change)사항을 지속적으로 보여주는 Flag입니다.  
 > Watch를 멈추려면 Ctrl + c 를 입력합니다.
 
 <br><br><br>
