@@ -215,7 +215,8 @@ nginx-deployment-7dd48c557f-k6czs   1/1     Running             0          6s
 
 <br><br><br>
 
-Deployment에 어떤 변화가 생겼나 볼까요?
+Deployment에 어떤 변화가 생겼나 볼까요?  
+첫 번째 터미널에서 실행해주세요.
 ```bash
 ubuntu@ip-172-31-23-60:~$ kubectl describe deployment nginx-deployment | grep -i image
     Image:        nginx:1.19
