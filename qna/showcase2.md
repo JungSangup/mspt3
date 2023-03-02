@@ -12,7 +12,7 @@
 | 8   | [Book] 08_Kubernetes_Workload(1)               | ~[Hands-on] 08_Kubernetes_Workload(1)~               |
 | 9   | [Book] 09_Kubernetes_Workload(2)               | ~[Hands-on] 09_Kubernetes_Workload(2)~               |
 | 10  | [Book] 10_Kubernetes_Service                   | ~[Hands-on] 10_Kubernetes_Service~                   |
-| 11  | [Book] 11_Kubernetes_Storage                   | [Hands-on] 11_Kubernetes_Storage                   |
+| 11  | [Book] 11_Kubernetes_Storage                   | ~[Hands-on] 11_Kubernetes_Storage~                   |
 | 12  | [Book] 12_Kubernetes_Configuration             | [Hands-on] 12_Kubernetes_Configuration             |
 | 13  | [Book] 13_Kubernetes_Deployment_strategies     | [Hands-on] 13_Kubernetes_Deployment_strategies     |
 | 14  | [Book] 14_Kubernetes_Horizontal Pod Autoscaler | [Hands-on] 14_Kubernetes_Horizontal Pod Autoscaler |
