@@ -165,7 +165,7 @@ nginx-deployment-85fc747956-x6zmj   1/1     Running   0          4m23s
 
 ```
 
-> 💻 명령어
+> 💻 명령어 (Terminal 2)
 >```bash
 >kubectl get pods --watch
 >```
@@ -346,7 +346,7 @@ nginx-deployment-7dd48c557f-s9msd   1/1     Running   0          4m47s
 
 ```
 
-> 💻 명령어
+> 💻 명령어 (Terminal 2)
 >```bash
 >kubectl get pods --watch
 >```
@@ -583,7 +583,7 @@ nginx-deployment-85fc747956-hkvgs   1/1     Running   0          92s
 
 ```
 
-> 💻 명령어
+> 💻 명령어 (Terminal 2)
 >```bash
 >kubectl get pods --watch
 >```
