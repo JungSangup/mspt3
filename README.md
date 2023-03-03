@@ -98,7 +98,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [ ] 11장의 보너스 실습에서  http://todo-app.info/에 접속할 때 hosts파일에 수정하라는 부분이 명시 되어 있었는데, 이건 보너스 실습이어서 수행 안하는 사람도 있을것으로 추정 됩니다. 그래서 12장에서 http://todo-app.info/에 접속하는 부분이 나오기 전, hosts파일을 삭제 하라고 함께 명시 해 주면 좋을 것 같습니다.
 
-- [ ] 실습파일 위치 : hands_on_files/ch05 에서 mspt3/hands_on_files/ch05 까지 해서 넣어주는게 좋을 것 같습니다. (처음으로 실습 위치가 바뀌는 챕터다 보니 참고용으로 넣으면 좋을 것 같습니다.) / Ch05, 08, 09, 10 등 상단 수행 디렉토리 위치에 mspt3 디렉토리도 표시되면 좋을 것 같습니다. (ex. mspt3/hands_on_files/ch05)
+- [x] 실습파일 위치 : hands_on_files/ch05 에서 mspt3/hands_on_files/ch05 까지 해서 넣어주는게 좋을 것 같습니다. (처음으로 실습 위치가 바뀌는 챕터다 보니 참고용으로 넣으면 좋을 것 같습니다.) / Ch05, 08, 09, 10 등 상단 수행 디렉토리 위치에 mspt3 디렉토리도 표시되면 좋을 것 같습니다. (ex. mspt3/hands_on_files/ch05) -> 실습파일이 있는 모든 챕터에 디렉토리 이동명령어 추가함.
 
 - [ ] [Hands-on] 07. 에서 kubectl logs -n kube-system [KUBE-SCHEDULER-NAME]
 확인 하는 부분에서 logs 확인하면 failed 가 나와서 수강생들이 잘못 한 것으로 오해할 수 있으니 log 확인이므로 fail 가 나와도 상관없이 정상 처리 된 것임을 알려주시면 좋을 것 같습니다.
