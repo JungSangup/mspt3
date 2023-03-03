@@ -223,6 +223,8 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 **[접속방법2]**  MobaXterm
 MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 
+설치 방법은 [SSH 도구 설치하기](https://github.com/mspt2/Operation_gitops_2023/blob/main/docs/1-1-VPC.md#1-9-ssh-%EB%8F%84%EA%B5%AC-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)를 참고하세요.
+
 ![](./img/mobaxterm1.png)
 > MobaXterm을 실행하고 `Session` 버튼을 클릭합니다.
 
