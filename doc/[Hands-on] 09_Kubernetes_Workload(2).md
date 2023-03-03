@@ -12,6 +12,17 @@
 
 💾실습파일 위치 : [hands_on_files/ch09](../hands_on_files/ch09)
 
+미리 준비된 실습용 파일을 사용하려는 경우 아래 디렉토리 이동 명령어를 실행해주세요.
+```bash
+ubuntu@ip-172-31-23-60:~$ cd ~/mspt3/hands_on_files/ch09
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch09$
+```
+
+> 💻 명령어
+>```bash
+>cd ~/mspt3/hands_on_files/ch09
+>```
+
 ---
 
 ## 1. ReplicaSet을 이용해 Pod 관리하기

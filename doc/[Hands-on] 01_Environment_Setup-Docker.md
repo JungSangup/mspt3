@@ -306,7 +306,7 @@ Reading package lists... Done
 
 <br><br><br>
 
-다음은, HTTPS를 이용하기 위해서 몇 가지 패키지를 설치합니다.
+다음은, HTTPS를 이용하기 위해서 몇 가지 패키지를 설치합니다.  
 ```bash
 ubuntu@ip-172-31-23-60:~$ sudo apt-get install -y ca-certificates curl gnupg lsb-release
 Reading package lists... Done
@@ -500,6 +500,9 @@ For more examples and ideas, visit:
 <br><br><br>
 
 그리고, 실습에 필요한 몇 가지 패키지를 추가로 더 설치할게요.  
+- net-tools : ifconfig, netstat 등의 명령어 사용
+- tree : 디렉토리 구조를 보기위한 툴
+- conntrack : 리눅스 커널의 network connection을 관리하고 추적
 ```bash
 ubuntu@ip-172-31-23-60:~$ sudo apt-get update
 Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal InRelease

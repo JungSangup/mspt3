@@ -565,7 +565,8 @@ Login Succeeded
 >```bash
 >docker login -u [USER-NAME]
 >```
-> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
+> [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.  
+> ❗ Password 입력 중에는 화면에 표시되지 않습니다. 정확히 타이핑 후 엔터키를 누르면 됩니다.
 
 <br><br><br>
 
@@ -638,4 +639,18 @@ d68fe3ec9f65
 > 💻 명령어
 >```bash
 >docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+>```
+
+<br>
+
+정리 후에는 아래와 같이 실행중인 컨테이너가 없습니다.
+```bash
+ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-23-60:~/app$
+```
+
+> 💻 명령어
+>```bash
+>docker ps --all
 >```

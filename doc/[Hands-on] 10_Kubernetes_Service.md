@@ -12,6 +12,17 @@
 
 💾실습파일 위치 : [hands_on_files/ch10](../hands_on_files/ch10)
 
+미리 준비된 실습용 파일을 사용하려는 경우 아래 디렉토리 이동 명령어를 실행해주세요.
+```bash
+ubuntu@ip-172-31-23-60:~$ cd ~/mspt3/hands_on_files/ch10
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch10$
+```
+
+> 💻 명령어
+>```bash
+>cd ~/mspt3/hands_on_files/ch10
+>```
+
 ---
 
 ## 1. Service를 이용해서 Pod에 연결하기

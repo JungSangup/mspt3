@@ -68,17 +68,31 @@ boot  etc  lib	 lib64	media	opt  root  sbin  sys  usr
 우리가 앞에서 알아본 **레이어**의 개념을 잘 떠올려 보세요.
 
 앞에서 테스트한 컨테이너는 삭제하고 다음으로 넘어갈게요.  
-아래 명령어를 실행해주세요.
-
+아래 명령어를 실행해주세요.  
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker rm -f $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+ubuntu@ip-172-31-23-60:~$ docker rm --force $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 06388b0ee44f
 69a984336a12
 ```
 
 > 💻 명령어
 >```bash
->docker rm -f $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+>docker rm --force $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+>```
+❗ `--force`옵션 ([Force-remove a running container (--force)](https://docs.docker.com/engine/reference/commandline/rm/#force))은 running상태의 컨테이너를 강제로 삭제하는 옵션입니다.
+
+<br>
+
+정리 후에는 아래와 같이 실행중인 컨테이너가 없습니다.
+```bash
+ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-23-60:~/app$
+```
+
+> 💻 명령어
+>```bash
+>docker ps --all
 >```
 
 <br><br><br><br><br>
@@ -217,7 +231,7 @@ c6859ec898566de2e194acd1dd7b1df8832fe035e7e1179deb21c587e66502c9
 
 마찬가지로 정리하고 마칠게요.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker rm -f my-todo-manager
+ubuntu@ip-172-31-23-60:~$ docker rm --force my-todo-manager
 my-todo-manager
 ubuntu@ip-172-31-23-60:~$ docker volume rm todo-db
 todo-db
@@ -225,8 +239,22 @@ todo-db
 
 > 💻 명령어
 >```bash
->docker rm -f my-todo-manager
+>docker rm --force my-todo-manager
 >```
 >```bash
 >docker volume rm todo-db
+>```
+
+<br>
+
+정리 후에는 아래와 같이 실행중인 컨테이너가 없습니다.
+```bash
+ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-23-60:~/app$
+```
+
+> 💻 명령어
+>```bash
+>docker ps --all
 >```

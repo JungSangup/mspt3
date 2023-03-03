@@ -319,6 +319,20 @@ my-mysql
 >docker rm -f my-todo-manager my-mysql
 >```
 
+<br>
+
+정리 후에는 아래와 같이 실행중인 컨테이너가 없습니다.
+```bash
+ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-23-60:~/app$
+```
+
+> 💻 명령어
+>```bash
+>docker ps --all
+>```
+
 <br><br>
 
 여기까지 실습을 마치겠습니다.  ˘◡˘
