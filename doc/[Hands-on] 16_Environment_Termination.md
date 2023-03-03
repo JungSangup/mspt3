@@ -59,6 +59,8 @@
 어느정도 시간이 지나고 나면, EC2 Instance의 상태가 **Terminated**로 바뀌어 있을거예요.  
 그리고, 시간이 더 지나면 목록에서도 사라집니다.
 
+🤔 다음 단계로 넘어가기 전에 **Terminated** 상태로 바뀔 때까지 기다려주세요. 다음 단계(2. Security group 삭제하기)는 EC2 Instance가 완전히 삭제된 후 진행 가능합니다.
+
 <br><br><br><br><br>
 
 ## 2. Security group 삭제하기
@@ -69,6 +71,8 @@
 
 ![h:450](./img/aws_ec2_18.png)
 > 사용한 Security group (mspt3-sg)을 선택하고, `Delete security groups`를 실행합니다.
+
+
 
 <br><br><br>
 
