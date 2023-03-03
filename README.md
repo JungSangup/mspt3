@@ -96,7 +96,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [ ] 실습내용 중 VI가 필요한 부분에 내용 추가 ( vi 뒤에 파일명 넣기, i눌러서 편집, :wq로 종료, mkdir로 파일 dir만들기 등등. Dockerfile 생성하는 부분이나, yaml 생성하는 부분들에 필요함.)
 
-- [ ] 11장의 보너스 실습에서  http://todo-app.info/에 접속할 때 hosts파일에 수정하라는 부분이 명시 되어 있었는데, 이건 보너스 실습이어서 수행 안하는 사람도 있을것으로 추정 됩니다. 그래서 12장에서 http://todo-app.info/에 접속하는 부분이 나오기 전, hosts파일을 삭제 하라고 함께 명시 해 주면 좋을 것 같습니다.
+- [x] 11장의 보너스 실습에서  http://todo-app.info/에 접속할 때 hosts파일에 수정하라는 부분이 명시 되어 있었는데, 이건 보너스 실습이어서 수행 안하는 사람도 있을것으로 추정 됩니다. 그래서 12장에서 http://todo-app.info/에 접속하는 부분이 나오기 전, hosts파일을 삭제 하라고 함께 명시 해 주면 좋을 것 같습니다. -> 11,12장 hosts 관련부분 수정했습니다.
 
 - [x] 실습파일 위치 : hands_on_files/ch05 에서 mspt3/hands_on_files/ch05 까지 해서 넣어주는게 좋을 것 같습니다. (처음으로 실습 위치가 바뀌는 챕터다 보니 참고용으로 넣으면 좋을 것 같습니다.) / Ch05, 08, 09, 10 등 상단 수행 디렉토리 위치에 mspt3 디렉토리도 표시되면 좋을 것 같습니다. (ex. mspt3/hands_on_files/ch05) -> 실습파일이 있는 모든 챕터에 디렉토리 이동명령어 추가함.
 
