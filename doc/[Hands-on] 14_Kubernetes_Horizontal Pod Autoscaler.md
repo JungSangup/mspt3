@@ -163,4 +163,25 @@ service "php-apache" deleted
 >kubectl delete -f https://k8s.io/examples/application/php-apache.yaml
 >```
 
+<br>
+
+정리 후 상태는 아래와 같습니다. (service/kubernetes 는 시스템에서 사용하는 리소스입니다.)
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get hpa
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   125m
+```
+
+> 💻 명령어
+>```bash
+>kubectl get hpa
+>```
+>```bash
+>kubectl get all
+>```
+
+<br>
+
 끝~~~  ＿〆(。╹‿ ╹ 。)

@@ -442,6 +442,21 @@ deployment.apps "nginx-deployment" deleted
 >kubectl delete -f nginx-recreate.yaml
 >```
 
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get deployments
+No resources found in default namespace.
+```
+
+> 💻 명령어
+>```bash
+>kubectl get deployments
+>```
+
+<br>
+
 이제 두 번째 터미널은 Ctrl + c 를 눌러 Watch를 멈추겠습니다.
 
 <br><br><br><br><br>
@@ -691,6 +706,23 @@ deployment.apps "nginx-deployment" deleted
 >kubectl delete -f nginx-rollingupdate.yaml
 >```
 
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get deployments
+No resources found in default namespace.
+```
+
+> 💻 명령어
+>```bash
+>kubectl get deployments
+>```
+
+<br>
+
 두 번째 터미널은 Ctrl + c 를 눌러 Watch를 멈추겠습니다.
+
+<br>
 
 끝~

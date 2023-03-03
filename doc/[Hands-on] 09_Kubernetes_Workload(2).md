@@ -164,6 +164,19 @@ replicaset.apps "nginx-replicaset" deleted
 >kubectl delete -f nginx-replicaset.yaml
 >```
 
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get replicasets
+No resources found in default namespace.
+```
+
+> 💻 명령어
+>```bash
+>kubectl get replicasets
+>```
+
 <br><br><br><br><br>
 
 ## 2. Deployment를 이용해 Pod 관리하기
@@ -423,4 +436,17 @@ deployment.apps "my-nginx-deployment" deleted
 > 💻 명령어
 >```bash
 >kubectl delete -f nginx-deployment.yaml
+>```
+
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get deployments
+No resources found in default namespace.
+```
+
+> 💻 명령어
+>```bash
+>kubectl get deployments
 >```

@@ -265,3 +265,16 @@ pod "my-nginx3" deleted
 >```bash
 >kubectl delete pod --all
 >```
+
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get pods
+No resources found in default namespace.
+```
+
+> 💻 명령어
+>```bash
+>kubectl get pods
+>```

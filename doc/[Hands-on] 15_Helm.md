@@ -483,6 +483,20 @@ release "my-wordpress" uninstalled
 >helm uninstall my-wordpress
 >```
 
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ helm list
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+ubuntu@ip-172-31-28-216:~$
+```
+
+> 💻 명령어
+>```bash
+>helm list
+>```
+
 <br><br><br><br><br>
 
 ## 2. ToDo App. 실행해보기
@@ -532,6 +546,20 @@ release "my-todo-app" uninstalled
 > 💻 명령어
 >```bash
 >helm uninstall my-todo-app
+>```
+
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ helm list
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+ubuntu@ip-172-31-28-216:~$
+```
+
+> 💻 명령어
+>```bash
+>helm list
 >```
 
 <br><br><br>
@@ -773,6 +801,20 @@ release "my-todo-app" uninstalled
 > 💻 명령어
 >```bash
 >helm uninstall my-todo-app
+>```
+
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ helm list
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+ubuntu@ip-172-31-28-216:~$
+```
+
+> 💻 명령어
+>```bash
+>helm list
 >```
 
 한꺼번에 설치(install), 업데이트(update), 롤백(rollback), 삭제(uninstall)되니 편하네요.

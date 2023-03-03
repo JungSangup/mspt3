@@ -455,4 +455,23 @@ pod "curlpod" deleted
 
 <br>
 
+정리 후 상태는 아래와 같습니다. (service/kubernetes 는 시스템에서 사용하는 리소스입니다.)
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get ingress
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m35s
+```
+
+> 💻 명령어
+>```bash
+>kubectl get ingress
+>```
+>```bash
+>kubectl get all
+>```
+
+<br>
+
 끝~

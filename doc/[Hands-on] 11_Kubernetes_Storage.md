@@ -297,6 +297,32 @@ persistentvolumeclaim "nginx-pvc" deleted
 >
 >```
 
+정리 후 상태는 아래와 같습니다. (service/kubernetes 는 시스템에서 사용하는 리소스입니다.)
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get ingress
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get pvc
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get pv
+No resources found
+ubuntu@ip-172-31-23-60:~$ kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m35s
+```
+
+> 💻 명령어
+>```bash
+>kubectl get ingress
+>```
+>```bash
+>kubectl get pvc
+>```
+>```bash
+>kubectl get pv
+>```
+>```bash
+>kubectl get all
+>```
 
 이번 실습은 여기까지 입니다.  ˘◡˘  
 끝~
@@ -399,6 +425,35 @@ persistentvolumeclaim "todo-pvc" deleted
 >kubectl delete -f todo-deployment-volume.yaml
 >kubectl delete -f todo-pvc.yaml
 >
+>```
+
+<br>
+
+정리 후 상태는 아래와 같습니다. (service/kubernetes 는 시스템에서 사용하는 리소스입니다.)
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get ingress
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get pvc
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get pv
+No resources found
+ubuntu@ip-172-31-23-60:~$ kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m35s
+```
+
+> 💻 명령어
+>```bash
+>kubectl get ingress
+>```
+>```bash
+>kubectl get pvc
+>```
+>```bash
+>kubectl get pv
+>```
+>```bash
+>kubectl get all
 >```
 
 <br>

@@ -689,4 +689,45 @@ configmap "mysql-config" deleted
 
 <br>
 
+정리 후 상태는 아래와 같습니다. (service/kubernetes, kube-root-ca.crt, default-token-OOOOO 는 시스템에서 사용하는 리소스입니다.)
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get ingress
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get pvc
+No resources found in default namespace.
+ubuntu@ip-172-31-23-60:~$ kubectl get pv
+No resources found
+ubuntu@ip-172-31-23-60:~$ kubectl get configmaps
+NAME               DATA   AGE
+kube-root-ca.crt   1      12m
+ubuntu@ip-172-31-23-60:~$ kubectl get secrets
+NAME                  TYPE                                  DATA   AGE
+default-token-bx5vw   kubernetes.io/service-account-token   3      12m
+ubuntu@ip-172-31-23-60:~$ kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m35s
+```
+
+> 💻 명령어
+>```bash
+>kubectl get ingress
+>```
+>```bash
+>kubectl get pvc
+>```
+>```bash
+>kubectl get pv
+>```
+>```bash
+>kubectl get configmaps
+>```
+>```bash
+>kubectl get secrets
+>```
+>```bash
+>kubectl get all
+>```
+
+<br>
+
 이번 실습은 여기까지 입니다.   ＿〆(。╹‿ ╹ 。)

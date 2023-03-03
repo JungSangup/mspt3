@@ -83,7 +83,7 @@ ubuntu@ip-172-31-23-60:~$ docker rm --force $(docker ps -a -f "name=my-ubuntu1" 
 
 <br>
 
-정리 후에는 아래와 같이 실행중인 컨테이너가 없습니다.
+정리 후 상태는 아래와 같습니다.
 ```bash
 ubuntu@ip-172-31-23-60:~/app$ docker ps --all
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
@@ -247,7 +247,7 @@ todo-db
 
 <br>
 
-정리 후에는 아래와 같이 실행중인 컨테이너가 없습니다.
+정리 후 상태는 아래와 같습니다.
 ```bash
 ubuntu@ip-172-31-23-60:~/app$ docker ps --all
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
