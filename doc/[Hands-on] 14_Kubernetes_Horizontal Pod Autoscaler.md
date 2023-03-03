@@ -67,7 +67,7 @@ service/php-apache created
 명령어는 다음과 같습니다.  
 CPU 사용량을 50%로 유지하기 위해서 Pod의 개수를 1 에서 10 사이로 조정하라는 의미입니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+ubuntu@ip-172-31-23-60:~$ kubectl autoscale deployment php-apache --cpu-percent=30 --min=1 --max=10
 horizontalpodautoscaler.autoscaling/php-apache autoscaled
 ```
 
@@ -81,8 +81,8 @@ horizontalpodautoscaler.autoscaling/php-apache autoscaled
 잘 만들어졌나 볼까요?
 ```bash
 ubuntu@ip-172-31-23-60:~$ kubectl get hpa
-NAME         REFERENCE               TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
-php-apache   Deployment/php-apache   0%/50%    1         10        1          39s
+NAME         REFERENCE               TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+php-apache   Deployment/php-apache   <unknown>/30%   1         10        1          27s
 ```
 
 > 💻 명령어
@@ -118,22 +118,26 @@ ubuntu@ip-172-31-23-60:~$ kubectl get hpa
 NAME         REFERENCE               TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
 php-apache   Deployment/php-apache   250%/50%   1         10        4          3m50s
 
-ubuntu@ip-172-31-23-60:~$ kubectl get pods
+ubuntu@ip-172-31-23-60:~$ watch -n 1 kubectl get pods
+```
+```bash
+Every 1.0s: kubectl get pods                                                                                ip-172-31-28-216: Fri Mar  3 16:21:53 2023
+
 NAME                          READY   STATUS    RESTARTS   AGE
-load-generator                1/1     Running   0          109s
-php-apache-7d665c4ddf-8pjtg   1/1     Running   0          29s
-php-apache-7d665c4ddf-dgdjh   0/1     Pending   0          14s
-php-apache-7d665c4ddf-j6zsq   1/1     Running   0          5m33s
-php-apache-7d665c4ddf-jth8v   1/1     Running   0          29s
-php-apache-7d665c4ddf-nxkzc   1/1     Running   0          29s
+load-generator                1/1     Running   0          74s
+php-apache-7d665c4ddf-5x5cv   1/1     Running   0          28s
+php-apache-7d665c4ddf-7fv9f   0/1     Pending   0          13s
+php-apache-7d665c4ddf-8fmsr   1/1     Running   0          28s
+php-apache-7d665c4ddf-hdhgg   1/1     Running   0          3m3s
+php-apache-7d665c4ddf-vfhw2   1/1     Running   0          28s
 ```
 
-> 💻 명령어
+> 💻 명령어 (Terminal 2)
 >```bash
 >kubectl get hpa
 >```
 >```bash
->kubectl get pods
+>watch -n 1 kubectl get pods
 >```
 > 1개에서 시작한 Pod의 개수가 늘어나는 걸 확인할 수 있습니다.
 
@@ -143,6 +147,8 @@ php-apache-7d665c4ddf-nxkzc   1/1     Running   0          29s
 Ctrl + c로 중지하시면 됩니다.
 
 부하를 중지하면 다시 Pod의 수가 줄어드는것도 확인할 수 있습니다.
+
+두 번째 터미널의 watch명령어도 Ctrl + c로 중지해주세요.
 
 <br><br><br>
 
