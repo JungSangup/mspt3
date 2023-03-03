@@ -608,7 +608,15 @@ HOME=/root
 
 <br><br><br>
 
-브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보시구요.
+브라우저에서 http://todo-app.info/ 로 접속해서 테스트도 해보세요.    
+ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 ***todo-app.info*** 가 있어야 합니다. 없으면 추가해주세요.  
+- Windows라면 **C:\Windows\System32\drivers\etc\hosts** 파일에,
+- Linux계열은 **/etc/hosts** 파일에 추가하면 됩니다.
+```bash
+#mspt3
+11.22.33.44  my-nginx.info todo-app.info
+```
+> 11.22.33.44 대신 여러분 EC2 Instance의 **Public IPv4 address**를 써주세요.
 
 ![h:400](./img/k8s_todo_ingress.png)
 
