@@ -237,7 +237,7 @@ ubuntu@ip-172-31-23-60:~$ echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-prov
 
 > 💻 명령어
 >```bash
->echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
+>echo '<h1>Hello kubernetes</h1> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/JbHI1yI1Ndk" allowfullscreen></iframe>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
 >```
 
 <br>
@@ -403,6 +403,9 @@ todo-app-deployment-55464569cf-x8l6h   1/1     Running   0          8s
 >```bash
 >kubectl get pod
 >```
+
+위의 명령어들을 실행한 다음에도 데이터들이 유지되는지 확인해보세요.  
+이유는... 여러분도 잘 아시다시피, 데이터는 Volume영역에 저장되기 때문입니다.
 
 <br><br><br>
 
