@@ -161,14 +161,14 @@ bitnami/wordpress-intel	2.1.31       	6.1.1      	DEPRECATED WordPress for Intel
 다음은 `helm pull` 명령어 입니다.  
 **Helm repository**에 등록되어 있는 Helm chart를 다운로드(pull)하는 명령어 입니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ helm pull bitnami/wordpress --version 15.0.7
+ubuntu@ip-172-31-23-60:~$ helm pull bitnami/wordpress
 ubuntu@ip-172-31-23-60:~$ ls wordpress*
-wordpress-15.0.7.tgz
+wordpress-15.2.48.tgz
 ```
 
 > 💻 명령어
 >```bash
->helm pull bitnami/wordpress --version 15.0.7
+>helm pull bitnami/wordpress
 >```
 >```bash
 >ls wordpress*
@@ -179,7 +179,7 @@ wordpress-15.0.7.tgz
 tar 파일로 받아지네요.  
 압축도 풀어볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~$ tar -xvf wordpress-15.0.7.tgz
+ubuntu@ip-172-31-23-60:~$ tar -xvf wordpress*
 wordpress/Chart.yaml
 wordpress/Chart.lock
 wordpress/values.yaml
@@ -193,7 +193,7 @@ wordpress/templates/deployment.yaml
 
 > 💻 명령어
 >```bash
->tar -xvf wordpress-15.0.7.tgz
+>tar -xvf wordpress*
 >```
 
 <br><br><br>
