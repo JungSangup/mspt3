@@ -263,7 +263,7 @@ my-nginx-deployment-7cbbdb88f6-8n59s   1/1     Running   0          116s
 my-nginx-deployment-7cbbdb88f6-jvvsm   1/1     Running   0          116s
 my-nginx-deployment-7cbbdb88f6-w44q8   1/1     Running   0          116s
 ubuntu@ip-172-31-23-60:~$ kubectl exec -it my-nginx-deployment-7cbbdb88f6-8n59s -- cat /usr/share/nginx/html/index.html
-<h1>Hello kubernetes</h1>
+<h1>Hello kubernetes</h1> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/JbHI1yI1Ndk" allowfullscreen></iframe>
 ```
 > 💻 명령어
 >```bash
