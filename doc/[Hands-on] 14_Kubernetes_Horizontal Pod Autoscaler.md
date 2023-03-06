@@ -82,7 +82,7 @@ horizontalpodautoscaler.autoscaling/php-apache autoscaled
 ```bash
 ubuntu@ip-172-31-23-60:~$ kubectl get hpa
 NAME         REFERENCE               TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-php-apache   Deployment/php-apache   <unknown>/30%   1         10        1          27s
+php-apache   Deployment/php-apache   <unknown>/50%   1         10        1          27s
 ```
 
 > 💻 명령어
