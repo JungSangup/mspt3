@@ -67,7 +67,7 @@ service/php-apache created
 명령어는 다음과 같습니다.  
 CPU 사용량을 50%로 유지하기 위해서 Pod의 개수를 1 에서 10 사이로 조정하라는 의미입니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ kubectl autoscale deployment php-apache --cpu-percent=30 --min=1 --max=10
+ubuntu@ip-172-31-23-60:~$ kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
 horizontalpodautoscaler.autoscaling/php-apache autoscaled
 ```
 
