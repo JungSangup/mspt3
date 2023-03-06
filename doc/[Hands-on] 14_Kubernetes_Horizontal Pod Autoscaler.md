@@ -112,34 +112,40 @@ OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK
 
 <br><br><br>
 
-이제 터미널을 하나 더 열고 아래 명령어를 실행해서 어떤 변화가 있는지 알아봅니다.
+이제 터미널을 더 열고 아래 명령어를 실행해서 어떤 변화가 있는지 알아봅니다.  
+가능하면 두 개의 터미널을 더 열어두고 아래 두 가지를 같이 확인해보면 좋습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ kubectl get hpa
+Every 1.0s: kubectl get hpa                             ip-172-31-28-216: Mon Mar  6 13:15:05 2023
+
 NAME         REFERENCE               TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
-php-apache   Deployment/php-apache   250%/50%   1         10        4          3m50s
-
-ubuntu@ip-172-31-23-60:~$ watch -n 1 kubectl get pods
-```
-```bash
-Every 1.0s: kubectl get pods                                                                                ip-172-31-28-216: Fri Mar  3 16:21:53 2023
-
-NAME                          READY   STATUS    RESTARTS   AGE
-load-generator                1/1     Running   0          74s
-php-apache-7d665c4ddf-5x5cv   1/1     Running   0          28s
-php-apache-7d665c4ddf-7fv9f   0/1     Pending   0          13s
-php-apache-7d665c4ddf-8fmsr   1/1     Running   0          28s
-php-apache-7d665c4ddf-hdhgg   1/1     Running   0          3m3s
-php-apache-7d665c4ddf-vfhw2   1/1     Running   0          28s
+php-apache   Deployment/php-apache   71%/50%   1         10        6          4m13s
 ```
 
 > 💻 명령어 (Terminal 2)
 >```bash
->kubectl get hpa
+>watch -n 1 kubectl get hpa
 >```
+> watch 명령어는 Ctrl + c로 중단할 수 있습니다.
+
+<br>
+
+```bash
+Every 1.0s: kubectl top pod                             ip-172-31-28-216: Mon Mar  6 13:15:05 2023
+
+NAME                          CPU(cores)   MEMORY(bytes)
+load-generator                8m           0Mi
+php-apache-7d665c4ddf-2b8rf   122m         11Mi
+php-apache-7d665c4ddf-5r24h   121m         11Mi
+php-apache-7d665c4ddf-cxbhb   172m         11Mi
+php-apache-7d665c4ddf-l6lmv   158m         11Mi
+```
+
+> 💻 명령어 (Terminal 2)
 >```bash
->watch -n 1 kubectl get pods
+>watch -n 1 kubectl top pod
 >```
-> 1개에서 시작한 Pod의 개수가 늘어나는 걸 확인할 수 있습니다.
+> watch 명령어는 Ctrl + c로 중단할 수 있습니다.
+
 
 <br><br><br>
 
@@ -148,7 +154,7 @@ Ctrl + c로 중지하시면 됩니다.
 
 부하를 중지하면 다시 Pod의 수가 줄어드는것도 확인할 수 있습니다.
 
-두 번째 터미널의 watch명령어도 Ctrl + c로 중지해주세요.
+다른 터미널의 watch명령어도 Ctrl + c로 중지해주세요.
 
 <br><br><br>
 
