@@ -1231,6 +1231,26 @@ http://my-nginx.io
 
 ![h:300](./img/k8s_nginx_ingress.png)
 
+<br><br><br>
+
+잘 되죠?  
+그렇다면, 이제 남은것은 내 차트를 잘 패키징하면 됩니다.
+```
+ubuntu@ip-172-31-23-60:~$ helm package ./my-chart
+Successfully packaged chart and saved it to: /home/ubuntu/mspt3/hands_on_files/ch15/my-chart-0.1.0.tgz
+```
+
+> 💻 명령어
+>```bash
+>helm package ./my-chart
+>```
+
+**my-chart-0.1.0.tgz**라는 파일이 만들어집니다.
+
+helm chart repository에 업로드하거나, github같은곳에 업로드 해서 사용하시면 됩니다.
+
+<br><br><br>
+
 여기까지 Helm 에 대해 알아보았습니다.
 
 정리하고 마치겠습니다.
