@@ -349,8 +349,7 @@ Containers:
 >```bash
 >kubectl describe pod [KUBE-SCHEDULER-NAME] --namespace kube-system
 >```
->[KUBE-SCHEDULER-NAME] 에는 앞에서 조회한 결과 중 Kube-scheculer의 이름을 적어줍니다.
-
+>[KUBE-SCHEDULER-NAME] 에는 앞에서 조회한 결과 중 Kube-scheculer의 이름(e.g. kube-scheduler-ip-172-31-23-60)을 적어줍니다.
 
 <br><br><br>
 
@@ -375,7 +374,7 @@ I0211 14:35:05.683681       1 tlsconfig.go:240] "Starting DynamicServingCertific
 >```bash
 >kubectl logs -n kube-system [KUBE-SCHEDULER-NAME]
 >```
->[KUBE-SCHEDULER-NAME] 에는 앞에서 조회한 결과 중 Kube-scheculer의 이름을 적어줍니다.
+>[KUBE-SCHEDULER-NAME] 에는 앞에서 조회한 결과 중 Kube-scheculer의 이름(e.g. kube-scheduler-ip-172-31-23-60)을 적어줍니다.
 
 <br>
 
