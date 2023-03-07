@@ -417,7 +417,7 @@ ingress.networking.k8s.io/my-nginx-ingress created
 자 이제 정말로 모두 준비가 됐습니다.  
 웹 브라우저에서 아래 URL로 접속해보세요.
 
-http://my-nginx.info
+http://my-nginx.io
 
 ![h:300](./img/k8s_nginx_ingress.png)
 

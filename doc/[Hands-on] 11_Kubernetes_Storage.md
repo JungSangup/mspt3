@@ -251,7 +251,7 @@ Nginx에서 보여줄 간단한 **index.html**파일을 하나 만들었습니�
 
 이제 브라우저에서 어떻게 나오나 볼까요?
 
-http://my-nginx.info
+http://my-nginx.io
 
 ![h:200](./img/k8s_nginx_pvc.png)
 
