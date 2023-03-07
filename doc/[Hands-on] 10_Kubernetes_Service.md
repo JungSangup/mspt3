@@ -358,7 +358,7 @@ Node까지의 경로가 열려있다면 어디서든 이 IP로 접근 가능합�
 이번에는 Ingress 리소스를 생성하고 등록된 URL을 이용해서 접속해 보겠습니다.
 
 먼저 Ingress 리소스를 아래와 같이 준비합니다.  
-웹 브라우저에서 http://my-nginx.info 와 같이 입력해서 접속해보려고 합니다.
+웹 브라우저에서 http://my-nginx.io 와 같이 입력해서 접속해보려고 합니다.
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -369,7 +369,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-    - host: my-nginx.info
+    - host: my-nginx.io
       http:
         paths:
           - path: /
@@ -408,7 +408,7 @@ ingress.networking.k8s.io/my-nginx-ingress created
 
 ```bash
 #mspt3
-11.22.33.44  my-nginx.info
+11.22.33.44  my-nginx.io
 ```
 > 11.22.33.44 대신 여러분 EC2 Instance의 **Public IPv4 address**를 써주세요.
 
