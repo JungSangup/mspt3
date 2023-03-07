@@ -232,7 +232,7 @@ ingress.networking.k8s.io/my-nginx-ingress created
 
 아직 한 가지 더 할 일이 남았습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ echo '<h1>Hello kubernetes</h1>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
+ubuntu@ip-172-31-23-60:~$ echo '<h1>Hello kubernetes</h1> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/JbHI1yI1Ndk" allowfullscreen></iframe>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
 ```
 
 > 💻 명령어
