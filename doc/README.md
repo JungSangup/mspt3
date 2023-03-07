@@ -21,6 +21,9 @@
 
 
 ## 실습 시작 전 확인사항
+실습을 시작하기 전 실습환경을 확인하는 방법입니다.  
+이전 실습을 진행한 후 환경에 변화가 있다면 아래 내용을 체크해주세요.
+
 - Docker 실습인 경우
     - [ ] 실습용 VM(EC2) Instance가 시작되어 있나요?
         - 아니라면, [AWS Console](https://aws.amazon.com/console/)에서 EC2 Instance를 선택하고 시작(`Start instance`)해주세요.
