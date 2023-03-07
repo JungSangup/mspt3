@@ -124,7 +124,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [ ] 추가 과제로 HPA를 운영 환경에서 적용할 때의 고려사항을 확인할 수 있는 예제가 하나 더 있어도 좋을 것 같습니다
 
 [15.md]
-- [ ] 후속 과정에서 헬름 차트를 사용하는 방식을 고려하여 필요한 이론, 실습 내용이 보완되었으면 합니다 ( [2주차(Outer Architecture)](https://github.com/mspt2/MSP-pjt-2w/blob/main/2w(Outer%20Architecture).md) 참조 , helm create로 eshop 차트 만들기 ) 
+- [x] 후속 과정에서 헬름 차트를 사용하는 방식을 고려하여 필요한 이론, 실습 내용이 보완되었으면 합니다 ( [2주차(Outer Architecture)](https://github.com/mspt2/MSP-pjt-2w/blob/main/2w(Outer%20Architecture).md) 참조 , helm create로 eshop 차트 만들기 ) -> 내용 추가함. (3. 나의 차트 만들어보기)
 - [ ] 쿠버네티스에 익숙한 입과자를 위한 심화 학습 과제가 있으면 좋겠습니다
 
 [16.md]
