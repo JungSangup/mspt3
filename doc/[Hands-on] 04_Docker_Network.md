@@ -312,11 +312,16 @@ mysql> select * from todo_items;
 ubuntu@ip-172-31-23-60:~$ docker rm -f my-todo-manager my-mysql
 my-todo-manager
 my-mysql
+ubuntu@ip-172-31-23-60:~$ docker network rm todo-app
+todo-app
 ```
 
 > 💻 명령어
 >```bash
 >docker rm -f my-todo-manager my-mysql
+>```
+>```bash
+>docker network rm todo-app
 >```
 
 <br>
