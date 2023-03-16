@@ -147,12 +147,12 @@ Kubernetes object는 일반적으로 아래와 같이 **YAML**파일로 정의�
 - **metadata** : Name, UID, Namespace등의 Object를 구분지을 수 있는 정보
 - **spec** : Object의 요구되는 상태(= Desired state)
   
-  ```yaml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: nginx-deployment
-  spec:
+spec:
   selector:
     matchLabels:
       app: nginx
@@ -167,7 +167,7 @@ Kubernetes object는 일반적으로 아래와 같이 **YAML**파일로 정의�
         image: nginx:1.14.2
         ports:
         - containerPort: 80
-  ```
+```
 
 ---
 
