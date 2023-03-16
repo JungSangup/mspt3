@@ -907,7 +907,7 @@ ingress:
 
 바뀐 부분은 다음과 같습니다.
 - ingress.enabled : false -> true
-- ingress.hosts[0].host : chart-example.local -> my-ninx.io 로 변경
+- ingress.hosts[0].host : chart-example.local -> my-nginx.io 로 변경
 
 <br><br><br>
 
