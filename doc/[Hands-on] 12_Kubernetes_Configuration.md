@@ -659,7 +659,8 @@ Bye
 >```bash
 >kubectl exec -it [POD-NAME] -- mysql -p todos
 >```
-> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.
+> [POD-NAME] 에는 MySQL POD의 이름을 넣어주세요.  
+> mysql의 root password 는 'secret' 입니다.
 
 <br><br><br>
 
