@@ -140,7 +140,7 @@ php-apache-7d665c4ddf-cxbhb   172m         11Mi
 php-apache-7d665c4ddf-l6lmv   158m         11Mi
 ```
 
-> 💻 명령어 (Terminal 2)
+> 💻 명령어 (Terminal 3)
 >```bash
 >watch -n 1 kubectl top pod
 >```
