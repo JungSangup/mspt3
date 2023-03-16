@@ -131,7 +131,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [x] 반별 리전 구분 안내 문구는 변경이 필요합니다 -> 수정했습니다. 
 - [x] EC2 인스턴스 삭제 전 시큐리티그룹 삭제가 안되는 경우에 대해서 안내가 있으면 좋겠습니다 -> 관련문구 추가했습니다.
 
-- [ ] 교재의 예제(특히 yaml) 오타와 들여쓰기 확인. ( workload(2), configuration )
+- [ ] 교재의 예제(특히 yaml) 오타와 들여쓰기 확인. ( k8s overview, configuration )
 
 - [ ] [Hands-on_03] 시작할 때 디렉토리 home으로 돌아오는 과정 필요 (이전챕터에서 /app에서 작업 했기 때문에 그대로 이어서 진행하려면 root 디렉토리로 이동하는게 필요할 것 같습니다.)
 
