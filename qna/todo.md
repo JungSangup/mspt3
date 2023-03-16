@@ -130,3 +130,5 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 [16.md]
 - [x] 반별 리전 구분 안내 문구는 변경이 필요합니다 -> 수정했습니다. 
 - [x] EC2 인스턴스 삭제 전 시큐리티그룹 삭제가 안되는 경우에 대해서 안내가 있으면 좋겠습니다 -> 관련문구 추가했습니다.
+
+- [ ] 교재의 예제(특히 yaml) 오타와 들여쓰기 확인. ( workload(2), configuration )
