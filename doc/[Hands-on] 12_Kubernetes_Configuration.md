@@ -492,13 +492,13 @@ spec:
 여러가지 방법이 있지만, 간단하게 [커맨드 라인에서 자격 증명을 통하여 시크릿 생성하기](https://kubernetes.io/ko/docs/tasks/configure-pod-container/pull-image-private-registry/#%EC%BB%A4%EB%A7%A8%EB%93%9C-%EB%9D%BC%EC%9D%B8%EC%97%90%EC%84%9C-%EC%9E%90%EA%B2%A9-%EC%A6%9D%EB%AA%85%EC%9D%84-%ED%86%B5%ED%95%98%EC%97%AC-%EC%8B%9C%ED%81%AC%EB%A6%BF-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)방법으로 해볼게요.
 
 ```bash
-ubuntu@ip-172-31-23-60:~$ kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=rogallo --docker-password=XXXXXX
+ubuntu@ip-172-31-23-60:~$ kubectl create secret docker-registry regcred --docker-server='https://index.docker.io/v1/' --docker-username='rogallo' --docker-password='XXXXXX'
 secret/regcred created
 ```
 
 > 💻 명령어
 >```bash
->kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=[USER-NAME] --docker-password=[PASSWORD]
+>kubectl create secret docker-registry regcred --docker-server='https://index.docker.io/v1/' --docker-username='[USER-NAME]' --docker-password='[PASSWORD]'
 >```
 > [USER-NAME]과 [PASSWORD]는 여러분의 정보로 채워넣어 주세요.
 
