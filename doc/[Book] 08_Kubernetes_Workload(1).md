@@ -212,7 +212,7 @@ Probe의 종류는 다음과 같은 것들이 있습니다.
   spec:
     containers:
     - name: liveness
-      image: k8s.gcr.io/liveness
+      image: registry.k8s.io/liveness
       args:
       - /server
       livenessProbe:
@@ -245,7 +245,7 @@ Probe의 종류는 다음과 같은 것들이 있습니다.
   spec:
     containers:
     - name: goproxy
-      image: k8s.gcr.io/goproxy:0.1
+      image: registry.k8s.io/goproxy:0.1
       ports:
       - containerPort: 8080
       readinessProbe:
