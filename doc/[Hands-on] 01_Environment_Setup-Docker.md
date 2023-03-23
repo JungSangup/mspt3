@@ -98,7 +98,7 @@
 | **구분**                            | **설정**                          |
 | --- | --- |
 | **VPC**                           | default VPC를 선택                  |
-| **Subnet**                        | subnet 중 하나를 선택 (public subnet) |
+| **Subnet**                        | 아래 AZ에 해당하는 subnet 중 하나를 선택 (public subnet)<br>us-east-1a, us-east-1b, us-east-1c, us-east-1d, us-east-1f |
 | **Auto-assign public IP**         | Enable                            |
 | **Firewall (security groups)**    | Create security group             |
 | **Security group name**           | mspt3-sg                          |
