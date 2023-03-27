@@ -133,7 +133,7 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 - [ ] 교재의 예제(특히 yaml) 오타와 들여쓰기 확인. ( k8s overview, configuration )
 
-- [ ] [Hands-on_03] 시작할 때 디렉토리 home으로 돌아오는 과정 필요 (이전챕터에서 /app에서 작업 했기 때문에 그대로 이어서 진행하려면 root 디렉토리로 이동하는게 필요할 것 같습니다.)
+- [x] [Hands-on_03] 시작할 때 디렉토리 home으로 돌아오는 과정 필요 (이전챕터에서 /app에서 작업 했기 때문에 그대로 이어서 진행하려면 root 디렉토리로 이동하는게 필요할 것 같습니다.) -> Hands-on 02 마지막에 홈디렉토리로 이동하는 절차를 추가함.
 
 - [ ] 12. Kubernetes Configuration 에서 kubectl exec -it todo-mysql-development-78dd847547-2b7ns -- mysql -p todos 명령어를 통해 Mysql 접속 할 때 Enter password넣는 부분이 있는데 이전에 언급 하긴 했지만 이 부분에서 한번 더 어떤걸 넣으면 되는지 언급 해 주면 좋을 것 같습니다. 
 
