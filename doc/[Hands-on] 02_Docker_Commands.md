@@ -634,20 +634,25 @@ ubuntu@ip-172-31-23-60:~/app$ docker rm $(docker ps -a -f "name=my-nginx" -f "na
 2fc9e3a49e91
 cac6c7cab1f9
 d68fe3ec9f65
+ubuntu@ip-172-31-23-60:~/app$ cd
+ubuntu@ip-172-31-23-60:~$
 ```
 
 > 💻 명령어
 >```bash
 >docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 >```
+>```bash
+>cd
+>```
 
 <br>
 
 정리 후 상태는 아래와 같습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/app$ docker ps --all
+ubuntu@ip-172-31-23-60:~$ docker ps --all
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-ubuntu@ip-172-31-23-60:~/app$
+ubuntu@ip-172-31-23-60:~$
 ```
 
 > 💻 명령어
