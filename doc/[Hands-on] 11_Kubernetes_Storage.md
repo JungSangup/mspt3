@@ -327,7 +327,11 @@ service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m35s
 이번 실습은 여기까지 입니다.  ˘◡˘  
 끝~
 
-<br><br><br><br><br>
+<br><br><br>
+
+---
+
+<br><br><br>
 
 ### 보너스 실습
 

@@ -659,3 +659,272 @@ ubuntu@ip-172-31-23-60:~$
 >```bash
 >docker ps --all
 >```
+
+<br><br><br>
+
+---
+
+<br><br><br>
+
+### 보너스 실습
+
+<br>
+
+도커는 [Storage driver](https://docs.docker.com/storage/storagedriver/)를 이용해서 레이어로 이루어진 파일시스템을 관리합니다.  
+우리가 설치한 도커환경의 **Storage driver**는 이렇게 알아볼 수 있습니다.
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker info | grep -i "storage driver"
+ Storage Driver: overlay2
+```
+
+> 💻 명령어
+>```bash
+>docker info | grep -i "storage driver"
+>```
+
+**overlay2**라는 storage driver를 사용하고 있네요.  
+더 자세한 건 [Docker storage drivers](https://docs.docker.com/storage/storagedriver/select-storage-driver/)를 참고하시구요.
+
+<br><br><br>
+
+우리가 관심을 가지고 볼 곳은 아래 디렉토리들 입니다.  
+- /var/lib/docker/image/overlay2/layerdb/sha256
+- /var/lib/docker/overlay2
+
+> 위의 디렉토리들은 root권한이 있어야 접근/조회가 가능합니다. (sudo 사용)
+
+```bash
+ubuntu@ip-172-31-23-60:~$ sudo tree -L 3 /var/lib/docker/image
+/var/lib/docker/image
+└── overlay2
+    ├── distribution
+    │   ├── diffid-by-digest
+    │   └── v2metadata-by-diffid
+    ├── imagedb
+    │   ├── content
+    │   └── metadata
+    ├── layerdb
+    │   ├── mounts
+    │   ├── sha256
+    │   └── tmp
+    └── repositories.json
+
+11 directories, 1 file
+
+ubuntu@ip-172-31-23-60:~$ sudo tree -L 1 /var/lib/docker/overlay2
+/var/lib/docker/overlay2
+├── 06b8c67bb3e41e4a4c8f0bb4229dadf360cb689321c321e116b2c29ed1eb3999
+├── 0730612fbb3bdad1e5adec146b404b3c943f2dd5c2005490777951b9d4a1aa15
+... 생략 ...
+├── f8a74a06069179b4c4388d7eb65ca8e1b213418c4bb1332fdbe9561b97743071
+├── f90ae589f017fa9fbb25bd224019e494eee1e11ee779feac5eead5448e6ff769
+├── fc2d48992ee0b4607df96c4b44f2f257148f9179dcc3c85ce3f94c61e25c0799
+└── l
+
+98 directories, 0 files
+```
+
+이제 아래 실습에서 위의 디렉토리에 있는 파일들이 무엇인지 좀 더 자세히 알아볼게요.
+
+<br><br><br>
+
+앞의 실습에서 내려받은 **Ubuntu:18.04** 이미지를 조금 더 자세히 볼까요?
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker image inspect ubuntu:18.04 --format "{{json .RootFS.Layers}}"
+["sha256:b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4"]
+```
+
+> 💻 명령어
+>```bash
+>docker image inspect ubuntu:18.04 --format "{{json .RootFS.Layers}}"
+>```
+> `--format` 옵션은 [Format command and log output](https://docs.docker.com/config/formatting/)를 참고하세요.
+
+<br>
+
+**sha256:b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4**는 ubuntu 이미지의 **레이어 정보** 입니다.  
+여러개의 레이어를 가진 이미지는 이 정보도 여러 개 표시됩니다.  
+
+레이어 데이터는 **/var/lib/docker/image/overlay2/layerdb/sha256**에 있습니다. (Storage driver가 Overlay2인 경우)
+
+<br><br><br>
+
+이제 레이어 데이터의 정보를 이용해서, 실제로 레이어의 파일들이 위치한 곳(디렉토리)을 알아보겠습니다.
+
+레이어 정보 중 **cache-id**에는 레이어의 파일들이 저장된 위치정보(디렉토리명)를 가지고 있습니다.  
+다음과 같이 조회하면 디렉토리명을 하나 확인할 수 있습니다.
+
+```bash
+ubuntu@ip-172-31-23-60:~$ sudo cat /var/lib/docker/image/overlay2/layerdb/sha256/b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4/cache-id
+71fd236df50fd04938097606fb40b63897c7a591240de32dceede7b50b539474
+```
+
+> 💻 명령어
+>```bash
+>sudo cat /var/lib/docker/image/overlay2/layerdb/sha256/b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4/cache-id
+>```
+
+**71fd236df50fd04938097606fb40b63897c7a591240de32dceede7b50b539474** 가 파일들이 저장되어 있는 위치(디렉토리) 입니다.  
+이 결과는 실습환경에 따라 달라질 수 있습니다.
+
+<br><br><br>
+
+실제로 파일들이 위치하는 곳은 **/var/lib/docker/overlay2**아래에 있는 디렉토리들 입니다.  
+앞에서 확인한 ubuntu:18.04 이미지는 아래와 같이 확인하면 됩니다.
+
+```bash
+ubuntu@ip-172-31-23-60:~$ sudo ls -al /var/lib/docker/overlay2/71fd236df50fd04938097606fb40b63897c7a591240de32dceede7b50b539474/diff
+total 84
+drwxr-xr-x 21 root root 4096 Apr 13 13:13 .
+drwx--x---  3 root root 4096 Apr 13 13:13 ..
+drwxr-xr-x  2 root root 4096 Mar  8 02:06 bin
+drwxr-xr-x  2 root root 4096 Apr 24  2018 boot
+drwxr-xr-x  2 root root 4096 Mar  8 02:06 dev
+drwxr-xr-x 30 root root 4096 Mar  8 02:06 etc
+drwxr-xr-x  2 root root 4096 Apr 24  2018 home
+drwxr-xr-x  8 root root 4096 May 23  2017 lib
+drwxr-xr-x  2 root root 4096 Mar  8 02:06 lib64
+drwxr-xr-x  2 root root 4096 Mar  8 02:05 media
+drwxr-xr-x  2 root root 4096 Mar  8 02:05 mnt
+drwxr-xr-x  2 root root 4096 Mar  8 02:05 opt
+drwxr-xr-x  2 root root 4096 Apr 24  2018 proc
+drwx------  2 root root 4096 Mar  8 02:06 root
+drwxr-xr-x  5 root root 4096 Mar  8 02:06 run
+drwxr-xr-x  2 root root 4096 Mar  8 02:06 sbin
+drwxr-xr-x  2 root root 4096 Mar  8 02:05 srv
+drwxr-xr-x  2 root root 4096 Apr 24  2018 sys
+drwxrwxrwt  2 root root 4096 Mar  8 02:06 tmp
+drwxr-xr-x 10 root root 4096 Mar  8 02:05 usr
+drwxr-xr-x 11 root root 4096 Mar  8 02:06 var
+```
+
+> 💻 명령어
+>```bash
+>sudo ls -al /var/lib/docker/overlay2/[DIR]/diff
+>```
+> [DIR]에는 앞의 명령어 실행결과를 넣어주세요. ( e.g. 71fd236df50fd04938097606fb40b63897c7a591240de32dceede7b50b539474 )
+
+ubuntu:18.04는 하나의 레이어로 이루어져 있고, 그 안에는 위와같은 디렉토리와 파일들이 있습니다.
+
+<br><br><br>
+
+이제 저 ubuntu 이미지를 실행해서 컨테이너를 생성하고, 레이어들의 정보를 볼게요.  
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker run -itd --name my-ubuntu1 ubuntu:18.04 /bin/bash
+245613566caacef33fc7dc9f8bc54a04d266668f8fb496517eeeb966f67aa22b
+ubuntu@ip-172-31-23-60:~$ docker run -itd --name my-ubuntu2 ubuntu:18.04 /bin/bash
+8d5d524ddb0fffc14f9377001973b44536009ae0f62ec62c56fc8d2c6e51c9a7
+```
+
+> 💻 명령어
+>```bash
+>docker run -itd --name my-ubuntu1 ubuntu:18.04 /bin/bash
+>```
+>```bash
+>docker run -itd --name my-ubuntu2 ubuntu:18.04 /bin/bash
+>```
+
+ubuntu:18.04 이미지를 이용해서 ubuntu1과 ubuntu2 두 개의 컨테이너를 실행했습니다.
+
+<br><br><br>
+
+그리고 목록을 조회해 보면
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker ps --size --filter "name=my-ubuntu1" --filter "name=my-ubuntu2"
+CONTAINER ID   IMAGE          COMMAND       CREATED       STATUS       PORTS     NAMES        SIZE
+8d5d524ddb0f   ubuntu:18.04   "/bin/bash"   9 hours ago   Up 9 hours             my-ubuntu2   0B (virtual 63.1MB)
+245613566caa   ubuntu:18.04   "/bin/bash"   9 hours ago   Up 9 hours             my-ubuntu1   0B (virtual 63.1MB)
+```
+
+> 💻 명령어
+>```bash
+>docker ps --size --filter "name=my-ubuntu1" --filter "name=my-ubuntu2"
+>```
+> --size(-s) : 사이즈 표시, --filter(-f) : 특정 조건으로 필터링
+
+<br>
+
+SIZE 컬럼을 잘 봐주세요.  
+- 0B : R/W Layer(Container layer)의 사이즈
+- virtual 63.1MB : R/O Layer(Image layer) + R/W Layer(Container layer) 의 사이즈
+
+똑 같은 R/O Layer(Image layer)를 공유하고 있고, 각 컨테이너는 0B의 R/W Layer(Conatiner layer)를 가지고 있습니다.
+
+이제 이 중 하나의 컨테이너에 파일을 추가해 볼게요.
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker exec -it my-ubuntu1 bash -c "echo 'Hello docker' > /hello.txt"
+ubuntu@ip-172-31-23-60:~$ docker exec -it my-ubuntu1 cat /hello.txt
+Hello docker
+```
+
+> 💻 명령어
+>```bash
+>docker exec -it my-ubuntu1 bash -c "echo 'Hello docker' > /hello.txt"
+>```
+>```bash
+>docker exec -it my-ubuntu1 cat /hello.txt
+>```
+
+<br><br><br>
+
+이제 다시 사이즈를 볼까요?
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker ps --size --filter "name=my-ubuntu1" --filter "name=my-ubuntu2"
+CONTAINER ID   IMAGE          COMMAND       CREATED       STATUS       PORTS     NAMES        SIZE
+8d5d524ddb0f   ubuntu:18.04   "/bin/bash"   9 hours ago   Up 9 hours             my-ubuntu2   0B (virtual 63.1MB)
+245613566caa   ubuntu:18.04   "/bin/bash"   9 hours ago   Up 9 hours             my-ubuntu1   13B (virtual 63.1MB)
+```
+
+> 💻 명령어
+>```bash
+>docker ps --size --filter "name=my-ubuntu1" --filter "name=my-ubuntu2"
+>```
+
+my-ubuntu1 은 SIZE가 **13B**로 변경됐네요.  
+R/W Layer(Container layer)에 'Hello docker'라는 문자열이 저장된 hello.txt 파일이 추가됐기 때문입니다.
+
+<br><br><br>
+
+그럼, 저 파일은 Host머신의 저장공간 중 어디에 있는걸까요?  
+한 번 찾아가 볼게요.
+
+<br>
+
+```bash
+ubuntu@ip-172-31-23-60:~$ docker inspect my-ubuntu1 --format "{{json .GraphDriver.Data.UpperDir}}"
+"/var/lib/docker/overlay2/ecaff97441ba63d91ea354752f557ceab0fc5f555933f9371018109776bf04fb/diff"
+```
+
+> 💻 명령어
+>```bash
+>docker inspect my-ubuntu1 --format "{{json .GraphDriver.Data.UpperDir}}"
+>```
+> --format(-f) : 명령어 출력형태를 설정 - [Format command and log output](https://docs.docker.com/config/formatting/) 참조.
+
+위 명령어의 실행결과가 바로 R/W Layer(Container layer)가 실제 위치하는 곳 입니다.
+
+이렇게 해보세요.
+
+```bash
+ubuntu@ip-172-31-23-60:~$ sudo ls -al /var/lib/docker/overlay2/ecaff97441ba63d91ea354752f557ceab0fc5f555933f9371018109776bf04fb/diff
+total 12
+drwxr-xr-x 2 root root 4096 Apr 14 12:53 .
+drwx--x--- 5 root root 4096 Apr 14 03:37 ..
+-rw-r--r-- 1 root root   13 Apr 14 12:53 hello.txt
+```
+
+> 💻 명령어
+>```bash
+>sudo ls -al [DIR]
+>```
+> [DIR] 에는 앞의 명령어(docker ispect) 실행결과 디렉토리 경로를 적어주세요.
+> /var/lib/docker 는 root 권한이 있어야 조회 가능합니다. (sudo 사용)
+
+<br>
+
