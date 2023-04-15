@@ -211,6 +211,25 @@ Container는 Image와 생성 시 제공된 구성옵션으로 정의됩니다.
 
 ---
 
+## Storage drivers & OverlayFS
+Docker는 layer들로 이루어진 파일시스템에서 데이터를 읽고 쓰기 위해서 Storage driver를 사용합니다.  
+그 중에서 대표적인 Storage driver가 OverlayFS이고, overlay와 overlay2 storage driver가 있습니다.  
+
+아래 그림은 overlay storage driver가 어떻게 동작하는지를 보여줍니다.  
+Image layer(lowerdir)와 Container layer(upperdir)가 합쳐져서(Union) Container mount(merged)가 되는것입니다.
+
+![w:800](img/docker_overlay_constructs.jpeg)
+- Image layer에 있는 file1, file3와
+- Container layer에 있는 file2, file4
+
+가 합쳐진 Container mount의 파일들이 컨테이어에서 사용됩니다.  
+file2는 Image layer에도 있지만, 더 상위 layer인 Container layer의 것이 우선순위가 높습니다.  
+이런 형태의 사용방법을 [copy-on-write (CoW)](https://docs.docker.com/storage/storagedriver/#the-copy-on-write-cow-strategy) 라고 합니다.
+
+🔗[Use the OverlayFS storage driver](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)
+
+---
+
 ## Images and Layers
 
 Docker **image**는 일련의 계층(**Layer**)으로 이루어져 있으며, 이 계층들은 단일 이미지로 결합됩니다.
