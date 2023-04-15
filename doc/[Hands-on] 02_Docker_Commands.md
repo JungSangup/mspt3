@@ -937,7 +937,7 @@ drwx--x--- 5 root root 4096 Apr 14 03:37 ..
 >```bash
 >sudo ls -al [DIR]
 >```
-> [DIR] 에는 앞의 명령어(docker ispect) 실행결과 디렉토리 경로를 적어주세요.
+> [DIR] 에는 앞의 명령어(docker ispect) 실행결과의 디렉토리 경로를 적어주세요.  
 > /var/lib/docker 는 root 권한이 있어야 조회 가능합니다. (sudo 명령어 사용)
 
 <br>
@@ -945,6 +945,8 @@ drwx--x--- 5 root root 4096 Apr 14 03:37 ..
 **.GraphDriver.Data.UpperDir** 말고도 아래와 같은 레이어 정보도 확인해보세요.
 - **.GraphDriver.Data.LowerDir**
 - **.GraphDriver.Data.MergedDir**
+
+<br><br><br>
 
 마지막으로 정리하고 마칠게요.
 ```bash
