@@ -923,7 +923,7 @@ docker inspect명령으로 컨테이너의 상세정보를 확인했습니다.
 
 <br>
 
-이렇게 해보세요.
+이제 이렇게 해보세요.
 
 ```bash
 ubuntu@ip-172-31-23-60:~$ sudo ls -al /var/lib/docker/overlay2/ecaff97441ba63d91ea354752f557ceab0fc5f555933f9371018109776bf04fb/diff
@@ -942,3 +942,32 @@ drwx--x--- 5 root root 4096 Apr 14 03:37 ..
 
 <br>
 
+**.GraphDriver.Data.UpperDir** 말고도 아래와 같은 레이어 정보도 확인해보세요.
+- **.GraphDriver.Data.LowerDir**
+- **.GraphDriver.Data.MergedDir**
+
+마지막으로 정리하고 마칠게요.
+```bash
+ubuntu@ip-172-31-23-60:~$ docker rm -f $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+8d5d524ddb0f
+245613566caa
+```
+
+> 💻 명령어
+>```bash
+>docker rm -f $(docker ps -a -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+>```
+
+<br>
+
+정리 후 상태는 아래와 같습니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ docker ps --all
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-23-60:~$
+```
+
+> 💻 명령어
+>```bash
+>docker ps --all
+>```
