@@ -277,9 +277,8 @@ CMD python /app/app.py
   - Docker client : 사용자 인터페이스
   - Docker registries : 이미지 저장소
 - Docker objects
-  - Images
-  - Containers
-  - Networks
-  - Volumes
+  - Images, Containers
+  - Networks, Volumes
   - etc.
+- Storage drivers & OverlayFS
 - Images and Layers , Container and Layers
