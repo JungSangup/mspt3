@@ -666,7 +666,7 @@ ubuntu@ip-172-31-23-60:~$
 
 <br><br><br>
 
-### 보너스 실습
+## 💿 보너스 트랙
 
 <br>
 
@@ -692,7 +692,7 @@ ubuntu@ip-172-31-23-60:~$ docker info | grep -i "storage driver"
 - /var/lib/docker/image/overlay2/layerdb/sha256
 - /var/lib/docker/overlay2
 
-> 위의 디렉토리들은 root권한이 있어야 접근/조회가 가능합니다. (sudo 사용)
+> 위의 디렉토리들은 root권한이 있어야 접근/조회가 가능합니다. ([sudo](https://namu.wiki/w/sudo) 명령어 사용)
 
 ```bash
 ubuntu@ip-172-31-23-60:~$ sudo tree -L 3 /var/lib/docker/image
@@ -725,6 +725,14 @@ ubuntu@ip-172-31-23-60:~$ sudo tree -L 1 /var/lib/docker/overlay2
 98 directories, 0 files
 ```
 
+> 💻 명령어
+>```bash
+>sudo tree -L 3 /var/lib/docker/image
+>```
+>```bash
+>sudo tree -L 1 /var/lib/docker/overlay2
+>```
+
 이제 아래 실습에서 위의 디렉토리에 있는 파일들이 무엇인지 좀 더 자세히 알아볼게요.
 
 <br><br><br>
@@ -744,10 +752,8 @@ ubuntu@ip-172-31-23-60:~$ docker image inspect ubuntu:18.04 --format "{{json .Ro
 
 <br>
 
-**sha256:b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4**는 ubuntu 이미지의 **레이어 정보** 입니다.  
+**sha256:b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4**는 ubuntu:18.04 이미지의 **레이어 정보** 입니다.  
 여러개의 레이어를 가진 이미지는 이 정보도 여러 개 표시됩니다.  
-
-레이어 데이터는 **/var/lib/docker/image/overlay2/layerdb/sha256**에 있습니다. (Storage driver가 Overlay2인 경우)
 
 <br><br><br>
 
@@ -811,6 +817,7 @@ ubuntu:18.04는 하나의 레이어로 이루어져 있고, 그 안에는 위와
 <br><br><br>
 
 이제 저 ubuntu 이미지를 실행해서 컨테이너를 생성하고, 레이어들의 정보를 볼게요.  
+같은 이미지를 사용해서 두 개의 컨테이너를 실행합니다. (my-ubuntu1, my-ubuntu2)
 
 ```bash
 ubuntu@ip-172-31-23-60:~$ docker run -itd --name my-ubuntu1 ubuntu:18.04 /bin/bash
@@ -852,9 +859,12 @@ SIZE 컬럼을 잘 봐주세요.
 - 0B : R/W Layer(Container layer)의 사이즈
 - virtual 63.1MB : R/O Layer(Image layer) + R/W Layer(Container layer) 의 사이즈
 
-똑 같은 R/O Layer(Image layer)를 공유하고 있고, 각 컨테이너는 0B의 R/W Layer(Conatiner layer)를 가지고 있습니다.
+똑 같은 R/O Layer(Image layer)를 공유하고 있고, 각 컨테이너는 0B의 R/W Layer(Conatiner layer)를 가지고 있습니다.  
+아직 아무것도 하지 않았기 때문에 R/W Layer의 사이즈는 0B 입니다.
 
-이제 이 중 하나의 컨테이너에 파일을 추가해 볼게요.
+<br>
+
+이제 이 중 하나의 컨테이너에 파일을 추가해 볼게요.  
 
 ```bash
 ubuntu@ip-172-31-23-60:~$ docker exec -it my-ubuntu1 bash -c "echo 'Hello docker' > /hello.txt"
@@ -869,6 +879,7 @@ Hello docker
 >```bash
 >docker exec -it my-ubuntu1 cat /hello.txt
 >```
+> [docker exec](https://docs.docker.com/engine/reference/commandline/exec/) 명령어를 사용해서, 컨테이너에 명령어를 전달함.
 
 <br><br><br>
 
@@ -886,13 +897,13 @@ CONTAINER ID   IMAGE          COMMAND       CREATED       STATUS       PORTS    
 >docker ps --size --filter "name=my-ubuntu1" --filter "name=my-ubuntu2"
 >```
 
-my-ubuntu1 은 SIZE가 **13B**로 변경됐네요.  
+**my-ubuntu1** 은 SIZE가 **13B**로 변경됐네요.  
 R/W Layer(Container layer)에 'Hello docker'라는 문자열이 저장된 hello.txt 파일이 추가됐기 때문입니다.
 
 <br><br><br>
 
 그럼, 저 파일은 Host머신의 저장공간 중 어디에 있는걸까요?  
-한 번 찾아가 볼게요.
+한 번 찾아가 볼까요?
 
 <br>
 
@@ -907,7 +918,10 @@ ubuntu@ip-172-31-23-60:~$ docker inspect my-ubuntu1 --format "{{json .GraphDrive
 >```
 > --format(-f) : 명령어 출력형태를 설정 - [Format command and log output](https://docs.docker.com/config/formatting/) 참조.
 
-위 명령어의 실행결과가 바로 R/W Layer(Container layer)가 실제 위치하는 곳 입니다.
+docker inspect명령으로 컨테이너의 상세정보를 확인했습니다.  
+그 중에서 **.GraphDriver.Data.UpperDir**가 바로 R/W Layer(Container layer)가 실제 위치하는 곳 입니다.
+
+<br>
 
 이렇게 해보세요.
 
@@ -924,7 +938,7 @@ drwx--x--- 5 root root 4096 Apr 14 03:37 ..
 >sudo ls -al [DIR]
 >```
 > [DIR] 에는 앞의 명령어(docker ispect) 실행결과 디렉토리 경로를 적어주세요.
-> /var/lib/docker 는 root 권한이 있어야 조회 가능합니다. (sudo 사용)
+> /var/lib/docker 는 root 권한이 있어야 조회 가능합니다. (sudo 명령어 사용)
 
 <br>
 
