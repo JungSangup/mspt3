@@ -379,3 +379,724 @@ I0211 14:35:05.683681       1 tlsconfig.go:240] "Starting DynamicServingCertific
 <br>
 
 여기까지, 기본적인 kubectl 명령어들을 알아보았습니다. 더 많은 내용은 차차 알아볼게요~ ٩(ˊᗜˋ*)و
+
+
+<br><br><br>
+
+---
+
+<br><br><br>
+
+## 💿 보너스 트랙
+
+
+우리가 사용한 [kubectl](https://kubernetes.io/ko/docs/reference/kubectl/) 은 [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/)를 이용해서 컨트롤플레인과 통신하는데 사용되는 명령줄 도구(Command line tool) 입니다.
+
+API가 있다는 것은, kubectl이 아닌 다른 방법으로도 API로 요청을 보내고 응답을 받을 수 있다는 것입니다.  
+예를들면, HTTP GET이나 POST 같은 것 말입니다.  
+
+그럼, 이 부분을 한 번 자세히 들여다볼까요?  
+
+<br>
+
+앞에서 우리는 이런 명령어를 실행해봤습니다.  
+클러스터에 존재하는 노드의 목록을 조회하는 것이었죠.
+
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl get nodes
+NAME              STATUS   ROLES                  AGE   VERSION
+ip-172-31-23-60   Ready    control-plane,master   2d    v1.23.0
+```
+
+> 💻 명령어
+>```bash
+>kubectl get nodes
+>```
+
+이걸, 다른 방법으로 (kubectl 을 사용하지 않고) 해볼게요.
+
+<br><br><br>
+
+먼저 kubectl 에 사용된 설정정보를 볼게요.  
+기본 위치는 사용자 home(~ 또는 $HOME) 아래 `.kube/config` 입니다.
+```bash
+ubuntu@ip-172-31-23-60:~$ cat ~/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /home/ubuntu/.minikube/ca.crt
+    extensions:
+    - extension:
+        last-update: Mon, 27 Mar 2023 13:08:03 UTC
+        provider: minikube.sigs.k8s.io
+        version: v1.28.0
+      name: cluster_info
+    server: https://172.31.29.188:8443
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    extensions:
+    - extension:
+        last-update: Mon, 27 Mar 2023 13:08:03 UTC
+        provider: minikube.sigs.k8s.io
+        version: v1.28.0
+      name: context_info
+    namespace: default
+    user: minikube
+  name: minikube
+current-context: minikube
+kind: Config
+preferences: {}
+users:
+- name: minikube
+  user:
+    client-certificate: /home/ubuntu/.minikube/profiles/minikube/client.crt
+    client-key: /home/ubuntu/.minikube/profiles/minikube/client.key
+```
+
+> 💻 명령어
+>```bash
+>cat ~/.kube/config
+>```
+
+이 부분을 잘 봐주세요.
+- clusters.cluster.server: https://172.31.29.188:8443
+- clusters.cluster.certificate-authority: /home/ubuntu/.minikube/ca.crt
+- users.user.client-certificate: /home/ubuntu/.minikube/profiles/minikube/client.crt
+- users.user.client-key: /home/ubuntu/.minikube/profiles/minikube/client.key
+
+첫 번째 server가 api server의 주소이고, 아래 세 개는 api server로 요청을 보낼 때 사용되는 인증서와 키 파일 입니다.
+
+<br><br><br>
+
+다음은 node object에 대한 정보를 알아볼게요.
+```bash
+ubuntu@ip-172-31-23-60:~$ kubectl explain node
+KIND:     Node
+VERSION:  v1
+
+DESCRIPTION:
+     Node is a worker node in Kubernetes. Each node will have a unique
+     identifier in the cache (i.e. in etcd).
+
+FIELDS:
+   apiVersion	<string>
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+   kind	<string>
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+   metadata	<Object>
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+
+   spec	<Object>
+     Spec defines the behavior of a node.
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+
+   status	<Object>
+     Most recently observed status of the node. Populated by the system.
+     Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+```
+
+> 💻 명령어
+>```bash
+>kubectl explain node
+>```
+
+node 의 API Version은 v1 입니다.  
+[Node](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/node-v1/)의 정보도 참고하세요.
+
+
+<br><br><br>
+
+자, 이제 우리가 API를 통해서 node의 정보를 알아보기 위해서 필요한 사항들은 모두 준비가 됐습니다.  
+정리해보자면,
+
+- Node의 API Version : v1
+- clusters.cluster.server: https://172.31.29.188:8443
+- clusters.cluster.certificate-authority: /home/ubuntu/.minikube/ca.crt
+- users.user.client-certificate: /home/ubuntu/.minikube/profiles/minikube/client.crt
+- users.user.client-key: /home/ubuntu/.minikube/profiles/minikube/client.key
+
+그럼, 위의 정보를 조합해서 curl 명령을 실행해볼까요?
+
+```bash
+ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1 --cacert /home/ubuntu/.minikube/ca.crt --cert /home/ubuntu/.minikube/profiles/minikube/client.crt --key /home/ubuntu/.minikube/profiles/minikube/client.key
+{
+  "kind": "APIResourceList",
+  "groupVersion": "v1",
+  "resources": [
+    {
+      "name": "bindings",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Binding",
+      "verbs": [
+        "create"
+      ]
+    },
+    {
+      "name": "componentstatuses",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "ComponentStatus",
+      "verbs": [
+        "get",
+        "list"
+      ],
+      "shortNames": [
+        "cs"
+      ]
+    },
+    {
+      "name": "configmaps",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ConfigMap",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "cm"
+      ],
+      "storageVersionHash": "qFsyl6wFWjQ="
+    },
+    {
+      "name": "endpoints",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Endpoints",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "ep"
+      ],
+      "storageVersionHash": "fWeeMqaN/OA="
+    },
+    {
+      "name": "events",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Event",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "ev"
+      ],
+      "storageVersionHash": "r2yiGXH7wu8="
+    },
+    {
+      "name": "limitranges",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "LimitRange",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "limits"
+      ],
+      "storageVersionHash": "EBKMFVe6cwo="
+    },
+    {
+      "name": "namespaces",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "Namespace",
+      "verbs": [
+        "create",
+        "delete",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "ns"
+      ],
+      "storageVersionHash": "Q3oi5N2YM8M="
+    },
+    {
+      "name": "namespaces/finalize",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "Namespace",
+      "verbs": [
+        "update"
+      ]
+    },
+    {
+      "name": "namespaces/status",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "Namespace",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "nodes",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "Node",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "no"
+      ],
+      "storageVersionHash": "XwShjMxG9Fs="
+    },
+    {
+      "name": "nodes/proxy",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "NodeProxyOptions",
+      "verbs": [
+        "create",
+        "delete",
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "nodes/status",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "Node",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "persistentvolumeclaims",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PersistentVolumeClaim",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "pvc"
+      ],
+      "storageVersionHash": "QWTyNDq0dC4="
+    },
+    {
+      "name": "persistentvolumeclaims/status",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PersistentVolumeClaim",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "persistentvolumes",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "PersistentVolume",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "pv"
+      ],
+      "storageVersionHash": "HN/zwEC+JgM="
+    },
+    {
+      "name": "persistentvolumes/status",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "PersistentVolume",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "pods",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Pod",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "po"
+      ],
+      "categories": [
+        "all"
+      ],
+      "storageVersionHash": "xPOwRZ+Yhw8="
+    },
+    {
+      "name": "pods/attach",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PodAttachOptions",
+      "verbs": [
+        "create",
+        "get"
+      ]
+    },
+    {
+      "name": "pods/binding",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Binding",
+      "verbs": [
+        "create"
+      ]
+    },
+    {
+      "name": "pods/ephemeralcontainers",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Pod",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "pods/eviction",
+      "singularName": "",
+      "namespaced": true,
+      "group": "policy",
+      "version": "v1",
+      "kind": "Eviction",
+      "verbs": [
+        "create"
+      ]
+    },
+    {
+      "name": "pods/exec",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PodExecOptions",
+      "verbs": [
+        "create",
+        "get"
+      ]
+    },
+    {
+      "name": "pods/log",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Pod",
+      "verbs": [
+        "get"
+      ]
+    },
+    {
+      "name": "pods/portforward",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PodPortForwardOptions",
+      "verbs": [
+        "create",
+        "get"
+      ]
+    },
+    {
+      "name": "pods/proxy",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PodProxyOptions",
+      "verbs": [
+        "create",
+        "delete",
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "pods/status",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Pod",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "podtemplates",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "PodTemplate",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "storageVersionHash": "LIXB2x4IFpk="
+    },
+    {
+      "name": "replicationcontrollers",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ReplicationController",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "rc"
+      ],
+      "categories": [
+        "all"
+      ],
+      "storageVersionHash": "Jond2If31h0="
+    },
+    {
+      "name": "replicationcontrollers/scale",
+      "singularName": "",
+      "namespaced": true,
+      "group": "autoscaling",
+      "version": "v1",
+      "kind": "Scale",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "replicationcontrollers/status",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ReplicationController",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "resourcequotas",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ResourceQuota",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "quota"
+      ],
+      "storageVersionHash": "8uhSgffRX6w="
+    },
+    {
+      "name": "resourcequotas/status",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ResourceQuota",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "secrets",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Secret",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "storageVersionHash": "S6u1pOWzb84="
+    },
+    {
+      "name": "serviceaccounts",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ServiceAccount",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "sa"
+      ],
+      "storageVersionHash": "pbx9ZvyFpBE="
+    },
+    {
+      "name": "serviceaccounts/token",
+      "singularName": "",
+      "namespaced": true,
+      "group": "authentication.k8s.io",
+      "version": "v1",
+      "kind": "TokenRequest",
+      "verbs": [
+        "create"
+      ]
+    },
+    {
+      "name": "services",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Service",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update",
+        "watch"
+      ],
+      "shortNames": [
+        "svc"
+      ],
+      "categories": [
+        "all"
+      ],
+      "storageVersionHash": "0/CO1lhkEBI="
+    },
+    {
+      "name": "services/proxy",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "ServiceProxyOptions",
+      "verbs": [
+        "create",
+        "delete",
+        "get",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "services/status",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "Service",
+      "verbs": [
+        "get",
+        "patch",
+        "update"
+      ]
+    }
+  ]
+}
+```
+
+> 💻 명령어
+>```bash
+>curl https://172.31.29.188:8443/api/v1 \
+>     --cacert /home/ubuntu/.minikube/ca.crt \
+>     --cert /home/ubuntu/.minikube/profiles/minikube/client.crt \
+>     --key /home/ubuntu/.minikube/profiles/minikube/client.key
+>```
