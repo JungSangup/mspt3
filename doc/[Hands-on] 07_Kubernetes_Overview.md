@@ -530,7 +530,363 @@ node 의 API Version은 v1 입니다.
 그럼, 위의 정보를 조합해서 curl 명령을 실행해볼까요?
 
 ```bash
-ubuntu@ip-172-31-23-60:~$ c
+ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1/nodes \
+>     --cacert /home/ubuntu/.minikube/ca.crt \
+>     --cert /home/ubuntu/.minikube/profiles/minikube/client.crt \
+>     --key /home/ubuntu/.minikube/profiles/minikube/client.key
+{
+  "kind": "NodeList",
+  "apiVersion": "v1",
+  "metadata": {
+    "resourceVersion": "2624875"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "ip-172-31-29-188",
+        "uid": "0ca16cf4-b220-441c-9570-bc2367298e4d",
+        "resourceVersion": "2624695",
+        "creationTimestamp": "2023-03-15T06:04:09Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "amd64",
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/arch": "amd64",
+          "kubernetes.io/hostname": "ip-172-31-29-188",
+          "kubernetes.io/os": "linux",
+          "minikube.k8s.io/commit": "986b1ebd987211ed16f8cc10aed7d2c42fc8392f",
+          "minikube.k8s.io/name": "minikube",
+          "minikube.k8s.io/primary": "true",
+          "minikube.k8s.io/updated_at": "2023_03_15T06_04_12_0700",
+          "minikube.k8s.io/version": "v1.28.0",
+          "node-role.kubernetes.io/control-plane": "",
+          "node-role.kubernetes.io/master": "",
+          "node.kubernetes.io/exclude-from-external-load-balancers": ""
+        },
+        "annotations": {
+          "kubeadm.alpha.kubernetes.io/cri-socket": "/var/run/dockershim.sock",
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        },
+        "managedFields": [
+          {
+            "manager": "Go-http-client",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-03-15T06:04:11Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:kubeadm.alpha.kubernetes.io/cri-socket": {},
+                  "f:volumes.kubernetes.io/controller-managed-attach-detach": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:beta.kubernetes.io/arch": {},
+                  "f:beta.kubernetes.io/os": {},
+                  "f:kubernetes.io/arch": {},
+                  "f:kubernetes.io/hostname": {},
+                  "f:kubernetes.io/os": {},
+                  "f:node-role.kubernetes.io/control-plane": {},
+                  "f:node-role.kubernetes.io/master": {},
+                  "f:node.kubernetes.io/exclude-from-external-load-balancers": {}
+                }
+              }
+            }
+          },
+          {
+            "manager": "kubectl-label",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-03-15T06:04:13Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:labels": {
+                  "f:minikube.k8s.io/commit": {},
+                  "f:minikube.k8s.io/name": {},
+                  "f:minikube.k8s.io/primary": {},
+                  "f:minikube.k8s.io/updated_at": {},
+                  "f:minikube.k8s.io/version": {}
+                }
+              }
+            }
+          },
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-03-15T06:04:25Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  "f:node.alpha.kubernetes.io/ttl": {}
+                }
+              },
+              "f:spec": {
+                "f:podCIDR": {},
+                "f:podCIDRs": {
+                  ".": {},
+                  "v:\"10.244.0.0/24\"": {}
+                }
+              }
+            }
+          },
+          {
+            "manager": "Go-http-client",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-03-15T06:04:43Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:status": {
+                "f:conditions": {
+                  "k:{\"type\":\"DiskPressure\"}": {
+                    "f:lastHeartbeatTime": {}
+                  },
+                  "k:{\"type\":\"MemoryPressure\"}": {
+                    "f:lastHeartbeatTime": {}
+                  },
+                  "k:{\"type\":\"PIDPressure\"}": {
+                    "f:lastHeartbeatTime": {}
+                  },
+                  "k:{\"type\":\"Ready\"}": {
+                    "f:lastHeartbeatTime": {},
+                    "f:lastTransitionTime": {},
+                    "f:message": {},
+                    "f:reason": {},
+                    "f:status": {}
+                  }
+                },
+                "f:images": {}
+              }
+            },
+            "subresource": "status"
+          }
+        ]
+      },
+      "spec": {
+        "podCIDR": "10.244.0.0/24",
+        "podCIDRs": [
+          "10.244.0.0/24"
+        ]
+      },
+      "status": {
+        "capacity": {
+          "cpu": "2",
+          "ephemeral-storage": "20134592Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "3956716Ki",
+          "pods": "110"
+        },
+        "allocatable": {
+          "cpu": "2",
+          "ephemeral-storage": "20134592Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "3956716Ki",
+          "pods": "110"
+        },
+        "conditions": [
+          {
+            "type": "MemoryPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2023-04-20T08:09:11Z",
+            "lastTransitionTime": "2023-03-15T06:04:08Z",
+            "reason": "KubeletHasSufficientMemory",
+            "message": "kubelet has sufficient memory available"
+          },
+          {
+            "type": "DiskPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2023-04-20T08:09:11Z",
+            "lastTransitionTime": "2023-03-15T06:04:08Z",
+            "reason": "KubeletHasNoDiskPressure",
+            "message": "kubelet has no disk pressure"
+          },
+          {
+            "type": "PIDPressure",
+            "status": "False",
+            "lastHeartbeatTime": "2023-04-20T08:09:11Z",
+            "lastTransitionTime": "2023-03-15T06:04:08Z",
+            "reason": "KubeletHasSufficientPID",
+            "message": "kubelet has sufficient PID available"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2023-04-20T08:09:11Z",
+            "lastTransitionTime": "2023-03-15T06:04:22Z",
+            "reason": "KubeletReady",
+            "message": "kubelet is posting ready status. AppArmor enabled"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "172.31.29.188"
+          },
+          {
+            "type": "Hostname",
+            "address": "ip-172-31-29-188"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "nodeInfo": {
+          "machineID": "ec2f2cd4f7f51d90a9f7d9865f2f3c72",
+          "systemUUID": "ec2f2cd4-f7f5-1d90-a9f7-d9865f2f3c72",
+          "bootID": "4b314966-61e3-431d-8acc-d5d026cad0a9",
+          "kernelVersion": "5.15.0-1028-aws",
+          "osImage": "Ubuntu 20.04.5 LTS",
+          "containerRuntimeVersion": "docker://20.10.23",
+          "kubeletVersion": "v1.23.0",
+          "kubeProxyVersion": "v1.23.0",
+          "operatingSystem": "linux",
+          "architecture": "amd64"
+        },
+        "images": [
+          {
+            "names": [
+              "k8s.gcr.io/etcd@sha256:64b9ea357325d5db9f8a723dcf503b5a449177b17ac87d69481e126bb724c263",
+              "k8s.gcr.io/etcd:3.5.1-0"
+            ],
+            "sizeBytes": 292558922
+          },
+          {
+            "names": [
+              "k8s.gcr.io/ingress-nginx/controller@sha256:5516d103a9c2ecc4f026efbd4b40662ce22dc1f824fb129ed121460aaa5c47f8"
+            ],
+            "sizeBytes": 289315470
+          },
+          {
+            "names": [
+              "rogallo/todo-app:1.0.0"
+            ],
+            "sizeBytes": 172325131
+          },
+          {
+            "names": [
+              "nginx@sha256:63b44e8ddb83d5dd8020327c1f40436e37a6fffd3ef2498a6204df23be6e7e94",
+              "nginx:latest"
+            ],
+            "sizeBytes": 142151046
+          },
+          {
+            "names": [
+              "k8s.gcr.io/kube-apiserver@sha256:d10db42c2353539ce15006854edfb6707ba6025f282d59d962729ed3b6039004",
+              "k8s.gcr.io/kube-apiserver:v1.23.0"
+            ],
+            "sizeBytes": 135154064
+          },
+          {
+            "names": [
+              "nginx@sha256:e90ac5331fe095cea01b121a3627174b2e33e06e83720e9a934c7b8ccc9c55a0",
+              "nginx:1.18"
+            ],
+            "sizeBytes": 132899597
+          },
+          {
+            "names": [
+              "nginx@sha256:ed7f815851b5299f616220a63edac69a4cc200e7f536a56e421988da82e44ed8",
+              "nginx:1.19.3"
+            ],
+            "sizeBytes": 132861270
+          },
+          {
+            "names": [
+              "k8s.gcr.io/kube-controller-manager@sha256:0bfbb13e5e9cec329523b6f654687af8ce058adbc90b42e5af7a929ac22e2a53",
+              "k8s.gcr.io/kube-controller-manager:v1.23.0"
+            ],
+            "sizeBytes": 124963795
+          },
+          {
+            "names": [
+              "k8s.gcr.io/kube-proxy@sha256:2e8292d30042bb75f745d2a90d0fc4fbc3a3b1bdbe5b9d3bf50dd866c62b2ba7",
+              "k8s.gcr.io/kube-proxy:v1.23.0"
+            ],
+            "sizeBytes": 112319647
+          },
+          {
+            "names": [
+              "node@sha256:dc98dac24efd4254f75976c40bce46944697a110d06ce7fa47e7268470cf2e28",
+              "node:10-alpine"
+            ],
+            "sizeBytes": 82736775
+          },
+          {
+            "names": [
+              "ubuntu@sha256:67211c14fa74f070d27cc59d69a7fa9aeff8e28ea118ef3babc295a0428a6d21",
+              "ubuntu:latest"
+            ],
+            "sizeBytes": 77810806
+          },
+          {
+            "names": [
+              "ubuntu@sha256:24a0df437301598d1a4b62ddf59fa0ed2969150d70d748c84225e6501e9c36b9",
+              "ubuntu:20.04"
+            ],
+            "sizeBytes": 72785566
+          },
+          {
+            "names": [
+              "k8s.gcr.io/metrics-server/metrics-server@sha256:5ddc6458eb95f5c70bd13fdab90cbd7d6ad1066e5b528ad1dcb28b76c5fb2f00"
+            ],
+            "sizeBytes": 68793965
+          },
+          {
+            "names": [
+              "ubuntu@sha256:8aa9c2798215f99544d1ce7439ea9c3a6dfd82de607da1cec3a8a2fae005931b",
+              "ubuntu:18.04"
+            ],
+            "sizeBytes": 63146040
+          },
+          {
+            "names": [
+              "k8s.gcr.io/kube-scheduler@sha256:af8166ce28baa7cb902a2c0d16da865d5d7c892fe1b41187fd4be78ec6291c23",
+              "k8s.gcr.io/kube-scheduler:v1.23.0"
+            ],
+            "sizeBytes": 53476049
+          },
+          {
+            "names": [
+              "k8s.gcr.io/coredns/coredns@sha256:5b6ec0d6de9baaf3e92d0f66cd96a25b9edbce8716f5f15dcd1a616b3abd590e",
+              "k8s.gcr.io/coredns/coredns:v1.8.6"
+            ],
+            "sizeBytes": 46829283
+          },
+          {
+            "names": [
+              "gcr.io/k8s-minikube/storage-provisioner@sha256:18eb69d1418e854ad5a19e399310e52808a8321e4c441c1dddad8977a0d7a944",
+              "gcr.io/k8s-minikube/storage-provisioner:v5"
+            ],
+            "sizeBytes": 31465472
+          },
+          {
+            "names": [
+              "busybox@sha256:b5d6fe0712636ceb7430189de28819e195e8966372edfc2d9409d79402a0dc16",
+              "busybox:latest"
+            ],
+            "sizeBytes": 4863138
+          },
+          {
+            "names": [
+              "k8s.gcr.io/pause@sha256:3d380ca8864549e74af4b29c10f9cb0956236dfb01c40ca076fb6c37253234db",
+              "k8s.gcr.io/pause:3.6"
+            ],
+            "sizeBytes": 682696
+          }
+        ]
+      }
+    }
+  ]
+}
 ```
 
 > 💻 명령어
@@ -543,14 +899,25 @@ ubuntu@ip-172-31-23-60:~$ c
 
 <br>
 
-너무 정보가 많아서 잘 모르겠네요.  
-딱 이렇게만 해서 비교해보세요.
-
-```bash
-ubuntu@ip-172-31-23-60:~$ 
-```
+위의 결과과 아래 명령어의 결과를 한 번 비교도 해보세요.
 
 > 💻 명령어
 >```bash
->
+>kubectl get nodes --output json
 >```
+
+<br>
+
+node 의 name이나 InternalIP등의 정보들을 확인할 수 있습니다.
+
+<br><br><br>
+
+간단한 조회 API만 확인해봤지만, 이 외에도 생성/수정/삭제 동작들이 모두 API를 통해서 실행됩니다.  
+User뿐만 아니라, Kubernetes의 각 컴포넌트들이나 API로 접근 가능한 다른 시스템들도 동일하게 이 API들을 사용하고 있습니다.
+
+이번 실습은 여기까지 입니다.  
+API에 대해 더 자세히 공부해보고 싶으시면 아래 링크들을 참고하세요.
+
+- [API 개요](https://kubernetes.io/ko/docs/reference/using-api/)  
+- [API 접근 제어](https://kubernetes.io/ko/docs/reference/access-authn-authz/)  
+- [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/)
