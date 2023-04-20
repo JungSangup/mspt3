@@ -505,6 +505,7 @@ For more examples and ideas, visit:
 - net-tools : ifconfig, netstat 등의 명령어 사용
 - tree : 디렉토리 구조를 보기위한 툴
 - conntrack : 리눅스 커널의 network connection을 관리하고 추적
+- jq : JSON 프로세서
 ```bash
 ubuntu@ip-172-31-23-60:~$ sudo apt-get update
 Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal InRelease
@@ -548,7 +549,7 @@ Processing triggers for man-db (2.9.1-1) ...
 > 💻 명령어
 >```bash
 >sudo apt-get update
->sudo apt-get install -y net-tools tree conntrack
+>sudo apt-get install -y net-tools tree conntrack jq
 >
 >```
 
