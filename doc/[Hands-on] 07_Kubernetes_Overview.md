@@ -530,10 +530,7 @@ node 의 API Version은 v1 입니다.
 그럼, 위의 정보를 조합해서 curl 명령을 실행해볼까요?
 
 ```bash
-ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1/nodes \
->     --cacert /home/ubuntu/.minikube/ca.crt \
->     --cert /home/ubuntu/.minikube/profiles/minikube/client.crt \
->     --key /home/ubuntu/.minikube/profiles/minikube/client.key
+ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1/nodes --cacert /home/ubuntu/.minikube/ca.crt --cert /home/ubuntu/.minikube/profiles/minikube/client.crt --key /home/ubuntu/.minikube/profiles/minikube/client.key
 {
   "kind": "NodeList",
   "apiVersion": "v1",
@@ -891,11 +888,9 @@ ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1/nodes \
 
 > 💻 명령어
 >```bash
->curl https://172.31.29.188:8443/api/v1/nodes \
->     --cacert /home/ubuntu/.minikube/ca.crt \
->     --cert /home/ubuntu/.minikube/profiles/minikube/client.crt \
->     --key /home/ubuntu/.minikube/profiles/minikube/client.key
+>curl [SERVER]/api/v1/nodes --cacert /home/ubuntu/.minikube/ca.crt --cert /home/ubuntu/.minikube/profiles/minikube/client.crt --key /home/ubuntu/.minikube/profiles/minikube/client.key
 >```
+> [SERVER]에는 앞에서 조회한 결과 중 여러분 환경의 서버정보를 넣어주세요.
 
 <br>
 
