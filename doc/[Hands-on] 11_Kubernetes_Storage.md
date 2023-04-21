@@ -333,7 +333,7 @@ service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7m35s
 
 <br><br><br>
 
-### 보너스 실습
+### 💿 보너스 트랙
 
 앞의 실습까지 하고도 시간이 남으면 해보세요.
 
