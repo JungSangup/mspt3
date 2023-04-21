@@ -950,6 +950,9 @@ drwx--x--- 5 root root 4096 Apr 14 03:37 ..
 - **.GraphDriver.Data.LowerDir**
 - **.GraphDriver.Data.MergedDir**
 
+힌트만 드릴게요.  
+Lower + Upper = Merged
+
 <br><br><br>
 
 마지막으로 정리하고 마칠게요.
