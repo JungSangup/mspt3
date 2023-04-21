@@ -903,7 +903,7 @@ ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1/nodes --cacert 
 
 <br>
 
-node 의 name이나 InternalIP등의 정보들을 확인할 수 있습니다.
+node 의 name이나 InternalIP등의 정보들을 확인할 수 있습니다.  
 
 <br><br><br>
 
