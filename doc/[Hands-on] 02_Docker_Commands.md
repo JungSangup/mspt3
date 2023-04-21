@@ -942,6 +942,10 @@ drwx--x--- 5 root root 4096 Apr 14 03:37 ..
 
 <br>
 
+찾았다! hello.txt   🫵🏻
+
+<br><br><br>
+
 **.GraphDriver.Data.UpperDir** 말고도 아래와 같은 레이어 정보도 확인해보세요.
 - **.GraphDriver.Data.LowerDir**
 - **.GraphDriver.Data.MergedDir**
