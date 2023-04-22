@@ -216,7 +216,9 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 <br><br><br>
 
 ![](./img/terminal4.png)
-> 필요한 모든 절차를 거치고 정상적으로 접속되면 위와같은 화면이 표시됩니다.
+> 필요한 모든 절차를 거치고 정상적으로 접속되면 위와같은 화면이 표시됩니다.  
+> SSH 포트를 변경한 경우 ssh 명령어에 `-p [PORT]`옵션을 추가해주세요.  
+> e.g.) 23번 포트로 변경한 경우 : `ssh -i "mspt3.pem" -p 23 ubuntu@ec2-0-00-00-000.compute-1.amazonaws.com`
 
 <br><br><br>
 
@@ -231,7 +233,8 @@ MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 <br><br><br>
 
 ![](./img/mobaxterm2.png)
-접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.
+접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.  
+> SSH 포트를 변경한 경우 포트정보도 맞게 설정해서 접속하세요.
 
 - **Remote host** : EC2 Instance의 **Public IPv4 address** 또는 **Public IPv4 DNS**
 - **Specify username** : ubuntu
