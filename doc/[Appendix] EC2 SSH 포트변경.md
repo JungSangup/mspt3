@@ -67,7 +67,7 @@ AWS Console에서 EC2 > Instances 화면으로 이동합니다.
 <br>
 
 여기까지만 하고 사용해도 됩니다.  
-별도의 Teminal 프로그램을 사용해서 접속하지 않고, 브라우저를 통해서 **EC2 Instance Connect**를 사용하는 방법입니다.
+별도의 Teminal 프로그램을 사용해서 접속하지 않고, **EC2 Instance Connect**를 사용하는 방법입니다.
 
 <br><br><br>
 
@@ -98,7 +98,7 @@ Port 23
 ```
 
 > 💻 명령어
-> >```bash
+>```bash
 >sudo sed -i 's/#Port 22/Port 23/g' /etc/ssh/sshd_config
 >```
 >```bash
@@ -108,7 +108,7 @@ Port 23
 
 <br><br><br>
 
-이제 sshd 서비스를 재시작 해주세요.  
+그리고 sshd 서비스를 재시작 해주세요.  
 ```bash
 ubuntu@ip-172-31-29-188:~$ sudo service sshd restart
 ```
@@ -129,4 +129,4 @@ ubuntu@ip-172-31-29-188:~$ sudo service sshd restart
 다음은 기본 과정과 동일합니다.  
 단, 접속 시 포트만 기본포트인 22가 아닌 23을 사용하면 됩니다.
 
-접속 방법은 본 교재를 참고해주세요.
+[본 교재](https://github.com/JungSangup/mspt3/blob/main/doc/%5BHands-on%5D%2001_Environment_Setup-Docker.md#2-vm-instance-%EC%A0%91%EC%86%8D%ED%95%98%EA%B8%B0)로 돌아가서 다음 과정을 진행해주세요.
