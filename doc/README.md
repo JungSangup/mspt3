@@ -18,7 +18,7 @@
 | 14  | [Book] 14_Kubernetes_Horizontal Pod Autoscaler              | [Hands-on] 14_Kubernetes_Horizontal Pod Autoscaler |
 | 15  | [Book] 15_Helm                                              | [Hands-on] 15_Helm                                 |
 
-💿 : 보너스 트랙 포함.
+💿 : Self Study 포함.
 
 ## 실습 시작 전 확인사항
 
