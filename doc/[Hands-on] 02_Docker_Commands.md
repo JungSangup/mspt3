@@ -630,7 +630,7 @@ a6524c5b12a6: Layer already exists
 이번 실습은 여기까지 입니다.  
 마지막으로 정리하고 마칠게요.
 ```bash
-ubuntu@ip-172-31-23-60:~/app$ docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+ubuntu@ip-172-31-23-60:~/app$ docker rm -f $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 2fc9e3a49e91
 cac6c7cab1f9
 d68fe3ec9f65
