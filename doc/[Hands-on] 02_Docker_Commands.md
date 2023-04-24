@@ -640,7 +640,7 @@ ubuntu@ip-172-31-23-60:~$
 
 > 💻 명령어
 >```bash
->docker rm $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
+>docker rm -f $(docker ps -a -f "name=my-nginx" -f "name=my-ubuntu1" -f "name=my-ubuntu2" -q)
 >```
 >```bash
 >cd
