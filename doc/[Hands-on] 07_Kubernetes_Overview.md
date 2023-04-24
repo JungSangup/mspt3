@@ -387,7 +387,7 @@ I0211 14:35:05.683681       1 tlsconfig.go:240] "Starting DynamicServingCertific
 
 <br><br><br>
 
-## 💿 보너스 트랙
+## 💿 Self Study
 
 
 우리가 사용한 [kubectl](https://kubernetes.io/ko/docs/reference/kubectl/) 은 [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/)를 이용해서 컨트롤플레인과 통신하는데 사용되는 명령줄 도구(Command line tool) 입니다.
