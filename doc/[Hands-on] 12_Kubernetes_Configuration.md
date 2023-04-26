@@ -623,7 +623,9 @@ ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 ***todo-app.inf
 <br><br><br>
 
 MySQL DB의 테이블에 잘 저장됐는지도 확인해보세요.  
-화면에서 입력한 내용이 **todo_items** 테이블에 저장되어 있습니다.
+화면에서 입력한 내용이 **todo_items** 테이블에 저장되어 있습니다.  
+⚠️ DB 테이블에 데이터가 저장된 걸 확인하기 위해서는, 위의 화면에서 Item을 몇 개 입력해주세요.
+
 ```bash
 ubuntu@ip-172-31-23-60:~$ kubectl exec -it todo-mysql-deployment-78dd847547-2b7ns -- mysql -p todos
 Enter password:
