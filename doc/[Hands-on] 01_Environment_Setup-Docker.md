@@ -59,6 +59,8 @@
 > Instance 이름을 **mspt3**로 하고, **AMI(Amazon Machine Image)** 중에서 **Ubuntu**를 선택합니다.  
 > Ubuntu 버젼은 **Ubuntu Server 20.04 LTS(HVM), SSD Volume Type** 을, Architecture는 **64-bit (x86)** 을 선택합니다.
 
+# Ubuntu 버젼은 22.04 가 아닌, 20.04 LTS 입니다. 꼭 확인해주세요. 꼭이요~
+
 <br><br><br>
 
 ![](./img/aws_ec2_4.png)
