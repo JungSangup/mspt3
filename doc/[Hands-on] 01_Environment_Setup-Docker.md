@@ -249,11 +249,6 @@ MobaXterm을 이용하여 VM Instance에 접속하는 방법입니다.
 > 접속되면 위와같은 화면이 표시됩니다.  
 > 다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
-<br><br><br>
-
-🙀 사용자 환경에 따라 위와같은 방법으로 접속이 안되는 경우도 있습니다. (22번 포트를 사용할 수 없는 경우)  
-이 경우에는 [EC2 SSH 포트변경](%5BAppendix%5D%20EC2%20SSH%20%ED%8F%AC%ED%8A%B8%EB%B3%80%EA%B2%BD.md)을 참고해서 포트를 변경하고 다시 접속해보세요.
-
 <br><br><br><br><br>
 
 ## 3. Docker 설치하기
