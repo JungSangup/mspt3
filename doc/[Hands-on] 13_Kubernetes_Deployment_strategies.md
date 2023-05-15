@@ -431,7 +431,6 @@ ubuntu@ip-172-31-23-60:~$ kubectl describe pod nginx-deployment-85fc747956-7vgpg
 <br><br><br>
 
 다 해보셨으면 다음 실습을 위해 Object들을 삭제해주세요.  
-아시죠? **선언형(Declarative)**...
 ```bash
 ubuntu@ip-172-31-23-60:~$ kubectl delete -f nginx-recreate.yaml
 deployment.apps "nginx-deployment" deleted
