@@ -16,11 +16,10 @@ footer: Samsung SDS
 
 <br>
 
-- **Docker commands**
-  - **Run**
-  - **Image**
-  - **Container**
-  - **Others**
+- **Docker commands - 이미지 다루기**
+- **Docker commands - 컨테이너 실행하기**
+- **Docker commands - 오브젝트 확인하기**
+- **Docker commands(정리)**
 
 ---
 
@@ -29,6 +28,70 @@ footer: Samsung SDS
 도커 명령어를 이용하여 **이미지**와 **컨테이너**를 다루는 방법을 알아보겠습니다.
 
 ![h:450 left](./img/docker_stages.png)
+
+---
+
+### Docker commands - 이미지 다루기   
+
+컨테이너를 생성하기 위해서는 컨테이너 이미지가 필요합니다.  
+이미지를 준비하는 방법은 여러가지가 있지만, 대표적으로  
+
+- 빌드(Build)해서 만들기
+- Registry에서 다운로드(Pull)하기
+
+와 같은 방법이 있습니다.  
+
+`docker pull` 명령어를 실행하면, Registy에서 이미지를 **다운로드(Pull)** 할 수 있습니다.  
+명령어 형식은 다음과 같습니다.  
+
+```bash
+ docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+```
+Pull할 **이미지**(IMAGE[:TAG|@DIGEST])를 지정하여 실행합니다.  
+이 때, TAG를 지정하지 않으면(생략하면) `:latest` 를 기본으로 사용합니다.
+
+그리고, Registry는 [Docker hub(default)](https://hub.docker.com/)나 다른 Registry들이 사용될 수 있습니다.
+
+- Docker Hub의 이미지 (예시) - `nginx:latest`, `nginx:1.18`, `ubuntu:20.04`
+- 다른 Registry의 이미지 (예시) - `registry.k8s.io/busybox`, `registry.k8s.io/liveness` 
+
+<br>
+
+🔗[docker Pull](https://docs.docker.com/engine/reference/commandline/pull/)
+
+---
+
+### Docker commands - 이미지 다루기   
+
+`docker pull` 명령어의 실행 예시는 다음과 같습니다.  
+
+```bash
+ubuntu@ip-10-0-1-14:~$ docker pull nginx:1.18
+1.18: Pulling from library/nginx
+f7ec5a41d630: Pull complete
+0b20d28b5eb3: Pull complete
+1576642c9776: Pull complete
+c12a848bad84: Pull complete
+03f221d9cf00: Pull complete
+Digest: sha256:e90ac5331fe095cea01b121a3627174b2e33e06e83720e9a934c7b8ccc9c55a0
+Status: Downloaded newer image for nginx:1.18
+docker.io/library/nginx:1.18
+```
+> 이미지는 레이어들로 이우어져 있고, 각 레이어들이 모두 pull 됩니다.
+
+`docker push` 명령어의 실행 예시는 다음과 같습니다.  
+```bash
+ubuntu@ip-10-0-1-14:~$ docker push rogallo/todo-app:1.0.0
+The push refers to repository [docker.io/rogallo/todo-app]
+a07f0156c43d: Pushed
+8c40db749504: Pushed
+4efca0eb4778: Pushed
+edff9ff691d5: Layer already exists
+cbe4b9146f86: Layer already exists
+a6524c5b12a6: Layer already exists
+9a5d14f9f550: Layer already exists
+1.0.0: digest: sha256:5cee6f196aa06a6ba00a1b7c40a0b674510cf9f931785d9491daaa31af0d9de1 size: 1787
+```
 
 ---
 
@@ -184,7 +247,73 @@ root@4276ef1e8f67:/#
 
 ---
 
-### Docker commands - 기본 명령어 (이미지 관련)
+### Docker commands - 오브젝트 확인하기
+
+현재 Host 머신에 존재하는 오브젝트를 확인하는 명령어들은 다음과 같은 것들이 있습니다.  
+
+- 이미지 목록 확인 : `docker images`
+- 컨테이너 목록 : `docker ps`
+- 오브젝트의 상세내용 확인 : `docker inspect`
+
+각각의 명령어 사용 예는 다음과 같습니다.
+
+먼저 이미지의 목록을 확인하려면 다음과 같이 조회하면 됩니다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+nginx        latest    448a08f1d2f9   12 days ago   142MB
+ubuntu       latest    3b418d7b466a   2 weeks ago   77.8MB
+nginx        1.18      c2c45d506085   2 years ago   133MB
+```
+
+그리고, 컨테이너의 목록은 다음과 같이 조회할 수 있습니다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker ps --all
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS                                   NAMES
+c27a65cf592d   ubuntu    "/bin/bash"              11 seconds ago   Exited (0) 8 seconds ago                                           charming_mcnulty
+d804da47bffd   nginx     "/docker-entrypoint.…"   22 seconds ago   Up 21 seconds              0.0.0.0:8080->80/tcp, :::8080->80/tcp   my-nginx
+```
+> **--all** 옵션을 사용하여 Exit 상태의 컨테이너까지 모두 조회함.
+
+---
+
+### Docker commands - 오브젝트 확인하기
+
+생성된 컨테이너의 상세내용을 확인하는 명령어의 실행결과는 다음과 같습니다.
+```bash
+ubuntu@ip-10-0-1-14:~$ docker inspect my-nginx
+[
+    {
+        "Id": "d804da47bffdeab9f26a0f3d47f971d4a245de0e3c8a7eab31821003475ed654",
+        "Created": "2023-05-16T04:34:55.45188562Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "nginx",
+            "-g",
+            "daemon off;"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 16302,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-05-16T04:34:55.957204065Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:448a08f1d2f94e8db6db9286fd77a3a4f3712786583720a12f1648abb8cace25",
+        ... 생략 ...
+    }
+]
+```
+
+---
+
+### Docker commands(정리) - 기본 명령어 (이미지 관련)
 
 ```bash
 # 자주 사용되는 명령어
@@ -214,7 +343,7 @@ $ docker load [OPTIONS]
 
 ---
 
-### Docker commands - 기본 명령어 (컨테이너 관련)
+### Docker commands(정리) - 기본 명령어 (컨테이너 관련)
 
 ```bash
 # 자주 사용되는 명령어
@@ -242,7 +371,7 @@ $ docker stop [OPTIONS] CONTAINER [CONTAINER...]
 
 ---
 
-### Docker commands - 기타 명령어
+### Docker commands(정리) - 기타 명령어
 
 ```bash
 # 자주 사용되는 명령어
