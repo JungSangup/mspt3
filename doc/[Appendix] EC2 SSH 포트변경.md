@@ -114,7 +114,7 @@ ubuntu@ip-172-31-29-188:~$ sudo service sshd restart
 ```
 
 > 💻 명령어
-> >```bash
+>```bash
 >sudo service sshd restart
 >```
 
