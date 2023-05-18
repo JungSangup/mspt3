@@ -93,7 +93,7 @@ Pod의 Lifecycle에서의 단계(Phase)를 나타내는 고수준 요약
 | **Failed** | Pod의 모든 컨테이너가 종료되었고, 그 중 적어도 하나의 컨테이너가 실패로 종료 |
 | **Unknown** | Pod의 상태를 확인할 수 없는 단계로, 일반적으로 Node와의 통신오류로 인해 발생함 |
 
-![h:150](./img/k8s_pod_lifecycle.png)
+[![h:150](./img/k8s_pod_lifecycle.png)](https://livebook.manning.com/book/kubernetes-in-action-second-edition/chapter-6/v-15/)
 
 ---
 
