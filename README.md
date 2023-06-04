@@ -1,8 +1,7 @@
 
-![](doc/img/banner.png)
+![](doc/img/banner2.png)
 
 이 Repository는 **MSP T3** 과정 중 **Docker & Kubernetes** 학습을 위한 교재와 실습파일들의 저장소 입니다.  
-
 
 
 ## 디렉토리 구조 및 설명
