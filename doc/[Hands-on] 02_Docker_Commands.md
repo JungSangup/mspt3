@@ -754,6 +754,7 @@ ubuntu@ip-172-31-23-60:~$ docker image inspect ubuntu:18.04 --format "{{json .Ro
 
 **sha256:b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4**는 ubuntu:18.04 이미지의 **레이어 정보** 입니다.  
 여러개의 레이어를 가진 이미지는 이 정보도 여러 개 표시됩니다.  
+실습 결과는 교재와 다를 수도 있습니다.  
 
 <br><br><br>
 
@@ -771,6 +772,8 @@ ubuntu@ip-172-31-23-60:~$ sudo cat /var/lib/docker/image/overlay2/layerdb/sha256
 >```bash
 >sudo cat /var/lib/docker/image/overlay2/layerdb/sha256/b7e0fa7bfe7f9796f1268cca2e65a8bfb1e010277652cee9a9c9d077a83db3c4/cache-id
 >```
+> 앞의 실행결과가 교재와 다르다면, 본인 실행결과의 SHA256 값을 사용하세요. ( b7... 대신 다른 값을 사용 )
+
 
 **71fd236df50fd04938097606fb40b63897c7a591240de32dceede7b50b539474** 가 파일들이 저장되어 있는 위치(디렉토리) 입니다.  
 이 결과는 실습환경에 따라 달라질 수 있습니다.
