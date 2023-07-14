@@ -16,7 +16,7 @@
 | 12  | [Book] 12_Kubernetes_Configuration                          | [Hands-on] 12_Kubernetes_Configuration             |
 | 13  | [Book] 13_Kubernetes_Deployment_strategies                  | [Hands-on] 13_Kubernetes_Deployment_strategies     |
 | 14  | [Book] 14_Kubernetes_Horizontal Pod Autoscaler              | [Hands-on] 14_Kubernetes_Horizontal Pod Autoscaler |
-| 15  | [Book] 15_Helm                                              | [Hands-on] 15_Helm                                 |
+| 15  | [Book] 15_Helm                                              | [Hands-on] 15_Helm 💿                              |
 
 💿 : Self Study 포함.
 
