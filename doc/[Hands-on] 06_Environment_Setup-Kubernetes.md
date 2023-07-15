@@ -91,7 +91,7 @@ ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.2
 
 > 💻 명령어
 >```bash
->minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
+>minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server
 >```
 
 <br>
