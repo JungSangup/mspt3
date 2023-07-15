@@ -42,7 +42,7 @@ ubuntu@ip-172-31-23-60:~$ sudo install minikube-linux-amd64 /usr/local/bin/minik
 
 이제 minikube CLI를 이용해서 minikube cluster를 시작합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb
+ubuntu@ip-172-31-23-60:~$ minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server
 😄  minikube v1.28.0 on Ubuntu 20.04
 ✨  Using the none driver based on user configuration
 👍  Starting control plane node minikube in cluster minikube
