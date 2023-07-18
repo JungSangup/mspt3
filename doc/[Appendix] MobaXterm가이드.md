@@ -1,3 +1,37 @@
+# MobaXterm 설치하기
+
+<br>
+
+1. MobaXterm 다운로드 수행한다.
+
+- 접속 URL :  https://mobaxterm.mobatek.net/download.html
+
+- Home Edition에서 `Download now` 버튼을 클릭한다.   
+
+![](images/2022-03-07-20-57-40.png)
+
+<br>
+
+2. 다운로드 받은 파일을 압축 해제한다.
+
+- 편의상 `MobaXterm Home Edition (Portable edition)` 버튼을 클릭하여 다운로드 받고, 이후에 압축을 푼다.      
+- 예시 화면과 달리 MobaXterm 버전이 업데이트 된 경우 업데이트 된 버전으로 사용한다.      
+
+![](images/2022-03-07-20-58-15.png)
+
+<br>
+
+3. exe 파일을 실행한다.
+
+- 압축을 푼 위치로 이동하여 MobaXterm_Personal_*.exe 실행파일을 더블 클릭한다.
+
+- 기호에 맞는 테마를 선택하고 MobaXterm 설치를 마무리한다.
+
+![](images/2022-03-07-20-58-32.png)
+
+
+
+
 # MobaXterm 텍스트 편집 가이드
 
 <br>
