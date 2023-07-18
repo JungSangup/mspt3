@@ -156,7 +156,8 @@
 
 ## 2. VM Instance 접속하기
 
-생성된 VM Instance의 접속(SSH)은 다음의 방법 중 하나를 사용하면 됩니다.
+생성된 VM Instance의 접속(SSH)은 다음의 방법 중 하나를 사용하면 됩니다.  
+실습은  **[접속방법2]** MobaXterm 으로 진행하겠습니다.  **[접속방법1]**은 참고만 하세요.  
 
 - **[접속방법1]** Terminal 프로그램 (e.g. [Windows terminal](https://docs.microsoft.com/ko-KR/windows/terminal/install), PowerShell, [cmder](https://cmder.app/), [iTerm2](https://iterm2.com/), etc.)
 - **[접속방법2]** MobaXterm
