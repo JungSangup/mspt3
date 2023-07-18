@@ -314,6 +314,8 @@ my-todo-manager
 my-mysql
 ubuntu@ip-172-31-23-60:~$ docker network rm todo-app
 todo-app
+ubuntu@ip-172-31-23-60:~$ docker volume rm todo-mysql-data
+todo-mysql-data
 ```
 
 > 💻 명령어
@@ -322,6 +324,9 @@ todo-app
 >```
 >```bash
 >docker network rm todo-app
+>```
+>>```bash
+>docker volume rm todo-app
 >```
 
 <br>
