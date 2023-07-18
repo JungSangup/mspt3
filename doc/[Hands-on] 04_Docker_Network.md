@@ -326,7 +326,7 @@ todo-mysql-data
 >docker network rm todo-app
 >```
 >```bash
->docker volume rm todo-app
+>docker volume rm todo-mysql-data
 >```
 
 <br>
