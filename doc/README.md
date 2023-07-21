@@ -40,4 +40,4 @@
     - 혹시 안된다면 Security group을 확인해보세요. (지금 내 환경에서 22번 포트로 접속 가능한 조건인지)
   - [ ] Minikube가 시작되어 있나요? (`minikube status`명령어로 확인가능)
     - 아니라면, 아래 명령어로 Minikube를 시작해주세요.
-    - `minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server,metallb`
+    - `minikube start --driver=none --kubernetes-version=v1.23.0 --addons=ingress,metrics-server`
