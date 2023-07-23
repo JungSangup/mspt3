@@ -219,7 +219,7 @@ $ kubectl replace -f nginx.yaml
 #### [선언형 오브젝트 구성 (Declarative object configuration)](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/object-management/#%EC%84%A0%EC%96%B8%ED%98%95-%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%84%B1)
 
 명령형 오브젝트 구성(Imperative object configuration)과 비슷해 보이지만, 수행할 작업내용(커맨드)을 정의하지 않습니다.
-셍성/업데이트/삭제 는 자동으로 감지되어 처리됩니다.
+생성/업데이트/삭제 는 자동으로 감지되어 처리됩니다.
 
 ```bash
 $ kubectl apply -f configs/
