@@ -43,7 +43,7 @@ footer: Samsung SDS
 ![h:400](./img/k8s_service3.png)
 Pod는 ReplicaSet에 의해 동적으로 생성되고 소멸되기를 반복하기 때문에 Pod의 IP로
 서비스를 할 수 없습니다. Kubenetes에서는 Pod간의 통신이 필요하다면
-(e.g. Font-ent, Back-end 간 통신) Service Object를 생성하여 통신해야 합니다. 
+(e.g. Front-end, Back-end 간 통신) Service Object를 생성하여 통신해야 합니다. 
 위의 그림에서 변화하는 Object들인 Nginx와 mysql의 앞에 Service object를 두어
 Pod간에 통신이 안정적으로 이루어지도록 합니다.
 
