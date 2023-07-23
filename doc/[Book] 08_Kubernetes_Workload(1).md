@@ -38,7 +38,7 @@ footer: Samsung SDS
 **파드**(**Pod**)는 Kubernetes에서 생성하고 관리할 수 있는 배포 가능한 **가장 작은 컴퓨팅 단위**입니다.
 Pod는 하나 이상의 컨테이너 그룹으로 구성되며, **스토리지**와 **네트워크**를 공유합니다.
 
-이 **Pod**는 **Node**에서 실행되는데, 이때 Node의 [Cuntainer runtime](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/)을 이용하게 됩니다.
+이 **Pod**는 **Node**에서 실행되는데, 이때 Node의 [Container runtime](https://kubernetes.io/ko/docs/setup/production-environment/container-runtimes/)을 이용하게 됩니다.
 
 > **Docker**는 대표적인 Kubernetes의 Container runtime이었지만, Kubernetes v1.20이후에는 deprecated 되었습니다. ([참조](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/))
 > 하지만, 앞서 배운 Docker환경에서 만들어진 컨테이너 이미지는 Kubernetes에서 문제없이 동작하니 걱정할 필요는 없습니다.
@@ -233,7 +233,7 @@ Probe의 종류는 다음과 같은 것들이 있습니다.
 #### Container probes
 
 - [Define a TCP liveness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-tcp-liveness-probe)
-  tcpSocket 유형의 readinessProbe와 livenessProbe 에제입니다.
+  tcpSocket 유형의 readinessProbe와 livenessProbe 예제입니다.
   
   ```yaml
   apiVersion: v1
