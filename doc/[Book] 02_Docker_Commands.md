@@ -323,6 +323,7 @@ $ docker push [OPTIONS] NAME[:TAG]
 $ docker images [OPTIONS] [REPOSITORY[:TAG]]
 $ docker rmi [OPTIONS] IMAGE [IMAGE...]
 # 기타 명령어
+$ docker image prune [OPTIONS]
 $ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 $ docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 $ docker save [OPTIONS] IMAGE [IMAGE...]
@@ -330,16 +331,17 @@ $ docker load [OPTIONS]
 ```
 
 | Command                                                                       | Description                                                              |
-|:----------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
-| [docker build](https://docs.docker.com/engine/reference/commandline/build/)   | Build an image from a Dockerfile                                         |
-| [docker pull](https://docs.docker.com/engine/reference/commandline/pull/)     | Pull an image or a repository from a registry                            |
-| [docker push](https://docs.docker.com/engine/reference/commandline/push/)     | Push an image or a repository to a registry                              |
-| [docker images](https://docs.docker.com/engine/reference/commandline/images/) | List images                                                              |
-| [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/)       | Remove one or more images                                                |
-| [docker tag](https://docs.docker.com/engine/reference/commandline/tag/)       | Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE                    |
-| [docker commit](https://docs.docker.com/engine/reference/commandline/commit/) | Create a new image from a container’s changes                            |
-| [docker save](https://docs.docker.com/engine/reference/commandline/save/)     | Save one or more images to a tar archive (streamed to STDOUT by default) |
-| [docker load](https://docs.docker.com/engine/reference/commandline/load/)     | Load an image from a tar archive or STDIN                                |
+|:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
+| [docker build](https://docs.docker.com/engine/reference/commandline/build/)             | Build an image from a Dockerfile                                         |
+| [docker pull](https://docs.docker.com/engine/reference/commandline/pull/)               | Pull an image or a repository from a registry                            |
+| [docker push](https://docs.docker.com/engine/reference/commandline/push/)               | Push an image or a repository to a registry                              |
+| [docker images](https://docs.docker.com/engine/reference/commandline/images/)           | List images                                                              |
+| [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/)                 | Remove one or more images                                                |
+| [docker image prune](https://docs.docker.com/engine/reference/commandline/image_prune/) | Remove unused images                                                     |
+| [docker tag](https://docs.docker.com/engine/reference/commandline/tag/)                 | Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE                    |
+| [docker commit](https://docs.docker.com/engine/reference/commandline/commit/)           | Create a new image from a container’s changes                            |
+| [docker save](https://docs.docker.com/engine/reference/commandline/save/)               | Save one or more images to a tar archive (streamed to STDOUT by default) |
+| [docker load](https://docs.docker.com/engine/reference/commandline/load/)               | Load an image from a tar archive or STDIN                                |
 
 ---
 
