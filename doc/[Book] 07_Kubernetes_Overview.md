@@ -286,7 +286,7 @@ storageclasses                    sc           storage.k8s.io/v1                
 ## Labels and Selectors
 
 **Label**은 Object에 첨부된 **Key/Value 쌍**(pairs)입니다. **Label**은 **Object의 특성**을 식별하는데 사용되지만, 시스템에 직접적인 의미는 없습니다.
-Object들의 하위 집합(subsets)을 선책하고 구성하는데 사용됩니다.
+Object들의 하위 집합(subsets)을 선택하고 구성하는데 사용됩니다.
 
 아래는 Label을 사용한 예제 입니다.
 
