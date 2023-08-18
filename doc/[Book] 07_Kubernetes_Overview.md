@@ -107,10 +107,8 @@ Kubernetes Object는 클러스터의 상태를 나타내는 영속성을 가지�
 - 그 애플리케이션이 이용할 수 있는 리소스
 - 그 애플리케이션이 어떻게 재구동 정책(Restart policies), 업그레이드, 그리고 내고장성(fault-tolerance)과 같은 것에 동작해야 하는지에 대한 정책
 
-K8S Object는 하나의 의도(Desired state)를 담은 레코드로, 생성되면  
-K8S는 이 Object가 유지되도록 지속적으로 노력합니다.
-이러한 Object의 생성/수정/삭제는 [Kubernetes API](https://kubernetes.io/ko/docs/concepts/overview/kubernetes-api/)를 통해 이루어지는데,
-CLI인 `kubectl`도 이 API를 이용합니다.
+K8S Object는 하나의 의도(Desired state)를 담은 레코드로, 생성되면 K8S는 이 Object가 유지되도록 지속적으로 노력합니다.  
+이러한 Object의 생성/수정/삭제는 [Kubernetes API](https://kubernetes.io/ko/docs/concepts/overview/kubernetes-api/)를 통해 이루어지는데, CLI인 `kubectl`도 이 API를 이용합니다.
 
 앞으로 다루겠지만, 일반적으로 [YAML(YAML Ain't Markup Language)](https://yaml.org/)
 형식의 파일로 Object를 정의하고, API를 통해 Kubernetes에 처리를 요청합니다.
