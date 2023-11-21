@@ -61,7 +61,7 @@
 
 ### Kubernetes
 
-[Kubernetes Overview Diagrams](https://shipit.dev/posts/kubernetes-overview-diagrams.html)  ( -> 김순홍프로님이 공유해주신 정보입니다. 👍 )
+[Kubernetes Overview Diagrams](https://shipit.dev/posts/kubernetes-overview-diagrams.html) 
 
 ---
 
