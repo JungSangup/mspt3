@@ -24,7 +24,7 @@ kubeadm 도구를 이용해서 Kubernetes cluster를 구성하는 절차입니�
 이 가이드는 아래와 같은 구성으로 진행함.
 
 - Node 구성 : Contol-plane node * 1 , (Worker) node * 2
-- Node OS : Ubuntu Server 22.04 LTS
+- Node OS : Ubuntu Server 20.04 LTS
 - Container runtime : containerd
 - Kubernetes version : 1.29
 - Ingress controller : ingress nginx
