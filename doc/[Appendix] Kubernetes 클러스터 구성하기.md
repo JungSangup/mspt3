@@ -332,8 +332,9 @@ kube-system    kube-scheduler-ip-172-31-26-107            1/1     Running   0   
 
 
 
-> 관련 문서 : [Initializing your control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#initializing-your-control-plane-node) 
-> 관련 문서 : [kubeadm init](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/) 
+
+> 관련 문서 : [Initializing your control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#initializing-your-control-plane-node)   
+> 관련 문서 : [kubeadm init](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/)   
 > 관련 문서 : [Deploying flannel manually](https://github.com/flannel-io/flannel?tab=readme-ov-file#deploying-flannel-manually)
 
 ---
