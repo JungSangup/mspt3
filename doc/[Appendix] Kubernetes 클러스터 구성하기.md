@@ -473,5 +473,9 @@ $ kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/c
 
 ### 8. Storage Class 구성
 
+NFS Provision를 이용한 Storage Class 구성.  
 
-> 관련 문서 :
+
+
+> 관련 문서 : [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+> 관련 문서 : [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)  
