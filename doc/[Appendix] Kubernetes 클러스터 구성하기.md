@@ -428,9 +428,46 @@ version.BuildInfo{Version:"v3.13.3", GitCommit:"c8b948945e52abba22ff885446a1486c
 
 ### 7. Ingress controller 설치 및 구성
 
+Ingress controller로 Nginx를 설치합니다.  
 
+```bash
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
+```
+> 위 예시는 v1.8.2 설치 예시입니다.
 
-> 관련 문서 :
+설치가 완료되면 아래와 같이 `ingress-nginx` 네임스페이스와 리소스들이 생성됩니다.  
+```bash
+$ kubectl get all -n ingress-nginx 
+NAME                                           READY   STATUS      RESTARTS   AGE
+pod/ingress-nginx-admission-create-qb2d9       0/1     Completed   0          69s
+pod/ingress-nginx-admission-patch-lqnjb        0/1     Completed   0          69s
+pod/ingress-nginx-controller-65b5d9b59-sp6wj   1/1     Running     0          69s
+
+NAME                                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+service/ingress-nginx-controller             NodePort    10.98.120.247    <none>        80:30732/TCP,443:31727/TCP   69s
+service/ingress-nginx-controller-admission   ClusterIP   10.111.152.207   <none>        443/TCP                      69s
+
+NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ingress-nginx-controller   1/1     1            1           69s
+
+NAME                                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/ingress-nginx-controller-65b5d9b59   1         1         1       69s
+
+NAME                                       COMPLETIONS   DURATION   AGE
+job.batch/ingress-nginx-admission-create   1/1           6s         69s
+job.batch/ingress-nginx-admission-patch    1/1           6s         69s
+```
+
+설치 후 NodePort를 특정 포트로 변경하려면 [kubectl edit](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_edit/) 명령어를 이용하여 변경합니다. (e.g. HTTP의 NodePort를 30000으로 변경)
+
+문제가 있어 삭제(uninstall)를 해야하는 경우 다음과 같이 삭제 가능합니다.  
+```bash
+$ kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
+```
+
+> 관련 문서 : [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)  
+> 관련 문서 : [Ingress-Nginx Controller - Installation Guide - Bare metal clusters](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters)  
+> 관련 문서 : [Ingress-Nginx Controller - Bare-metal considerations](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)
 
 ---
 
