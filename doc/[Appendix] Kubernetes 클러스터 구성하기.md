@@ -149,7 +149,7 @@ $ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/c
 
 결과는 아래와 같아야 합니다.  
 - disabled_plugins 에 cri가 포함되어 있지 않다.
-- SystemdCgroup = true  
+- SystemdCgroup = true ( [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] 부분 )
 ```bash
 $ sudo cat /etc/containerd/config.toml | grep disabled_plugins
 disabled_plugins = []
