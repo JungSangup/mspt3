@@ -14,8 +14,9 @@ kubeadm 도구를 이용해서 Kubernetes cluster를 구성하는 절차입니�
 3. kubeadm, kubelet, kubectl 설치
 4. Control-plane node 구성
 5. (Worker) node 구성
-6. Ingress controller 설치 및 구성
-7. Storage Class 구성
+6. Helm 설치
+7. Ingress controller 설치 및 구성
+8. Storage Class 구성
 
 ---
 
@@ -398,4 +399,42 @@ ip-172-31-29-238   Ready    control-plane   175m   v1.29.0   172.31.29.238   <no
 
 
 
-> 관련 문서 : [kubeadm join](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-join/) 
+> 관련 문서 : [kubeadm join](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-join/)
+
+---
+
+### 6. Helm 설치
+
+Kubernetes package manager인 Helm을 설치합니다.  
+kubectl CLI를 위한 설정이 된 곳(앞의 과정대로 진행하셨다면 Control-plane node)에서 다음과 같이 설치합니다.  
+
+```bash
+curl -LO https://get.helm.sh/helm-v3.13.3-linux-amd64.tar.gz
+tar -zxvf helm-v3.13.3-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin/helm
+```
+> 설치 시접의 릴리즈 확인은 [Helm releases](https://github.com/helm/helm/releases)를 참고하세요.
+
+설치 확인은 아래와 같이 해보시면 됩니다.  
+```bash
+$ helm version
+version.BuildInfo{Version:"v3.13.3", GitCommit:"c8b948945e52abba22ff885446a1486cb5fd3474", GitTreeState:"clean", GoVersion:"go1.20.11"}
+```
+
+
+> 관련 문서 : [Installing Helm  - From the binary releases ](https://helm.sh/docs/intro/install/#from-the-binary-releases)
+
+---
+
+### 7. Ingress controller 설치 및 구성
+
+
+
+> 관련 문서 :
+
+---
+
+### 8. Storage Class 구성
+
+
+> 관련 문서 :
