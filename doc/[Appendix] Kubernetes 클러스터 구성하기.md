@@ -215,7 +215,7 @@ default via 172.31.16.1 dev ens5 proto dhcp src 172.31.30.145 metric 100
 sudo kubeadm init --apiserver-advertise-address=172.31.30.145 --pod-network-cidr=10.244.0.0/16
 ```
 > `--apiserver-advertise-address` : Control-plane node의 IP Address  
-> `--pod-network-cidr` : 사용할 Network add-on에 따라 설정함. (위 예시는 ...)
+> `--pod-network-cidr` : 사용할 Network add-on에 따라 설정함. (위 예시는 Flannel 을 위한 구성입니다.)
 
 아래는 실행결과 예시입니다.  
 ```bash
@@ -301,6 +301,7 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+> [Tip] `kubectl` CLI를 편하게 사용하기 위해서 [kubectl 자동 완성 활성화](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/#kubectl-%EC%9E%90%EB%8F%99-%EC%99%84%EC%84%B1-%ED%99%9C%EC%84%B1%ED%99%94)를 적용하면 편합니다.
 
 다음은 pod network add-on 을 설치합니다. ( 아래 예시는 Flannel )
 
@@ -308,11 +309,34 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
+정상적으로 준비가 된 경우 아래와 같이 표시됩니다.  
+```bash
+$ kubectl get po -A
+NAMESPACE      NAME                                       READY   STATUS    RESTARTS   AGE
+kube-flannel   kube-flannel-ds-z97gc                      1/1     Running   0          2m1s
+kube-system    coredns-76f75df574-276ns                   1/1     Running   0          5m3s
+kube-system    coredns-76f75df574-swj5p                   1/1     Running   0          5m3s
+kube-system    etcd-ip-172-31-26-107                      1/1     Running   0          5m17s
+kube-system    kube-apiserver-ip-172-31-26-107            1/1     Running   0          5m17s
+kube-system    kube-controller-manager-ip-172-31-26-107   1/1     Running   0          5m17s
+kube-system    kube-proxy-x6zmg                           1/1     Running   0          5m3s
+kube-system    kube-scheduler-ip-172-31-26-107            1/1     Running   0          5m18s
+```
+
+여기까지 하면 Control-plane node는 준비가 됐습니다.  
+다음 단계로 넘어가기 전에 API Server 접근을 위해서 Control-plane node의 Security Group에 다음 규칙을 추가해주세요.  
+| Type | Protocol | Port range | Source |
+| --- | --- | --- | --- |
+| Custom TCP | TCP | 6443 | 172.31.0.0/16 |
+> Source의 IP Range는 (Worker) node의 IP Range 입니다.
+
 
 
 > 관련 문서 : [Initializing your control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#initializing-your-control-plane-node) 
 > 관련 문서 : [kubeadm init](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/) 
 > 관련 문서 : [Deploying flannel manually](https://github.com/flannel-io/flannel?tab=readme-ov-file#deploying-flannel-manually)
+
+---
 
 ### 5. (Worker) node 구성
 
