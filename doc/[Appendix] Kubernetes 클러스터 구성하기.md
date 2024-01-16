@@ -134,14 +134,27 @@ sudo apt-get install -y containerd.io
 
 #### 2.3. containerd 설정
 
-systemd cgroup driver 와 CRI Support 를 위해 다음과 같이 설정파일을 변경합니다.  
-`/etc/containerd/config.toml`파일의 내용을 모두 삭제(또는 comment out 처리)하고 아래 내용을 추가합니다.  
-> 이 가이드는 K8s cluster 구성만 고려하고 있어 아래 내용만 남깁니다. 별도로 다른 설정이 필요한 경우 관련 가이드에 따라 설정하세요. 
+systemd를 cgroup driver로 사용하고, CRI Support를 위해 다음과 같이 containrd의 설정을 변경합니다.  
 
+먼저 config.toml 파일을 생성합니다. (overwrite)  
 ```bash
-[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-    SystemdCgroup = true
+$ containerd config default | sudo tee /etc/containerd/config.toml
+```
+> containerd 의 default config.를 config.toml 파일에 기록
+
+Containerd의 default config.에서는 `SystemdCgroup = false`로 되어있기 때문에 이 부분을 변경합니다.  
+```bash
+$ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+```
+
+결과는 아래와 같아야 합니다.  
+- disabled_plugins 에 cri가 포함되어 있지 않다.
+- SystemdCgroup = true  
+```bash
+$ sudo cat /etc/containerd/config.toml | grep disabled_plugins
+disabled_plugins = []
+$ sudo cat /etc/containerd/config.toml | grep SystemdCgroup
+            SystemdCgroup = true
 ```
 
 설정을 변경했으면 아래 명령어를 실행해서 containerd 를 재시작합니다.
