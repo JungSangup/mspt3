@@ -24,7 +24,7 @@ kubeadm 도구를 이용해서 Kubernetes cluster를 구성하는 절차입니�
 이 가이드는 아래와 같은 구성으로 진행함.
 
 - Node 구성 : Contol-plane node * 1 , (Worker) node * 2
-- Node OS : Ubuntu Server 20.04 LTS
+- Node OS : Ubuntu Server 22.04 LTS
 - Container runtime : containerd
 - Kubernetes version : 1.29
 - Ingress controller : ingress nginx
@@ -47,12 +47,13 @@ Kubernetes 클러스터 구성을 위한 Node VM들을 준비합니다.
 
 | Node name        | OS                      | Node type | VPC         | Public IP | Storage |
 |:---------------- |:-----------------------:| --------- |:-----------:| --------- | ------- |
-| k8s-controlplane | Ubuntu Server 20.04 LTS | t3.medium | Default VPC | Enable    | 20GiB   |
-| k8s-node01        | Ubuntu Server 20.04 LTS | t3.medium | Default VPC | Enable    | 20GiB   |
-| k8s-node02        | Ubuntu Server 20.04 LTS | t3.medium | Default VPC | Enable    | 20GB    |
+| k8s-controlplane | Ubuntu Server 22.04 LTS | t3.medium | Default VPC | Enable    | 20GiB   |
+| k8s-node01        | Ubuntu Server 22.04 LTS | t3.medium | Default VPC | Enable    | 20GiB   |
+| k8s-node02        | Ubuntu Server 22.04 LTS | t3.medium | Default VPC | Enable    | 20GB    |
 
 아래는 k8s-controlplane 구성 예시이며, k8s-node1와 k8s-node2는 Name만 다르게 하고 다른 구성은 동일하게 진행합니다.  
 
+**아래 그림 교체 예정 (Ubuntu 20.04 -> Ubuntu 22.04)**  
 ![](./img/k8s_bootstrapping_1.png)
 
 ![](./img/k8s_bootstrapping_2.png)
