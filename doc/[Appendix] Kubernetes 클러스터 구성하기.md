@@ -473,7 +473,7 @@ kubectl delete namespaces ingress-nginx
 ```
 
 > 관련 문서 : [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)  
-> 관련 문서 : [Ingress-Nginx Controller - Installation Guide - Bare metal clusters](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters)  
+> 관련 문서 : [Ingress-Nginx Controller - Installation Guide - Quick start](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)  
 > 관련 문서 : [Ingress-Nginx Controller - Bare-metal considerations](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)  
 > 관련 문서 : [Ingress-Nginx Helm chart](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx)
 
