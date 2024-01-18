@@ -139,13 +139,13 @@ systemd를 cgroup driver로 사용하고, CRI Support를 위해 다음과 같이
 
 먼저 config.toml 파일을 생성합니다. (overwrite)  
 ```bash
-$ containerd config default | sudo tee /etc/containerd/config.toml
+containerd config default | sudo tee /etc/containerd/config.toml
 ```
 > containerd 의 default config.를 config.toml 파일에 기록
 
 Containerd의 default config.에서는 `SystemdCgroup = false`로 되어있기 때문에 이 부분을 변경합니다.  
 ```bash
-$ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 ```
 
 결과는 아래와 같아야 합니다.  
@@ -382,7 +382,7 @@ $ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outf
 
 위의 정보를 조합하여 아래와 같이 `kubeadm join` 명령어를 실행합니다.  
 ```bash
-$ sudo kubeadm join 172.31.30.145:6443 --token ev57z0.770ldkw... --discovery-token-ca-cert-hash sha256:3d98992e...
+sudo kubeadm join 172.31.30.145:6443 --token ev57z0.770ldkw... --discovery-token-ca-cert-hash sha256:3d98992e...
 ```
 > 주의 : `kubeadm join` 명령어는 Control-plane node가 아닌, (Worker) node 에서 실행합니다.
 
