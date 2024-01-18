@@ -448,7 +448,8 @@ helm install ingress-nginx ingress-nginx \
 $ helm ls -n ingress-nginx
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
 ingress-nginx   ingress-nginx   1               2024-01-18 04:09:58.730337499 +0000 UTC deployed        ingress-nginx-4.9.0     1.9.5      
-$ k get all -n ingress-nginx
+
+$ kubectl get all -n ingress-nginx
 NAME                                            READY   STATUS    RESTARTS   AGE
 pod/ingress-nginx-controller-6c84576bbd-x487j   1/1     Running   0          41s
 
