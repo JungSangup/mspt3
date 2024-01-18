@@ -431,43 +431,50 @@ version.BuildInfo{Version:"v3.13.3", GitCommit:"c8b948945e52abba22ff885446a1486c
 Ingress controller로 Nginx를 설치합니다.  
 
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
+helm install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace \
+  --set controller.service.type=NodePort \
+  --set controller.service.nodePorts.http=30000 \
+  --set controller.service.nodePorts.https=30001
 ```
-> 위 예시는 v1.8.2 설치 예시입니다.
+> ingress-nginx helm chart를 이용하고, Service type은 NodePort(HTTP:30000, HTTPS:30001)로 설정 했습니다.
+
+
+
 
 설치가 완료되면 아래와 같이 `ingress-nginx` 네임스페이스와 리소스들이 생성됩니다.  
 ```bash
-$ kubectl get all -n ingress-nginx 
-NAME                                           READY   STATUS      RESTARTS   AGE
-pod/ingress-nginx-admission-create-qb2d9       0/1     Completed   0          69s
-pod/ingress-nginx-admission-patch-lqnjb        0/1     Completed   0          69s
-pod/ingress-nginx-controller-65b5d9b59-sp6wj   1/1     Running     0          69s
+$ helm ls -n ingress-nginx
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+ingress-nginx   ingress-nginx   1               2024-01-18 04:09:58.730337499 +0000 UTC deployed        ingress-nginx-4.9.0     1.9.5      
+$ k get all -n ingress-nginx
+NAME                                            READY   STATUS    RESTARTS   AGE
+pod/ingress-nginx-controller-6c84576bbd-x487j   1/1     Running   0          41s
 
 NAME                                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-service/ingress-nginx-controller             NodePort    10.98.120.247    <none>        80:30732/TCP,443:31727/TCP   69s
-service/ingress-nginx-controller-admission   ClusterIP   10.111.152.207   <none>        443/TCP                      69s
+service/ingress-nginx-controller             NodePort    10.107.129.131   <none>        80:30000/TCP,443:30001/TCP   41s
+service/ingress-nginx-controller-admission   ClusterIP   10.106.188.41    <none>        443/TCP                      41s
 
 NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/ingress-nginx-controller   1/1     1            1           69s
+deployment.apps/ingress-nginx-controller   1/1     1            1           41s
 
-NAME                                                 DESIRED   CURRENT   READY   AGE
-replicaset.apps/ingress-nginx-controller-65b5d9b59   1         1         1       69s
-
-NAME                                       COMPLETIONS   DURATION   AGE
-job.batch/ingress-nginx-admission-create   1/1           6s         69s
-job.batch/ingress-nginx-admission-patch    1/1           6s         69s
+NAME                                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/ingress-nginx-controller-6c84576bbd   1         1         1       41s
 ```
 
-설치 후 NodePort를 특정 포트로 변경하려면 [kubectl edit](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_edit/) 명령어를 이용하여 변경합니다. (e.g. HTTP의 NodePort를 30000으로 변경)
+설치 후 NodePort를 특정 포트로 변경하려면 [kubectl edit](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_edit/) 명령어를 이용하여 변경합니다.  
 
-문제가 있어 삭제(uninstall)를 해야하는 경우 다음과 같이 삭제 가능합니다.  
+삭제는 다음과 같이 합니다.  
 ```bash
-$ kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
+helm uninstall ingress-nginx --namespace ingress-nginx
+kubectl delete namespaces ingress-nginx
 ```
 
 > 관련 문서 : [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)  
 > 관련 문서 : [Ingress-Nginx Controller - Installation Guide - Bare metal clusters](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters)  
-> 관련 문서 : [Ingress-Nginx Controller - Bare-metal considerations](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)
+> 관련 문서 : [Ingress-Nginx Controller - Bare-metal considerations](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)  
+> 관련 문서 : [Ingress-Nginx Helm chart](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx)
 
 ---
 
