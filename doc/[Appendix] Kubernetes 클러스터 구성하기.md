@@ -54,7 +54,6 @@ Kubernetes 클러스터 구성을 위한 Node VM들을 준비합니다.
 
 아래는 k8s-controlplane 구성 예시이며, k8s-node1와 k8s-node2는 Name만 다르게 하고 다른 구성은 동일하게 진행합니다.  
 
-**아래 그림 교체 예정 (Ubuntu 20.04 -> Ubuntu 22.04)**  
 ![](./img/k8s_bootstrapping_1.png)
 
 ![](./img/k8s_bootstrapping_2.png)
