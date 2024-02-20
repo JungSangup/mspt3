@@ -498,7 +498,7 @@ $ showmount -e 172.31.26.107
 Export list for 172.31.26.107:
 /data/k8s-volume 172.31.16.0/20
 ```
-> 위 예시는 172.31.26.107 에 NFS Server가 구성되어 있는 예시입니다. /data/k8s-volume 디렉토리가 Volume 영역으로 사용됩니다.
+> 위 예시는 172.31.26.107 에 NFS Server가 구성되어 있는 예시입니다. /data/k8s-volume 디렉토리가 Volume 영역으로 사용되고 172.31.16.0/20에서 접근 가능한 구성입니다.
 
 이제 NFS Subdir External Provisioner 를 설치합니다.
 ```bash
