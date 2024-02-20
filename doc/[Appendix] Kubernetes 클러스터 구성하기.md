@@ -480,9 +480,55 @@ kubectl delete namespaces ingress-nginx
 
 ### 8. Storage Class 구성
 
-NFS Provision를 이용한 Storage Class 구성.  
+> [사전조건] NFS Server가 구성되어 있어야 함.
+
+미리 준비된 NFS Server의 Storage를 Dynamic Volume provisioning영역으로 사용하기 위해서 Storage Class를 구성합니다.  
+먼저, 워크로드가 실행될 노드에 NFS Client를 설치합니다.  
+
+```bash
+sudo apt-get update
+sudo apt-get install -y nfs-common
+```
+
+그 다음은 NFS Server에서 공유된 디렉토리의 정보를 확인합니다.  
+이 영역은 미리 준비되어 있어야 합니다.  
+
+```bash
+$ showmount -e 172.31.26.107
+Export list for 172.31.26.107:
+/data/k8s-volume 172.31.16.0/20
+```
+> 위 예시는 172.31.26.107 에 NFS Server가 구성되어 있는 예시입니다. /data/k8s-volume 디렉토리가 Volume 영역으로 사용됩니다.
+
+이제 NFS Subdir External Provisioner 를 설치합니다.
+```bash
+$ helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+$ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+    --create-namespace --namespace nfs-provisioner \
+    --set nfs.server=172.31.26.107 \
+    --set nfs.path=/data/k8s-volume \
+    --set storageClass.defaultClass=true
+```
+
+설치 후 확인은 아래와 같이 합니다.
+```bash
+$ kubectl get storageclasses
+NAME                   PROVISIONER                                     RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+nfs-client (default)   cluster.local/nfs-subdir-external-provisioner   Delete          Immediate           true                   33d
+$ kubectl describe storageclasses nfs-client 
+Name:                  nfs-client
+IsDefaultClass:        Yes
+Annotations:           meta.helm.sh/release-name=nfs-subdir-external-provisioner,meta.helm.sh/release-namespace=nfs-provisioner,storageclass.kubernetes.io/is-default-class=true
+Provisioner:           cluster.local/nfs-subdir-external-provisioner
+Parameters:            archiveOnDelete=true
+AllowVolumeExpansion:  True
+MountOptions:          <none>
+ReclaimPolicy:         Delete
+VolumeBindingMode:     Immediate
+Events:                <none>
+```
 
 
 
-> 관련 문서 : [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+> 관련 문서 : [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)  
 > 관련 문서 : [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)  
