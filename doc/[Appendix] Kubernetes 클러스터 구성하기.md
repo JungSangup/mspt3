@@ -483,7 +483,7 @@ kubectl delete namespaces ingress-nginx
 > [사전조건] NFS Server가 구성되어 있어야 함.
 
 미리 준비된 NFS Server의 Storage를 Dynamic Volume provisioning영역으로 사용하기 위해서 Storage Class를 구성합니다.  
-먼저, 워크로드가 실행될 노드에 NFS Client를 설치합니다.  
+먼저, 워크로드가 실행될 노드( (worker) node )에 NFS Client를 설치합니다.  
 
 ```bash
 sudo apt-get update
