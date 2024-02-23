@@ -440,7 +440,8 @@ helm install ingress-nginx ingress-nginx \
 > ingress-nginx helm chart를 이용하고, Service type은 NodePort(HTTP:30000, HTTPS:30001)로 설정 했습니다.
 
 
-
+이 구성은 Ingress-Nginx Controller의 Bare-metal 구성에서 [Over a NodePort Service](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#over-a-nodeport-service) 방법을 사용한 것입니다.  
+Load balancing 구성은 여러가지 방법이 있을 수 있으므로, 구축하는 환경에 맞게 구성하시면 됩니다.  
 
 설치가 완료되면 아래와 같이 `ingress-nginx` 네임스페이스와 리소스들이 생성됩니다.  
 ```bash
