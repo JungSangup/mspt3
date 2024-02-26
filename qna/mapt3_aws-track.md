@@ -20,6 +20,7 @@
   - docker pull 실행시 표시되는 레이어들은 하위 레이어부터 표시됩니다.
   - 교재 예시인 todo-app:1.0.0 과 todo-app:2.0.0 을 순서대로 pull 해보면 확인 가능합니다.
   - todo-app:1.0.0을 먼저 pull 한 다음, todo-app:2.0.0을 pull 할 때 변하지 않는 하위 레이어는 `Already exists`료 표시되고 중복해서 다운로드 되지 않, 변경된 레이어인 상위 레이어만 다운로드 되는것을 확인할 수 있습니다.
+  - 아래는 레이어의 순서를 나타내지만, 실제로 동작이 이루어지는 순서는 조금 더 복잡합니다. 각 레이어는 pull(download)과 extract를 하게되는데 이 때 pull은 병렬로 진행되고, extract는 순차로 진행됩니다. (참고 : [Sebastiaan van Stijn](https://github.com/thaJeztah) Current versions of Docker will pull layers in parallel, but extracting would still be done sequential.)
 
 ```bash
 ubuntu@ip-172-31-8-50:~/temp$ docker pull rogallo/todo-app:1.0.0
@@ -51,4 +52,4 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
 
 ---
 
-## Kubernetes
+## Kubernet
