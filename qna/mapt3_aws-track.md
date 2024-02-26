@@ -52,4 +52,4 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
 
 ---
 
-## Kubernet
+## Kubernetes
