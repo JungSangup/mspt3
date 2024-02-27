@@ -72,4 +72,54 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
   - 클라우드를 사용하지 않은 경우에는 다른 방법으로 (e.g. Software LB) LB타입 서비스를 사용할 수 있습니다.
  
 - Label이 여러개인 Pod는 여러개의 Service와 연결될 수도 있나요?
-  - ...
+  - 네 가능합니다.
+  - 아래와 같이 app=my-nginx label이 설정된 pod를 두 개의 service에서 동일한 selector 설정으로 연결하고 있습니다.
+  - nginx-clusterip-service와 nginx-nodeport-service 두 오브젝트를 describe 명령어로 확인해보면 둘 다 endpoints로 동일한 pod 세 개를 연결하고 있습니다. (아래 예제는 172.17.0.2:80,172.17.0.3:80,172.17.0.7:80 )
+
+```bash
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl get all
+NAME                                       READY   STATUS    RESTARTS   AGE
+pod/my-nginx-deployment-55985c7fcf-hckzj   1/1     Running   0          22s
+pod/my-nginx-deployment-55985c7fcf-vvx6m   1/1     Running   0          22s
+pod/my-nginx-deployment-55985c7fcf-xxs5l   1/1     Running   0          22s
+
+NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP        6h30m
+service/nginx-clusterip-service   ClusterIP   10.104.185.140   <none>        80/TCP         15s
+service/nginx-nodeport-service    NodePort    10.99.125.47     <none>        80:30007/TCP   10s
+
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl describe svc nginx-clusterip-service 
+Name:              nginx-clusterip-service
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=my-nginx
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.104.185.140
+IPs:               10.104.185.140
+Port:              <unset>  80/TCP
+TargetPort:        80/TCP
+Endpoints:         172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
+Session Affinity:  None
+Events:            <none>
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl describe svc nginx-nodeport-service 
+Name:                     nginx-nodeport-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=my-nginx
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.99.125.47
+IPs:                      10.99.125.47
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30007/TCP
+Endpoints:                172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
