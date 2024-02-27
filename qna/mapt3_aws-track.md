@@ -77,16 +77,16 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
   - nginx-clusterip-service와 nginx-nodeport-service 두 오브젝트를 describe 명령어로 확인해보면 둘 다 endpoints로 동일한 pod 세 개를 연결하고 있습니다. (아래 예제는 172.17.0.2:80,172.17.0.3:80,172.17.0.7:80 )
 
 ```bash
-ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl get all
-NAME                                       READY   STATUS    RESTARTS   AGE
-pod/my-nginx-deployment-55985c7fcf-hckzj   1/1     Running   0          22s
-pod/my-nginx-deployment-55985c7fcf-vvx6m   1/1     Running   0          22s
-pod/my-nginx-deployment-55985c7fcf-xxs5l   1/1     Running   0          22s
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl get all -o wide
+NAME                                       READY   STATUS    RESTARTS   AGE     IP           NODE             NOMINATED NODE   READINESS GATES
+pod/my-nginx-deployment-55985c7fcf-hckzj   1/1     Running   0          4m50s   172.17.0.7   ip-172-31-8-50   <none>           <none>
+pod/my-nginx-deployment-55985c7fcf-vvx6m   1/1     Running   0          4m50s   172.17.0.2   ip-172-31-8-50   <none>           <none>
+pod/my-nginx-deployment-55985c7fcf-xxs5l   1/1     Running   0          4m50s   172.17.0.3   ip-172-31-8-50   <none>           <none>
 
-NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-service/kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP        6h30m
-service/nginx-clusterip-service   ClusterIP   10.104.185.140   <none>        80/TCP         15s
-service/nginx-nodeport-service    NodePort    10.99.125.47     <none>        80:30007/TCP   10s
+NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+service/kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP        6h35m   <none>
+service/nginx-clusterip-service   ClusterIP   10.104.185.140   <none>        80/TCP         4m43s   app=my-nginx
+service/nginx-nodeport-service    NodePort    10.99.125.47     <none>        80:30007/TCP   4m38s   app=my-nginx
 
 ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl describe svc nginx-clusterip-service 
 Name:              nginx-clusterip-service
