@@ -49,7 +49,27 @@ Digest: sha256:a1427b50a4190a6d1da6f605b5a07b600261e06bd09f664865562c4ecd305e58
 Status: Downloaded newer image for rogallo/todo-app:2.0.0
 ```
 
+- Dockerfile에서 COPY 명령 한 줄마다 layer가 지정되나요?
+  - 네, 명령어(Instruction) 중 파일이 처리되는 것은 각각 레이어로 만들어집니다.
+ 
+- Dockerfile 실습(ch05) 에서 CMD["java","HelloDocker"]를 RUN["java","HelloDocker"]로 해도 동일한 결과가 나오는 건가요?
+  - 아니오, 둘은 다릅니다. RUN은 빌드(docker build) 시점에 실행되고 CMD는 런(docker run) 시점에 실행됩니다.
+  - 예제에서 "java HelloDocker" command는 컨테이너가 실행되는 시점에 화면에 표시하기 위해서 사용한 것입니다.
 
 ---
 
 ## Kubernetes
+
+- Kubernetes service뒤에 위치한 Pod는 Port가 모두 동일한가요?
+  - 같은 spec.으로 만들어진 경우 동일합니다.
+
+- 하나의 쿠버네티스 클러스터에 서비스를 여러 개 사용할 수 있나요?
+  - 네, 여러개 만들어서 사용할 수 있습니다.
+  - 쿠버네티스 클러스터는 다양한 프로젝트/애플리케이션들이 함께 실행되는 실행환경 입니다. 그 다양한 프로젝트/애플리케이션들이 필요한 서비스를 만들어서 쓰는 것입니다.
+ 
+- 서비스타입을 로드밸런서로 선택하면, 클라우드 공급자의 LB를 먼저 생성하고 거기에 쿠버네티스 node ip/port를 정책으로 물려야 하나요?
+  - 클라우드에 쿠버네티스 클러스터를 구성한 경우 LB타입 서비스를 생성하면 자동으로 클라우드의 LB가 생성되고 노드들로 연결됩니다.
+  - 클라우드를 사용하지 않은 경우에는 다른 방법으로 (e.g. Software LB) LB타입 서비스를 사용할 수 있습니다.
+ 
+- Label이 여러개인 Pod는 여러개의 Service와 연결될 수도 있나요?
+  - ...
