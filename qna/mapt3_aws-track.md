@@ -73,53 +73,28 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
  
 - Label이 여러개인 Pod는 여러개의 Service와 연결될 수도 있나요?
   - 네 가능합니다.
-  - 아래와 같이 app=my-nginx label이 설정된 pod를 두 개의 service에서 동일한 selector 설정으로 연결하고 있습니다.
+  - 아래와 같이 color1=blue와 color2=red label이 설정된 pod를 두 개의 service에서 각각 다른 selector 설정으로 연결하고 있습니다.
   - nginx-clusterip-service와 nginx-nodeport-service 두 오브젝트를 describe 명령어로 확인해보면 둘 다 endpoints로 동일한 pod 세 개를 연결하고 있습니다. (아래 예제는 172.17.0.2:80,172.17.0.3:80,172.17.0.7:80 )
 
 ```bash
-ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl get all -o wide
-NAME                                       READY   STATUS    RESTARTS   AGE     IP           NODE             NOMINATED NODE   READINESS GATES
-pod/my-nginx-deployment-55985c7fcf-hckzj   1/1     Running   0          4m50s   172.17.0.7   ip-172-31-8-50   <none>           <none>
-pod/my-nginx-deployment-55985c7fcf-vvx6m   1/1     Running   0          4m50s   172.17.0.2   ip-172-31-8-50   <none>           <none>
-pod/my-nginx-deployment-55985c7fcf-xxs5l   1/1     Running   0          4m50s   172.17.0.3   ip-172-31-8-50   <none>           <none>
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10/temp$ kubectl get pods --show-labels -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE     IP           NODE             NOMINATED NODE   READINESS GATES   LABELS
+my-nginx-deployment-6995d986df-k6zdc   1/1     Running   0          2m28s   172.17.0.2   ip-172-31-8-50   <none>           <none>            color1=blue,color2=red,pod-template-hash=6995d986df
+my-nginx-deployment-6995d986df-qrfnq   1/1     Running   0          2m29s   172.17.0.7   ip-172-31-8-50   <none>           <none>            color1=blue,color2=red,pod-template-hash=6995d986df
+my-nginx-deployment-6995d986df-znbhr   1/1     Running   0          2m29s   172.17.0.3   ip-172-31-8-50   <none>           <none>            color1=blue,color2=red,pod-template-hash=6995d986df
 
-NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
-service/kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP        6h35m   <none>
-service/nginx-clusterip-service   ClusterIP   10.104.185.140   <none>        80/TCP         4m43s   app=my-nginx
-service/nginx-nodeport-service    NodePort    10.99.125.47     <none>        80:30007/TCP   4m38s   app=my-nginx
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10/temp$ kubectl get svc -o wide
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+kubernetes                ClusterIP   10.96.0.1        <none>        443/TCP        8h      <none>
+nginx-clusterip-service   ClusterIP   10.111.173.117   <none>        80/TCP         2m28s   color1=blue
+nginx-nodeport-service    NodePort    10.105.8.29      <none>        80:30007/TCP   2m23s   color2=red
 
-ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl describe svc nginx-clusterip-service 
-Name:              nginx-clusterip-service
-Namespace:         default
-Labels:            <none>
-Annotations:       <none>
-Selector:          app=my-nginx
-Type:              ClusterIP
-IP Family Policy:  SingleStack
-IP Families:       IPv4
-IP:                10.104.185.140
-IPs:               10.104.185.140
-Port:              <unset>  80/TCP
-TargetPort:        80/TCP
+
+
+
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10/temp$ kubectl describe svc nginx-clusterip-service | grep Endpoints
 Endpoints:         172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
-Session Affinity:  None
-Events:            <none>
-ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10$ kubectl describe svc nginx-nodeport-service 
-Name:                     nginx-nodeport-service
-Namespace:                default
-Labels:                   <none>
-Annotations:              <none>
-Selector:                 app=my-nginx
-Type:                     NodePort
-IP Family Policy:         SingleStack
-IP Families:              IPv4
-IP:                       10.99.125.47
-IPs:                      10.99.125.47
-Port:                     <unset>  80/TCP
-TargetPort:               80/TCP
-NodePort:                 <unset>  30007/TCP
+
+ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10/temp$ kubectl describe svc nginx-nodeport-service | grep Endpoints
 Endpoints:                172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
-Session Affinity:         None
-External Traffic Policy:  Cluster
-Events:                   <none>
 ```
