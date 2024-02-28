@@ -168,3 +168,8 @@ nginx-pv   3Gi        RWO            Retain           Bound    default/nginx-pvc
 
 ```
 
+### Kubernetes commands - [kubectl](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+
+| Command                                                                       | Description                                                              |
+|:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
+| [get](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get) | Display one or many resources. |
