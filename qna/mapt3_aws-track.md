@@ -56,6 +56,23 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
   - 아니오, 둘은 다릅니다. RUN은 빌드(docker build) 시점에 실행되고 CMD는 런(docker run) 시점에 실행됩니다.
   - 예제에서 "java HelloDocker" command는 컨테이너가 실행되는 시점에 화면에 표시하기 위해서 사용한 것입니다.
 
+
+### Docker commands
+
+| Command                                                                       | Description                                                              |
+|:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
+| [docker build](https://docs.docker.com/engine/reference/commandline/build/)             | Build an image from a Dockerfile                                         |
+| [docker pull](https://docs.docker.com/engine/reference/commandline/pull/)               | Pull an image or a repository from a registry                            |
+| [docker push](https://docs.docker.com/engine/reference/commandline/push/)               | Push an image or a repository to a registry                              |
+| [docker images](https://docs.docker.com/engine/reference/commandline/images/)           | List images                                                              |
+| [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/)                 | Remove one or more images                                                |
+|:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
+| [docker run](https://docs.docker.com/engine/reference/commandline/run/)         | Run a command in a new container                                                                                                         |
+| [docker ps](https://docs.docker.com/engine/reference/commandline/ps/)           | List containers                                                                                                                          |
+| [docker inspect](https://docs.docker.com/engine/reference/commandline/inspect/) | Return low-level information on Docker objects                                                                                           |
+| [docker rm](https://docs.docker.com/engine/reference/commandline/rm/)           | Remove one or more containers                                                                                                            |
+
+
 ---
 
 ## Kubernetes
