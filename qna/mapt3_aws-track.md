@@ -66,12 +66,14 @@ Status: Downloaded newer image for rogallo/todo-app:2.0.0
 | [docker push](https://docs.docker.com/engine/reference/commandline/push/)               | Push an image or a repository to a registry                              |
 | [docker images](https://docs.docker.com/engine/reference/commandline/images/)           | List images                                                              |
 | [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/)                 | Remove one or more images                                                |
-|:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
 | [docker run](https://docs.docker.com/engine/reference/commandline/run/)         | Run a command in a new container                                                                                                         |
 | [docker ps](https://docs.docker.com/engine/reference/commandline/ps/)           | List containers                                                                                                                          |
 | [docker inspect](https://docs.docker.com/engine/reference/commandline/inspect/) | Return low-level information on Docker objects                                                                                           |
 | [docker rm](https://docs.docker.com/engine/reference/commandline/rm/)           | Remove one or more containers                                                                                                            |
-
+| [docker login](https://docs.docker.com/engine/reference/commandline/login/)   | Log in to a Docker registry (e.g. [Docker hub](https://hub.docker.com/)) |
+| [docker logout](https://docs.docker.com/engine/reference/commandline/logout/) | Log out from a Docker registry                                           |
+| [docker logs](https://docs.docker.com/engine/reference/commandline/logs/)     | Fetch the logs of a container                                            |
+| [docker create](https://docs.docker.com/engine/reference/commandline/create/) | Create a new container (**without starting it**)                         |
 
 ---
 
