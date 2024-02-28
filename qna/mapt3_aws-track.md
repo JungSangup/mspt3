@@ -100,4 +100,52 @@ Endpoints:                172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
 ```
 
 - PVC spec.에서 StorageClass를 생략하면 동적 프로비져닝이라는 것을 어떻게 알 수 있나요?
-  - ...
+  - K8s 클러스터에 default storageclass 가 지정되어 있는 경우, 생략하면 동적 프로비져닝을 우선합니다.
+  - 만약 default storageclass가 지정되어 있지 않은 경우(storageclass는 있지만 default가 아닌경우)에는
+    - storageClassName: OOO 과 같이 설정해서 동적으로 프로비저닝 하거나
+    - label 과 selector를 이용해서 정적으로 프로비저닝 할 수 있습니다. (아래 예시)
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv
+  labels:
+    type: static
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc
+spec:
+  selector:
+    matchLabels:
+      type: static
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+```
+ 
+```bash
+$ kubectl get storageclasses
+NAME         PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-path   rancher.io/local-path   Delete          WaitForFirstConsumer   false                  23d
+
+$ kubectl get pvc -o wide
+NAME        STATUS   VOLUME     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE   VOLUMEMODE
+nginx-pvc   Bound    nginx-pv   3Gi        RWO                           <unset>                 18s   Filesystem
+$ kubectl get pv -o wide
+NAME       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM               STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE   VOLUMEMODE
+nginx-pv   3Gi        RWO            Retain           Bound    default/nginx-pvc                  <unset>                          12m   Filesystem
+
+```
+
