@@ -180,4 +180,13 @@ nginx-pv   3Gi        RWO            Retain           Bound    default/nginx-pvc
 | [exec](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec) | Execute a command in a container. |
 | [logs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) | Print the logs for a container in a pod or specified resource. |
 
+### Helm commands - [helm](https://helm.sh/docs/helm/helm/)
+
+| Command                                                                       | Description                                                              |
+|:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
+| [Helm Install](https://helm.sh/docs/helm/helm_install/) | install a chart |
+| [Helm Upgrade](https://helm.sh/docs/helm/helm_upgrade/) | upgrade a release |
+| [Helm List](https://helm.sh/docs/helm/helm_list/) | list releases |
+| [Helm Show Values](https://helm.sh/docs/helm/helm_show_values/) | show the chart's values |
+| [Helm Uninstall](https://helm.sh/docs/helm/helm_uninstall/) | uninstall a release |
 
