@@ -173,3 +173,11 @@ nginx-pv   3Gi        RWO            Retain           Bound    default/nginx-pvc
 | Command                                                                       | Description                                                              |
 |:--------------------------------------------------------------------------------------- |:------------------------------------------------------------------------ |
 | [get](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get) | Display one or many resources. |
+| [delete](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete) | Delete resources by file names, stdin, resources and names, or by resources and label selector. |
+| [apply](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply) | Apply a configuration to a resource by file name or stdin. |
+| [edit](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#edit) | Edit a resource from the default editor. |
+| [describe](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#describe) | Show details of a specific resource or group of resources. |
+| [exec](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec) | Execute a command in a container. |
+| [logs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) | Print the logs for a container in a pod or specified resource. |
+
+
