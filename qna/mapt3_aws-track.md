@@ -98,3 +98,6 @@ Endpoints:         172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
 ubuntu@ip-172-31-8-50:~/mspt3/hands_on_files/ch10/temp$ kubectl describe svc nginx-nodeport-service | grep Endpoints
 Endpoints:                172.17.0.2:80,172.17.0.3:80,172.17.0.7:80
 ```
+
+- PVC spec.에서 StorageClass를 생략하면 동적 프로비져닝이라는 것을 어떻게 알 수 있나요?
+  - ...
