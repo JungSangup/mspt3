@@ -146,13 +146,20 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 
 
 ### K8s cluster IP 변경
-1. 백업 : /etc/kubernetes
-2. 설정파일 변경
+1. stop services ( kubelet, containerd )
+```bash
+sudo systemctl stop kubelet containerd
+```
+
+3. 백업 : /etc/kubernetes
+
+4. 설정파일 변경
 ```bash
 cd /etc/kubernetes
 sudo find . -type f -exec sed -i 's/192.168.165.104/192.168.167.103/g' {} +
 ```
-3. 인증서 재생성
+
+4. 인증서 재생성
 ```bash
 cd /etc/kubernetes/pki
 sudo rm apiserver.{crt,key}
@@ -162,5 +169,11 @@ sudo kubeadm init phase certs etcd-peer
 sudo rm etcd/server.{crt,key}
 sudo kubeadm init phase certs etcd-server
 ```
-4. 컨테이너 재시작
-5. kubeconfig 설정변경
+
+5. 컨테이너 재시작
+
+6. kubeconfig 설정변경
+
+
+
+https://devopstales.github.io/kubernetes/k8s-change-ip/
