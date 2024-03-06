@@ -138,3 +138,29 @@ Overview > Workload(1) > Workload(2) > Service > Storage > Configuration > Deplo
 - [x] 12. Kubernetes Configuration 에서 kubectl exec -it todo-mysql-development-78dd847547-2b7ns -- mysql -p todos 명령어를 통해 Mysql 접속 할 때 Enter password넣는 부분이 있는데 이전에 언급 하긴 했지만 이 부분에서 한번 더 어떤걸 넣으면 되는지 언급 해 주면 좋을 것 같습니다. 
 
 - [x] 12. Kubernetes Configuration 에서 --docker-password에서 password 에 특수 문자 포함 되어 있는경우 오류 발생합니다. '' 으로 감싸주면 해결 되는것으로 보입니다. -> 교재에 내용 업데이트함.
+- [ ] 
+
+
+
+
+
+
+### K8s cluster IP 변경
+1. 백업 : /etc/kubernetes
+2. 설정파일 변경
+```bash
+cd /etc/kubernetes
+sudo find . -type f -exec sed -i 's/192.168.165.104/192.168.167.103/g' {} +
+```
+3. 인증서 재생성
+```bash
+cd /etc/kubernetes/pki
+sudo rm apiserver.{crt,key}
+sudo kubeadm init phase certs apiserver
+sudo rm etcd/peer.{crt,key}
+sudo kubeadm init phase certs etcd-peer
+sudo rm etcd/server.{crt,key}
+sudo kubeadm init phase certs etcd-server
+```
+4. 컨테이너 재시작
+5. kubeconfig 설정변경
