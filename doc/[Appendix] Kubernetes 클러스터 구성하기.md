@@ -65,6 +65,12 @@ Kubernetes 클러스터 구성을 위한 Node VM들을 준비합니다.
 ![](./img/k8s_bootstrapping_4.png)
 
 
+---
+
+### [Option] Swapoff
+
+
+
 
 ---
 
