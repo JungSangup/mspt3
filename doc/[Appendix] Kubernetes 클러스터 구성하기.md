@@ -84,7 +84,21 @@ $
 ```
 > `free` 또는 `swapon` 명령어 사용. (위 예시는 Swap 비활성화 된 경우임.)
 
+위 예시처럼 Swap 이 비활성화 되어있는 경우에는 이 절차를 생략하고 다음 절차(2. Container runtime 설치)를 바로 실행합니다.
 
+그렇지 않은 경우에는 다음과 같이 Swap을 비활성화 합니다.  
+
+먼저, 현재 설정된 swap 메모리를 비활성화 합니다.
+```bash
+$ sudo swapoff --all
+```
+> `swapoff` 명령어 사용
+
+그 다음은, OS가 재시작 되더라도 swap 구성이 되지 않도록 다음과 같이 fstab 파일을 수정합니다.
+```bash
+$ sudo sed -i '/ swap / s/^/#/' /etc/fstab
+```
+> /etc/fstab파일에서 swap 설정 부분을 찾아서 comment out 처리(#) 함.
 
 
 
