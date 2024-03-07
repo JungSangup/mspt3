@@ -69,6 +69,27 @@ Kubernetes 클러스터 구성을 위한 Node VM들을 준비합니다.
 
 ### [Option] Swapoff
 
+Kubernetes는 Swap 메모리를 지원하지 않고 있습니다.  
+따라서, Kubernetes를 구성하려는 노드에서는 Swap 설정을 모두 비활성화 해야 합니다.
+> 최근에는 지원하려는 움직임이 있습니다. ( [Kubernetes 1.28: Beta support for using swap on Linux](https://kubernetes.io/blog/2023/08/24/swap-linux-beta/) )
+
+먼저 Swap 설정 확인은 다음과 같이 할 수 있습니다.
+```bash
+$ free --human
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       630Mi       123Mi       2.0Mi       3.0Gi       2.8Gi
+Swap:             0B          0B          0B
+$ swapon --summary
+$
+```
+> `free` 또는 `swapon` 명령어 사용. (위 예시는 Swap 비활성화 된 경우임.)
+
+
+
+
+
+
+
 
 
 
