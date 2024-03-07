@@ -101,12 +101,6 @@ $ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 > /etc/fstab파일에서 swap 설정 부분을 찾아서 comment out 처리(#) 함.
 
 
-
-
-
-
-
-
 ---
 
 ### 2. Container runtime 설치
