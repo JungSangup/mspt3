@@ -663,10 +663,10 @@ $ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/n
 >```
 >```bash
 >helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
-    --create-namespace --namespace nfs-provisioner \
-    --set nfs.server=[NFS-SERVER IP ADDRESS] \
-    --set nfs.path=[NFS-SERVER VOLUME PATH] \
-    --set storageClass.defaultClass=true
+>    --create-namespace --namespace nfs-provisioner \
+>    --set nfs.server=[NFS-SERVER IP ADDRESS] \
+>    --set nfs.path=[NFS-SERVER VOLUME PATH] \
+>    --set storageClass.defaultClass=true
 >```
 > nfs.server(NFS Server의 IP Address)와 nfs.path(NFS Server의 Volume 영역)는 앞서 확인한 정보를 참조하여 설정합니다.
 
