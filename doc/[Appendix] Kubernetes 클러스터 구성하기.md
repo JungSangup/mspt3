@@ -82,6 +82,13 @@ Swap:             0B          0B          0B
 $ swapon --summary
 $
 ```
+> 💻 명령어
+>```bash
+>free --human
+>```
+>```bash
+>swapon --summary
+>```
 > `free` 또는 `swapon` 명령어 사용. (위 예시는 Swap 비활성화 된 경우임.)
 
 위 예시처럼 Swap 이 비활성화 되어있는 경우에는 이 절차를 생략하고 다음 절차(2. Container runtime 설치)를 바로 실행합니다.
