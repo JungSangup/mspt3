@@ -1,4 +1,4 @@
-## [Appendix] Kubernetes 클러스터 구성하기
+## [Appendix] Kubernetes 클러스터 구성하기 ( with kubeadm )
 
 <br>
 
