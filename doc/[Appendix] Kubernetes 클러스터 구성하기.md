@@ -95,16 +95,23 @@ $
 
 그렇지 않은 경우에는 다음과 같이 Swap을 비활성화 합니다.  
 
-먼저, 현재 설정된 swap 메모리를 비활성화 합니다.
+먼저, 현재 설정된 swap 메모리를 비활성화 합니다. (swapoff)
 ```bash
 $ sudo swapoff --all
 ```
-> `swapoff` 명령어 사용
+> 💻 명령어
+>```bash
+>sudo swapoff --all
+>```
 
 그 다음은, OS가 재시작 되더라도 swap 구성이 되지 않도록 다음과 같이 fstab 파일을 수정합니다.
 ```bash
 $ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 ```
+> 💻 명령어
+>```bash
+>sudo sed -i '/ swap / s/^/#/' /etc/fstab
+>```
 > /etc/fstab파일에서 swap 설정 부분을 찾아서 comment out 처리(#) 함.
 
 
@@ -124,25 +131,27 @@ $ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 [Network Plugin Requirements](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#network-plugin-requirements)에 따라 iptables proxy 설정을 합니다.  
 
 아래 명령어를 실행합니다.  
-```bash
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-overlay
-br_netfilter
-EOF
 
-sudo modprobe overlay
-sudo modprobe br_netfilter
-
-# sysctl params required by setup, params persist across reboots
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
-EOF
-
-# Apply sysctl params without reboot
-sudo sysctl --system
-```
+> 💻 명령어
+>```bash
+>cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+>overlay
+>br_netfilter
+>EOF
+>
+>sudo modprobe overlay
+>sudo modprobe br_netfilter
+>
+># sysctl params required by setup, params persist across reboots
+>cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+>net.bridge.bridge-nf-call-iptables  = 1
+>net.bridge.bridge-nf-call-ip6tables = 1
+>net.ipv4.ip_forward                 = 1
+>EOF
+>
+># Apply sysctl params without reboot
+>sudo sysctl --system
+>```
 
 > 관련 문서 : [Install and configure prerequisites](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#install-and-configure-prerequisites) 
 
@@ -152,23 +161,23 @@ sudo sysctl --system
 
 containerd를 apt package로 설치합니다.  
 
-```bash
-# Add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install -y containerd.io
-```
-
+> 💻 명령어
+>```bash
+># Add Docker's official GPG key:
+>sudo apt-get update
+>sudo apt-get install -y ca-certificates curl gnupg
+>sudo install -m 0755 -d /etc/apt/keyrings
+>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+>sudo chmod a+r /etc/apt/keyrings/docker.gpg
+>
+># Add the repository to Apt sources:
+>echo \
+>  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+>  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+>  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+>sudo apt-get update
+>sudo apt-get install -y containerd.io
+>```
 
 > 관련 문서 : [Getting started with containerd - Installing containerd - Option 2: From apt-get](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#option-2-from-apt-get-or-dnf) , [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
@@ -179,15 +188,17 @@ sudo apt-get install -y containerd.io
 systemd를 cgroup driver로 사용하고, CRI Support를 위해 다음과 같이 containrd의 설정을 변경합니다.  
 
 먼저 config.toml 파일을 생성합니다. (overwrite)  
-```bash
-containerd config default | sudo tee /etc/containerd/config.toml
-```
+> 💻 명령어
+>```bash
+>containerd config default | sudo tee /etc/containerd/config.toml
+>```
 > containerd 의 default config.를 config.toml 파일에 기록
 
 Containerd의 default config.에서는 `SystemdCgroup = false`로 되어있기 때문에 이 부분을 변경합니다.  
-```bash
-sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
-```
+> 💻 명령어
+>```bash
+>sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+>```
 
 결과는 아래와 같아야 합니다.  
 - disabled_plugins 에 cri가 포함되어 있지 않다.
@@ -199,11 +210,19 @@ $ sudo cat /etc/containerd/config.toml | grep SystemdCgroup
             SystemdCgroup = true
 ```
 
-설정을 변경했으면 아래 명령어를 실행해서 containerd 를 재시작합니다.
+> 💻 명령어
+>```bash
+>sudo cat /etc/containerd/config.toml | grep disabled_plugins
+>```
+>```bash
+>sudo cat /etc/containerd/config.toml | grep SystemdCgroup
+>```
 
-```bash
-sudo systemctl restart containerd
-```
+설정을 변경했으면 아래 명령어를 실행해서 containerd 를 재시작합니다.
+> 💻 명령어
+>```bash
+>sudo systemctl restart containerd
+>```
 
 > 관련 문서 : [Configuring the systemd cgroup driver](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
 
