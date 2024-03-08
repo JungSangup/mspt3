@@ -63,44 +63,41 @@ front-proxy-ca          Mar 06, 2034 03:04 UTC   9y              no
 
 ```bash
 $ $ sudo cp -r /etc/kubernetes ~/k8s-backup/
-$ tree ./k8s-backup
-./k8s-backup
-├── admin.conf
-├── controller-manager.conf
-├── kubelet.conf
-├── manifests
-│   ├── etcd.yaml
-│   ├── kube-apiserver.yaml
-│   ├── kube-controller-manager.yaml
-│   └── kube-scheduler.yaml
-├── pki
-│   ├── apiserver-etcd-client.crt
-│   ├── apiserver-etcd-client.key
-│   ├── apiserver-kubelet-client.crt
-│   ├── apiserver-kubelet-client.key
-│   ├── apiserver.crt
-│   ├── apiserver.key
-│   ├── ca.crt
-│   ├── ca.key
-│   ├── etcd
-│   │   ├── ca.crt
-│   │   ├── ca.key
-│   │   ├── healthcheck-client.crt
-│   │   ├── healthcheck-client.key
-│   │   ├── peer.crt
-│   │   ├── peer.key
-│   │   ├── server.crt
-│   │   └── server.key
-│   ├── front-proxy-ca.crt
-│   ├── front-proxy-ca.key
-│   ├── front-proxy-client.crt
-│   ├── front-proxy-client.key
-│   ├── sa.key
-│   └── sa.pub
-├── scheduler.conf
-└── super-admin.conf
+$ tree ~/k8s-backup/
+/home/ubuntu/k8s-backup/
+└── kubernetes
+    ├── admin.conf
+    ├── controller-manager.conf
+    ├── kubelet.conf
+    ├── manifests  [error opening dir]
+    ├── pki
+    │   ├── apiserver-etcd-client.crt
+    │   ├── apiserver-etcd-client.key
+    │   ├── apiserver-kubelet-client.crt
+    │   ├── apiserver-kubelet-client.key
+    │   ├── apiserver.crt
+    │   ├── apiserver.key
+    │   ├── ca.crt
+    │   ├── ca.key
+    │   ├── etcd
+    │   │   ├── ca.crt
+    │   │   ├── ca.key
+    │   │   ├── healthcheck-client.crt
+    │   │   ├── healthcheck-client.key
+    │   │   ├── peer.crt
+    │   │   ├── peer.key
+    │   │   ├── server.crt
+    │   │   └── server.key
+    │   ├── front-proxy-ca.crt
+    │   ├── front-proxy-ca.key
+    │   ├── front-proxy-client.crt
+    │   ├── front-proxy-client.key
+    │   ├── sa.key
+    │   └── sa.pub
+    ├── scheduler.conf
+    └── super-admin.conf
 
-4 directories, 31 files
+5 directories, 27 files
 ```
 
 > 💻 명령어
