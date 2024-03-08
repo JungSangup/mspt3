@@ -281,7 +281,7 @@ default via 172.31.16.1 dev ens5 proto dhcp src 172.31.30.145 metric 100
 
 > 💻 명령어
 >```bash
->sudo kubeadm init --apiserver-advertise-address=172.31.30.145 --pod-network-cidr=10.244.0.0/16
+>sudo kubeadm init --apiserver-advertise-address=[API-SERVER IP ADDRESS] --pod-network-cidr=10.244.0.0/16
 >```
 > `--apiserver-advertise-address` : Control-plane node의 IP Address  
 > `--pod-network-cidr` : 사용할 Network add-on에 따라 설정함. (위 예시는 Flannel 을 위한 구성입니다.)
