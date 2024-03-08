@@ -538,14 +538,15 @@ version.BuildInfo{Version:"v3.13.3", GitCommit:"c8b948945e52abba22ff885446a1486c
 
 Ingress controller로 Nginx를 설치합니다.  
 
-```bash
-helm install ingress-nginx ingress-nginx \
-  --repo https://kubernetes.github.io/ingress-nginx \
-  --namespace ingress-nginx --create-namespace \
-  --set controller.service.type=NodePort \
-  --set controller.service.nodePorts.http=30000 \
-  --set controller.service.nodePorts.https=30001
-```
+> 💻 명령어
+>```bash
+>helm install ingress-nginx ingress-nginx \
+>  --repo https://kubernetes.github.io/ingress-nginx \
+>  --namespace ingress-nginx --create-namespace \
+>  --set controller.service.type=NodePort \
+>  --set controller.service.nodePorts.http=30000 \
+>  --set controller.service.nodePorts.https=30001
+>```
 > ingress-nginx helm chart를 이용하고, Service type은 NodePort(HTTP:30000, HTTPS:30001)로 설정 했습니다.
 
 
@@ -573,6 +574,13 @@ NAME                                                  DESIRED   CURRENT   READY 
 replicaset.apps/ingress-nginx-controller-6c84576bbd   1         1         1       41s
 ```
 
+> 💻 명령어
+>```bash
+>helm ls -n ingress-nginx
+>```
+>```bash
+>kubectl get all -n ingress-nginx
+>```
 설치 후 NodePort를 특정 포트로 변경하려면 [kubectl edit](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_edit/) 명령어를 이용하여 변경합니다.  
 
 삭제는 다음과 같이 합니다.  
@@ -580,6 +588,14 @@ replicaset.apps/ingress-nginx-controller-6c84576bbd   1         1         1     
 helm uninstall ingress-nginx --namespace ingress-nginx
 kubectl delete namespaces ingress-nginx
 ```
+
+> 💻 명령어
+>```bash
+>helm uninstall ingress-nginx --namespace ingress-nginx
+>```
+>```bash
+>kubectl delete namespaces ingress-nginx
+>```
 
 > 관련 문서 : [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)  
 > 관련 문서 : [Ingress-Nginx Controller - Installation Guide - Quick start](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)  
@@ -595,10 +611,11 @@ kubectl delete namespaces ingress-nginx
 미리 준비된 NFS Server의 Storage를 Dynamic Volume provisioning영역으로 사용하기 위해서 Storage Class를 구성합니다.  
 먼저, 워크로드가 실행될 노드( (worker) node )에 NFS Client를 설치합니다.  
 
-```bash
-sudo apt-get update
-sudo apt-get install -y nfs-common
-```
+> 💻 명령어
+>```bash
+>sudo apt-get update
+>sudo apt-get install -y nfs-common
+>```
 
 그 다음은 NFS Server에서 공유된 디렉토리의 정보를 확인합니다.  
 이 영역은 미리 준비되어 있어야 합니다.  
@@ -610,6 +627,12 @@ Export list for 172.31.26.107:
 ```
 > 위 예시는 172.31.26.107 에 NFS Server가 구성되어 있는 예시입니다. /data/k8s-volume 디렉토리가 Volume 영역으로 사용되고 172.31.16.0/20에서 접근 가능한 구성입니다.
 
+> 💻 명령어
+>```bash
+>showmount -e [NFS-SERVER IP ADDRESS]
+>```
+
+
 이제 NFS Subdir External Provisioner 를 설치합니다.
 ```bash
 $ helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
@@ -619,6 +642,18 @@ $ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/n
     --set nfs.path=/data/k8s-volume \
     --set storageClass.defaultClass=true
 ```
+
+> 💻 명령어
+>```bash
+>helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+>```
+>```bash
+>helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+    --create-namespace --namespace nfs-provisioner \
+    --set nfs.server=[NFS-SERVER IP ADDRESS] \
+    --set nfs.path=[NFS-SERVER VOLUME PATH] \
+    --set storageClass.defaultClass=true
+>```
 > nfs.server(NFS Server의 IP Address)와 nfs.path(NFS Server의 Volume 영역)는 앞서 확인한 정보를 참조하여 설정합니다.
 
 설치 후 확인은 아래와 같이 합니다.
@@ -639,7 +674,13 @@ VolumeBindingMode:     Immediate
 Events:                <none>
 ```
 
-
+> 💻 명령어
+>```bash
+>kubectl get storageclasses
+>```
+>```bash
+>kubectl describe storageclasses nfs-client
+>```
 
 > 관련 문서 : [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)  
 > 관련 문서 : [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)  
