@@ -238,20 +238,21 @@ $ sudo cat /etc/containerd/config.toml | grep SystemdCgroup
 다음 명령을 실행해서 세 개의 패키지를 설치합니다.
 > 아래 명령어는 Kubernetes v1.29 경우입니다. 설치 시점에 필요한 버젼을 확인 후 진행하세요.
 
-```bash
-sudo apt-get update
-# apt-transport-https may be a dummy package; if so, you can skip that package
-sudo apt-get install -y apt-transport-https ca-certificates curl gpg
-
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-
-# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
-sudo apt-mark hold kubelet kubeadm kubectl
-```
+> 💻 명령어
+>```bash
+>sudo apt-get update
+># apt-transport-https may be a dummy package; if so, you can skip that package
+>sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+>
+>curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+>
+># This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+>echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+>
+>sudo apt-get update
+>sudo apt-get install -y kubelet kubeadm kubectl
+>sudo apt-mark hold kubelet kubeadm kubectl
+>```
 
 > 관련 문서 : [Installing kubeadm, kubelet and kubectl](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl)
 
@@ -269,12 +270,19 @@ $ ip route show
 default via 172.31.16.1 dev ens5 proto dhcp src 172.31.30.145 metric 100
 ...
 ```
+
+> 💻 명령어
+> ```bash
+>ip route show
+...
 > 위와 같이 출력되면 172.31.30.145 가 이 Node의 IP Address 임.
 
 아래 명령어를 실행하여 Control-plane node에 Control-plane component들을 설치하고 실행합니다.  
-```bash
-sudo kubeadm init --apiserver-advertise-address=172.31.30.145 --pod-network-cidr=10.244.0.0/16
-```
+
+> 💻 명령어
+>```bash
+>sudo kubeadm init --apiserver-advertise-address=172.31.30.145 --pod-network-cidr=10.244.0.0/16
+>```
 > `--apiserver-advertise-address` : Control-plane node의 IP Address  
 > `--pod-network-cidr` : 사용할 Network add-on에 따라 설정함. (위 예시는 Flannel 을 위한 구성입니다.)
 
@@ -357,18 +365,20 @@ kubeadm join 172.31.30.145:6443 --token ev57z0.770ldkw... \
 ```
 
 kubectl 설정을 위해 다음 명령어를 실행합니다.
-```bash
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-```
+> 💻 명령어
+>```bash
+>mkdir -p $HOME/.kube
+>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+>sudo chown $(id -u):$(id -g) $HOME/.kube/config
+>```
 > [Tip] `kubectl` CLI를 편하게 사용하기 위해서 [kubectl 자동 완성 활성화](https://kubernetes.io/ko/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/#kubectl-%EC%9E%90%EB%8F%99-%EC%99%84%EC%84%B1-%ED%99%9C%EC%84%B1%ED%99%94)를 적용하면 편합니다.
 
 다음은 pod network add-on 을 설치합니다. ( 아래 예시는 Flannel )
 
-```bash
-kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
-```
+> 💻 명령어
+>```bash
+>kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+>```
 
 정상적으로 준비가 된 경우 아래와 같이 표시됩니다.  
 ```bash
@@ -383,6 +393,11 @@ kube-system    kube-controller-manager-ip-172-31-26-107   1/1     Running   0   
 kube-system    kube-proxy-x6zmg                           1/1     Running   0          5m3s
 kube-system    kube-scheduler-ip-172-31-26-107            1/1     Running   0          5m18s
 ```
+
+> 💻 명령어
+>```bash
+>kubectl get po -A
+>```
 
 여기까지 하면 Control-plane node는 준비가 됐습니다.  
 다음 단계로 넘어가기 전에 API Server 접근을 위해서 Control-plane node의 Security Group에 다음 규칙을 추가해주세요.  
@@ -425,6 +440,12 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 > `172.31.30.145:6443` 이 API Server의 endpoint 입니다.
 
+> 💻 명령어
+>```bash
+>kubectl cluster-info
+>```
+
+
 (2) token
 ```bash
 $ kubeadm token list
@@ -433,6 +454,12 @@ ev57z0.770ldkw...   21h         2024-01-16T05:07:18Z   authentication,signing   
 ```
 > `ev57z0.770ldkw...` 이 token name 입니다.
 
+> 💻 명령어
+>```bash
+>kubeadm token list
+>```
+
+
 (3) discovery-token-ca-cert-hash
 ```bash
 $ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
@@ -440,14 +467,25 @@ $ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outf
 ```
 > `3d98992e...` 이 CA Cert 의 Hash 입니다.
 
+> 💻 명령어
+>```bash
+>openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+>```
+
+
 위의 정보를 조합하여 아래와 같이 `kubeadm join` 명령어를 실행합니다.  
 ```bash
 sudo kubeadm join 172.31.30.145:6443 --token ev57z0.770ldkw... --discovery-token-ca-cert-hash sha256:3d98992e...
 ```
+
+> 💻 명령어
+>```bash
+>sudo kubeadm join [API-SERVER Endpoint] --token [TOKEN-NAME] --discovery-token-ca-cert-hash sha256:[CA-CERT Hash]
+>```
 > 주의 : `kubeadm join` 명령어는 Control-plane node가 아닌, (Worker) node 에서 실행합니다.
 
 
-Join 후에 Node를 조회하면 아래와 같이 조회됩니다.  
+Join 후에 kubectl을 이용해서 Node를 조회하면 아래와 같이 조회됩니다.  
 ```bash
 $ kubectl get nodes -o wide
 NAME               STATUS   ROLES           AGE    VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
@@ -455,6 +493,11 @@ ip-172-31-30-145   Ready    <none>          10s    v1.29.0   172.31.30.145   <no
 ip-172-31-25-27    Ready    <none>          18s    v1.29.0   172.31.25.27    <none>        Ubuntu 20.04.6 LTS   5.15.0-1048-aws   containerd://1.6.26
 ip-172-31-29-238   Ready    control-plane   175m   v1.29.0   172.31.29.238   <none>        Ubuntu 20.04.6 LTS   5.15.0-1048-aws   containerd://1.6.26
 ```
+
+> 💻 명령어
+>```bash
+>kubectl get nodes -o wide
+>```
 > 한 개의 Control-plane node와 두 개의 (Worker) node 가 확인됨.
 
 
@@ -468,11 +511,12 @@ ip-172-31-29-238   Ready    control-plane   175m   v1.29.0   172.31.29.238   <no
 Kubernetes package manager인 Helm을 설치합니다.  
 kubectl CLI를 위한 설정이 된 곳(앞의 과정대로 진행하셨다면 Control-plane node)에서 다음과 같이 설치합니다.  
 
-```bash
-curl -LO https://get.helm.sh/helm-v3.13.3-linux-amd64.tar.gz
-tar -zxvf helm-v3.13.3-linux-amd64.tar.gz
-sudo mv linux-amd64/helm /usr/local/bin/helm
-```
+> 💻 명령어
+>```bash
+>curl -LO https://get.helm.sh/helm-v3.13.3-linux-amd64.tar.gz
+>tar -zxvf helm-v3.13.3-linux-amd64.tar.gz
+>sudo mv linux-amd64/helm /usr/local/bin/helm
+>```
 > 설치 시접의 릴리즈 확인은 [Helm releases](https://github.com/helm/helm/releases)를 참고하세요.
 
 설치 확인은 아래와 같이 해보시면 됩니다.  
@@ -481,6 +525,10 @@ $ helm version
 version.BuildInfo{Version:"v3.13.3", GitCommit:"c8b948945e52abba22ff885446a1486cb5fd3474", GitTreeState:"clean", GoVersion:"go1.20.11"}
 ```
 
+> 💻 명령어
+>```bash
+>helm version
+>```
 
 > 관련 문서 : [Installing Helm  - From the binary releases ](https://helm.sh/docs/intro/install/#from-the-binary-releases)
 
