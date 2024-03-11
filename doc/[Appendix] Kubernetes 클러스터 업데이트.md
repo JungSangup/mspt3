@@ -408,6 +408,14 @@ pod "kube-proxy-fk4w7" deleted
 ```
 
 
+이것도???
+```bash
+$ sudo kubeadm init phase addon all
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+```
+
+
 #### 7. (CP) bootstrap token 업데이트
 bootstrap token을 다시 생성합니다.
 
