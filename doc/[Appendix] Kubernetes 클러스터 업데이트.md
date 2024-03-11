@@ -1,7 +1,7 @@
 ## [Appendix] Kubernetes 클러스터 업데이트 ( with kubeadm )
 
 
-다음 두 가지 경우 업데이트 절차입니다.
+다음 경우의 업데이트 절차입니다.
 
 1. Kubernetes 버젼 업데이트
 2. Controlplane/Worker node의 IP Address 변경
@@ -576,7 +576,7 @@ Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 
 ---
 
-### 3. 인증서 갱신
+### 3. K8s 컴포넌트 인증서 갱신
 
 
 작성 중...
