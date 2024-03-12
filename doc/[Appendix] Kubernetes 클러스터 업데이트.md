@@ -616,5 +616,5 @@ front-proxy-ca          Mar 06, 2034 03:04 UTC   9y              no
 >```
 
 
-> 관련 문서 : [kubeadm certs check-expiration](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-certs/#cmd-certs-check-expiration)
+> 관련 문서 : [kubeadm certs check-expiration](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-certs/#cmd-certs-check-expiration)  
 > 관련 문서 : [kubeadm을 사용한 인증서 관리 - 수동 인증서 갱신](https://kubernetes.io/ko/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#%EC%88%98%EB%8F%99-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EA%B0%B1%EC%8B%A0)
