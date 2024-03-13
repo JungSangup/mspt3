@@ -98,6 +98,8 @@ $ tree ~/k8s-backup/kubernetes
 - etcd peer 인증서/키 ( /etc/kubernetes/pki/etcd/peer.* )
 - etcd server 인증서/키 ( /etc/kubernetes/pki/etcd/server.* )
 
+> 참조 : 인증서 SAN에 Host_IP가 있는 것들이 대상임.  [PKI certificates and requirements - All certificates](https://kubernetes.io/docs/setup/best-practices/certificates/#all-certificates) 참조  
+
 순서는 기존 인증서/키 삭제 후 [kubeadm init phase certs](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init-phase/#cmd-phase-certs)명령어를 이용하여 다시 생성합니다.
 
 먼저 삭제는 다음과 같이 합니다.
