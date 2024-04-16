@@ -12,6 +12,13 @@
 **[3. Docker 설치하기](#3-docker-설치하기)**  
 **[4. Git clone하기 (실습파일 다운로드)](#4-git-clone하기-실습파일-다운로드)**  
 
+
+
+- Virtual Server생성 AZ설정 1 -> 2로 변경
+- Firewall은 신규가 아닌 기존 Firewall에 규칙 추가
+- F/W, S/G Outbound 포트 : 80,443
+- 캡쳐화면 프롬프트 (기존 AWS화면 사용됨.)
+
 ---
 
 <br>
