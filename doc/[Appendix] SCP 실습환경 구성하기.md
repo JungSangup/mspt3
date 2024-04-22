@@ -42,98 +42,230 @@
 
 <br><br><br>
 
-VPC와 Internet gateway 등 네트워킹 구성은 선행과정(개발)의 자원을 그대로 사용합니다.  
-이번 과정의 실습을 위해서 한 개의 Virtual Server만 추가하도록 하겠습니다.
+이제 VPC(Virtual Private Cloud)를 생성합니다.  
 
-
-![](./img/scp_vs_1.png)
-> 좌측 메뉴에서 자원관리를 선택하고, 상품별 자원관리에서 Compute > Virtual Server > Virtual Server를 선택하고, 우측상단의 상품신청 버튼을 클릭합니다.
+![](./img/scp_3.png)
+> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Networking > VPC > VPC를 선택하고, 우측상단 또는 화면 중앙의 **상품신청** 버튼을 클릭합니다.
 
 <br><br><br>
 
-![](./img/scp_vs_2.png)
+![](./img/scp_4.png)
+> **VPC명**(**mspt3**)을 입력하고, **중복체크** 후 문제가 없으면 **다음**을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_5.png)
+> 입력내용 확인 후 문제가 없는 경우 **완료**를 클릭해서 VPC를 생성합니다.
+
+<br><br><br>
+
+![](./img/scp_6.png)
+> 정상적으로 생성되면 위와 같이 목록이 표시됩니다.  
+> 상태가 **Active**로 되어있습니다.
+
+<br><br><br>
+
+다음은 Subnet을 생성하고 설정합니다.  
+본 실습은 간단한 구성을 위해 Public Subnet을 구성하고 사용합니다.
+
+![](./img/scp_7.png)
+> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Networking > VPC > 서브넷을 선택하고, 우측상단 또는 화면 중앙의 **서브넷 생성** 버튼을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_8.png)
+> 다음과 같이 필수정보를 입력합니다.  
+> - VPC : `mspt3` (앞의 과정에서 생성한 VPC명을 선택)
+> - 사용 용도 : `일반`, `Public`
+> - 서브넷명 : `mspt3PublicSub` 입력 후 **중복체크**
+> - IP대역 : `10.0.1.0/24` 입력 후 **중복체크**
+
+<br><br><br>
+
+![](./img/scp_9.png)
+> 입력내용 확인 후 문제가 없는 경우 **완료**를 클릭해서 서브넷을 생성합니다.
+
+<br><br><br>
+
+![](./img/scp_10.png)
+> 정상적으로 생성되면 위와 같이 목록이 표시됩니다.  
+> 상태가 **Active**로 되어있습니다.
+
+
+<br><br><br>
+
+다음은 Internet Gateway를 생성합니다.
+
+
+![](./img/scp_11.png)
+> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Networking > VPC > Internet Gateway를 선택하고, 우측상단 또는 화면 중앙의 **IGW 생성** 버튼을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_12.png)
+> 다음과 같이 필수정보를 입력합니다.  
+> - VPC : `mspt3` (앞의 과정에서 생성한 VPC명을 선택)
+> - 구분 : `Internet Gateway`
+> - Firewall 로깅 여부 : `미사용` (교육용으로 사용하기 위해 단순한 구성을 선택함.)
+
+<br><br><br>
+
+![](./img/scp_13.png)
+> 입력내용 확인 후 문제가 없는 경우 **완료**를 클릭해서 Internet Gateway를 생성합니다.
+
+<br><br><br>
+
+![](./img/scp_14.png)
+> 정상적으로 생성되면 위와 같이 목록이 표시됩니다.  
+> 상태가 **Active**로 되어있습니다.
+
+<br><br><br>
+
+여기까지는 네트워크 구성에 관련된 내용입니다.  
+
+이제 우리가 사용할 컴퓨팅 자원인 Virtual Server를 만들어 보겠습니다.
+
+![](./img/scp_18.png)
+> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Compute > Virtual Server > Virtual Server를 선택하고, 우측상단 또는 화면 중앙의 **상품신청** 버튼을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_19.png)
 > 다음과 같이 신청 정보를 선택하고 다음을 클릭합니다.
-> - 종류 : 표준 > **Ubuntu**
-> - 이미지 버젼 : **Ubuntu 20.04**
+> - 종류 : 표준 > Ubuntu
+> - 이미지 버젼 : Ubuntu 20.04
 
 ## ☢️ 😱 Ubuntu 버젼은 ***20.04*** 입니다. 꼭 확인해주세요. 꼭이요~ 🙏🏻
 ## 🙅🏻‍♀️ 22.04 아닙니다.
 
 <br><br><br>
 
-![](./img/scp_vs_3.png)
+![](./img/scp_20.png)
 > 다음과 같이 상품 구성을 설정하고 다음을 클릭합니다.
 > - 서버 수 : `1`
 > - 서버 타입 : `Standard s1v2m4 (vCPU 2 | Memory 4G)`
 > - 약정기간 : `None`
-> - Block Storage : `dev-ubuntu` , `100GB`
+> - Block Storage : `bsMspt3` , `100GB`
 
 <br><br><br>
 
-![](./img/scp_vs_4.png)
-화면과 같이 정보를 입력합니다.
-> - Key pair : `dev-key-pair` (앞의 과정에서 생성한 Key pair)
-> - 서버별 Prefix : `dev-ubuntu`
+![](./img/scp_21.png)
+> Key pair 생성을 위해서 `+ 신규 생성`을 클릭합니다.  
+> 기존에 생성한 Key pair가 있다면, 신규 생성 하지 않고 기존 Key pair를 사용해도 됩니다.
+
+<br><br><br>
+
+![](./img/scp_22.png)
+> 서버 Key pair명을 `mspt3`로 설정하고 **완료**를 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_23.png)
+> Key pair가 생성되면 Key를 다운로드 합니다.  
+> 최초 1회만 다운로드 가능하기 때문에 잘 보관해둡니다.
+
+<br><br><br>
+
+![](./img/scp_24.png)
+> 생성된 Key pair정보는 화면과 같이 표시됩니다.
+
+<br><br><br>
+
+![](./img/scp_25.png)
+> 다시 **Virtual Server 신청** 탭으로 이동하여 화면과 같이 정보를 입력합니다.
+> - Key pair : `mspt3` (앞의 과정에서 생성한 Key pair)
+> - 서버별 Prefix : `mspt3`
 > - 네트워크 설정
->   - VPC : `devVPC` (앞의 과정에서 생성한 VPC)
->   - 일반 서브넷 : `devPublicSub (Public)` (앞의 과정에서 생성한 Subnet)
+>   - VPC : `mspt3` (앞의 과정에서 생성한 VPC)
+>   - 일반 서브넷 : `mspt3PublicSub (Public)` (앞의 과정에서 생성한 Subnet)
 >   - NAT : `사용`
-> - AZ 설정 : `AZ2`
-> - Security Group : `선택` 버튼 클릭
-
-## 🙅🏻‍♀️ AZ는 AZ1 아닙니다. ***AZ2***로 설정해주세요. 🙏🏻
+> - AZ 설정 : `AZ1`
+> - Security Group : `선택` 버튼 클릭 (신규 생성으로 이동)
 
 <br><br><br>
 
-![](./img/scp_vs_5.png)
-> Security Group에서 devSG를 선택합니다. (앞의 과정에서 생성한 Security Group)
+![](./img/scp_26.png)
+> 새로운 Security Group 생성을 위해 화면 중앙 **Security Group**을 클릭합니다.
 
 <br><br><br>
 
-![](./img/scp_vs_6.png)
-> 화면과 같이 devSG가 선택된 것을 확인하고 **다음**을 클릭합니다.
+![](./img/scp_27.png)
+> 다음과 같이 필수 정보를 입력하고 **다음**을 클릭합니다.
+> - Security Group명 : `mspt3SG`
+> - VPC : `mspt3` (앞의 과정에서 생성한 VPC)
+> - 로깅 여부 : `미사용`
 
 <br><br><br>
 
-![](./img/scp_vs_7.png)
-> 앞에서 입력한 내용을 확인하고, 문제가 없는 경우 완료를 클릭합니다.
+![](./img/scp_28.png)
+> 모든 내용이 정상이면 **완료**버튼을 클릭하여 Security Group을 생성합니다.
 
 <br><br><br>
+
+![](./img/scp_29.png)
+> 정상적으로 Security Group이 생성되면 화면과 같이 표시됩니다.  
+> Security Group의 상태가 **Active** 입니다.
+
+<br><br><br>
+
+![](./img/scp_30.png)
+> 다시 이전 화면(Virtual Server 신청)으로 돌아와 조금 전 생성한 `Security Group`을 선택하고 **확인**을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_31.png)
+> 화면에 정상적으로 `Security Group`이 선택된 것을 확인하고, **다음**버튼을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_32.png)
+> 앞에서 입력한 내용을 확인하고, 문제가 없는 경우 **완료**를 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_33.png)
+> 정상적으로 Virtual Server가 생성되고 동작하면 화면과 같이 조회 가능합니다.  
+> 화면 중앙부근의 `IP`와 `NAT IP`를 잘 기록해두세요. 이후 실습에서 계속 사용하게 됩니다.
+
+<br><br><br>
+
 
 이제 생성한 Virtual Server의 Inbound/Outbound 네트워크 허용을 위해 방화벽과 Security Group을 설정합니다.
 
-![](./img/scp_vs_8.png)
-> 좌측 메뉴에서 자원관리를 선택하고, 상품별 자원관리에서 Networking > Firewall을 선택하고, 우측 리스트의 Firewall(FW_IGW_devVPC)을 클릭합니다.
+
+![](./img/scp_34.png)
+> [https://ifconfig.me/](https://ifconfig.me/)에서 현재 내 PC의 IP를 확인할 수 있습니다.
 
 <br><br><br>
 
-![](./img/scp_vs_9.png)
+![](./img/scp_35.png)
+> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Networking > Firewall을 선택하고, 우측 리스트의 Firewall을 클릭합니다.
+
+<br><br><br>
+
+![](./img/scp_36.png)
 > **규칙**탭에서 `규칙추가`버튼을 클릭합니다.
 
 <br><br><br>
 
-![](./img/scp_vs_10.png)
+![](./img/scp_37.png)
 > 화면과 같이 **Inbound 규칙**을 입력하고 **확인**을 클릭합니다.
-> - 출발지 IP : 내 PC의 `IP` ([https://www.myip.com/](https://www.myip.com/)이나 [https://ifconfig.me/](https://ifconfig.me/) 에서 확인 가능. )
-> - 목적지 IP : 10.0.1.0/24 (앞의 과정에서 설정한 Public subnet의 IP 대역)
+> - 출발지 IP : 앞에서 확인한 내 PC의 `IP` ( [https://ifconfig.me/](https://ifconfig.me/) 에서 확인 가능. )
+> - 목적지 IP : 앞에서 확인한 Virtual Server의 `IP` 
 > - 프로토콜 : TCP
 > - 허용 포트 : 직접입력
 >   - TCP : 22,80,443,3000,30000-32767
 > - 동작 : Allow
 > - 방향 : Inbound
 
-<br><br><br>
-
-![](./img/scp_vs_11.png)
-> 그림과 같이 새로운 규칙이 추가된 걸 확인합니다.
 
 <br><br><br>
 
 동일한 방법으로 Outbound 규칙도 하나 추가합니다.
 
-![](./img/scp_vs_12.png)
+![](./img/scp_38.png)
 > 화면과 같이 **Outbound 규칙**을 입력하고 **확인**을 클릭합니다.
-> - 출발지 IP : 10.0.1.0/24 (앞의 과정에서 설정한 Public subnet의 IP 대역)
+> - 출발지 IP : 앞에서 확인한 Virtual Server의 `IP` 
 > - 목적지 IP : 0.0.0.0/0 ( 모든 IP Address를 의미합니다. ) 
 > - 프로토콜 : TCP
 > - 허용 포트 : 직접입력
@@ -143,39 +275,28 @@ VPC와 Internet gateway 등 네트워킹 구성은 선행과정(개발)의 자�
 
 <br><br><br>
 
-![](./img/scp_vs_13.png)
-> 그림과 같이 새로운 규칙이 추가된 걸 확인합니다.
+![](./img/scp_39.png)
+> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Networking > Security Group을 선택하고, 우측 리스트의 `mspt3SG`를 클릭합니다.
+> `mspt3SG`는 Virtual Server 생성 과정에서 생성한 Security Group입니다.
 
 <br><br><br>
 
-이제 Security Group에 규칙을 추가합니다.
-
-![](./img/scp_vs_14.png)
-> 좌측 메뉴에서 **자원관리**를 선택하고, 상품별 자원관리에서 Networking > Security Group을 선택하고, 우측 리스트의 `devSG`를 클릭합니다.
-
-<br><br><br>
-
-![](./img/scp_vs_15.png)
+![](./img/scp_40.png)
 > **규칙**탭에서 `규칙추가`버튼을 클릭합니다.
 
 <br><br><br>
 
-![](./img/scp_vs_16.png)
-> 화면과 같이 **Inbound 규칙**을 입력하고 **확인**을 클릭합니다.  
-> - 방향 : Inbound 규칙
-> - 대상 주소 : 내 PC의 `IP` ([https://www.myip.com/](https://www.myip.com/)이나 [https://ifconfig.me/](https://ifconfig.me/) 에서 확인 가능. )
+![](./img/scp_41.png)
+> 화면과 같이 **Inbound 규칙**을 입력하고 **확인**을 클릭합니다.
+> 방향 : Inbound 규칙
+> - 대상 주소 : 앞에서 확인한 내 PC의 `IP` ( [https://ifconfig.me/](https://ifconfig.me/) 에서 확인 가능. )
 > - 프로토콜 : TCP
 > - 허용 포트 : 직접입력
 >   - TCP : 22,80,443,3000,30000-32767
 
 <br><br><br>
 
-![](./img/scp_vs_17.png)
-> 그림과 같이 새로운 규칙이 추가된 걸 확인합니다.
-
-<br><br><br>
-
-![](./img/scp_vs_18.png)
+![](./img/scp_42.png)
 > 화면과 같이 **Outbound 규칙**을 입력하고 **확인**을 클릭합니다.
 > - 방향 : Outbound 규칙
 > - 대상 주소 : 0.0.0.0/0 ( 모든 IP Address를 의미합니다. ) 
@@ -183,15 +304,11 @@ VPC와 Internet gateway 등 네트워킹 구성은 선행과정(개발)의 자�
 > - 허용 포트 : 직접입력
 >   - TCP : 80,443
 
-<br><br><br>
-
-![](./img/scp_vs_19.png)
-> 그림과 같이 새로운 규칙이 추가된 걸 확인합니다.
-
-<br><br><br>
 
 여기까지가 인프라 준비 입니다.  
 이제 우리가 실습에 사용할 환경이 준비됐습니다. 👏🏻👏🏻👏🏻
+
+
 
 <br><br><br><br><br>
 
@@ -199,61 +316,48 @@ VPC와 Internet gateway 등 네트워킹 구성은 선행과정(개발)의 자�
 
 SSH 접속을 위해서는 다음을 먼저 확인해야 합니다.
 
-- Virtual Server의 **NAT IP** ( 자원관리 > Compute > Virtual Server 에서 확인 )
-- Key pair (**dev-key-pair.pem** 파일)
-- SSH 접속을 위한 Inbound traffic (Port:22) 이 허용되어 있는지 확인 ( 앞에서 진행함 )
+- Virtual Server의 **NAT IP**
+- Key pair (**mspt3.pem** 파일)
+- SSH 접속을 위한 Inbound traffic (Port:22) 이 허용되어 있는지 확인 (앞에서 이미 진행함.)
 
 위의 내용을 확인 후 터미널 프로그램인 MobaXterm을 준비합니다.  
 다음 순서대로 실행해주세요.
 
-![](./img/mobaxterm_1.png)
-> - [MobaXterm Download 페이지](https://mobaxterm.mobatek.net/download.html) 에서 Home Edition(Free) 하단 `Download now` 버튼을 클릭
+![](./img/2022-03-07-20-57-40.png)
+> - 접속 URL :  https://mobaxterm.mobatek.net/download.html
+> - Home Edition 하단 `Download now` 버튼을 클릭 
 
 <br><br><br>
 
-![](./img/mobaxterm_2.png)
-> - `MobaXterm Home Edition vxx.x (Portable edition)` 버튼을 클릭하여 zip파일을 다운로드 하고 적당한 위치에 압축해제 합니다.
+![](./img/2022-03-07-20-58-15.png)
+> - `MobaXterm Home Edition (Portable edition)` 버튼을 클릭하여 다운로드 하고 압축해제 합니다.  
+> - 버젼은 화면과 다를 수 있습니다.
 
 <br><br><br>
 
-![](./img/mobaxterm_3.png)
-> 압축을 해재하면 그림과 같이 **MobaXterm_Personal_xx.x.exe** 파일이 있습니다. 이 파일을 실행합니다.
+![](./img/2022-03-07-20-58-32.png)
+> 압축을 해재하면 그림과 같이 MobaXterm_Personal_*.exe 가 있습니다. 이 파일을 실행합니다.
 
 <br><br><br>
 
-![](./img/mobaxterm_4.png)
-> MobaXterm이 실행되면 화면 좌측 상단에서 `Session` 버튼을 클릭합니다.
+![](./img/mobaxterm1.png)
+> MobaXterm이 실행되면 화면에서 `Session` 버튼을 클릭합니다.
 
 <br><br><br>
 
-![](./img/mobaxterm_5.png)
-> 접속방식은 `SSH`를 선택하고 다음 정보를 입력합니다.  
-> - **Remote host** : Virtual Server의 **NAT IP**
-> - **Specify username** : vmuser
+![](./img/mobaxterm2.png)
+접속방식은 `SSH`를 선택하고 다음 정보를 입력한 다음 `OK`버튼을 클릭하여 접속합니다.  
+> SSH 포트를 변경한 경우 포트정보도 맞게 설정해서 접속하세요.
 
-❗️ SSH 포트를 22에서 다른 포트로 변경한 경우 포트정보도 맞게 설정해주세요.
-
-위와같이 설정한 다음 **Use private key** 영역의 파란 아이콘을 클릭합니다.
-
-<br><br><br>
-
-![](./img/mobaxterm_6.png)
-> 미리 다운로드 받아놓은 **dev-key-pair.pem**파일을 찾아 선택합니다.
+- **Remote host** : Virtual Server의 **NAT IP**
+- **Specify username** : vmuser
+- **Use private key** : mspt3.pem
 
 <br><br><br>
 
-![](./img/mobaxterm_7.png)
-> 그림과 같이 private key 파일이 선택되었으면, 아래 `OK` 버튼을 클릭하여 Virtual Server로 접속합니다.
-
-<br><br><br>
-
-![](./img/mobaxterm_8.png)
+![](./img/mobaxterm3.png)
 > 접속되면 위와같은 화면이 표시됩니다.  
-
-<br><br><br>
-
-![](./img/mobaxterm_9.png)
-> 다음 번 접속부터는 좌측 **Quick connect**의 **User sessions**에 저장된 정보를 이용할 수 있습니다.
+> 다음 번 접속부터는 **Quick connect**의 **User session**을 이용할 수 있습니다.
 
 <br><br><br><br><br>
 
