@@ -28,15 +28,15 @@
 - Docker 실습인 경우
   
   - [ ] 실습용 VM(EC2 또는 Virtual Server) Instance가 시작되어 있나요?
-    - 아니라면, [AWS Console](https://aws.amazon.com/console/) 또는 [SCP Console](https://cloud.samsungsds.com/console)에서 EC2 또는 Virtual Server Instance를 선택하고 시작(`Start instance`)해주세요.
-  - [ ] 터미널 S/W(e.g. Windows terminal, MobaXTerm etc.)로 실습용 VM(EC2) Instance에 접속해주세요.
+    - 아니라면, [AWS Console](https://aws.amazon.com/console/) 또는 [SCP Console](https://cloud.samsungsds.com/console)에서 VM Instance를 시작해주세요.
+  - [ ] 터미널 S/W(e.g. Windows terminal, MobaXTerm etc.)로 실습용 VM Instance에 접속해주세요.
     - 혹시 안된다면 Security group을 확인해보세요. (지금 내 환경에서 22번 포트로 접속 가능한 조건인지)
 
 - Kubernetes 실습인 경우
   
   - [ ] 실습용 VM(EC2 또는 Virtual Server) Instance가 시작되어 있나요?
-    - 아니라면, [AWS Console](https://aws.amazon.com/console/) 또는 [SCP Console](https://cloud.samsungsds.com/console)에서 EC2 또는 Virtual Server Instance를 선택하고 시작(`Start instance`)해주세요.
-  - [ ] 터미널 S/W(e.g. Windows terminal, MobaXTerm etc.)로 실습용 VM(EC2) Instance에 접속해주세요.
+    - 아니라면, [AWS Console](https://aws.amazon.com/console/) 또는 [SCP Console](https://cloud.samsungsds.com/console)에서 VM Instance를 시작해주세요.
+  - [ ] 터미널 S/W(e.g. Windows terminal, MobaXTerm etc.)로 실습용 VM Instance에 접속해주세요.
     - 혹시 안된다면 Security group을 확인해보세요. (지금 내 환경에서 22번 포트로 접속 가능한 조건인지)
   - [ ] Minikube가 시작되어 있나요? (`minikube status`명령어로 확인가능)
     - 아니라면, 아래 명령어로 Minikube를 시작해주세요.
