@@ -349,7 +349,7 @@ Node까지의 경로가 열려있다면 어디서든 이 IP로 접근 가능합�
 
 ![h:300](./img/k8s_nginx_nodeport.png)
 
-> http://[Node의 IP]:30007 로 접속합니다. (EC2 Instance인 경우 **Public IPv4 address**)
+> http://[Node의 IP]:30007 로 접속합니다. (AWS EC2 Instance인 경우 **Public IPv4 address**, SCP Virtual Server인 경우 **NAT IP**)
 
 <br><br><br><br><br>
 
@@ -410,7 +410,7 @@ ingress.networking.k8s.io/my-nginx-ingress created
 #mspt3
 11.22.33.44  my-nginx.io
 ```
-> 11.22.33.44 대신 여러분 EC2 Instance의 **Public IPv4 address**를 써주세요.
+> 11.22.33.44 대신 여러분 AWS EC2 Instance의 **Public IPv4 address** 또는 SCP Virtual Server의 **NAT IP**를 써주세요.
 
 <br><br><br>
 

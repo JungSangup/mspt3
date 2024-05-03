@@ -372,7 +372,7 @@ ToDo App 접속을 위해서 **hosts**파일에 다음과 같이 하나(***todo-
 #mspt3
 11.22.33.44  my-nginx.io todo-app.info
 ```
-> 11.22.33.44 대신 여러분 EC2 Instance의 **Public IPv4 address**를 써주세요.
+> 11.22.33.44 대신 여러분 AWS EC2 Instance의 **Public IPv4 address** 또는 SCP Virtual Server의 **NAT IP**를 써주세요.
 
 이제 브라우저에서 http://todo-app.info/ 로 접속하면, 아래와 같이 접속 가능할거예요.
 
