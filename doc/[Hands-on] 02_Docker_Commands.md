@@ -287,8 +287,12 @@ ubuntu는 **Exited** 상태이고, nginx는 **Running** 상태 입니다.
 <br><br><br>
 
 nginx가 정말 Running 상태인지 8080번 포트로 접속해서 확인도 해보세요.
-- AWS EC2인 경우 인스턴스의 **Public IPv4 address**로 접속하면 됩니다. (e.g. http://IP:8080/)
-- Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
+- 실습환경이 AWS인 경우
+  - EC2 인스턴스의 **Public IPv4 address**로 접속합니다. (e.g. http://[Public IPv4 address]:8080/)
+  - Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
+- 실습환경이 SCP인 경우
+  - Virtual Server의 **NAT IP**로 접속하면 됩니다. (e.g. http://[NAT IP]:8080/)
+  - Firewall과 Security group의 Inbound rule에 8080번 포트에 대한 규칙이 있어야 합니다.
 
 ![h:400](./img/docker_nginx1.png)
 

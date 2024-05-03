@@ -182,8 +182,12 @@ ubuntu@ip-172-31-23-60:~$ docker run --detach --publish 3000:3000 --volume todo-
 <br><br><br>
 
 이제 실행된 애플리케이션에 접속하고 오늘 할 일을 몇 개 적어볼까요?  
-- AWS EC2인 경우 인스턴스의 Public IPv4 address로 접속하면 됩니다. (e.g. http://IP:3000/)
-- Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
+- 실습환경이 AWS인 경우
+  - EC2 인스턴스의 **Public IPv4 address**로 접속합니다. (e.g. http://[Public IPv4 address]:3000/)
+  - Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
+- 실습환경이 SCP인 경우
+  - Virtual Server의 **NAT IP**로 접속하면 됩니다. (e.g. http://[NAT IP]:3000/)
+  - Firewall과 Security group의 Inbound rule에 3000번 포트에 대한 규칙이 있어야 합니다.
 
 ![h:200](./img/todo-list-sample3.png)
 
@@ -221,7 +225,7 @@ c6859ec898566de2e194acd1dd7b1df8832fe035e7e1179deb21c587e66502c9
 > [USER-NAME] 에는 여러분의 정보로 채워넣어 주세요.
 - **[USER-NAME]/todo-app:1.0.0** 이 준비가 안된 경우, **rogallo/101-todo-app:1.0.0**을 이용해주세요. login 없이 사용가능한 public repository의 이미지입니다.
 
-그리고 다시 우리 애플리케이션으로 접속해보세요. (e.g. http://IP:3000/)
+그리고 다시 우리 애플리케이션으로 접속해보세요.
 
 어떤가요? 오늘 할 일 목록이 그대로 남아있나요? **정국이와 저녁식사**도 **장보기**도 잊지않고 할 수 있게 되었습니다.
 
