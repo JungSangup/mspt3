@@ -1,4 +1,4 @@
-
+FA
 # [Hands-on] 01. Environment setup - Docker
 
 ![](./img/hands_on.png)
@@ -170,7 +170,7 @@
 >   - VPC : `mspt3` (앞의 과정에서 생성한 VPC)
 >   - 일반 서브넷 : `mspt3PublicSub (Public)` (앞의 과정에서 생성한 Subnet)
 >   - NAT : `사용`
-> - AZ 설정 : `AZ1`
+> - AZ 설정 : `AZ2`
 > - Security Group : `선택` 버튼 클릭 (신규 생성으로 이동)
 
 <br><br><br>
