@@ -177,3 +177,7 @@ sudo kubeadm init phase certs etcd-server
 
 
 https://devopstales.github.io/kubernetes/k8s-change-ip/
+
+
+
+121.133.133.0/24, 221.167.219.0/24
