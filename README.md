@@ -27,7 +27,7 @@
 
 | 실습환경 | 설명 |
 | :--- | :--- |
-| [Docker engine](https://docs.docker.com/engine/install/) + [Minikube](https://minikube.sigs.k8s.io/) | 단일 노드 실행환경 입니다.<br>실습교재에는 **AWS EC2 Instance**를 이용하여 Docker와 Minikube를 구성하는 내용이 포함되어 있습니다. |
+| [Docker engine](https://docs.docker.com/engine/install/) + [Minikube](https://minikube.sigs.k8s.io/) | 단일 노드 실행환경 입니다.<br>실습교재에는 **AWS EC2 Instance** 또는, **SCP Virtual Server**를 이용하여 Docker와 Minikube를 구성하는 내용이 포함되어 있습니다. |
 | [Killercoda](https://killercoda.com/brian) | 설치없이 간단히 실습해볼 수 있는 환경입니다.<br>이 과정의 실습교재 내용 대부분을 동일하게 구성해 놓았습니다. |
 | [Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/) | 학습용 환경인 경우 Windows에 Docker Desktop을 설치해서 Docker와 Kubernetes(Single-node)까지 실습해볼 수 있습니다.<br>설치 가이드 : [[Appendix] Docker_desktop.md](./doc/%5BAppendix%5D%20Docker_desktop.md) |
 | [Play with Docker](https://labs.play-with-docker.com/) | 설치없이 간단히 실습해볼 수 있는 환경입니다. (Docker) |
