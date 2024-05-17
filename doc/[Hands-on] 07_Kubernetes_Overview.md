@@ -886,9 +886,15 @@ ubuntu@ip-172-31-23-60:~$ curl https://172.31.29.188:8443/api/v1/nodes --cacert 
 }
 ```
 
-> 💻 명령어
+> 💻 명령어 ( AWS Track )
 >```bash
 >curl [SERVER]/api/v1/nodes --cacert /home/ubuntu/.minikube/ca.crt --cert /home/ubuntu/.minikube/profiles/minikube/client.crt --key /home/ubuntu/.minikube/profiles/minikube/client.key
+>```
+> [SERVER]에는 앞에서 조회한 결과 중 여러분 환경의 서버정보를 넣어주세요.
+
+> 💻 명령어 ( SCP Track )
+>```bash
+>curl [SERVER]/api/v1/nodes --cacert /home/vmuser/.minikube/ca.crt --cert /home/vmuser/.minikube/profiles/minikube/client.crt --key /home/vmuser/.minikube/profiles/minikube/client.key
 >```
 > [SERVER]에는 앞에서 조회한 결과 중 여러분 환경의 서버정보를 넣어주세요.
 
