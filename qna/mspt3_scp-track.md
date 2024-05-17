@@ -11,7 +11,7 @@
  
 - hands-on 05 실습에서 Baseimage (FROM openjdk:8)는 어디서 어디로 다운로드(pull) 하나요?
   - Docker build가 실행되는 곳 (Docker daemon이 있는 곳)으로 다운로드(pull) 됩니다.
-  - Dockerfile과 build context가 위치한 곳이 아닌, 빌드가 진행되는 곳 입니다.
+  - Dockerfile과 build context가 위치한 곳이 아닌, docker build가 진행되는 곳 입니다.
   - 빌드되는 순서로 보자면 다음과 같습니다.
     - build context를 docker daemon으로 전달
     - dockerfile의 명령어를 순서대로 진행
