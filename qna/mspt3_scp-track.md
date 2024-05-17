@@ -26,3 +26,7 @@
 ---
 
 ## Kubernetes
+
+- [Hands-on] 08. Kubernetes Workload(1)  실습에서 **registry.k8s.io/liveness** 이미지는 hub.docker.com 에서 검색이 안되는데 왜 그런건가요?
+  - 앞의 실습에서 표시한 **nginx:1.18** 과 같은 경우는 앞에 docker hub 의 url이 생략된 것입니다.
+  - **registry.k8s.io/liveness** 는 **registry.k8s.io** 컨테이너 레지스트리에 있는 **liveness** 이미지를 사용한다는 의미 입니다.
