@@ -117,7 +117,7 @@ Successfully tagged hellodocker:v1
 
 빌드가 성공하면 `docker images`명령어로 조회도 해보세요.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/dockerfile$ docker images hellodocker
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch05$ docker images hellodocker
 REPOSITORY    TAG       IMAGE ID       CREATED              SIZE
 hellodocker   v1        91d22f496ae4   About a minute ago   526MB
 ```
@@ -129,7 +129,7 @@ hellodocker   v1        91d22f496ae4   About a minute ago   526MB
 
 이미지가 준비됐으니 이제 실행을 해볼게요.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker run --rm hellodocker:v1
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch05$ docker run --rm hellodocker:v1
 Hello Docker!!!
 ```
 
@@ -182,7 +182,7 @@ CMD ["java","HelloDocker"]
 
 이제 아래 명령어로 hellodocker 이미지 v2를 생성합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker build -f Dockerfile2 -t hellodocker:v2 .
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch05$ docker build -f Dockerfile2 -t hellodocker:v2 .
 Sending build context to Docker daemon  4.096kB
 Step 1/8 : FROM openjdk:8 as build-stage
  ---> b273004037cc
@@ -229,7 +229,7 @@ Successfully tagged hellodocker:v2
 
 빌드가 성공하면 `docker images`명령어를 실행해서 결과를 볼까요?
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker images hellodocker
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch05$ docker images hellodocker
 REPOSITORY    TAG       IMAGE ID       CREATED              SIZE
 hellodocker   v2        9435a2a2311d   About a minute ago   274MB
 hellodocker   v1        91d22f496ae4   7 minutes ago        526MB
@@ -249,7 +249,7 @@ v1 과 v2 는 Java Application은 동일하지만, base image의 차이 때문�
 
 컨테이너 실행결과는 아래처럼 차이가 없습니다.
 ```bash
-ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/dockerfile$ docker run --rm hellodocker:v2
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch05$ docker run --rm hellodocker:v2
 Hello Docker!!!
 ```
 
