@@ -76,7 +76,7 @@ ubuntu@ip-172-31-23-60:~$ tree
 
 이제 아래 명령어로 hellodocker 이미지를 생성합니다.
 ```bash
-ubuntu@ip-172-31-23-60:~$ docker build -f Dockerfile1 -t hellodocker:v1 .
+ubuntu@ip-172-31-23-60:~/mspt3/hands_on_files/ch05$ docker build -f Dockerfile1 -t hellodocker:v1 .
 Sending build context to Docker daemon  4.096kB
 Step 1/5 : FROM openjdk:8
 8: Pulling from library/openjdk
