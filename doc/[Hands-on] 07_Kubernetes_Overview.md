@@ -523,9 +523,9 @@ node 의 API Version은 v1 입니다.
 
 - Node의 API Version : v1
 - clusters.cluster.server: https://172.31.29.188:8443
-- clusters.cluster.certificate-authority: /home/ubuntu/.minikube/ca.crt
-- users.user.client-certificate: /home/ubuntu/.minikube/profiles/minikube/client.crt
-- users.user.client-key: /home/ubuntu/.minikube/profiles/minikube/client.key
+- clusters.cluster.certificate-authority: ~/.minikube/ca.crt
+- users.user.client-certificate: ~/.minikube/profiles/minikube/client.crt
+- users.user.client-key: ~/.minikube/profiles/minikube/client.key
 
 그럼, 위의 정보를 조합해서 curl 명령을 실행해볼까요?
 
