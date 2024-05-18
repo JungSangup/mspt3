@@ -32,4 +32,56 @@
   - **registry.k8s.io/liveness** 는 **registry.k8s.io** 컨테이너 레지스트리에 있는 **liveness** 이미지를 사용한다는 의미 입니다.
  
 - Deployment나 ReplicaSet에 의해서 Pod들이 만들어져 있는 상태에서 강제로 동일한 spec.의 pod를 하나 더 만들면 어떻게 되나요?
-  - ...
+  - 기존 Deployment-ReplicaSet에 의해 관리되는 Pod들은 그대로 있고, 새로운 Pod가 하나 만들어집니다.
+  - Pod와 ReplicaSet은 Label과 Selector로도 연결관계를 알 수 있지만, OwnerReference 정보로도 확인이 가능합니다.
+  - 아래 두 가지 Pod의 내용을 보면
+    - 첫 번째 Pod는 ReplicaSet에 의해 관리되는 Pod이기 때문에 ownerReferences 정보가 있고,
+    - 두 번째 Pod는 단독으로 생성했기 때문에 ownerReferences 정보가 없습니다.
+    - 둘 다 Label은 동일합니다.
+    - 또 다른 방법으로는, `kubectl describe`명령으로 조회했을 때 `Controlled By:` 에 ReplicaSet의 정보가 있는지 없는지를 확인해도 됩니다.
+    - 자세한 정보는 [Owners and Dependents](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/)를 참고하세요.
+```bash
+$ k get po my-nginx-deployment-697d895648-62q6n -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 66f3f05354300bc7f945640749263fd2d34782b785e7b668e39925a291bb1c3d
+    cni.projectcalico.org/podIP: 192.168.1.4/32
+    cni.projectcalico.org/podIPs: 192.168.1.4/32
+  creationTimestamp: "2024-05-18T03:46:16Z"
+  generateName: my-nginx-deployment-697d895648-
+  labels:
+    app: my-nginx
+    pod-template-hash: 697d895648
+  name: my-nginx-deployment-697d895648-62q6n
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: my-nginx-deployment-697d895648
+    uid: 7493b703-caa3-4188-9fd4-8a5d7a623c66
+  resourceVersion: "2027"
+  uid: 458f2fd7-643d-4167-8b83-08f287aa5b1a
+```
+```bash
+$ kubectl get po my-nginx-4 -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 9e8cf3087658b22eae6128d9846a8e3f7832009194cd25726817e76c6548f26d
+    cni.projectcalico.org/podIP: 192.168.1.7/32
+    cni.projectcalico.org/podIPs: 192.168.1.7/32
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"my-nginx"},"name":"my-nginx-4","namespace":"default"},"spec":{"containers":[{"image":"nginx:1.19.3","name":"my-nginx","ports":[{"containerPort":80}]}]}}
+  creationTimestamp: "2024-05-18T03:51:10Z"
+  labels:
+    app: my-nginx
+  name: my-nginx-4
+  namespace: default
+  resourceVersion: "2396"
+  uid: f1c19cd6-97cb-4510-8a62-f5776286cb80
+```
