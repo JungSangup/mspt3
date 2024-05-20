@@ -85,3 +85,21 @@ metadata:
   resourceVersion: "2396"
   uid: f1c19cd6-97cb-4510-8a62-f5776286cb80
 ```
+
+- K8s 서비스 타입 중에 ExternalName이란 걸 들어본 것 같은데, 이건 서비스 종류에 포함되지 않는건가요?
+  - 아닙니다. 우리 교재는 세 가지만 다루고 있지만 ExternalName타입도 있습니다.
+  - 자세한 내용은 [ExternalName 유](https://kubernetes.io/ko/docs/concepts/services-networking/service/#externalname) 를 참조하세요.
+ 
+- Docker에서는 Volume은 도커가 관리하는 스토리지 이고, Bind mount는 사용자가 지정한 경로를 사용할 수 있었는데, K8s Volume은 다른 의미로 쓰이는건가요?
+  - 네, 맞습니다. 이름이 Volume이라 혼동될 수 있지만, K8s에서의 Volume은 오히려 Bind mount와 같은 형태로 쓰이는 것이라고 보시면 됩니다.
+  - K8s Volume의 spec.을 보면 마운트 될 경로를 지정할 수 있습니다.
+ 
+ - Pod에서 파일시스템 모드로 PVC를 요청하면 Node에서도 실제 파일시스템이 만들어지는 건가요?
+   - ...
+  
+- (위 질문에 이어서) 그럼 서버(Volume이 만들어진 곳)에서 df -h 하면 pod에서 요청한 파일시스템이 보이는거죠?
+  - ...
+ 
+- ConfigMap 교재에서 ConfigMap은 API Object라고 되어있는데, 무슨 뜻인가요?
+  - K8s API 요청에 의해 관리되는 Object라는 뜻입니다. 그냥 Object라고 한 것과 동일한 의미입니다.
+  - K8s에서 Object의 생성/수정/삭제는 Kube-apiserver로 전달되는 API요청에 의해서 처리됩니다.
