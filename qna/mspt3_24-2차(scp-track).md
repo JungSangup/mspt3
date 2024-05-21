@@ -1,4 +1,4 @@
-# MSP T3 - 2024 SCP Track
+# MSP T3 - mspt3_24-2차 (SCP Track)
 
 ## Docker
 
