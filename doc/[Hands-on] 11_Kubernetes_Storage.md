@@ -237,7 +237,7 @@ ubuntu@ip-172-31-23-60:~$ echo '<h1>Hello kubernetes</h1> <br> <iframe width="14
 
 > 💻 명령어
 >```bash
->echo '<h1>Hello kubernetes</h1> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/smdmEhkIRVc?si=kvgfbaOGXSrxQ4ec" allowfullscreen></iframe> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/mUDFLe3Q__U?si=AYq5Fhh9Mcb9N6eM" allowfullscreen></iframe> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/wDfqXR_5yyQ?si=v64pHyCqZ-4pW38f" allowfullscreen></iframe> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/6RQ-bBdASvk?si=N7PPnNz_rrNwiZEo" allowfullscreen></iframe>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
+>echo '<h1>Hello kubernetes</h1> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/wDfqXR_5yyQ?si=v64pHyCqZ-4pW38f" allowfullscreen></iframe> <br> <iframe width="1400" height="788" src="https://www.youtube.com/embed/6RQ-bBdASvk?si=N7PPnNz_rrNwiZEo" allowfullscreen></iframe>' >> /tmp/hostpath-provisioner/default/nginx-pvc/index.html
 >```
 
 <br>
