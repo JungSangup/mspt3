@@ -1,4 +1,4 @@
-# MSP T3 - 2024 AWS Track
+# MSP T3 - mspt3_24-1차 (AWS Track)
 
 ## Docker
 
