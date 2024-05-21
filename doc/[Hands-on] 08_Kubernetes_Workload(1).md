@@ -117,7 +117,7 @@ my-nginx2   1/1     Running   0          2m14s   172.17.0.3   ip-172-31-23-60   
 
 <br><br><br>
 
-세 번째는, [선언형 오브젝트 구성 (Declarative object configuration)](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/object-management/#%EB%AA%85%EB%A0%B9%ED%98%95-%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%84%B1) 입니다.
+세 번째는, [선언형 오브젝트 구성 (Declarative object configuration)](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/object-management/#%EC%84%A0%EC%96%B8%ED%98%95-%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%84%B1) 입니다.
 어떤 작업을 할지(**create**, **update**) 명시하지 않고 단순히 `apply`라는 키워드를 씁니다.
 무엇을 할지는 쿠버네티스가 알아서 해줍니다. (ง˙∇˙)ว
 
